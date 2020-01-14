@@ -4,6 +4,17 @@
 
 이 프로젝트는 [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate/)를 커스텀하여 만들어졌습니다.
 
+### 주요 라이브러리
+
+* [react](https://reactjs.org/) 16.8.6
+* [react-intl](https://github.com/formatjs/react-intl) 2.8.0
+* [redux](https://redux.js.org/api/api-reference) 4.0.1
+* [redux-form](https://redux-form.com/8.2.2/docs/gettingstarted.md/) 8.2.2
+* [styled-components](https://styled-components.com/docs) 4.2.0
+* [reselect](https://github.com/reduxjs/reselect) 4.0.0
+* [redux-saga](https://redux-saga.js.org/) 1.0.2
+* [immer](https://immerjs.github.io/immer/docs/introduction) 3.0.0
+
 ### 시작하기
 
 ```sh

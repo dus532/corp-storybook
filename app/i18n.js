@@ -17,7 +17,7 @@ const koTranslationMessages = require('./translations/ko.json');
 addLocaleData(enLocaleData);
 addLocaleData(koLocaleData);
 
-const DEFAULT_LOCALE = 'en';
+const DEFAULT_LOCALE = 'ko';
 
 // prettier-ignore
 const appLocales = [

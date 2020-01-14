@@ -1,46 +1,39 @@
-import generateMenuKey from 'utils/generateMenuKey';
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
-export const routes = [
-  {
-    path: '/',
-    menuTitle: '메인',
-    pageTitle: '메인 타이틀',
-  },
-  {
-    path: '/first',
-    menuTitle: '첫 번째',
-    children: [
-      {
-        path: '/first/general',
-        menuTitle: '기본',
-        pageTitle: '기본 타이틀',
-      },
-      {
-        path: '/first/layout',
-        menuTitle: '레이아웃',
-      },
-      {
-        path: '/first/navigation',
-        menuTitle: '네비게이션',
-      },
-      {
-        path: '/first/test',
-        menuTitle: '테스트',
-        children: [
-          {
-            path: '/first/test/test2',
-            menuTitle: '테스트 아이템',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    path: '/second',
-    menuTitle: '두 번째',
-    pageTitle: '두 번째 타이틀',
-  },
-];
+import generateMenuKey from 'utils/generateMenuKey';
+import { ADMINISTRATOR_TYPES } from 'utils/constants';
+
+import messages from './messages';
+
+export const routes = {
+  [ADMINISTRATOR_TYPES.CARPLAT_MASTER]: [
+    {
+      path: '/carplat',
+      menuTitle: <FormattedMessage {...messages.home.menuTitle} />,
+      pageTitle: <FormattedMessage {...messages.home.pageTitle} />,
+    },
+    {
+      path: 'carplat/userManagement',
+      menuTitle: <FormattedMessage {...messages.userManagement.menuTitle} />,
+      children: [
+        {
+          path: '/carplat/userManagement/management',
+          menuTitle: (
+            <FormattedMessage
+              {...messages.userManagement.management.menuTitle}
+            />
+          ),
+          pageTitle: (
+            <FormattedMessage
+              {...messages.userManagement.management.pageTitle}
+            />
+          ),
+        },
+      ],
+    },
+  ],
+};
 
 function translateRoutesToEndPointArray(
   acc,
@@ -70,12 +63,15 @@ function translateRoutesToEndPointArray(
   return acc;
 }
 
-export const endPointInformations = routes.reduce(
-  translateRoutesToEndPointArray,
-  {
-    parentKeys: [],
-    parentBreadcrumb: [],
-  },
+export const endPointInformations = Object.keys(routes).reduce(
+  (acc, key) => ({
+    ...acc,
+    ...routes[key].reduce(translateRoutesToEndPointArray, {
+      parentKeys: [],
+      parentBreadcrumb: [],
+    }),
+  }),
+  {},
 );
 
 export const defaultInformation = {

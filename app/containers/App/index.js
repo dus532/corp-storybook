@@ -9,45 +9,23 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
-import { Layout } from 'antd';
 
-import Nav from 'containers/Nav';
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import NotFoundPage from 'pages/common/NotFoundPage/Loadable';
+import CarplatLayout from 'pages/carplat/Layout';
 
 import GlobalStyle from '../../global-styles';
 
-const { Header, Sider } = Layout;
-
 export default function App() {
   return (
-    <Layout>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
+    <>
+      <Helmet titleTemplate="%s - 카플랫 관리자 페이지" defaultTitle="카플랫">
+        <meta name="description" content="카플랫 서비스 관리툴입니다." />
       </Helmet>
-      <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-        }}
-      >
-        <Nav />
-      </Sider>
-      <Layout style={{ marginLeft: 200, minHeight: '100vh' }}>
-        <Header style={{ background: '#fff', padding: 0, marginBottom: 2 }} />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/first/test/test2" component={HomePage} />
-          <Route exact path="/first/layout" component={HomePage} />
-          <Route path="" component={NotFoundPage} />
-        </Switch>
-      </Layout>
+      <Switch>
+        <Route path="/carplat/" component={CarplatLayout} />
+        <Route path="" component={NotFoundPage} />
+      </Switch>
       <GlobalStyle />
-    </Layout>
+    </>
   );
 }

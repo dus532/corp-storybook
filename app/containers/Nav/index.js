@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Menu } from 'antd';
 
 import generateMenuKey from 'utils/generateMenuKey';
+import { ADMINISTRATOR_TYPES } from 'utils/constants';
 
 import { routes, endPointInformations, defaultInformation } from './constants';
 
@@ -33,7 +34,8 @@ NavMenu.propTypes = {
   children: PropTypes.array,
 };
 
-function Nav({ location: { pathname } }) {
+function Nav({ adminType, location: { pathname } }) {
+  const routesOfAdminType = routes[adminType];
   const information = endPointInformations[pathname] || defaultInformation;
   const { selectedKeys } = information;
 
@@ -44,12 +46,13 @@ function Nav({ location: { pathname } }) {
       defaultOpenKeys={selectedKeys}
       selectedKeys={selectedKeys}
     >
-      {routes.map(NavMenu)}
+      {routesOfAdminType.map(NavMenu)}
     </Menu>
   );
 }
 
 Nav.propTypes = {
+  adminType: PropTypes.oneOf(Object.values(ADMINISTRATOR_TYPES)).isRequired,
   location: PropTypes.object.isRequired,
 };
 

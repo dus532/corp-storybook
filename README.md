@@ -57,3 +57,4 @@ carplat-admin/app
 - [ ] staging 설정
 - [ ] 배포 라인 설정
 - [ ] 위지웍 에디터 추가
+- [ ] 라우팅 utils 추가

@@ -2,7 +2,7 @@
 
 ### 프로젝트 기반
 
-이 프로젝트는 [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate/)를 커스텀하여 만들어졌습니다.
+이 프로젝트는 [react-boilerplate](https://github.com/react-boilerplate/react-boilerplate/)를 커스텀하고 [ant.design](https://ant.design/docs/react/introduce) 컴포넌트를 사용하여 만들어졌습니다.
 
 ### 주요 라이브러리
 
@@ -14,6 +14,7 @@
 * [reselect](https://github.com/reduxjs/reselect) 4.0.0
 * [redux-saga](https://redux-saga.js.org/) 1.0.2
 * [immer](https://immerjs.github.io/immer/docs/introduction) 3.0.0
+* [ant.dedsign](https://ant.design/docs/react/introduce) 3.*
 
 ### 시작하기
 

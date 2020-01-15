@@ -51,6 +51,7 @@ carplat-admin/app
 ```
 
 ### TODOs
+- [ ] styled-components v5 확인 후 
 - [ ] API 데이터 통신 방식 정의
 - [ ] antd 공용 컴포넌트 정의 + 개발
 - [ ] 레퍼런스 페이지 개발

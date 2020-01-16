@@ -25,9 +25,11 @@ import {
   makeSelectError,
 } from 'containers/App/selectors';
 import withPageHeader from 'HOCs/withPageHeader';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import { KEY } from './constants';
 import messages from './messages';
+import saga from './saga';
 
 const { Content } = Layout;
 
@@ -56,6 +58,7 @@ export function UserManagementPage({
   handleSubmit,
   /* REDUX-FORM */
 }) {
+  useInjectSaga({ key: KEY, saga });
   useInjectResourceControllerReducer({ key: KEY, resources: userResources });
   useInjectResourceControllerSaga({ key: KEY, resources: userResources });
 

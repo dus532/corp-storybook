@@ -23,7 +23,7 @@ export default function App() {
       </Helmet>
       <Switch>
         <Route path="/carplat/" component={CarplatLayout} />
-        <Route path="" component={NotFoundPage} />
+        <Route path="" component={CarplatLayout} />
       </Switch>
       <GlobalStyle />
     </>

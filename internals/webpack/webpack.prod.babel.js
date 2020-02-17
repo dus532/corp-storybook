@@ -94,7 +94,7 @@ module.exports = require('./webpack.base.babel')({
 
       // No need to cache .htaccess. See http://mxs.is/googmp,
       // this is applied before any match in `caches` section
-      excludes: ['.htaccess'],
+      excludes: ['.htaccess', 'index.html', 'favicon.ico'],
 
       caches: {
         main: [':rest:'],
@@ -117,10 +117,10 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new WebpackPwaManifest({
-      name: 'React Boilerplate',
-      short_name: 'React BP',
-      description: 'My React Boilerplate-based project!',
-      background_color: '#fafafa',
+      name: 'CARPLAT ADMIN',
+      short_name: 'CARPLAT',
+      description: '카플랫 관리자 툴',
+      background_color: '#141721',
       theme_color: '#b1624d',
       inject: true,
       ios: true,

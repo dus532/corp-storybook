@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 
 import { USER } from 'utils/resourceTypes';
 import { useInjectResourceControllerReducer } from 'services/ResourceController/getReducer';
@@ -27,6 +27,7 @@ import {
 import withPageHeader from 'HOCs/withPageHeader';
 import { useInjectSaga } from 'utils/injectSaga';
 
+import FilterTest from './components/FilterTest';
 import { KEY } from './constants';
 import messages from './messages';
 import saga from './saga';
@@ -35,6 +36,7 @@ const { Content } = Layout;
 
 const userResources = [USER];
 
+/* USER */
 const { updateListDataParams } = getActionCreators(userResources, KEY);
 
 const {
@@ -44,6 +46,7 @@ const {
   makeSelectListData,
   makeSelectTotalCount,
 } = getSelectors(userResources, KEY);
+/* USER */
 
 export function UserManagementPage({
   /* USERS */
@@ -53,6 +56,7 @@ export function UserManagementPage({
   fetchUsersErrorMessage,
   users,
   totalCount,
+  updateUsersParams,
   /* USERS */
   /* REDUX-FORM */
   handleSubmit,
@@ -67,11 +71,12 @@ export function UserManagementPage({
   }, []);
 
   return (
-    <Content>
+    <Content style={{ padding: '10px' }}>
       <Helmet>
         <title>UserManagement Page</title>
         <meta name="description" content="유저 테스트용 페이지" />
       </Helmet>
+      <FilterTest updateListDataParams={updateUsersParams} />
       <div>
         {fetchUsersLoading && <FormattedMessage {...messages.loadingText} />}
         {fetchUsersError && (
@@ -94,6 +99,9 @@ export function UserManagementPage({
         <Field component="input" name="test" />
         <button type="submit">테스트</button>
       </form>
+      <Button loading={fetchUsersLoading} onClick={fetchUsers}>
+        Fetch 테스트
+      </Button>
     </Content>
   );
 }
@@ -106,6 +114,7 @@ UserManagementPage.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object),
   totalCount: PropTypes.number,
   handleSubmit: PropTypes.func,
+  updateUsersParams: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -121,6 +130,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
+    updateUsersParams: params => dispatch(updateListDataParams([], params)),
     fetchUsers: () =>
       dispatch(
         updateListDataParams([], {

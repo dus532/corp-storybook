@@ -21,6 +21,9 @@
     "preinstall": "npm run npmcheckversion",
     "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build:dev": "cross-env NODE_ENV=production RUN_TIME_ENV=development webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build:stage": "cross-env NODE_ENV=production RUN_TIME_ENV=staging webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build:prod": "cross-env NODE_ENV=production RUN_TIME_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",
     "start": "cross-env NODE_ENV=development node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
@@ -42,7 +45,10 @@
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prettify": "prettier --write"
+    "prettify": "prettier --write",
+    "deploy-dev": "./internals/deploy/deploy.sh development",
+    "deploy-stage": "./internals/deploy/deploy.sh staging",
+    "deploy-prod": "./internals/deploy/deploy.sh production"
   },
   "browserslist": [
     "last 2 versions",
@@ -81,6 +87,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
+    "polished": "^3.4.2",
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",

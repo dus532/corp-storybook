@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  aws-cli: circleci/aws-cli@x.y
-  
 executors:
   api_server_exec:
     docker:

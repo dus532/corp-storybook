@@ -57,33 +57,9 @@ jobs:
             echo deploy to dev envionment
             cd ./script && ./deploy-dev.sh
 
-  deploy-staging:
-    machine: true
-    steps:
-      - checkout
-      - run:
-          name: Deploy to the staging Environment
-          command: |
-            echo deploy to staging envionment
-            cd ./internals/deploy && ./deploy.sh staging
-
 workflows:
   version: 2.1
   build-test-deploy:
     jobs:
       - build
       - test
-      - deploy-dev:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: develop
-      - deploy-staging:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: staging

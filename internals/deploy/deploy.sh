@@ -20,7 +20,7 @@ then
   yarn build:stage
 elif [ $RUN_TIME_ENV = "production" ]
 then
-  S3_BUCKET="s3://preprod.staging.platdev.net"
+  S3_BUCKET="s3://admin.preprod.platdev.net"
   CDN_ID="EO9OLXQ7SE1KL"
 
   # Build the project

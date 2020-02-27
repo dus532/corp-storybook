@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@0.1.20
+
 executors:
   api_server_exec:
     docker:
@@ -54,16 +57,55 @@ jobs:
             echo deploy to dev envionment
             cd ./script && ./deploy-dev.sh
 
+  deploy-cdn-dev:
+    #executor: aws-cli/default
+    executor: api_server_exec
+    steps:
+      - checkout
+      - aws-cli/setup:
+          aws-access-key-id: DEV_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: DEV_AWS_SECRET_ACCESS_KEY
+          aws-region: DEV_AWS_DEFAULT_REGION
+      - run:
+          name: Deploy to development envionment
+          command: |
+            echo deploy to development envionment
+            yarn install
+            cd ./internals/deploy && ./deploy.sh development
+
+  deploy-cdn-staging:
+    #executor: aws-cli/default
+    executor: api_server_exec
+    steps:
+      - checkout
+      - aws-cli/setup:
+          aws-access-key-id: STAGING_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: STAGING_AWS_SECRET_ACCESS_KEY
+          aws-region: STAGING_AWS_DEFAULT_REGION
+      - run:
+          name: Deploy to staging envionment
+          command: |
+            echo deploy to staging envionment
+            yarn install
+            cd ./internals/deploy && ./deploy.sh staging
+
 workflows:
   version: 2.1
   build-test-deploy:
     jobs:
       - build
       - test
-      - deploy-dev:
+      - deploy-cdn-dev:
           requires:
             - build
             - test
           filters:
             branches:
               only: develop
+      - deploy-cdn-staging:
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: staging

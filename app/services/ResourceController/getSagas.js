@@ -5,10 +5,12 @@ import generateCarplatResourceURI, {
   getKey,
 } from 'utils/generateCarplatResourceURI';
 import { useInjectSaga } from 'utils/injectSaga';
+import translateFilterOption from 'utils/translateFilterOption';
 
 import getActionTypes from './getActionTypes';
 import getActionCreators from './getActionCreators';
 import getSelectors from './getSelectors';
+import { DESC } from './constants';
 
 // 포맷 참고: https://www.notion.so/carplat/API-662591bb668a4a89b16103ac81ea9d1e
 
@@ -17,6 +19,12 @@ export default function getSaga(resources, key = 'global') {
     // 별도의 처리를 해줘야하는 액션들
     BULK_READ_START,
     UPDATE_LIST_DATA_PARAMS,
+    UPDATE_PAGINATION,
+    SET_ORDERING,
+    UPDATE_ORDERING,
+    SET_FILTERING,
+    UPDATE_FILTERING,
+    SET_SEARCHING_QUERY,
     // 중복 코드를 발생시키는 나머지 액션들
     CREATE_START,
     READ_START,
@@ -35,9 +43,53 @@ export default function getSaga(resources, key = 'global') {
 
   function* bulkReadGenerator({ uids }) {
     try {
-      const bulkReadParams = yield select(makeSelectListDataParams());
+      const { pagination, ordering, filtering, ...params } = yield select(
+        makeSelectListDataParams(),
+      );
 
-      yield put(processedBulkReadStart(uids, bulkReadParams));
+      // TODO
+      //  - 여기서 listDataParams processing
+      const order = Object.keys(ordering)
+        .filter(fieldName => ordering[fieldName])
+        .map(
+          fieldName => `${ordering[fieldName] === DESC ? '-' : ''}${fieldName}`,
+        );
+      const filterArray = Object.keys(filtering)
+        .filter(fieldName => Object.keys(filtering[fieldName]).length > 0)
+        .map(fieldName => ({
+          fieldName,
+          options: Object.keys(filtering[fieldName]).map(
+            option =>
+              `${translateFilterOption(filtering[fieldName][option])}${option}`,
+          ),
+        }));
+
+      // filter가 하나면 f=user,-admin 형태로 만듦.
+      // filter가 두 개 이상이면 f[type]=sedan,-suv&f[brand]=+hyundai 형태로
+      // 만듦.
+      let filterObject = {};
+      if (filterArray.length === 1) {
+        filterObject = {
+          q: filterArray[0].options.join(','),
+        };
+      } else if (filterArray.length > 1) {
+        filterObject = filterArray.reduce((acc, { fieldName, options }) => {
+          acc[`f[${fieldName}]`] = options.join(',');
+
+          return acc;
+        }, {});
+      }
+
+      const processedParams = {
+        ...pagination,
+        ...(order.length > 0 && {
+          order: order.join(','),
+        }),
+        ...filterObject,
+        ...params,
+      };
+
+      yield put(processedBulkReadStart(uids, processedParams));
     } catch (err) {
       const { failAction } = processedBulkReadStart();
 
@@ -47,7 +99,16 @@ export default function getSaga(resources, key = 'global') {
 
   function* bulkReadWatcher() {
     yield takeLatest(
-      [BULK_READ_START, UPDATE_LIST_DATA_PARAMS],
+      [
+        BULK_READ_START,
+        UPDATE_LIST_DATA_PARAMS,
+        UPDATE_PAGINATION,
+        SET_ORDERING,
+        UPDATE_ORDERING,
+        SET_FILTERING,
+        UPDATE_FILTERING,
+        SET_SEARCHING_QUERY,
+      ],
       bulkReadGenerator,
     );
   }

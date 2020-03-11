@@ -39,6 +39,12 @@ export default function getActionCreators(resources, key = 'global') {
     // bulkRead에 필요한 params update
     PROCESSED_BULK_READ_START,
     UPDATE_LIST_DATA_PARAMS,
+    UPDATE_PAGINATION,
+    SET_ORDERING,
+    UPDATE_ORDERING,
+    SET_FILTERING,
+    UPDATE_FILTERING,
+    SET_SEARCHING_QUERY,
   } = getActionTypes(resources, key);
 
   return {
@@ -99,6 +105,46 @@ export default function getActionCreators(resources, key = 'global') {
       type: UPDATE_LIST_DATA_PARAMS,
       uids,
       params,
+    }),
+    // paging 정보 업데이트
+    updatePagination: (uids, pagination) => ({
+      type: UPDATE_PAGINATION,
+      uids,
+      pagination,
+    }),
+    // ordering 정보 업데이트
+    // 일반 assign 방식으로 레퍼런스 변경
+    setOrdering: (uids, ordering) => ({
+      type: SET_ORDERING,
+      uids,
+      ordering,
+    }),
+    // ordering 정보 업데이트
+    // Object.assign 방식으로 merge
+    updateOrdering: (uids, ordering) => ({
+      type: UPDATE_ORDERING,
+      uids,
+      ordering,
+    }),
+    // filtering 정보 업데이트
+    // 일반 assign 방식으로 레퍼런스 변경
+    setFiltering: (uids, filtering) => ({
+      type: SET_FILTERING,
+      uids,
+      filtering,
+    }),
+    // filtering 정보 업데이트
+    // Object.assign 방식으로 merge
+    updateFiltering: (uids, filtering) => ({
+      type: UPDATE_FILTERING,
+      uids,
+      filtering,
+    }),
+    // 검색용 쿼리 변경
+    setSearchingQuery: (uids, searchingQuery) => ({
+      type: SET_SEARCHING_QUERY,
+      uids,
+      searchingQuery,
     }),
   };
 }

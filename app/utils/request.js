@@ -22,9 +22,7 @@ function parseJSON(response) {
 
   const totalCount = parseInt(response.headers.get('X-Total-Count'), 10);
 
-  return response
-    .json()
-    .then(data => ({ message: data.message, totalCount, data }));
+  return response.json().then(body => ({ totalCount, ...body }));
 }
 
 /**
@@ -61,6 +59,10 @@ export default function request(url, options) {
 
   // CARPLAT API server로 요청을 보낼 때
   // userAgent를 추가해서 보냄.
+  //
+  // TODO
+  //  - carplat-api-lts 에서 사용하지 않는다면
+  //    X-User-Agent 추가하는 부분 삭제해도 됨.
   if (!window.userAgent) {
     if (navigator.userAgent) {
       parser.setUA(navigator.userAgent);

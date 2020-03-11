@@ -27,6 +27,12 @@ export default function getActionTypes(resources, key = 'global') {
     // 더 추가함.
     PROCESSED_BULK_READ_START: `${actionKey}/PROCESSED_BULK_READ_START`,
     UPDATE_LIST_DATA_PARAMS: `${actionKey}/UPDATE_LIST_DATA_PARAMS`,
+    UPDATE_PAGINATION: `${actionKey}/UPDATE_PAGINATION`,
+    UPDATE_ORDERING: `${actionKey}/UPDATE_ORDERING`,
+    DELETE_ORDERING_OPTION: `${actionKey}/DELETE_ORDERING_OPTION`,
+    SET_FILTERING: `${actionKey}/SET_FILTERING`,
+    UPDATE_FILTERING: `${actionKey}/UPDATE_FILTERING`,
+    SET_SEARCHING_QUERY: `${actionKey}/SET_SEARCHING_QUERY`,
     // 초기화
     INITIALIZE_STATE: `${actionKey}/INITIALIZE_STATE`,
   };

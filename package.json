@@ -1,10 +1,10 @@
 {
-  "name": "carplat-admin",
+  "name": "boilerplat-admin",
   "version": "4.0.0",
-  "description": "carplat-admin = partner 1.0 + partners 2.0 ",
+  "description": "boilerplat-admin = partner 1.0 + partners 2.0 ",
   "repository": {
     "type": "git",
-    "url": "git://github.com/plat-dev/carplat-admin.git"
+    "url": "git://github.com/plat-dev/boilerplat-admin.git"
   },
   "engines": {
     "npm": ">=5",

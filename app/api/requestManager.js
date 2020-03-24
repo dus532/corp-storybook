@@ -4,7 +4,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import moment from 'moment';
+import moment from 'utils/moment';
 import UserManager from 'utils/userManager';
 import config from 'config';
 

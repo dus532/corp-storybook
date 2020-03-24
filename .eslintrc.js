@@ -23,6 +23,10 @@ module.exports = {
     },
   },
   rules: {
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsFor: ['draft'] },
+    ],
     'prettier/prettier': ['error', prettierOptions],
     'arrow-body-style': [2, 'as-needed'],
     'class-methods-use-this': 0,

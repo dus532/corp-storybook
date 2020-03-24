@@ -1,6 +1,6 @@
 // 액션!
 import RequestManager from 'api/requestManager';
-import { LOAD, INCRE } from 'store/constants/global';
+import { LOAD, INCRE, HANDLE_CHANGE } from 'store/global/constants';
 
 export const load = () => ({
   type: LOAD,
@@ -8,3 +8,8 @@ export const load = () => ({
 });
 
 export const incre = () => ({ type: INCRE });
+
+export const handleChange = e => ({
+  type: HANDLE_CHANGE,
+  data: e,
+});

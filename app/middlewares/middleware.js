@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import uuid from 'uuid';
 
 import { KEY, LIFECYCLE } from './constants';

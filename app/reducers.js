@@ -8,14 +8,14 @@ import { reducer as reduxFormReducer } from 'redux-form';
 
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import counterReducer from 'store/reducer/global';
+import globalReducer from 'store/global/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
-    counter: counterReducer,
+    global: globalReducer,
     language: languageProviderReducer,
     router: connectRouter(history),
     form: reduxFormReducer,

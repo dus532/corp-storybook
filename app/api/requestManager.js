@@ -1,4 +1,3 @@
-/*eslint-disable*/
 // 환영합니다!
 // 여기는 API 요청을 담당하는 RequestManager 입니다.
 import axios from 'axios';

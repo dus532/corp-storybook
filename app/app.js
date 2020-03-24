@@ -15,6 +15,10 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 
+// react-toastify
+import { ToastContainer } from 'react-toastify';
+import './react-toastify.css';
+
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
@@ -53,6 +57,7 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <App />
+          <ToastContainer autoClose={4000} position="top-center" />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

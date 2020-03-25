@@ -3,7 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
-import CarplatLayout from 'pages/carplat';
+import SignIn from 'pages/common/signin';
 import GlobalStyle from 'global-styles';
 
 const App = () => (
@@ -12,7 +12,7 @@ const App = () => (
       <meta name="description" content="카플랫 서비스 관리툴입니다." />
     </Helmet>
     <Switch>
-      <Route path="/" exact component={CarplatLayout} />
+      <Route path="/" exact component={SignIn} />
     </Switch>
     <GlobalStyle />
   </>

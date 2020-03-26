@@ -30,6 +30,7 @@ export default function configureStore(initialState = {}, history) {
     //   };
     /* eslint-enable */
   }
+  /* eslint-disable no-underscore-dangle */
 
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
@@ -44,6 +45,7 @@ export default function configureStore(initialState = {}, history) {
   // 추가 의존성 없이 사용합니다
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
+  /* eslint-disable no-underscore-dangle */
   const enhancers = [applyMiddleware(...middlewares, reduxPackMiddleware)];
 
   const store = createStore(

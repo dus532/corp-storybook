@@ -1,19 +1,28 @@
 import React from 'react';
+import { push } from 'connected-react-router';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SignWrap, SignInput, SignExtra, Button, Logo } from 'components';
-import { signHandleChange } from 'store/sign/actions';
+import { actionSignIn, actionSignHandleChange } from 'store/sign/actions';
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const signInData = useSelector(state => state.sign);
 
   const handleChange = data => {
-    dispatch(signHandleChange(data.target));
+    dispatch(actionSignHandleChange(data.target));
   };
 
-  const propsList = { signInData, handleChange };
+  const handleCheckBoxChange = data => {
+    dispatch(actionSignHandleChange(data.target, 'checkbox'));
+  };
+
+  const onSignIn = () => {
+    dispatch(actionSignIn(() => dispatch(push('/carplat'))));
+  };
+
+  const propsList = { signInData, handleChange, handleCheckBoxChange };
 
   return (
     <SignWrap>
@@ -26,7 +35,7 @@ const SignIn = () => {
         <SignInput {...propsList} />
         <SignExtra {...propsList} />
         <br />
-        <Button>로그인</Button>
+        <Button onClick={onSignIn}>로그인</Button>
       </div>
     </SignWrap>
   );

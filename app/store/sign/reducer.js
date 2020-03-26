@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { SIGN_IN, HANDLE_CHANGE } from 'store/sign/constants';
+import { SIGN_IN, HANDLE_CHANGE, RESET } from 'store/sign/constants';
 import ApiRequest from 'store/request/request';
 
 const initialState = { id: '', pw: '', isSaved: false, status: 0 };
@@ -13,8 +13,14 @@ const signReducer = (state = initialState, action) => {
       case SIGN_IN:
         return ApiRequest(state, action, payload);
       case HANDLE_CHANGE:
-        draft[data.name] = data.value;
+        if (action.kinds === 'checkbox') {
+          draft[data.name] = data.checked;
+        } else {
+          draft[data.name] = data.value;
+        }
         return draft;
+      case RESET:
+        return initialState;
       default:
         return draft;
     }

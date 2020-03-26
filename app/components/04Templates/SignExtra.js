@@ -18,13 +18,14 @@ const SignExtraFlex = styled.div`
   }
 `;
 
-const SignExtra = ({ SignInData, handleChange }) => (
+const SignExtra = ({ signInData, handleCheckBoxChange }) => (
   <SignExtraFlex>
     <div className="save_checkbox">
       <CheckBox
         id="isSaved"
-        checked={SignInData.isSaved}
-        handleChange={handleChange}
+        name="isSaved"
+        checked={signInData.isSaved}
+        onChange={handleCheckBoxChange}
       />
       <label htmlFor="isSaved">
         <h5>로그인 상태 유지</h5>
@@ -35,8 +36,8 @@ const SignExtra = ({ SignInData, handleChange }) => (
 );
 
 SignExtra.propTypes = {
-  SignInData: PropTypes.object,
-  handleChange: PropTypes.func,
+  signInData: PropTypes.object,
+  handleCheckBoxChange: PropTypes.func,
 };
 
 export default SignExtra;

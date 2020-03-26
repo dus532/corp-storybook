@@ -15,11 +15,19 @@ const Wrap = styled.div`
   }
 
   .container {
-    width: 540px;
+    width: 560px;
     padding: 48px;
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid #f2f2f2;
     border-radius: 6px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .container {
+      width: 100%;
+      margin: 0 12px;
+      padding: 28px;
+    }
   }
 `;
 

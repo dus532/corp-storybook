@@ -2,20 +2,18 @@
 import RequestManager from 'api/requestManager';
 import { SIGN_IN, HANDLE_CHANGE, RESET } from 'store/sign/constants';
 
-export const actionSignIn = goRoute => ({
+export const actionSignIn = onSuccess => ({
   type: SIGN_IN,
   promise: RequestManager('get', ''),
   meta: {
-    onSuccess: () => {
-      goRoute();
-    },
+    onSuccess,
   },
 });
 
-export const actionSignHandleChange = (e, kinds) => ({
+export const actionSignHandleChange = (e, index) => ({
   type: HANDLE_CHANGE,
   data: e,
-  kinds,
+  index,
 });
 
 export const actionSignReset = () => ({

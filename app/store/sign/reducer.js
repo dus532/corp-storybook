@@ -13,7 +13,7 @@ const signReducer = (state = initialState, action) => {
       case SIGN_IN:
         return ApiRequest(state, action, payload);
       case HANDLE_CHANGE:
-        if (action.kinds === 'checkbox') {
+        if (action.index === 'checkbox') {
           draft[data.name] = data.checked;
         } else {
           draft[data.name] = data.value;

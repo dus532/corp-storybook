@@ -1,32 +1,57 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  h2{
+      margin:0;
+      padding:0;
+      font-size:1.8rem;
+      font-weight:500;
+  }
+
   h3{
     margin:0;
     padding:0;
-    font-size:1.5rem;
-    font-weight:500;
+    font-size:1.1rem;
+    font-weight:normal;
+    letter-spacing:-0.2px;
   }
   
   h4{
     margin:0;
     padding:0;
     font-size:1rem;
-    font-weight:500;
+    font-weight:normal;
   }
   
   h5{
     margin:0;
     padding:0;
     font-size:0.8rem;
-    font-weight:500;
+    font-weight:normal;
   }
 
   h6{
     margin:0;
     padding:0;
     font-size:0.6rem;
-    font-weight:500;
+    font-weight:normal;
+  }
+
+  button{
+    background:none;
+  }
+
+  button,
+  button:active,
+  button:focus{
+    outline:none;
+    border:none;
+    padding: 0;
+    cursor:pointer;
+  }
+  
+  button span{
+      position: relative;
   }
 
   html,
@@ -53,6 +78,12 @@ const GlobalStyle = createGlobalStyle`
 
   input {
     outline:none;
+  }
+
+  @media screen and (max-width: 768px) {
+    h2{
+      font-size:1.3em;
+    };
   }
 `;
 

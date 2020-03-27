@@ -5,10 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { SignWrap, SignInput, SignExtra, Button, Logo } from 'components';
 import { actionSignIn, actionSignHandleChange } from 'store/sign/actions';
+import { toggleFindEmail } from 'store/modals/actions';
+import { ModalFindEmail } from 'modals';
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const signInData = useSelector(state => state.sign);
+  const modalsData = useSelector(state => state.modals);
 
   const handleChange = data => {
     dispatch(actionSignHandleChange(data.target));
@@ -22,22 +25,38 @@ const SignIn = () => {
     dispatch(actionSignIn(() => dispatch(push('/carplat'))));
   };
 
+  const doToggleFindEmail = () => {
+    dispatch(toggleFindEmail());
+  };
+
   const propsList = { signInData, handleChange, handleCheckBoxChange };
 
   return (
-    <SignWrap>
-      <div className="container">
-        <Logo />
-        <br />
-        <h5>
-          프리미엄 기업 카셰어링 서비스, 카플랫 비즈니스에 오신 것을 환영합니다.
-        </h5>
-        <SignInput {...propsList} />
-        <SignExtra {...propsList} />
-        <br />
-        <Button onClick={onSignIn}>로그인</Button>
-      </div>
-    </SignWrap>
+    <>
+      <SignWrap>
+        <div className="sign_container">
+          <Logo />
+          <h2>
+            프리미엄 기업 카셰어링 서비스,
+            <br /> 카플랫 비즈니스에 오신 것을 환영합니다.
+          </h2>
+          <div className="sign_bottom">
+            <SignInput {...propsList} />
+            <SignExtra {...propsList} toggleFindEmail={doToggleFindEmail} />
+            <Button onClick={onSignIn}>
+              <span>로그인</span>
+            </Button>
+            <h5 className="sign_askCarplat">
+              [느낌표] 나는요 오빠가 좋은걸 어떡해
+            </h5>
+          </div>
+        </div>
+      </SignWrap>
+      <ModalFindEmail
+        view={modalsData.findEmail}
+        onClickExit={doToggleFindEmail}
+      />
+    </>
   );
 };
 

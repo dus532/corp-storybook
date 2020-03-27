@@ -2,40 +2,36 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import Input from 'components/01Atoms/Input';
+
 const StyledDiv = styled.div`
   display: flex;
   align-items: center;
+  justify-context: center;
 
   span {
     position: relative;
     width: 0px;
-    right: 36px;
-    margin-left: 4px;
+    right: -4px;
   }
 
   .eyes {
     width: 0px;
     position: relative;
-    right: 52px;
+    right: 24px;
     cursor: pointer;
   }
 `;
 
-const StyledInput = styled.input`
-  font-size: 1em;
-  transition: 0.35s;
-  border: 1px solid #ddd;
-  display: block;
+const InputError = styled.div`
   width: 100%;
-  height: 40px;
-  border-radius: 4px;
-  margin: 4px 0;
-  padding: 4px 12px;
-  font-size: 1rem;
+  text-align: left;
+  padding-left: 12px;
+  height: 16px;
+  margin: 2px 0 16px;
 
-  &:hover {
-    background: #f2f2f2;
-    transition: 0.35s;
+  h5 {
+    color: #ee6833;
   }
 `;
 
@@ -62,36 +58,44 @@ const statusEmojis = status => {
   }
 };
 
-const Input = props => {
+const DataInput = props => {
   const [viewPW, setViewPW] = useState(props.type);
   return (
-    <StyledDiv>
-      <StyledInput {...props} type={viewPW} />
-      {props.type === 'password' && (
-        <div
-          className="eyes"
-          onClick={() =>
-            viewPW === 'password' ? setViewPW('text') : setViewPW('password')
-          }
-          onKeyPress={e => e.key === '19' && setViewPW('text')}
-          role="button"
-          tabIndex={0}
-        >
-          눈
-        </div>
+    <>
+      <StyledDiv>
+        <Input {...props} type={viewPW} />
+        {props.type === 'password' && (
+          <div
+            className="eyes"
+            onClick={() =>
+              viewPW === 'password' ? setViewPW('text') : setViewPW('password')
+            }
+            onKeyPress={e => e.key === '19' && setViewPW('text')}
+            role="button"
+            tabIndex={0}
+          >
+            눈
+          </div>
+        )}
+        {statusEmojis(props.status)}
+      </StyledDiv>
+      {props.error && (
+        <InputError>
+          <h5>{props.error}</h5>
+        </InputError>
       )}
-      {statusEmojis(props.status)}
-    </StyledDiv>
+    </>
   );
 };
 
-Input.propTypes = {
+DataInput.propTypes = {
   onChange: PropTypes.func,
   name: PropTypes.string,
   value: PropTypes.any,
   type: PropTypes.string,
   placeholder: PropTypes.string,
   status: PropTypes.number,
+  error: PropTypes.string,
 };
 
-export default Input;
+export default DataInput;

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-const Button = styled.button`
+const SubButton = styled.button`
   width: 100%;
   height: 40px;
-  background: black;
+  background: #f6f6f6;
   outline: none;
   border: none;
-  color: white;
+  color: black;
   font-size: 1rem;
   font-weight: bold;
   transition: 0.25s;
@@ -14,13 +14,9 @@ const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: rgb(50, 50, 50);
+    background: #ddd;
     transition: 0.25s;
-  }
-
-  &:active {
-    outline: none;
   }
 `;
 
-export default Button;
+export default SubButton;

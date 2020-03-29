@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  ul{
+    margin:0;
+  }
   h2{
       margin:0;
       padding:0;
@@ -41,12 +44,17 @@ const GlobalStyle = createGlobalStyle`
     background:none;
   }
 
+  .container{
+    max-width:1200px;
+    margin: 0 auto;
+    height:100%;
+  }
+
   button,
   button:active,
   button:focus{
     outline:none;
     border:none;
-    padding: 0;
     cursor:pointer;
   }
   
@@ -60,6 +68,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     line-height: 1.5;
     word-break:keep-all;
+    background:#F7F7F7;
   }
 
   body {
@@ -78,6 +87,14 @@ const GlobalStyle = createGlobalStyle`
 
   input {
     outline:none;
+  }
+
+  a{
+    text-decoration:none;
+  }
+
+  a{
+    color:inherit;
   }
 
   @media screen and (max-width: 768px) {

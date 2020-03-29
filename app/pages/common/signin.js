@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { push } from 'connected-react-router';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { SignWrap, SignInput, SignExtra, Button, Logo } from 'components';
-import { actionSignIn, actionSignHandleChange } from 'store/sign/actions';
-import { toggleFindEmail } from 'store/modals/actions';
+import {
+  actionSignIn,
+  actionSignHandleChange,
+  toggleFindEmail,
+  actionSetUser,
+} from 'store';
 import { ModalFindEmail } from 'modals';
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const signInData = useSelector(state => state.sign);
   const modalsData = useSelector(state => state.modals);
+  const userData = useSelector(state => state.user);
 
   const handleChange = data => {
     dispatch(actionSignHandleChange(data.target));
@@ -22,7 +27,12 @@ const SignIn = () => {
   };
 
   const onSignIn = () => {
-    dispatch(actionSignIn(() => dispatch(push('/carplat'))));
+    dispatch(
+      actionSignIn(() => {
+        dispatch(actionSetUser());
+        dispatch(push('/home'));
+      }),
+    );
   };
 
   const doToggleFindEmail = () => {
@@ -30,6 +40,12 @@ const SignIn = () => {
   };
 
   const propsList = { signInData, handleChange, handleCheckBoxChange };
+
+  useEffect(() => {
+    if (userData.name) {
+      dispatch(push('/home'));
+    }
+  }, []);
 
   return (
     <>

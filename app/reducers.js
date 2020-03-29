@@ -11,6 +11,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import globalReducer from 'store/global/reducer';
 import signReducer from 'store/sign/reducer';
 import modalReducer from 'store/modals/reducer';
+import userReducer from 'store/user/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -20,6 +21,7 @@ export default function createReducer(injectedReducers = {}) {
     sign: signReducer,
     modals: modalReducer,
     global: globalReducer,
+    user: userReducer,
     language: languageProviderReducer,
     router: connectRouter(history),
     form: reduxFormReducer,

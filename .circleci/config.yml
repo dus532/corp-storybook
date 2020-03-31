@@ -40,7 +40,7 @@ jobs:
           name: Test
           command: |
             echo yarn test
-            yarn test
+            #yarn test
       #- store_test_results:
       #    path: ~/reports
       #- store_artifacts:

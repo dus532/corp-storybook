@@ -1,9 +1,17 @@
 import React, { useEffect } from 'react';
 import { push } from 'connected-react-router';
+import { FormattedMessage } from 'react-intl';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { SignWrap, SignInput, SignExtra, Button, Logo } from 'components';
+import {
+  SignWrap,
+  SignInput,
+  SignExtra,
+  Button,
+  Logo,
+  NewLine,
+} from 'components';
 import {
   actionSignIn,
   actionSignHandleChange,
@@ -35,7 +43,7 @@ const SignIn = () => {
     );
   };
 
-  const doToggleFindEmail = () => {
+  const onToggleFindEmail = () => {
     dispatch(toggleFindEmail());
   };
 
@@ -53,14 +61,17 @@ const SignIn = () => {
         <div className="sign_container">
           <Logo />
           <h2>
-            프리미엄 기업 카셰어링 서비스,
-            <br /> 카플랫 비즈니스에 오신 것을 환영합니다.
+            <FormattedMessage id="carplat-biz.signin.body">
+              {txt => <NewLine data={txt} />}
+            </FormattedMessage>
           </h2>
           <div className="sign_bottom">
             <SignInput {...propsList} />
-            <SignExtra {...propsList} toggleFindEmail={doToggleFindEmail} />
+            <SignExtra {...propsList} toggleFindEmail={onToggleFindEmail} />
             <Button onClick={onSignIn}>
-              <span>로그인</span>
+              <span>
+                <FormattedMessage id="carplat-biz.signin.signin" />
+              </span>
             </Button>
             <h5 className="sign_askCarplat">
               [느낌표] 나는요 오빠가 좋은걸 어떡해
@@ -70,7 +81,7 @@ const SignIn = () => {
       </SignWrap>
       <ModalFindEmail
         view={modalsData.findEmail}
-        onClickExit={doToggleFindEmail}
+        onClickExit={onToggleFindEmail}
       />
     </>
   );

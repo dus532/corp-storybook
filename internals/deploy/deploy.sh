@@ -6,22 +6,22 @@ BUILD_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../" && pwd)/build"
 # Set the S3 bucket URL and the cloudfront ID
 if [ $RUN_TIME_ENV = "development" ]
 then
-  S3_BUCKET="s3://admin.dev.platdev.net"
-  CDN_ID="E2FV0ED0Q8FCKY"
+  S3_BUCKET="s3://biz-corp-admin.dev.platdev.net"
+  CDN_ID="E1SAL9QNUQW32T"
 
   # Build the project
   yarn build:dev
 elif [ $RUN_TIME_ENV = "staging" ]
 then
-  S3_BUCKET="s3://admin.staging.platdev.net"
-  CDN_ID="E1ARZCOHX8HD18"
+  S3_BUCKET="s3://biz-corp-admin.staging.platdev.net"
+  CDN_ID="E3R4V6QQQDQ8UZ"
 
   # Build the project
   yarn build:stage
 elif [ $RUN_TIME_ENV = "production" ]
 then
-  S3_BUCKET="s3://admin.preprod.platdev.net"
-  CDN_ID="EO9OLXQ7SE1KL"
+  S3_BUCKET="s3://biz-corp-admin.preprod.platdev.net"
+  CDN_ID="EG5EDGEAVU4RV"
 
   # Build the project
   yarn build:prod

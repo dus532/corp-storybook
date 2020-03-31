@@ -6,31 +6,11 @@ orbs:
 executors:
   api_server_exec:
     docker:
-      # Primary container
       - image: circleci/node:12.14.1
     environment:
       TZ: Asia/Seoul
-      NODE_ENV: test
 
 jobs:
-  build:
-    #executor: api_server_exec
-    machine: true
-    steps:
-      - checkout
-      #- run:
-      #    name: Migrate Database
-      #    command: yarn run migrate
-      - run:
-          name: Build
-          command: |
-            echo Build
-            mkdir -p ~/reports
-            # test script
-      #- store_test_results:
-      #    path: ~/reports
-      #- store_artifacts:
-      #    path: ~/reports
 
   test:
     machine: true
@@ -42,23 +22,8 @@ jobs:
             echo Test
             mkdir -p ~/reports
             # test script
-      #- store_test_results:
-      #    path: ~/reports
-      #- store_artifacts:
-      #    path: ~/reports
-
-  deploy-dev:
-    machine: true
-    steps:
-      - checkout
-      - run:
-          name: Deploy to the Development Environment
-          command: |
-            echo deploy to dev envionment
-            cd ./script && ./deploy-dev.sh
 
   deploy-cdn-dev:
-    #executor: aws-cli/default
     executor: api_server_exec
     steps:
       - checkout
@@ -67,14 +32,26 @@ jobs:
           aws-secret-access-key: DEV_AWS_SECRET_ACCESS_KEY
           aws-region: DEV_AWS_DEFAULT_REGION
       - run:
-          name: Deploy to development envionment
+          name: Install
           command: |
-            echo deploy to development envionment
+            echo yarn install
             yarn install
+      - run:
+          name: Test
+          command: |
+            echo yarn test
+            yarn test
+      #- store_test_results:
+      #    path: ~/reports
+      #- store_artifacts:
+      #    path: ~/reports
+      - run:
+          name: Deploy to dev envionment
+          command: |
+            echo deploy to dev envionment
             cd ./internals/deploy && ./deploy.sh development
 
   deploy-cdn-staging:
-    #executor: aws-cli/default
     executor: api_server_exec
     steps:
       - checkout
@@ -83,28 +60,38 @@ jobs:
           aws-secret-access-key: STAGING_AWS_SECRET_ACCESS_KEY
           aws-region: STAGING_AWS_DEFAULT_REGION
       - run:
+          name: Install
+          command: |
+            echo yarn install
+            yarn install
+      - run:
+          name: Test
+          command: |
+            echo yarn test
+            yarn test
+      #- store_test_results:
+      #    path: ~/reports
+      #- store_artifacts:
+      #    path: ~/reports
+      - run:
           name: Deploy to staging envionment
           command: |
-            echo deploy to staging envionment
-            yarn install
+            echo deploy to dev envionment
             cd ./internals/deploy && ./deploy.sh staging
 
 workflows:
   version: 2.1
   build-test-deploy:
     jobs:
-      - build
       - test
       - deploy-cdn-dev:
           requires:
-            - build
             - test
           filters:
             branches:
               only: develop
       - deploy-cdn-staging:
           requires:
-            - build
             - test
           filters:
             branches:

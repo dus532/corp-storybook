@@ -102,6 +102,19 @@ const GlobalStyle = createGlobalStyle`
       font-size:1.3em;
     };
   }
+
+  // 실험실! 각종 애니메이션이 추가되어 있습니다.
+  @keyframes rotate_card{
+    from{
+      transform:rotateZ(6deg);
+      opacity:0;
+    }
+    to{
+      transform:rotateZ(0deg);
+      opacity:1;
+    }
+    
+  }
 `;
 
 export default GlobalStyle;

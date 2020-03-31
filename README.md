@@ -45,7 +45,7 @@ carplat-admin/app
 ├── components/       # 프로젝트 전체에서 공유되는 Component, atomic 패턴으로 제작
 ├── containers/       # 프로젝트 전체에서 공유되면서 store에서 데이터를 보고 있는 Component.
 ├── services/         # 재사용 가능한 sideEffect 컨트롤러.
-├── HOCs/             # Higher-Order Component 집합.
+├── modals/           # 페이지에서 사용되는 modals, portal로 순간이동하여 #modal에 그려짐.
 ├── utils/            # 프로젝트 전체에서 공유되는 util 함수.
 ├── middlewares/      # redux의 비동기 처리를 가능하게 해주는 middlewares ( redux-pack pork )
 └── pages/            # 페이지 정보와 라우팅 정보.

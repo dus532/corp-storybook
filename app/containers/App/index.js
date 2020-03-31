@@ -35,12 +35,12 @@ const App = () => {
         {/* 로그인 부분 */}
         <Route path="/" exact component={SignIn} />
         {/* 초기설정 */}
+        <Route path="/initial/introduce" exact component={InitIntroduce} />
         <Route
           path="/initial/registerCard"
           exact
           component={InitRegisterCard}
         />
-        <Route path="/initial/registerCard" exact component={InitIntroduce} />
         {/* 대쉬보드 */}
         <Route path="/home" exact component={DashBoard} />
       </Switch>

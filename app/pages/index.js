@@ -1,9 +1,9 @@
 // Common 공통
-export { default as SignIn } from 'pages/common/signin';
+export { default as SignIn } from 'pages/common/SignIn';
 
 // DashBoard 대쉬보드
-export { default as DashBoard } from 'pages/home/dashboard';
+export { default as DashBoard } from 'pages/home/DashBoard';
 
 // InitialSetting 초기설정
-export { default as InitIntroduce } from 'pages/initialSetting/introduce';
-export { default as InitRegisterCard } from 'pages/initialSetting/registerCard';
+export { default as InitIntroduce } from 'pages/initialSetting/Introduce';
+export { default as InitRegisterCard } from 'pages/initialSetting/RegisterCard';

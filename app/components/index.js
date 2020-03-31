@@ -6,10 +6,13 @@ export { default as CheckBox } from 'components/01Atoms/CheckBox';
 export { default as Logo } from 'components/01Atoms/Logo';
 export { default as Arrow } from 'components/01Atoms/Arrow';
 export { default as Input } from 'components/01Atoms/Input';
+export { default as NewLine } from 'components/01Atoms/NewLine';
 export { default as Container } from 'components/01Atoms/Container';
+export { default as Container580 } from 'components/01Atoms/Container580';
 
 // 02 Molecules
 export { default as DataInput } from 'components/02Molecules/DataInput';
+export { default as ButtonBottom } from 'components/02Molecules/ButtonBottom';
 
 // 03 Organisms
 export { default as SignInput } from 'components/03Organisms/SignInput';

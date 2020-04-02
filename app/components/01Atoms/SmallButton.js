@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Button from 'components/01Atoms/Button';
 
 const SmallButton = styled(Button)`
-  background: #252525;
-  color: white;
+  background: #ededed;
+  color: black;
   width: 100px;
   height: auto;
   padding: 8px 0;
@@ -13,7 +13,7 @@ const SmallButton = styled(Button)`
   font-weight: 700;
 
   &:hover {
-    background: #555;
+    background: rgb(200, 200, 200);
   }
 `;
 

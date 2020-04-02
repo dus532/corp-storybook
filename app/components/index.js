@@ -17,7 +17,6 @@ export { default as ButtonBottom } from 'components/02Molecules/ButtonBottom';
 // 03 Organisms
 export { default as SignInput } from 'components/03Organisms/SignInput';
 export { default as Header } from 'components/03Organisms/Header';
-export { default as HeaderBottom } from 'components/03Organisms/HeaderBottom';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';

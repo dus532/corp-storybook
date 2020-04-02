@@ -27,10 +27,6 @@ jobs:
     executor: api_server_exec
     steps:
       - checkout
-      - aws-cli/setup:
-          aws-access-key-id: DEV_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: DEV_AWS_SECRET_ACCESS_KEY
-          aws-region: DEV_AWS_DEFAULT_REGION
       - run:
           name: Install
           command: |
@@ -58,6 +54,10 @@ jobs:
   deploy-cdn-dev:
     executor: api_server_exec
     steps:
+      - aws-cli/setup:
+          aws-access-key-id: DEV_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: DEV_AWS_SECRET_ACCESS_KEY
+          aws-region: DEV_AWS_DEFAULT_REGION
       - attach_workspace:
           at: ~/project
       - run:

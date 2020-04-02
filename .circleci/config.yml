@@ -54,7 +54,7 @@ jobs:
           name: Deploy to dev envionment
           environment:
             BUILD_DIR: build
-            S3_BUCKET: s3://cs-admin.dev.platdev.net
+            S3_BUCKET: s3://biz-corp-admin.dev.platdev.net
             CDN_ID: E1SAL9QNUQW32T
           command: |
             echo deploy to dev envionment

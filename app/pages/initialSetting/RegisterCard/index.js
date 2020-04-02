@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ButtonBottom, Container580 } from 'components';
+import { ButtonBottom, Container580, Input } from 'components';
 
 const RegisterCardTop = styled.div`
   margin-bottom: 60px;
@@ -23,6 +23,21 @@ const RegisterCardTop = styled.div`
   }
 `;
 
+const RegisterCardBottom = styled.div`
+  .enter_card {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  input {
+    width: 24%;
+    text-align: center;
+  }
+  h4 {
+    font-weight: 700;
+  }
+`;
+
 const RegisterCardForm = styled.form``;
 
 const RegisterCard = () => {
@@ -40,9 +55,19 @@ const RegisterCard = () => {
         </span>
         에서 부서 결제카드 등록을 설정하실 수 있습니다.
       </RegisterCardTop>
-      <RegisterCardForm>
-        <ButtonBottom left="이전" disabledLeft right="다음" />
-      </RegisterCardForm>
+      <RegisterCardBottom>
+        <h4>카드 번호를 입력하세요.</h4>
+        <div className="enter_card">
+          <Input />
+          <Input />
+          <Input />
+          <Input />
+        </div>
+        <br />
+        <RegisterCardForm>
+          <ButtonBottom left="이전" disabledLeft right="다음" />
+        </RegisterCardForm>
+      </RegisterCardBottom>
     </Container580>
   );
 };

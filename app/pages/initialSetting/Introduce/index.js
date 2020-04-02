@@ -10,6 +10,7 @@ const IntroTop = styled.div`
   display: flex;
   justify-content: space-between;
   height: 240px;
+  margin-top: 160px;
   .intro_top-left {
     width: 100px;
     margin-top: 48px;

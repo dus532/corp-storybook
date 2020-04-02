@@ -6,31 +6,11 @@ orbs:
 executors:
   api_server_exec:
     docker:
-      # Primary container
       - image: circleci/node:12.14.1
     environment:
       TZ: Asia/Seoul
-      NODE_ENV: test
 
 jobs:
-  build:
-    #executor: api_server_exec
-    machine: true
-    steps:
-      - checkout
-      #- run:
-      #    name: Migrate Database
-      #    command: yarn run migrate
-      - run:
-          name: Build
-          command: |
-            echo Build
-            mkdir -p ~/reports
-            # test script
-      #- store_test_results:
-      #    path: ~/reports
-      #- store_artifacts:
-      #    path: ~/reports
 
   test:
     machine: true
@@ -42,70 +22,67 @@ jobs:
             echo Test
             mkdir -p ~/reports
             # test script
+
+  build:
+    executor: api_server_exec
+    steps:
+      - checkout
+      - run:
+          name: Install
+          command: |
+            echo yarn install
+            yarn install
+      - run:
+          name: Test
+          command: |
+            echo yarn test
+            #yarn test
       #- store_test_results:
       #    path: ~/reports
       #- store_artifacts:
       #    path: ~/reports
-
-  deploy-dev:
-    machine: true
-    steps:
-      - checkout
       - run:
-          name: Deploy to the Development Environment
+          name: Build
           command: |
-            echo deploy to dev envionment
-            cd ./script && ./deploy-dev.sh
+            echo yarn build:dev
+            yarn build:dev
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - build
 
   deploy-cdn-dev:
-    #executor: aws-cli/default
     executor: api_server_exec
     steps:
-      - checkout
       - aws-cli/setup:
           aws-access-key-id: DEV_AWS_ACCESS_KEY_ID
           aws-secret-access-key: DEV_AWS_SECRET_ACCESS_KEY
           aws-region: DEV_AWS_DEFAULT_REGION
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: Deploy to development envionment
+          name: Deploy to dev envionment
+          environment:
+            BUILD_DIR: build
+            S3_BUCKET: s3://biz-corp-admin.dev.platdev.net
+            CDN_ID: E1SAL9QNUQW32T
           command: |
-            echo deploy to development envionment
-            yarn install
-            cd ./internals/deploy && ./deploy.sh development
-
-  deploy-cdn-staging:
-    #executor: aws-cli/default
-    executor: api_server_exec
-    steps:
-      - checkout
-      - aws-cli/setup:
-          aws-access-key-id: STAGING_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: STAGING_AWS_SECRET_ACCESS_KEY
-          aws-region: STAGING_AWS_DEFAULT_REGION
-      - run:
-          name: Deploy to staging envionment
-          command: |
-            echo deploy to staging envionment
-            yarn install
-            cd ./internals/deploy && ./deploy.sh staging
+            echo deploy to dev envionment
+            # Sync the bundle project
+            aws s3 sync $BUILD_DIR $S3_BUCKET --acl public-read
+            # Clear the cache
+            aws cloudfront create-invalidation --distribution-id $CDN_ID --paths /index.html /favicon.ico
 
 workflows:
   version: 2.1
-  build-test-deploy:
+  test-build-deploy:
     jobs:
-      - build
       - test
+      - build
       - deploy-cdn-dev:
           requires:
-            - build
             - test
+            - build
           filters:
             branches:
               only: develop
-      - deploy-cdn-staging:
-          requires:
-            - build
-            - test
-          filters:
-            branches:
-              only: staging

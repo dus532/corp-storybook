@@ -1,10 +1,10 @@
 {
-  "name": "carplat-admin",
+  "name": "boilerplat-admin",
   "version": "4.0.0",
-  "description": "carplat-admin = partner 1.0 + partners 2.0 ",
+  "description": "boilerplat-admin = partner 1.0 + partners 2.0 ",
   "repository": {
     "type": "git",
-    "url": "git://github.com/plat-dev/carplat-admin.git"
+    "url": "git://github.com/plat-dev/boilerplat-admin.git"
   },
   "engines": {
     "npm": ">=5",
@@ -76,6 +76,7 @@
     "compression": "1.7.4",
     "connected-react-router": "6.4.0",
     "cross-env": "5.2.0",
+    "dotenv": "^8.2.0",
     "express": "4.16.4",
     "fontfaceobserver": "2.1.0",
     "history": "4.9.0",

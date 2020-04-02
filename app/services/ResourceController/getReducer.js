@@ -45,7 +45,36 @@ const defaultInitialStateObject = {
   fetchStatsErrorMessage: '',
   // 데이터
   data: {},
-  listDataParams: {},
+  listDataParams: {
+    pagination: {
+      page: 1,
+      perPage: 15,
+    },
+    /*
+     * ordering 예시
+     *
+     * ordering: {
+     *   name: DESC,
+     *   createdAt: ASC,
+     * },
+     *
+     */
+    ordering: {},
+    /*
+     * filtering 예시
+     *
+     * filtering: {
+     *   type: {
+     *     van: OR,
+     *     suv: AND,
+     *     sports: NOT,
+     *   },
+     * },
+     *
+     */
+    filtering: {},
+    q: null,
+  },
   listData: [],
   extraData: {},
   totalCount: 0,
@@ -82,6 +111,12 @@ export default function getReducer(
     BULK_CREATE_SUCCEEDED,
     BULK_CREATE_FAILED,
     UPDATE_LIST_DATA_PARAMS,
+    UPDATE_PAGINATION,
+    SET_ORDERING,
+    UPDATE_ORDERING,
+    SET_FILTERING,
+    UPDATE_FILTERING,
+    SET_SEARCHING_QUERY,
     PROCESSED_BULK_READ_START,
     BULK_READ_START,
     BULK_READ_SUCCEEDED,
@@ -212,6 +247,41 @@ export default function getReducer(
           draft.bulkReadLoading = true;
           draft.bulkReadError = false;
           Object.assign(draft.listDataParams, action.params);
+          break;
+        case UPDATE_PAGINATION:
+          draft.bulkReadLoading = true;
+          draft.bulkReadError = false;
+          Object.assign(draft.listDataParams.pagination, action.pagination);
+          break;
+        case SET_ORDERING:
+          draft.bulkReadLoading = true;
+          draft.bulkReadError = false;
+          draft.listDataParams.ordering = action.ordering;
+          draft.listDataParams.pagination.page = 1;
+          break;
+        case UPDATE_ORDERING:
+          draft.bulkReadLoading = true;
+          draft.bulkReadError = false;
+          Object.assign(draft.listDataParams.ordering, action.ordering);
+          draft.listDataParams.pagination.page = 1;
+          break;
+        case SET_FILTERING:
+          draft.bulkReadLoading = true;
+          draft.bulkReadError = false;
+          draft.listDataParams.filtering = action.filtering;
+          draft.listDataParams.pagination.page = 1;
+          break;
+        case UPDATE_FILTERING:
+          draft.bulkReadLoading = true;
+          draft.bulkReadError = false;
+          Object.assign(draft.listDataParams.filtering, action.filtering);
+          draft.listDataParams.pagination.page = 1;
+          break;
+        case SET_SEARCHING_QUERY:
+          draft.bulkReadLoading = true;
+          draft.bulkReadError = false;
+          draft.listDataParams.q = action.searchingQuery;
+          draft.listDataParams.pagination.page = 1;
           break;
         case BULK_READ_SUCCEEDED:
           draft.bulkReadLoading = false;

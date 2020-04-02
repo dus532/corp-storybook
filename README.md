@@ -1,4 +1,4 @@
-# CARPLAT-ADMIN
+# BOILERPLATE-ADMIN
 
 ### 프로젝트 기반
 
@@ -20,9 +20,9 @@
 
 ```sh
 # Download the repo
-git clone https://github.com/plat-dev/carplat-admin
+git clone https://github.com/plat-dev/boilerplate-admin.git
 # Enter the repo
-cd carplat-admin
+cd boilerplat-admin
 # Install the dependencies
 yarn
 # Start local development
@@ -36,7 +36,7 @@ open http://localhost:3000
 아래 참고:
 
 ```sh
-carplat-admin/app
+boilerplat-admin/app
 ├── api/              # API 요청 wrapper.
 ├── components/       # 프로젝트 전체에서 공유되는 Component.
 ├── containers/       # 프로젝트 전체에서 공유되면서 store에서 데이터를 보고 있는 Component.

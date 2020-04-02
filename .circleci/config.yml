@@ -23,7 +23,7 @@ jobs:
             mkdir -p ~/reports
             # test script
 
-  deploy-cdn-dev:
+  build:
     executor: api_server_exec
     steps:
       - checkout
@@ -50,6 +50,16 @@ jobs:
           command: |
             echo yarn build:dev
             yarn build:dev
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - build
+
+  deploy-cdn-dev:
+    executor: api_server_exec
+    steps:
+      - attach_workspace:
+          at: ~/project
       - run:
           name: Deploy to dev envionment
           environment:
@@ -65,12 +75,14 @@ jobs:
 
 workflows:
   version: 2.1
-  build-test-deploy:
+  test-build-deploy:
     jobs:
       - test
+      - build
       - deploy-cdn-dev:
           requires:
             - test
+            - build
           filters:
             branches:
               only: develop

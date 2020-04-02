@@ -51,34 +51,6 @@ jobs:
             echo deploy to dev envionment
             cd ./internals/deploy && ./deploy.sh development
 
-  deploy-cdn-staging:
-    executor: api_server_exec
-    steps:
-      - checkout
-      - aws-cli/setup:
-          aws-access-key-id: STAGING_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: STAGING_AWS_SECRET_ACCESS_KEY
-          aws-region: STAGING_AWS_DEFAULT_REGION
-      - run:
-          name: Install
-          command: |
-            echo yarn install
-            yarn install
-      - run:
-          name: Test
-          command: |
-            echo yarn test
-            yarn test
-      #- store_test_results:
-      #    path: ~/reports
-      #- store_artifacts:
-      #    path: ~/reports
-      - run:
-          name: Deploy to staging envionment
-          command: |
-            echo deploy to dev envionment
-            cd ./internals/deploy && ./deploy.sh staging
-
 workflows:
   version: 2.1
   build-test-deploy:
@@ -90,9 +62,3 @@ workflows:
           filters:
             branches:
               only: develop
-      - deploy-cdn-staging:
-          requires:
-            - test
-          filters:
-            branches:
-              only: staging

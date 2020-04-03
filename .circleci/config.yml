@@ -49,29 +49,18 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - build
+            - script
 
   deploy-cdn-dev:
-    executor: api_server_exec
+    machine: true
     steps:
-      - aws-cli/setup:
-          aws-access-key-id: DEV_AWS_ACCESS_KEY_ID
-          aws-secret-access-key: DEV_AWS_SECRET_ACCESS_KEY
-          aws-region: DEV_AWS_DEFAULT_REGION
       - attach_workspace:
           at: ~/project
       - run:
           name: Deploy to dev envionment
-          environment:
-            BUILD_DIR: build
-            S3_BUCKET: s3://biz-corp-admin.dev.platdev.net
-            CDN_ID: E1SAL9QNUQW32T
           command: |
             echo deploy to dev envionment
-            # Sync the bundle project
-            aws s3 sync $BUILD_DIR $S3_BUCKET --acl public-read
-            # Clear the cache
-            aws cloudfront create-invalidation --distribution-id $CDN_ID --paths /index.html /favicon.ico
+            cd ./script && ./deploy-dev.sh
 
 workflows:
   version: 2.1

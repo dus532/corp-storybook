@@ -16,6 +16,7 @@ WORKDIR /project
 COPY --from=node_image /project/build build
 COPY --from=node_image /project/internals/deploy internals/deploy
 
-CMD ["internals/deply/deploy.sh" ]
+CMD ["sh", "internals/deploy/deploy.sh"]
 
+# update ENTROYPINT ["aws"] of mesosphere/aws-cli
 ENTRYPOINT [""]

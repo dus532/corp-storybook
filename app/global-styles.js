@@ -97,6 +97,34 @@ const GlobalStyle = createGlobalStyle`
     color:inherit;
   }
 
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  button,
+  textarea,
+  input,
+  select,
+  div,
+  a{
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+    user-select: none;
+
+  }
+
   @media screen and (max-width: 768px) {
     h2{
       font-size:1.3em;

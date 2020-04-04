@@ -5,7 +5,14 @@ import { push } from 'connected-react-router';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 
-import { SignIn, DashBoard, InitRegisterCard, InitIntroduce } from 'pages';
+import {
+  SignIn,
+  DashBoard,
+  InitRegisterCard,
+  InitIntroduce,
+  InitPayment,
+  InitUsage,
+} from 'pages';
 import { Header } from 'components';
 
 import GlobalStyle from 'global-styles';
@@ -41,6 +48,8 @@ const App = () => {
           exact
           component={InitRegisterCard}
         />
+        <Route path="/initial/payment" exact component={InitPayment} />
+        <Route path="/initial/usage" exact component={InitUsage} />
         {/* 대쉬보드 */}
         <Route path="/home" exact component={DashBoard} />
       </Switch>

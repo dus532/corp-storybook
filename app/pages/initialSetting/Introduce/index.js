@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { Container580, ButtonBottom } from 'components';
 import InitialCardsIMG from 'images/initial_cards.png';
@@ -39,7 +39,7 @@ const IntroBottom = styled.div`
 
 const Introduce = () => {
   const userData = useSelector(state => state.user);
-  const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <Container580>
@@ -69,7 +69,7 @@ const Introduce = () => {
       </IntroBottom>
       <ButtonBottom
         right="다음"
-        onClickRight={() => dispatch(push('/initial/registercard'))}
+        onClickRight={() => history.push('/initial/registercard')}
       />
     </Container580>
   );

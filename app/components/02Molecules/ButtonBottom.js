@@ -2,43 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ArrowBlackIMG from 'images/icon_arrow_black.png';
+import Button from 'components/01Atoms/Button';
 
 const StyledButtonBottom = styled.div`
   display: flex;
-  border-radius: 12px;
+  width: 373px;
+  margin: 0 auto;
   overflow: hidden;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: ${props =>
-    props.direction === 'right' ? 'flex-end' : 'flex-start'};
-  transition: 0.35s;
-  span {
-    font-size: 1.4em;
-    font-weight: 700;
-  }
-
-  &:hover {
-    background: #eee;
-    transition: 0.35s;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: auto;
-  }
-`;
-
-const Arrow = styled.div`
-  width: 24px;
-  height: 32px;
-  transform: ${props => props.direction === 'left' && 'rotate(180deg)'};
-  background: url(${ArrowBlackIMG}) center / cover;
-  display: inline-block;
 `;
 
 const ButtonBottom = ({
@@ -53,20 +23,19 @@ const ButtonBottom = ({
 }) => (
   <StyledButtonBottom>
     {left && (
-      <Button type={typeLeft} onClick={onClickLeft} disabled={disabledLeft}>
-        <Arrow direction="left" />
+      <Button
+        color="gray"
+        type={typeLeft}
+        onClick={onClickLeft}
+        disabled={disabledLeft}
+        style={{ marginRight: 8 }}
+      >
         <span>{left}</span>
       </Button>
     )}
     {right && (
-      <Button
-        direction="right"
-        type={typeRight}
-        onClick={onClickRight}
-        disabled={disabledRight}
-      >
+      <Button type={typeRight} onClick={onClickRight} disabled={disabledRight}>
         <span>{right}</span>
-        <Arrow />
       </Button>
     )}
   </StyledButtonBottom>

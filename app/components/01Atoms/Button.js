@@ -1,19 +1,24 @@
+/* eslint-disable indent */
 import styled from 'styled-components';
+
+import Color from 'config/color';
 
 const Button = styled.button`
   width: 100%;
   height: 40px;
-  background: black;
+  background: ${props =>
+    props.color === 'gray' ? Color.SubGray : Color.Black};
   outline: none;
   border: none;
-  color: white;
+  color: ${props => (props.color === 'gray' ? 'black' : 'white')};
   font-size: 1rem;
   font-weight: bold;
   transition: 0.25s;
   cursor: pointer;
 
   &:hover {
-    background: rgb(50, 50, 50);
+    background: ${props =>
+      props.color === 'gray' ? Color.WhiteHover : Color.SubGray};
     transition: 0.25s;
   }
 

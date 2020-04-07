@@ -1,21 +1,16 @@
 import produce from 'immer';
 
-import { LOAD, INCRE, HANDLE_CHANGE } from 'store/global/constants';
-import ApiRequest from 'store/request/request';
+import { SENDING_CHANGE } from 'store/global/constants';
 
-const initialState = { title: '', status: 0 };
+const initialState = { sending: false };
 
 // 리듀서!
-const counterReducer = (state = initialState, action) => {
-  const { type, data, payload } = action;
+const globalReducer = (state = initialState, action) => {
+  const { type } = action;
   return produce(state, draft => {
     switch (type) {
-      case LOAD:
-        return ApiRequest(state, action, payload);
-      case INCRE:
-        return draft;
-      case HANDLE_CHANGE:
-        draft[data.target.name] = data.target.value;
+      case SENDING_CHANGE:
+        draft.sending = !draft.sending;
         return draft;
       default:
         return draft;
@@ -23,4 +18,4 @@ const counterReducer = (state = initialState, action) => {
   });
 };
 
-export default counterReducer;
+export default globalReducer;

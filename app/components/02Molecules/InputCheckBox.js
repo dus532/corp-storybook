@@ -7,7 +7,6 @@ import IconCheck from 'images/icon_check.png';
 
 const StyledInput = styled.div`
   display: block;
-  margin-bottom: 20px;
 
   .bold {
     font-weight: 700;
@@ -63,10 +62,28 @@ const StyledInput = styled.div`
   }
 `;
 
-const InputCheckBox = ({ id, name, body, bold }) => (
+const InputCheckBox = ({
+  id,
+  name,
+  body,
+  bold,
+  labelStyle,
+  checked,
+  onChange,
+}) => (
   <StyledInput>
-    <input name={name} type="checkbox" id={id} />
-    <label htmlFor={id} className={bold ? 'bold' : 'underline'}>
+    <input
+      name={name}
+      type="checkbox"
+      id={id}
+      checked={checked}
+      onChange={onChange}
+    />
+    <label
+      htmlFor={id}
+      style={labelStyle}
+      className={bold ? 'bold' : 'underline'}
+    >
       {body}
     </label>
   </StyledInput>
@@ -77,6 +94,9 @@ InputCheckBox.propTypes = {
   name: PropTypes.string,
   body: PropTypes.any,
   bold: PropTypes.bool,
+  labelStyle: PropTypes.object,
+  checked: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 export default InputCheckBox;

@@ -9,7 +9,6 @@ import { reducer as reduxFormReducer } from 'redux-form';
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import globalReducer from 'store/global/reducer';
-import signReducer from 'store/sign/reducer';
 import modalReducer from 'store/modals/reducer';
 import userReducer from 'store/user/reducer';
 
@@ -18,7 +17,6 @@ import userReducer from 'store/user/reducer';
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
-    sign: signReducer,
     modals: modalReducer,
     global: globalReducer,
     user: userReducer,

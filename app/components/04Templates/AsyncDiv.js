@@ -1,19 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AsyncDiv = ({ data, body }) => {
-  if (data.status < 2) {
-    return <>로딩</>;
+import { REQUEST_SUCCESS, REQUEST_FAILURE } from 'store/request/constants';
+
+const AsyncDiv = ({ store, children }) => {
+  if (store.status === REQUEST_SUCCESS) {
+    return <>{children}</>;
   }
-  if (data.status === 2) {
-    return <>{body}</>;
+  if (store.status === REQUEST_FAILURE) {
+    return <>로딩 실패</>;
   }
-  return <>로딩 실패</>;
+  return <>로딩</>;
 };
 
 AsyncDiv.propTypes = {
-  data: PropTypes.object,
-  body: PropTypes.element,
+  store: PropTypes.object,
+  children: PropTypes.element,
 };
 
 export default AsyncDiv;

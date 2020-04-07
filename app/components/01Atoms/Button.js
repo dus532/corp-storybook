@@ -18,7 +18,7 @@ const Button = styled.button`
 
   &:hover {
     background: ${props =>
-      props.color === 'gray' ? Color.WhiteHover : Color.SubGray};
+      props.color === 'gray' ? Color.SubGrayHover : Color.BlackHover};
     transition: 0.25s;
   }
 

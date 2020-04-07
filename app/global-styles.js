@@ -50,11 +50,16 @@ const GlobalStyle = createGlobalStyle`
     height:100%;
   }
 
-  button,
+
+  button{
+    border:0;
+    outline:none;
+    cursor:pointer;
+  }
+
   button:active,
   button:focus{
     outline:none;
-    border:none;
     cursor:pointer;
   }
   

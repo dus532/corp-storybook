@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { push } from 'connected-react-router';
 
 import { Helmet } from 'react-helmet';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import {
   SignIn,
@@ -13,7 +13,9 @@ import {
   InitPayment,
   InitUsage,
 } from 'pages';
-import { Header } from 'components';
+import { Header, Sending } from 'components';
+
+import { actionSetUser } from 'store';
 
 import GlobalStyle from 'global-styles';
 
@@ -22,9 +24,14 @@ const App = () => {
   const routerData = useSelector(state => state.router);
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   useEffect(() => {
-    if (!userData.name && document.location.pathname !== '/') {
-      dispatch(push('/'));
+    if (Cookies.getJSON('UUID')) {
+      dispatch(actionSetUser(Cookies.getJSON('UUID')));
+    }
+    if (!userData.username && document.location.pathname !== '/') {
+      history.push('/');
     }
   }, []);
 
@@ -54,6 +61,7 @@ const App = () => {
         <Route path="/home" exact component={DashBoard} />
       </Switch>
       <GlobalStyle />
+      <Sending />
     </>
   );
 };

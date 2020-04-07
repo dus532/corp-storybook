@@ -13,10 +13,11 @@ RUN yarn build:dev
 
 FROM mesosphere/aws-cli:latest
 WORKDIR /project
+# update ENTROYPINT ["aws"] of mesosphere/aws-cli
+ENTRYPOINT [""]
+
 COPY --from=node_image /project/build build
 COPY --from=node_image /project/internals/deploy internals/deploy
 
 CMD ["sh", "internals/deploy/deploy.sh"]
 
-# update ENTROYPINT ["aws"] of mesosphere/aws-cli
-ENTRYPOINT [""]

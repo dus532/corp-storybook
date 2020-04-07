@@ -86,12 +86,12 @@ function handle(startingState, action, handlers) {
       state = safeMap(state, handlers.start, action, 'start');
       break;
     case LIFECYCLE.SUCCESS:
-      state = safeMap(state, handlers.success, action, 'success');
       state = safeMap(state, handlers.finish, action, 'finish');
+      state = safeMap(state, handlers.success, action, 'success');
       break;
     case LIFECYCLE.FAILURE:
-      state = safeMap(state, handlers.failure, action, 'failure');
       state = safeMap(state, handlers.finish, action, 'finish');
+      state = safeMap(state, handlers.failure, action, 'failure');
       break;
     default:
       // do nothing

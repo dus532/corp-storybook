@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { push } from 'connected-react-router';
 import { FormattedMessage } from 'react-intl';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import {
   SignWrap,
@@ -13,16 +13,16 @@ import {
   NewLine,
 } from 'components';
 import {
-  actionSignIn,
+  POSTSignIn,
   actionSignHandleChange,
   toggleFindEmail,
-  actionSetUser,
+  toggleSending,
 } from 'store';
 import { ModalFindEmail } from 'modals';
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const signInData = useSelector(state => state.sign);
+  const history = useHistory();
   const modalsData = useSelector(state => state.modals);
   const userData = useSelector(state => state.user);
 
@@ -35,11 +35,18 @@ const SignIn = () => {
   };
 
   const onSignIn = () => {
+    dispatch(toggleSending());
     dispatch(
-      actionSignIn(() => {
-        dispatch(actionSetUser());
-        dispatch(push('/home'));
-      }),
+      POSTSignIn(
+        userData,
+        () => {
+          dispatch(toggleSending());
+          // history.push('/home');
+        },
+        () => {
+          dispatch(toggleSending());
+        },
+      ),
     );
   };
 
@@ -47,11 +54,11 @@ const SignIn = () => {
     dispatch(toggleFindEmail());
   };
 
-  const propsList = { signInData, handleChange, handleCheckBoxChange };
+  const propsList = { userData, handleChange, handleCheckBoxChange };
 
   useEffect(() => {
     if (userData.name) {
-      dispatch(push('/home'));
+      history.push('/home');
     }
   }, []);
 

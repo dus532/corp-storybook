@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 
 import DataInput from 'components/02Molecules/DataInput';
 
-const SignInInput = ({ signInData, handleChange }) => (
+const SignInInput = ({ userData, handleChange }) => (
   <>
     <DataInput
-      name="id"
-      value={signInData.id}
+      name="username"
+      value={userData.username}
       onChange={handleChange}
       placeholder="아이디"
       error="한번도 못했던 말"
     />
     <DataInput
-      name="pw"
+      name="password"
       type="password"
-      value={signInData.pw}
+      value={userData.password}
       onChange={handleChange}
       placeholder="비밀번호"
       error="울면서 할 줄은 나 몰랐던 말"
@@ -24,7 +24,7 @@ const SignInInput = ({ signInData, handleChange }) => (
 );
 
 SignInInput.propTypes = {
-  signInData: PropTypes.object,
+  userData: PropTypes.object,
   handleChange: PropTypes.func,
 };
 

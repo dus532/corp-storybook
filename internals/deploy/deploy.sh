@@ -1,5 +1,5 @@
-S3_BUCKET="s3://biz-corp-admin.dev.platdev.net"
-CDN_ID="E1SAL9QNUQW32T"
+S3_BUCKET="s3://biz-corp-admin.staging.platdev.net"
+CDN_ID="E3R4V6QQQDQ8UZ"
 BUILD_DIR="build"
 
 # Clear the S3 bucket

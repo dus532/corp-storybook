@@ -23,7 +23,7 @@ const SignExtraFlex = styled.div`
   }
 `;
 
-const SignExtra = ({ userData, handleCheckBoxChange, toggleFindEmail }) => (
+const SignExtra = ({ userData, handleChange, toggleFindEmail }) => (
   <SignExtraFlex>
     <InputCheckBox
       className="sign-extra_checkbox"
@@ -32,7 +32,7 @@ const SignExtra = ({ userData, handleCheckBoxChange, toggleFindEmail }) => (
       body="로그인 상태 유지"
       labelStyle={{ textDecoration: 'none', fontSize: 12 }}
       checked={userData.isSaved}
-      onChange={handleCheckBoxChange}
+      onChange={e => handleChange(e, 'checkbox')}
     />
     <h5>
       <button type="button" onClick={toggleFindEmail}>
@@ -47,7 +47,7 @@ const SignExtra = ({ userData, handleCheckBoxChange, toggleFindEmail }) => (
 SignExtra.propTypes = {
   toggleFindEmail: PropTypes.func,
   userData: PropTypes.object,
-  handleCheckBoxChange: PropTypes.func,
+  handleChange: PropTypes.func,
 };
 
 export default SignExtra;

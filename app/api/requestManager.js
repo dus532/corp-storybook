@@ -34,7 +34,7 @@ const RequestManager = (method, url, data, header) => {
     const now = moment().format('MM.DD a h:mm:ss');
     if (data) {
       console.log(
-        `${now} 📡 서버 통신 ( ${method.toUpperCase()} ) /${url}`,
+        `${now} 📡 서버 통신 ( ${method.toUpperCase()} ) ${url}`,
         data,
       );
     }
@@ -43,10 +43,8 @@ const RequestManager = (method, url, data, header) => {
     // axios 통신을 시도합니다.
     axios({
       method,
-      url: `${config.apiServerURL}/${url}`,
-      data: {
-        Data: data,
-      },
+      url: `${config.apiServerURL}${url}`,
+      data,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
@@ -58,7 +56,7 @@ const RequestManager = (method, url, data, header) => {
     })
       .then(res => {
         console.log(
-          `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) /${url}`,
+          `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) ${url}`,
           res.data.Data,
         );
         resolve(res);
@@ -68,7 +66,7 @@ const RequestManager = (method, url, data, header) => {
           switch (err.response.status) {
             case 400:
               console.log(
-                `${now} ⛔️ 잘못된 요청 ( Bad Request, 400 ) /${url} - ${
+                `${now} ⛔️ 잘못된 요청 ( Bad Request, 400 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -76,7 +74,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 401:
               console.log(
-                `${now} ⛔️ 인증 실패 ( Unauthorized, 401 ) /${url} - ${
+                `${now} ⛔️ 인증 실패 ( Unauthorized, 401 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -106,7 +104,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 403:
               console.log(
-                `${now} ⛔️ 권한 없음 ( Forbidden, 403 ) /${url} - ${
+                `${now} ⛔️ 권한 없음 ( Forbidden, 403 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -122,7 +120,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 404:
               console.log(
-                `${now} ⛔️ 데이터 없음 ( Not Found, 404 ) /${url} - ${
+                `${now} ⛔️ 데이터 없음 ( Not Found, 404 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -131,7 +129,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 406:
               console.log(
-                `${now} ⛔️ 서버에서 원하는 규격이 아님 ( Not Acceptable, 406 ) /${url} - ${
+                `${now} ⛔️ 서버에서 원하는 규격이 아님 ( Not Acceptable, 406 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -139,7 +137,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 409:
               console.log(
-                `${now} ⛔️ 요청 충돌 ( Confilct, 409 ) /${url} - ${
+                `${now} ⛔️ 요청 충돌 ( Confilct, 409 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -151,7 +149,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 419:
               console.log(
-                `${now} ⛔️ 토큰 만료 ( Token Expired, 419 ) /${url} - ${
+                `${now} ⛔️ 토큰 만료 ( Token Expired, 419 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
@@ -159,7 +157,7 @@ const RequestManager = (method, url, data, header) => {
               break;
             case 500:
               console.log(
-                `${now} ⛔️ 서버 에러 ( Server Error, 500 ) /${url} - ${
+                `${now} ⛔️ 서버 에러 ( Server Error, 500 ) ${url} - ${
                   err.response.data.message
                 }`,
               );

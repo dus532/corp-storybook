@@ -1,4 +1,4 @@
-import handle from 'middlewares/handle';
+import handle from 'middlewares/pack/handle';
 import {
   REQUEST_START,
   REQUEST_FINISH,

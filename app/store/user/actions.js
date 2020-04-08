@@ -1,20 +1,38 @@
 // 액션!
 
 import RequestManager from 'api/requestManager';
-import { SIGN_IN, HANDLE_CHANGE, RESET, SET_USER } from 'store/user/constants';
+import {
+  SIGN_IN,
+  HANDLE_CHANGE,
+  RESET,
+  SET_USER,
+  SIGN_OUT,
+} from 'store/user/constants';
 
-export const POSTSignIn = (data, onSuccess, onFailure) => ({
+import UserManager from 'utils/userManager';
+
+export const POSTSignIn = data => ({
   type: SIGN_IN,
-  promise: RequestManager('get', '', data),
+  promise: RequestManager('post', '/action/login', data),
   meta: {
-    onSuccess,
-    onFailure,
+    onSuccess: res => {
+      if (data.isSaved) {
+        UserManager().setUser(res.data.message, true);
+      } else {
+        UserManager().setUser(res.data.message);
+      }
+    },
   },
 });
 
-export const actionSetUser = data => ({
+export const actionSignOut = () => ({
+  type: SIGN_OUT,
+  payload: () => UserManager().setUser(''),
+});
+
+export const actionSetUser = payload => ({
   type: SET_USER,
-  data,
+  payload,
 });
 
 export const actionSignHandleChange = (e, index) => ({

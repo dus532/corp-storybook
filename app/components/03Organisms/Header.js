@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
+
+import { actionSignOut } from 'store';
 
 import ArrowImg from 'images/icon_arrow_black.png';
 
@@ -73,6 +76,14 @@ const StyledHeader = styled.div`
 `;
 
 const Header = ({ isSigned, location }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onSignOut = () => {
+    dispatch(actionSignOut());
+    history.push('/');
+  };
+
   if (isSigned) {
     return (
       <>
@@ -81,8 +92,15 @@ const Header = ({ isSigned, location }) => {
             {location.indexOf('/initial') !== -1 ? <LogoHeader /> : <div />}
             <div className="header_right">
               <h5 className="header_name">{isSigned} 님</h5>
+              <SmallButton
+                onClick={() => {
+                  history.push('/initial/introduce');
+                }}
+              >
+                초기설정
+              </SmallButton>
               <SmallButton>마이 페이지</SmallButton>
-              <SmallButton>로그아웃</SmallButton>
+              <SmallButton onClick={onSignOut}>로그아웃</SmallButton>
             </div>
           </Container>
           {location.indexOf('/initial') !== -1 ? (
@@ -116,7 +134,7 @@ const Header = ({ isSigned, location }) => {
                   대시보드
                 </NavLink>
                 <NavLink
-                  to="/initial/introduce"
+                  to="/reservation"
                   activeClassName="header_bottom-active"
                 >
                   예약조회
@@ -141,7 +159,7 @@ const Header = ({ isSigned, location }) => {
 };
 
 Header.propTypes = {
-  isSigned: PropTypes.string,
+  isSigned: PropTypes.any,
   location: PropTypes.string,
 };
 

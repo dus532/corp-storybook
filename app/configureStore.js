@@ -7,7 +7,8 @@ import { routerMiddleware } from 'connected-react-router';
 
 import createSagaMiddleware from 'redux-saga';
 
-import { middleware as reduxPackMiddleware } from './middlewares';
+import { middleware as reduxPackMiddleware } from 'middlewares/pack';
+import utilsMiddleware from 'middlewares/utils';
 
 import createReducer from './reducers';
 
@@ -46,7 +47,9 @@ export default function configureStore(initialState = {}, history) {
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
   /* eslint-disable no-underscore-dangle */
-  const enhancers = [applyMiddleware(...middlewares, reduxPackMiddleware)];
+  const enhancers = [
+    applyMiddleware(...middlewares, reduxPackMiddleware, utilsMiddleware),
+  ];
 
   const store = createStore(
     createReducer(),

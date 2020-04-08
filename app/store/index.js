@@ -5,6 +5,7 @@ export {
   actionSignHandleChange,
   actionSignReset,
   actionSetUser,
+  actionSignOut,
 } from 'store/user/actions';
 
 // Modals 모달 스토어

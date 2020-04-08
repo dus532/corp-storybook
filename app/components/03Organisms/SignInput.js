@@ -6,8 +6,8 @@ import DataInput from 'components/02Molecules/DataInput';
 const SignInInput = ({ userData, handleChange }) => (
   <>
     <DataInput
-      name="username"
-      value={userData.username}
+      name="email"
+      value={userData.email}
       onChange={handleChange}
       placeholder="아이디"
       error="한번도 못했던 말"

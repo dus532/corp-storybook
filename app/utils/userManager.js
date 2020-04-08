@@ -1,17 +1,17 @@
+import Cookies from 'js-cookie';
+
+const KEY = 'UUINFO';
+
 const UserManager = () => {
-  const KEY = 'UUINFO';
+  const getUser = () => Cookies.getJSON(KEY);
 
-  const getUser = () => {
-    const dataString = window.localStorage.getItem(String(KEY));
-    if (dataString == null) {
-      return null;
+  const setUser = (user, isSaved) => {
+    if (isSaved) {
+      console.log(isSaved);
+      Cookies.set(KEY, user, { expires: 365, sameSite: 'lax' });
+    } else {
+      Cookies.set(KEY, user, { sameSite: 'lax' });
     }
-    return JSON.parse(dataString);
-  };
-
-  const setUser = user => {
-    const userString = JSON.stringify(user);
-    window.localStorage.setItem(String(KEY), userString);
   };
 
   return { KEY, getUser, setUser };

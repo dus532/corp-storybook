@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Helmet } from 'react-helmet';
-import { Switch, Route, useHistory } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 
 import {
   SignIn,
@@ -15,9 +14,11 @@ import {
 } from 'pages';
 import { Header, Sending } from 'components';
 
-import { actionSetUser } from 'store';
+import { actionSetUser, actionSignOut } from 'store';
 
 import GlobalStyle from 'global-styles';
+
+import UserManager from 'utils/userManager';
 
 const App = () => {
   const userData = useSelector(state => state.user);
@@ -25,15 +26,17 @@ const App = () => {
   const dispatch = useDispatch();
 
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    if (Cookies.getJSON('UUID')) {
-      dispatch(actionSetUser(Cookies.getJSON('UUID')));
-    }
-    if (!userData.username && document.location.pathname !== '/') {
+    const USER = UserManager().getUser();
+    if (USER && !userData.name) {
+      dispatch(actionSetUser(USER));
+    } else if (!USER && document.location.pathname !== '/') {
+      dispatch(actionSignOut());
       history.push('/');
     }
-  }, []);
+  }, [location]);
 
   return (
     <>

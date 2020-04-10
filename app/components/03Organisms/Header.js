@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux';
 
 import styled from 'styled-components';
 
-import { actionSignOut } from 'store';
+import Color from 'config/color';
+
+import { actionSignOut } from 'stores';
 
 import ArrowImg from 'images/icon_arrow_black.png';
 
@@ -17,7 +19,7 @@ const StyledHeader = styled.div`
   width: 100%;
   padding: 0 8px;
   box-sizing: border-box;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   .container {
     display: flex;
@@ -26,6 +28,11 @@ const StyledHeader = styled.div`
     height: 60px;
     max-width: 1172px;
     margin: 0 auto;
+  }
+
+  .header_top {
+    width: 100%;
+    background: ${Color.White};
   }
 
   .header_bottom {
@@ -88,21 +95,23 @@ const Header = ({ isSigned, location }) => {
     return (
       <>
         <StyledHeader>
-          <Container className="container">
-            {location.indexOf('/initial') !== -1 ? <LogoHeader /> : <div />}
-            <div className="header_right">
-              <h5 className="header_name">{isSigned} 님</h5>
-              <SmallButton
-                onClick={() => {
-                  history.push('/initial/introduce');
-                }}
-              >
-                초기설정
-              </SmallButton>
-              <SmallButton>마이 페이지</SmallButton>
-              <SmallButton onClick={onSignOut}>로그아웃</SmallButton>
-            </div>
-          </Container>
+          <div className="header_top">
+            <Container className="container">
+              {location.indexOf('/initial') !== -1 ? <LogoHeader /> : <div />}
+              <div className="header_right">
+                <h5 className="header_name">{isSigned.access_token} 님</h5>
+                <SmallButton
+                  onClick={() => {
+                    history.push('/initial/introduce');
+                  }}
+                >
+                  초기설정
+                </SmallButton>
+                <SmallButton>마이 페이지</SmallButton>
+                <SmallButton onClick={onSignOut}>로그아웃</SmallButton>
+              </div>
+            </Container>
+          </div>
           {location.indexOf('/initial') !== -1 ? (
             <>
               {location.indexOf(`/introduce`) !== -1 ? (

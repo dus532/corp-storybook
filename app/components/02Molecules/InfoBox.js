@@ -26,7 +26,7 @@ const InfoBox = ({ children }) => (
 );
 
 InfoBox.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
 };
 
 export default InfoBox;

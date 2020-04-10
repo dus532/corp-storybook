@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import IconClose from 'components/01Atoms/IconClose';
+
 const Div = styled.div`
   top: 0px;
   left: 0px;
@@ -35,6 +37,8 @@ const Div = styled.div`
   .floating_body {
     margin-bottom: 36px;
     text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.6rem;
   }
 
   .floating_footer {
@@ -78,32 +82,36 @@ const BG = styled.div`
       opacity: 1;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    background: rgba(0, 0, 0, 0.4);
+  }
 `;
 
-const FloatingDiv = ({ title, body, footer, onClickExit, view }) =>
-  view && (
-    <>
-      <BG onClick={onClickExit} />
-      <Div>
-        <div className="floating_container">
-          <div className="floating_header">
-            <h3>{title}</h3>
-            <button type="button" onClick={onClickExit}>
-              <span>[X]</span>
-            </button>
-          </div>
-          <div className="floating_body">{body}</div>
-          <div className="floating_footer">{footer}</div>
+const FloatingDiv = ({ title, body, footer, onClickExit }) => (
+  <>
+    <BG onClick={onClickExit} />
+    <Div>
+      <div className="floating_container">
+        <div className="floating_header">
+          <h3>{title}</h3>
+          <button type="button" onClick={onClickExit}>
+            <span>
+              <IconClose />
+            </span>
+          </button>
         </div>
-      </Div>
-    </>
-  );
+        <div className="floating_body">{body}</div>
+        <div className="floating_footer">{footer}</div>
+      </div>
+    </Div>
+  </>
+);
 
 FloatingDiv.propTypes = {
   title: PropTypes.string,
   body: PropTypes.element,
   onClickExit: PropTypes.func,
-  view: PropTypes.bool,
   footer: PropTypes.element,
 };
 

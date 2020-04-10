@@ -7,7 +7,6 @@ const UserManager = () => {
 
   const setUser = (user, isSaved) => {
     if (isSaved) {
-      console.log(isSaved);
       Cookies.set(KEY, user, { expires: 365, sameSite: 'lax' });
     } else {
       Cookies.set(KEY, user, { sameSite: 'lax' });

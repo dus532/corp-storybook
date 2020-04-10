@@ -12,9 +12,9 @@ import {
   InitPayment,
   InitUsage,
 } from 'pages';
-import { Header, Sending } from 'components';
+import { Header } from 'components';
 
-import { actionSetUser, actionSignOut } from 'store';
+import { actionSetUser, actionSignOut } from 'stores';
 
 import GlobalStyle from 'global-styles';
 
@@ -22,7 +22,6 @@ import UserManager from 'utils/userManager';
 
 const App = () => {
   const userData = useSelector(state => state.user);
-  const routerData = useSelector(state => state.router);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -30,7 +29,7 @@ const App = () => {
 
   useEffect(() => {
     const USER = UserManager().getUser();
-    if (USER && !userData.name) {
+    if (USER && !userData.data) {
       dispatch(actionSetUser(USER));
     } else if (!USER && document.location.pathname !== '/') {
       dispatch(actionSignOut());
@@ -44,10 +43,7 @@ const App = () => {
         <meta name="description" content="카플랫 서비스 관리툴입니다." />
       </Helmet>
       {/* 헤더 표시 */}
-      <Header
-        isSigned={userData.name}
-        location={routerData.location.pathname}
-      />
+      <Header isSigned={userData.data} location={location.pathname} />
       <Switch>
         {/* 로그인 부분 */}
         <Route path="/" exact component={SignIn} />
@@ -64,7 +60,6 @@ const App = () => {
         <Route path="/home" exact component={DashBoard} />
       </Switch>
       <GlobalStyle />
-      <Sending />
     </>
   );
 };

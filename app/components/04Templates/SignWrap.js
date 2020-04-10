@@ -10,6 +10,8 @@ const Wrap = styled.div`
 
   .sign_container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     width: 700px;
@@ -29,8 +31,8 @@ const Wrap = styled.div`
   @media screen and (max-width: 768px) {
     .sign_container {
       width: 100%;
-      margin: 0 12px;
-      padding: 36px;
+      margin: 0px;
+      padding: 0 20px;
     }
   }
 `;

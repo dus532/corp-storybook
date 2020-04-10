@@ -9,8 +9,8 @@ const SignInInput = ({ userData, handleChange }) => (
       name="email"
       value={userData.email}
       onChange={handleChange}
+      error="울면서 할 줄은 나 몰랐던 말"
       placeholder="아이디"
-      error="한번도 못했던 말"
     />
     <DataInput
       name="password"
@@ -18,7 +18,7 @@ const SignInInput = ({ userData, handleChange }) => (
       value={userData.password}
       onChange={handleChange}
       placeholder="비밀번호"
-      error="울면서 할 줄은 나 몰랐던 말"
+      status={1}
     />
   </>
 );

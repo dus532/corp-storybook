@@ -31,7 +31,7 @@ const IntroTop = styled.div`
 `;
 const IntroBottom = styled.div`
   font-size: 0.9em;
-  margin-bottom: 60px;
+  margin-bottom: 80px;
   span {
     font-weight: 700;
   }

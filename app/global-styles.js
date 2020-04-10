@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
   h5{
     margin:0;
     padding:0;
-    font-size:0.8rem;
+    font-size:0.9rem;
     font-weight:normal;
   }
 
@@ -90,7 +90,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5em;
   }
 
-  input {
+  input,input:focus {
     outline:none;
   }
 
@@ -132,7 +132,7 @@ const GlobalStyle = createGlobalStyle`
 
   @media screen and (max-width: 768px) {
     h2{
-      font-size:1.3em;
+      font-size:1.1em;
     };
   }
 
@@ -147,6 +147,52 @@ const GlobalStyle = createGlobalStyle`
       opacity:1;
     }
     
+  }
+
+  @keyframes zoom{
+    0%{
+      transform: scale(0.6);
+      opacity:0;
+    }
+    10%{
+      transform: scale(1.1);
+      opacity:1;
+    }
+    20%{
+      transform: scale(1);
+      opacity:1;
+    }
+    90%{
+      transform: scale(1);
+      opacity:1;
+    }
+    100%{
+      transform: scale(0.6);
+      opacity:0;
+    }
+  }
+
+  @keyframes top-down{
+    0%{
+      transform: translateY(-120px);
+      opacity:0;
+    }
+    10%{
+      transform: translateY(20px);
+      opacity:1;
+    }
+    20%{
+      transform: translateY(0px);
+      opacity:1;
+    }
+    90%{
+      transform: translateY(0px);
+      opacity:1;
+    }
+    100%{
+      transform: translateY(-120px);
+      opacity:0;
+    }
   }
 `;
 

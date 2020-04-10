@@ -32,12 +32,7 @@ const RequestManager = (method, url, data, header) => {
     // DEV. 모든 데이터 통신을 콘솔화 합니다.
     // 이는 추후 서버쪽 로그 기록으로도 활용될 수 있습니다.
     const now = moment().format('MM.DD a h:mm:ss');
-    if (data) {
-      console.log(
-        `${now} 📡 서버 통신 ( ${method.toUpperCase()} ) ${url}`,
-        data,
-      );
-    }
+    console.log(`${now} 📡 서버 통신 ( ${method.toUpperCase()} ) ${url}`, data);
 
     // 02. axios 통신
     // axios 통신을 시도합니다.
@@ -70,7 +65,6 @@ const RequestManager = (method, url, data, header) => {
                   err.response.data.message
                 }`,
               );
-              reject(err);
               break;
             case 401:
               console.log(
@@ -108,9 +102,7 @@ const RequestManager = (method, url, data, header) => {
                   err.response.data.message
                 }`,
               );
-              if (document.location.pathname === '/') {
-                reject(err);
-              } else {
+              if (document.location.pathname !== '/') {
                 toast.error(
                   `⛔️ 권한이 없습니다. ( Forbidden, 403 ) - ${
                     err.response.data.message
@@ -124,7 +116,6 @@ const RequestManager = (method, url, data, header) => {
                   err.response.data.message
                 }`,
               );
-              reject(err);
               // toast.error("데이터가 없습니다. ( No Data, 404 )");
               break;
             case 406:
@@ -133,7 +124,6 @@ const RequestManager = (method, url, data, header) => {
                   err.response.data.message
                 }`,
               );
-              reject(err);
               break;
             case 409:
               console.log(
@@ -168,10 +158,10 @@ const RequestManager = (method, url, data, header) => {
               );
               break;
             default:
-              reject(err);
               console.log(err.response);
               break;
           }
+          reject(err);
         } else {
           toast.error('⛔️ 혹시 서버가 꺼져있나요?');
         }

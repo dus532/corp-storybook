@@ -1,5 +1,5 @@
 const config = {
-  apiServerURL: 'http://localhost:3000',
+  apiServerURL: 'https://biz-corp-admin-api.dev.platdev.net',
   controlCenterServerURL: 'https://dev-controll-center.carplat.co.kr',
 };
 

@@ -11,9 +11,10 @@ import {
   Button,
   Logo,
   NewLine,
+  InfoBox,
 } from 'components';
-import { POSTSignIn, toggleFindEmail } from 'store';
-import { ModalFindEmail } from 'modals';
+import { actionPostSignIn, onModal } from 'stores';
+import { SIGN_FIND_EMAIL } from 'modals/constants';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -25,11 +26,10 @@ const SignIn = () => {
     isSaved: false,
   });
 
-  const modalsData = useSelector(state => state.modals);
   const userStore = useSelector(state => state.user);
 
   useEffect(() => {
-    if (userStore.name) {
+    if (userStore.data) {
       history.push('/home');
     }
   }, [userStore]);
@@ -43,11 +43,11 @@ const SignIn = () => {
   };
 
   const onSignIn = () => {
-    dispatch(POSTSignIn(userData));
+    dispatch(actionPostSignIn(userData));
   };
 
   const modalFindEmail = () => {
-    dispatch(toggleFindEmail());
+    dispatch(onModal(SIGN_FIND_EMAIL));
   };
 
   const propsList = { userData, handleChange };
@@ -70,16 +70,10 @@ const SignIn = () => {
                 <FormattedMessage id="carplat-biz.signin.signin" />
               </span>
             </Button>
-            <h5 className="sign_askCarplat">
-              [느낌표] 나는요 오빠가 좋은걸 어떡해
-            </h5>
+            <InfoBox>카플랫에 문의하기 : 1544-7198</InfoBox>
           </div>
         </div>
       </SignWrap>
-      <ModalFindEmail
-        view={modalsData.findEmail}
-        onClickExit={modalFindEmail}
-      />
     </>
   );
 };

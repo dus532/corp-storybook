@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Input from 'components/01Atoms/Input';
+import IconError from 'components/01Atoms/IconError';
+import IconOK from 'components/01Atoms/IconOK';
+import IconShow from 'components/01Atoms/IconShow';
+import IconHide from 'components/01Atoms/IconHide';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -12,14 +16,24 @@ const StyledDiv = styled.div`
   span {
     position: relative;
     width: 0px;
+    top: 4px;
     right: -4px;
   }
 
   .eyes {
     width: 0px;
     position: relative;
-    right: 24px;
+    top: 4px;
+    right: 32px;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 768px) {
+    span {
+      width: 20px;
+      right: 0px;
+      margin-left: 8px;
+    }
   }
 `;
 
@@ -39,22 +53,18 @@ const statusEmojis = status => {
   switch (status) {
     case 1:
       return (
-        <span role="img" aria-label="happy">
-          😄
+        <span>
+          <IconOK />
         </span>
       );
     case 2:
       return (
-        <span role="img" aria-label="sad">
-          😥
+        <span>
+          <IconError />
         </span>
       );
     default:
-      return (
-        <span role="img" aria-label="what">
-          🤔
-        </span>
-      );
+      return <></>;
   }
 };
 
@@ -74,9 +84,10 @@ const DataInput = props => {
             role="button"
             tabIndex={0}
           >
-            눈
+            {viewPW === 'password' ? <IconShow /> : <IconHide />}
           </div>
         )}
+        {props.error && statusEmojis(2)}
         {statusEmojis(props.status)}
       </StyledDiv>
       {props.error && (

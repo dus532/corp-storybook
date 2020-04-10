@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { REQUEST_SUCCESS, REQUEST_FAILURE } from 'store/request/constants';
+import { REQUEST_SUCCESS, REQUEST_FAILURE } from 'stores/controller/constants';
 
 const AsyncDiv = ({ store, children }) => {
   if (store.status === REQUEST_SUCCESS) {

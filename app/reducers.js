@@ -8,18 +8,22 @@ import { reducer as reduxFormReducer } from 'redux-form';
 
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import globalReducer from 'store/global/reducer';
-import modalReducer from 'store/modals/reducer';
-import userReducer from 'store/user/reducer';
+import globalReducer from 'stores/global/reducer';
+import { ModalReducer } from 'stores/modals';
+import { ToastReducer } from 'stores/toast';
+import createReducers from 'stores/controller/createReducer';
+
+const apiReducer = createReducers('user');
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
-    modals: modalReducer,
+    ...apiReducer,
+    modal: ModalReducer,
+    toast: ToastReducer,
     global: globalReducer,
-    user: userReducer,
     language: languageProviderReducer,
     router: connectRouter(history),
     form: reduxFormReducer,

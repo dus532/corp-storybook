@@ -24,6 +24,10 @@ import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
+import Modals from 'modals';
+import Toast from 'toast';
+
+import { Sending } from 'components';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -58,6 +62,9 @@ const render = messages => {
         <ConnectedRouter history={history}>
           <App />
           <ToastContainer autoClose={4000} position="top-center" />
+          <Modals />
+          <Toast />
+          <Sending />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

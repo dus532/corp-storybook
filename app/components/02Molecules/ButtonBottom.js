@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Button from 'components/01Atoms/Button';
+import SubButton from 'components/01Atoms/SubButton';
 
 const StyledButtonBottom = styled.div`
   display: flex;
@@ -23,15 +24,14 @@ const ButtonBottom = ({
 }) => (
   <StyledButtonBottom>
     {left && (
-      <Button
-        color="gray"
+      <SubButton
         type={typeLeft}
         onClick={onClickLeft}
         disabled={disabledLeft}
         style={{ marginRight: 8 }}
       >
         <span>{left}</span>
-      </Button>
+      </SubButton>
     )}
     {right && (
       <Button type={typeRight} onClick={onClickRight} disabled={disabledRight}>

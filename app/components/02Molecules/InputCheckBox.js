@@ -38,7 +38,7 @@ const StyledInput = styled.div`
     display: inline-block;
     width: 20px;
     height: 20px;
-    border-radius: 20%;
+    border-radius: 2px;
     background: #ededed;
     border: 1px solid #bdbdbd;
     vertical-align: middle;
@@ -52,8 +52,8 @@ const StyledInput = styled.div`
     display: inline-block;
     width: 20px;
     height: 20px;
-    border-radius: 20%;
-    border: 1px solid #3f8ef7;
+    border-radius: 2px;
+    border: 1px solid ${Color.Blue};
     padding: 4px;
     background: ${Color.Blue} url(${IconCheck}) center / 10px no-repeat;
     vertical-align: middle;

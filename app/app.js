@@ -25,7 +25,7 @@ import 'sanitize.css/sanitize.css';
 // Import root app
 import App from 'containers/App';
 import Modals from 'modals';
-import Toast from 'toast';
+import Toast from 'utils/toast';
 
 import { Sending } from 'components';
 

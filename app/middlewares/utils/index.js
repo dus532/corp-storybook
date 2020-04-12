@@ -1,11 +1,35 @@
 import { KEY, LIFECYCLE } from 'middlewares/pack/constants';
-import { toggleSending } from 'stores';
+import { toggleSending, onToast } from 'stores';
 
 import createActions from 'stores/controller/createActions';
 
 const utilsMiddleware = store => next => action => {
   const { type, meta } = action;
   const reqType = type.split('/')[0];
+
+  // 통신 오류를 잡아 토스트로 표현합니다.
+  if (meta && meta[KEY.LIFECYCLE] === LIFECYCLE.FAILURE) {
+    if (action.payload && action.payload.response) {
+      const { response } = action.payload;
+      switch (response.status) {
+        case 404:
+          // 데이터가 없습니다. 즉, 존재하지 않는 라운터라는 이야기죠
+          store.dispatch(
+            onToast(`${response.status} : 존재하지 않는 라우터입니다.`),
+          );
+          break;
+        case 500:
+          // 서버 오류입니다.
+          store.dispatch(
+            onToast(`${response.status} : 서버에서 오류가 발생했어요!`),
+          );
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
 
   // POST,PUT 통신시 Sending을 위한 미들웨어!
   switch (reqType) {

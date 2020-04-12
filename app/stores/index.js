@@ -3,7 +3,7 @@
 // Modals 모달 스토어
 export { onModal, offModal } from 'stores/modals';
 
-export { onToast, offToast } from 'stores/toast';
+export { onToast, offToast, delToast } from 'stores/toast';
 
 export {
   actionPostSignIn,
@@ -13,3 +13,8 @@ export {
 } from 'stores/actions/user';
 
 export { toggleSending } from 'stores/actions/global';
+
+export {
+  actionPostInitialCard,
+  actionPostInitialUsage,
+} from 'stores/actions/initial';

@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import Color from 'config/color';
+
 const GlobalStyle = createGlobalStyle`
   ul{
     margin:0;
@@ -38,6 +40,10 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
     font-size:0.6rem;
     font-weight:normal;
+  }
+
+  .error{
+    color:${Color.Red}
   }
 
   button{
@@ -132,11 +138,19 @@ const GlobalStyle = createGlobalStyle`
 
   @media screen and (max-width: 768px) {
     h2{
-      font-size:1.1em;
     };
   }
 
   // 실험실! 각종 애니메이션이 추가되어 있습니다.
+  @keyframes opacity{
+    from{
+      opacity:0;
+    }
+    to{
+      opacity:1;
+    }
+  }
+
   @keyframes rotate_card{
     from{
       transform:rotateZ(6deg);

@@ -13,11 +13,8 @@ import { ModalReducer } from 'stores/modals';
 import { ToastReducer } from 'stores/toast';
 import createReducers from 'stores/controller/createReducer';
 
-const apiReducer = createReducers('user');
+const apiReducer = createReducers('user', 'initial');
 
-/**
- * Merges the main reducer with the router state and dynamically injected reducers
- */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     ...apiReducer,

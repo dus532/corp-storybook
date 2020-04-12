@@ -23,6 +23,10 @@ const Input = styled.input`
     border: 1px solid ${Color.Blue};
     transition: 0.35s;
   }
+
+  &:invalid {
+    box-shadow: none;
+  }
 `;
 
 export default Input;

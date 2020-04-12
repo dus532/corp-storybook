@@ -13,16 +13,21 @@ import {
   NewLine,
   InfoBox,
 } from 'components';
-import { actionPostSignIn, onModal } from 'stores';
+import { actionPostSignIn } from 'stores';
 import { SIGN_FIND_EMAIL } from 'modals/constants';
+import { useToast, useModal } from 'utils/hooks';
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const toast = useToast();
+  const modal = useModal();
 
   const [userData, setUserData] = useState({
     email: '',
+    emailError: '',
     password: '',
+    passwordError: '',
     isSaved: false,
   });
 
@@ -42,12 +47,17 @@ const SignIn = () => {
     }
   };
 
-  const onSignIn = () => {
-    dispatch(actionPostSignIn(userData));
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (userData.email && userData.password) {
+      dispatch(actionPostSignIn(userData));
+    } else {
+      toast('빈칸을 채워주세요.');
+    }
   };
 
   const modalFindEmail = () => {
-    dispatch(onModal(SIGN_FIND_EMAIL));
+    modal(SIGN_FIND_EMAIL);
   };
 
   const propsList = { userData, handleChange };
@@ -62,16 +72,16 @@ const SignIn = () => {
               {txt => <NewLine data={txt} />}
             </FormattedMessage>
           </h2>
-          <div className="sign_bottom">
+          <form className="sign_bottom" onSubmit={handleSubmit}>
             <SignInput {...propsList} />
             <SignExtra {...propsList} toggleFindEmail={modalFindEmail} />
-            <Button onClick={onSignIn}>
+            <Button>
               <span>
                 <FormattedMessage id="carplat-biz.signin.signin" />
               </span>
             </Button>
             <InfoBox>카플랫에 문의하기 : 1544-7198</InfoBox>
-          </div>
+          </form>
         </div>
       </SignWrap>
     </>

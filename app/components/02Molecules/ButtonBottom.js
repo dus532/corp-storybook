@@ -7,7 +7,8 @@ import SubButton from 'components/01Atoms/SubButton';
 
 const StyledButtonBottom = styled.div`
   display: flex;
-  width: 373px;
+  width: 100%;
+  max-width: 373px;
   margin: 0 auto;
   overflow: hidden;
 `;

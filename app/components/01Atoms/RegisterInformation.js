@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const RegisterInformation = styled.div`
   margin-bottom: 24px;
+  line-height: 28px;
 
   h2 {
     display: block;

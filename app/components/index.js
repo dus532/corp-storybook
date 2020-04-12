@@ -13,6 +13,7 @@ export {
 export { default as Container } from 'components/01Atoms/Container';
 export { default as Container580 } from 'components/01Atoms/Container580';
 export { default as IconError } from 'components/01Atoms/IconError';
+export { default as IconOK } from 'components/01Atoms/IconOK';
 
 // 02 Molecules
 export { default as InfoBox } from 'components/02Molecules/InfoBox';
@@ -20,6 +21,9 @@ export { default as DataInput } from 'components/02Molecules/DataInput';
 export { default as InputRadio } from 'components/02Molecules/InputRadio';
 export { default as ButtonBottom } from 'components/02Molecules/ButtonBottom';
 export { default as InputCheckBox } from 'components/02Molecules/InputCheckBox';
+export {
+  default as SegmentControl,
+} from 'components/02Molecules/SegmentControl';
 
 // 03 Organisms
 export { default as SignInput } from 'components/03Organisms/SignInput';

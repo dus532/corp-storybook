@@ -7,6 +7,7 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
   background: #f7f7f7;
+  box-sizing: border-box;
 
   .sign_container {
     display: flex;
@@ -20,7 +21,8 @@ const Wrap = styled.div`
 
   .sign_bottom {
     margin-top: 40px;
-    width: 372px;
+    width: 100%;
+    max-width: 372px;
   }
 
   .sign_askCarplat {

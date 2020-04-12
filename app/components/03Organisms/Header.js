@@ -17,7 +17,6 @@ import Container from '../01Atoms/Container';
 
 const StyledHeader = styled.div`
   width: 100%;
-  padding: 0 8px;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 

@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { FloatingDiv, SubButton, Input } from 'components';
 import { actionPostResetPassword } from 'stores';
 
-import { useToast } from '../../toast';
+import { useToast } from 'utils/hooks';
 
-const FindEmail = ({ data, onClickExit }) => {
+const FindEmail = ({ onClickExit }) => {
   const toast = useToast();
   const dispatch = useDispatch();
 
@@ -27,8 +27,6 @@ const FindEmail = ({ data, onClickExit }) => {
       toast('이메일 주소가 입력되지 않았습니다.');
     }
   };
-
-  console.log(data);
 
   if (page === 0) {
     return (
@@ -84,7 +82,6 @@ const FindEmail = ({ data, onClickExit }) => {
 };
 
 FindEmail.propTypes = {
-  data: PropTypes.object,
   onClickExit: PropTypes.func,
 };
 

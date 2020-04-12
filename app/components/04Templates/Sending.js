@@ -13,6 +13,7 @@ const StyledSending = styled.div`
   justify-content: center;
   align-items: center;
   color: white;
+  animation: opacity 3s;
 `;
 
 const Sending = () => {
@@ -21,8 +22,7 @@ const Sending = () => {
   if (globalData.sending) {
     return (
       <StyledSending>
-        <div>1</div>
-        <div>로딩중</div>
+        <div>열심히 달리고 있어요!</div>
       </StyledSending>
     );
   }

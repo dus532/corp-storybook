@@ -7,6 +7,8 @@ import Color from 'config/color';
 const StyledBillPaper = styled.div`
   padding: 24px;
   background: ${Color.White};
+  width: 100%;
+  position: relative;
 `;
 
 const Line = styled.div`
@@ -16,7 +18,7 @@ const Line = styled.div`
   border-top: 1px solid ${Color.LineGray};
   padding-top: 4px;
   padding-bottom: 12px;
-  max-width: 532px;
+  width: 100%;
 
   .title {
     font-weight: 700;
@@ -28,7 +30,7 @@ const Amount = styled.div`
   display: flex;
   justify-content: space-between;
   color: ${Color.Blue};
-  max-width: 532px;
+  width: 100%;
 
   span {
     font-weight: 700;
@@ -42,7 +44,7 @@ const Amount = styled.div`
 const BillPaper = ({ data, amount, startDate, endDate }) => (
   <StyledBillPaper>
     {data.map(d => (
-      <Line key={d.body}>
+      <Line key={d.title}>
         <span className="title">{d.title}</span>
         <span className="body">{d.body}</span>
       </Line>

@@ -87,8 +87,7 @@ const DataInput = props => {
             {viewPW === 'password' ? <IconShow /> : <IconHide />}
           </div>
         )}
-        {props.error && statusEmojis(2)}
-        {statusEmojis(props.status)}
+        {props.value && statusEmojis(props.status)}
       </StyledDiv>
       {props.error && (
         <InputError>

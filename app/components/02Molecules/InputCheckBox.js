@@ -34,6 +34,7 @@ const StyledInput = styled.div`
   }
 
   input + label:before {
+    flex-shrink: 0;
     content: '';
     display: inline-block;
     width: 20px;

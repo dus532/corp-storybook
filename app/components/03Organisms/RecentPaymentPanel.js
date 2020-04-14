@@ -8,7 +8,7 @@ import IconNoData from 'components/01Atoms/IconNoData';
 const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
-  padding: 24px;
+  padding: 24px 20px;
 `;
 
 const Filter = styled.div`
@@ -28,11 +28,11 @@ const NoData = styled.div`
   margin-bottom: 24px;
 `;
 
-const RecentPaymentPanel = ({ store }) => {
+const RecentPaymentPanel = ({ store, className }) => {
   const data = store.data.monthly_payments;
 
   return (
-    <StyledPanel>
+    <StyledPanel className={className}>
       <Filter>
         <div>최근 결제 금액</div>
         <div>1</div>
@@ -52,6 +52,7 @@ const RecentPaymentPanel = ({ store }) => {
 
 RecentPaymentPanel.propTypes = {
   store: PropTypes.object,
+  className: PropTypes.any,
 };
 
 export default RecentPaymentPanel;

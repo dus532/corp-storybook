@@ -7,7 +7,7 @@ import Color from 'config/color';
 const StyledWelcomePanel = styled.div`
   margin-top: 30px;
   height: 80px;
-  padding: 0 28px;
+  padding: 0 20px;
   font-weight: 700;
   box-sizing: border-box;
   display: flex;
@@ -30,11 +30,11 @@ const Button = styled.button`
   }
 `;
 
-const WelcomePanel = ({ store }) => {
+const WelcomePanel = ({ store, className }) => {
   const data = store.data.admin;
 
   return (
-    <StyledWelcomePanel>
+    <StyledWelcomePanel className={className}>
       <div>{data.name}님, 안녕하세요!</div>
       <Button>이용안내 확인</Button>
     </StyledWelcomePanel>
@@ -43,6 +43,7 @@ const WelcomePanel = ({ store }) => {
 
 WelcomePanel.propTypes = {
   store: PropTypes.object,
+  className: PropTypes.any,
 };
 
 export default WelcomePanel;

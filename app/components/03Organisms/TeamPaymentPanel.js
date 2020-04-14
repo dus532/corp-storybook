@@ -9,7 +9,7 @@ import C from 'config/constants';
 const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
-  padding: 24px;
+  padding: 24px 20px;
   padding-bottom: 0px;
 `;
 
@@ -64,11 +64,11 @@ const Tag = styled.span`
   margin-right: 10px;
 `;
 
-const TeamPaymentPanel = ({ store }) => {
+const TeamPaymentPanel = ({ store, className }) => {
   const data = store.data.user_groups;
 
   return (
-    <StyledPanel>
+    <StyledPanel className={className}>
       <Filter>
         <div>부서별 결제 금액</div>
         <div>1</div>
@@ -104,6 +104,7 @@ const TeamPaymentPanel = ({ store }) => {
 
 TeamPaymentPanel.propTypes = {
   store: PropTypes.object,
+  className: PropTypes.any,
 };
 
 export default TeamPaymentPanel;

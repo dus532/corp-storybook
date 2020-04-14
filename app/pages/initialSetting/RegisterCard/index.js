@@ -122,7 +122,7 @@ const RegisterCard = () => {
   };
 
   return (
-    <Container580 padding>
+    <Container580>
       <RegisterInformation>
         <h2>대표 결제카드를 등록하세요.</h2>
         대표 결제카드 정보를 입력 하신 후 <span>다음</span> 버튼을 누르세요.

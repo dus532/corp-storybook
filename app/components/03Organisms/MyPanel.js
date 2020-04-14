@@ -37,11 +37,11 @@ const Line = styled.div`
   height: 48px;
 `;
 
-const MyPanel = ({ store }) => {
+const MyPanel = ({ store, className }) => {
   const data = store.data.business_subs;
 
   return (
-    <StyledMyPanel>
+    <StyledMyPanel className={className}>
       <Part>
         이용중인 서비스 상품
         <h2>{data.product}</h2>
@@ -65,6 +65,7 @@ const MyPanel = ({ store }) => {
 
 MyPanel.propTypes = {
   store: PropTypes.object,
+  className: PropTypes.any,
 };
 
 export default MyPanel;

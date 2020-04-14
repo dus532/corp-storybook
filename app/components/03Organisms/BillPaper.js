@@ -5,9 +5,8 @@ import PropTypes from 'prop-types';
 import Color from 'config/color';
 
 const StyledBillPaper = styled.div`
-  padding: 24px;
+  padding: 24px 20px;
   background: ${Color.White};
-  width: 100%;
   position: relative;
 `;
 
@@ -49,8 +48,8 @@ const Amount = styled.div`
   }
 `;
 
-const BillPaper = ({ data, amount, startDate, endDate }) => (
-  <StyledBillPaper>
+const BillPaper = ({ className, data, amount, startDate, endDate }) => (
+  <StyledBillPaper className={className}>
     {data.map(d => (
       <Line key={d.title}>
         <span className="title">{d.title}</span>
@@ -75,6 +74,7 @@ BillPaper.propTypes = {
   amount: PropTypes.string,
   startDate: PropTypes.string,
   endDate: PropTypes.string,
+  className: PropTypes.any,
 };
 
 export default BillPaper;

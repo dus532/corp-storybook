@@ -19,7 +19,7 @@ import Color from 'config/color';
 
 const PaymentCheckBox = styled.div`
   margin-top: 12px;
-  padding: 24px;
+  padding: 24px 20px;
   background: ${Color.White};
 
   div {
@@ -82,7 +82,7 @@ const Payment = () => {
   return (
     <>
       <Container580>
-        <RegisterInformation className="padding">
+        <RegisterInformation>
           <h2>지금 결제를 진행합니다.</h2>
           서비스 시작일 기준으로 한 달의 구독 요금이 미리 결제 처리됩니다.
           <br />
@@ -90,6 +90,7 @@ const Payment = () => {
           선택하세요.
         </RegisterInformation>
         <BillPaper
+          className="box_overflow"
           data={[
             { title: '기업이름', body: cardData.company_name },
             { title: '주소', body: cardData.address },
@@ -124,10 +125,10 @@ const Payment = () => {
           startDate="2020년 TEMP"
           endDate="2020년 TEMP"
         />
-        <InfoBox className="padding">
+        <InfoBox>
           정기 구독 결제는 매월 25일에 대표 결제카드로 자동 결제됩니다.
         </InfoBox>
-        <PaymentCheckBox>
+        <PaymentCheckBox className="box_overflow">
           <InputCheckBox
             name="all"
             id="allCheck"
@@ -151,7 +152,7 @@ const Payment = () => {
             onChange={handleChange}
           />
         </PaymentCheckBox>
-        <InfoBox className="padding">고객센터 문의 : 1544-7198</InfoBox>
+        <InfoBox>고객센터 문의 : 1544-7198</InfoBox>
         <br />
         <br />
         <br />

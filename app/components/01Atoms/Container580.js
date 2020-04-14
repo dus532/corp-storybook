@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container580 = styled.div`
   max-width: 580px;
   margin: 0 auto;
-  padding: ${props => (props.padding ? '0 20px' : '0')};
+  padding: 0 20px;
   box-sizing: content-box;
 
   .padding {

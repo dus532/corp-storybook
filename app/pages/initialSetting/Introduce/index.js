@@ -64,7 +64,7 @@ const Introduce = () => {
   const history = useHistory();
 
   return (
-    <Container580 padding>
+    <Container580>
       <IntroTop>
         <div className="intro_top-left">
           <h2>

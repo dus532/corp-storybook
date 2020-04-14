@@ -99,7 +99,6 @@ const GlobalStyle = createGlobalStyle`
   #app {
     min-height: 100%;
     min-width: 100%;    
-    padding-bottom:40px;
   }
 
   p,
@@ -152,6 +151,11 @@ const GlobalStyle = createGlobalStyle`
   @media screen and (max-width: 768px) {
     .mobile{
       display:inherit;
+    }
+
+    .box_overflow {
+      margin-left: -20px;
+      width: 100vw;
     }
   }
 

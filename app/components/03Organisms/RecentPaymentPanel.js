@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import NoDataIMG from 'images/icon_no-data.png';
+import PropTypes from 'prop-types';
 
 import Color from 'config/color';
+import IconNoData from 'components/01Atoms/IconNoData';
 
 const StyledPanel = styled.div`
   margin-top: 30px;
@@ -17,8 +17,6 @@ const Filter = styled.div`
   font-weight: 700;
 `;
 
-// const Chart = styled.div``;
-
 const NoData = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,28 +24,34 @@ const NoData = styled.div`
   justify-content: center;
 
   width: 100%;
-  height: 112px;
   text-align: center;
+  margin-bottom: 24px;
 `;
 
-const NoDataICON = styled.div`
-  width: 68px;
-  height: 40px;
-  background: url(${NoDataIMG}) center / cover;
-`;
+const RecentPaymentPanel = ({ store }) => {
+  const data = store.data.monthly_payments;
 
-const RecentPaymentPanel = () => (
-  <StyledPanel>
-    <Filter>
-      <div>최근 결제 금액</div>
-      <div>1</div>
-    </Filter>
-    <NoData>
-      <NoDataICON />
-      <br />
-      최근 결제 금액이 없습니다.
-    </NoData>
-  </StyledPanel>
-);
+  return (
+    <StyledPanel>
+      <Filter>
+        <div>최근 결제 금액</div>
+        <div>1</div>
+      </Filter>
+      {data.length > 0 ? (
+        <>WIP</>
+      ) : (
+        <NoData>
+          <IconNoData />
+          <br />
+          <h3>최근 결제 금액이 없습니다.</h3>
+        </NoData>
+      )}
+    </StyledPanel>
+  );
+};
+
+RecentPaymentPanel.propTypes = {
+  store: PropTypes.object,
+};
 
 export default RecentPaymentPanel;

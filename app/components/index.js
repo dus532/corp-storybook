@@ -14,6 +14,7 @@ export { default as Container } from 'components/01Atoms/Container';
 export { default as Container580 } from 'components/01Atoms/Container580';
 export { default as IconError } from 'components/01Atoms/IconError';
 export { default as IconOK } from 'components/01Atoms/IconOK';
+export { default as IconRightText } from 'components/01Atoms/IconRightText';
 
 // 02 Molecules
 export { default as InfoBox } from 'components/02Molecules/InfoBox';

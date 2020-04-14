@@ -28,6 +28,7 @@ const Line = styled.div`
 const Amount = styled.div`
   margin: 48px auto 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   color: ${Color.Blue};
   width: 100%;
@@ -38,6 +39,13 @@ const Amount = styled.div`
 
   .price {
     font-weight: 700;
+  }
+
+  @media screen and (max-width: 768px) {
+    .price {
+      width: 100%;
+      text-align: right;
+    }
   }
 `;
 

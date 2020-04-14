@@ -9,7 +9,7 @@ import {
 } from './constants';
 
 export default resourceName => ({
-  read: ({ url = `action/${resourceName}`, meta = {} }) => ({
+  read: ({ url = `/corp/${resourceName}`, meta = {} }) => ({
     type: GET_REQUEST,
     promise: RequestManager('get', url),
     meta: {
@@ -18,7 +18,7 @@ export default resourceName => ({
     },
   }),
 
-  create: ({ url = `action/${resourceName}`, params = {}, meta = {} }) => ({
+  create: ({ url = `/action/${resourceName}`, params = {}, meta = {} }) => ({
     type: POST_REQUEST,
     promise: RequestManager('post', url, params),
     meta: {
@@ -27,7 +27,11 @@ export default resourceName => ({
     },
   }),
 
-  onlyCreate: ({ url = `action/${resourceName}`, params = {}, meta = {} }) => ({
+  onlyCreate: ({
+    url = `/action/${resourceName}`,
+    params = {},
+    meta = {},
+  }) => ({
     type: POST_REQUEST_ONLY,
     promise: RequestManager('post', url, params),
     meta: {

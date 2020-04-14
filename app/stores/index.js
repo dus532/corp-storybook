@@ -18,3 +18,5 @@ export {
   actionPostInitialCard,
   actionPostInitialUsage,
 } from 'stores/actions/initial';
+
+export { actionGetDashBoard } from 'stores/actions/dashboard';

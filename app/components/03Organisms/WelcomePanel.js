@@ -22,6 +22,7 @@ const Button = styled.button`
   padding: 0 36px;
   font-weight: 700;
   transition: 0.35s;
+  border-radius: 4px;
 
   &:hover {
     background: ${Color.SubGray};
@@ -29,15 +30,19 @@ const Button = styled.button`
   }
 `;
 
-const WelcomePanel = ({ name }) => (
-  <StyledWelcomePanel>
-    <div>{name}님, 안녕하세요!</div>
-    <Button>이용안내 확인</Button>
-  </StyledWelcomePanel>
-);
+const WelcomePanel = ({ store }) => {
+  const data = store.data.admin;
+
+  return (
+    <StyledWelcomePanel>
+      <div>{data.name}님, 안녕하세요!</div>
+      <Button>이용안내 확인</Button>
+    </StyledWelcomePanel>
+  );
+};
 
 WelcomePanel.propTypes = {
-  name: PropTypes.string,
+  store: PropTypes.object,
 };
 
 export default WelcomePanel;

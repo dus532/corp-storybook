@@ -44,10 +44,15 @@ const RegisterIsName = styled.div`
 
 const RegisterCardDetail = styled.div`
   display: flex;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 `;
 
 const RegisterCardExpired = styled.div`
   width: 100%;
+  margin-bottom: 20px;
 
   .center {
     display: flex;
@@ -117,7 +122,7 @@ const RegisterCard = () => {
   };
 
   return (
-    <Container580>
+    <Container580 padding>
       <RegisterInformation>
         <h2>대표 결제카드를 등록하세요.</h2>
         대표 결제카드 정보를 입력 하신 후 <span>다음</span> 버튼을 누르세요.
@@ -268,7 +273,6 @@ const RegisterCard = () => {
             )}
           </RegisterCardExpired>
         </RegisterCardDetail>
-        <br />
         {state.card_type === C.CARD_TYPE.COMPANY ? (
           <>
             <h4>사업자 등록번호</h4>

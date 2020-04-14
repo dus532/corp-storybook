@@ -59,7 +59,7 @@ const Usage = () => {
   };
 
   return (
-    <Container580>
+    <Container580 padding>
       <RegisterInformation>
         <h2>서비스이용 한도를 설정합니다.</h2>
         신용 카드 월 이용 한도 금액을 설정하면 한도 금액 초과 시 기업관리자에게

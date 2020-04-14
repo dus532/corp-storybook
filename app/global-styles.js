@@ -3,6 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 import Color from 'config/color';
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto&display=swap');
+
   ul{
     margin:0;
   }
@@ -40,6 +42,13 @@ const GlobalStyle = createGlobalStyle`
     padding:0;
     font-size:0.6rem;
     font-weight:normal;
+  }
+
+  hr {
+    width:100%;
+    height:1px;
+    background:${Color.LineGray};
+    border:none;
   }
 
   .error{
@@ -83,12 +92,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Noto Sans CJK KR, 'Noto Sans KR' ,  Helvetica, Arial, sans-serif;
+
   }
 
   #app {
     min-height: 100%;
-    min-width: 100%;
+    min-width: 100%;    
+    padding-bottom:40px;
   }
 
   p,
@@ -100,11 +111,9 @@ const GlobalStyle = createGlobalStyle`
     outline:none;
   }
 
-  a{
+  a,a:active,a:focus{
     text-decoration:none;
-  }
-
-  a{
+    outline:none;
     color:inherit;
   }
 
@@ -136,9 +145,14 @@ const GlobalStyle = createGlobalStyle`
 
   }
 
+  .mobile{
+    display:none;
+  }
+
   @media screen and (max-width: 768px) {
-    h2{
-    };
+    .mobile{
+      display:inherit;
+    }
   }
 
   // 실험실! 각종 애니메이션이 추가되어 있습니다.

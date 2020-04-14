@@ -5,7 +5,7 @@ import Button from 'components/01Atoms/Button';
 const SmallButton = styled(Button)`
   background: #ededed;
   color: black;
-  width: 100px;
+  width: ${props => (props.mobile ? '100%' : '100px')};
   height: auto;
   padding: 8px 0;
   margin-right: 8px;

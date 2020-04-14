@@ -28,6 +28,28 @@ const IntroTop = styled.div`
     background: url(${InitialCardsIMG}) center / cover;
     animation: rotate_card 1s;
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    height: auto;
+
+    .intro_top-img {
+      width: 100%;
+      height: 180px;
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+      order: 1;
+      top: 0;
+    }
+
+    .intro_top-left {
+      order: 2;
+      margin-top: 0;
+    }
+  }
 `;
 const IntroBottom = styled.div`
   font-size: 0.9em;
@@ -42,7 +64,7 @@ const Introduce = () => {
   const history = useHistory();
 
   return (
-    <Container580>
+    <Container580 padding>
       <IntroTop>
         <div className="intro_top-left">
           <h2>

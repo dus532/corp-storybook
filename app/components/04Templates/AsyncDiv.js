@@ -15,7 +15,7 @@ const AsyncDiv = ({ store, children }) => {
 
 AsyncDiv.propTypes = {
   store: PropTypes.object,
-  children: PropTypes.element,
+  children: PropTypes.any,
 };
 
 export default AsyncDiv;

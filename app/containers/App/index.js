@@ -28,6 +28,7 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const USER = UserManager().getUser();
     if (USER && !userData.data) {
       dispatch(actionSetUser(USER));

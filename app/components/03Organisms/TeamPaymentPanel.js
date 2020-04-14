@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-
-// import NoDataIMG from 'images/icon_no-data.png';
+import PropTypes from 'prop-types';
 
 import Color from 'config/color';
+import IconNoData from 'components/01Atoms/IconNoData';
+import C from 'config/constants';
 
 const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
   padding: 24px;
+  padding-bottom: 0px;
 `;
 
 const Filter = styled.div`
@@ -30,6 +32,7 @@ const Card = styled.div`
 
   .team_name {
     width: 170px;
+    font-weight: 500;
   }
   .team_info {
     flex: 1;
@@ -40,42 +43,67 @@ const Card = styled.div`
   }
 `;
 
-// const NoData = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
+const NoData = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
 
-//   width: 100%;
-//   height: 112px;
-//   text-align: center;
-// `;
+  width: 100%;
+  height: 112px;
+  text-align: center;
+`;
 
-// const NoDataICON = styled.div`
-//   width: 68px;
-//   height: 40px;
-//   background: url(${NoDataIMG}) center / cover;
-// `;
+const Tag = styled.span`
+  padding: 6px 20px;
+  border-radius: 4px;
+  font-weight: 500;
+  color: ${props => (props.is_new_announcement ? '#2946b0' : 'black')};
+  background: ${props => (props.is_new_announcement ? '#e1e7ff' : `#f7f7f7`)};
+  margin-right: 10px;
+`;
 
-const TeamPaymentPanel = () => (
-  <StyledPanel>
-    <Filter>
-      <div>부서별 결제 금액</div>
-      <div>1</div>
-    </Filter>
-    <Table>
-      <Card>
-        <div className="team_name">전체</div>
-        <div className="team_info">부서 전용 카드 삼성카드/</div>
-        <div className="team_amount">3,789,400원</div>
-      </Card>
-    </Table>
-    {/* <NoData>
-      <NoDataICON />
-      <br />
-      최근 결제 금액이 없습니다.
-    </NoData> */}
-  </StyledPanel>
-);
+const TeamPaymentPanel = ({ store }) => {
+  const data = store.data.user_groups;
+
+  return (
+    <StyledPanel>
+      <Filter>
+        <div>부서별 결제 금액</div>
+        <div>1</div>
+      </Filter>
+      {data.length > 0 ? (
+        <Table>
+          {data.map(d => (
+            <Card key={d.id}>
+              <h3 className="team_name">{d.name}</h3>
+              <div className="team_info">
+                <Tag type={d.is_new_announcement}>
+                  {d.is_new_announcement ? '대표 결제카드' : '부서 전용카드'}
+                </Tag>
+                {d.card_corp} / {d.card_number} /{' '}
+                {d.card_type === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
+              </div>
+              <div className="team_amount">
+                {d.payment_amount && d.payment_amount.toLocaleString('en')}원
+              </div>
+            </Card>
+          ))}
+        </Table>
+      ) : (
+        <NoData>
+          <IconNoData />
+          <br />
+          <h3>부서별 결제 금액이 없습니다.</h3>
+        </NoData>
+      )}
+    </StyledPanel>
+  );
+};
+
+TeamPaymentPanel.propTypes = {
+  store: PropTypes.object,
+};
 
 export default TeamPaymentPanel;

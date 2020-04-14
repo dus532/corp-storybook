@@ -17,7 +17,6 @@ export const actionPostSignIn = data =>
           UserManager().setUser(res.data.payload);
         }
       },
-      read: '/action/login',
     },
   });
 

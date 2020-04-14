@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import LogoImg from 'images/logo_header.png';
+import LogoImg from 'images/logo_carplat.png';
 
 const LogoHeader = styled.div`
-  width: 180px;
-  height: 60px;
+  width: 154px;
+  height: 34px;
   background: url(${LogoImg}) center / contain no-repeat;
   display: inline-block;
 `;

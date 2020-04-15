@@ -10,7 +10,6 @@ import {
   SignExtra,
   Button,
   Logo,
-  NewLine,
   InfoBox,
 } from 'components';
 import { actionPostSignIn } from 'stores';
@@ -67,10 +66,9 @@ const SignIn = () => {
       <SignWrap>
         <div className="sign_container">
           <Logo />
-          <h2>
-            <FormattedMessage id="carplat-biz.signin.body">
-              {txt => <NewLine data={txt} />}
-            </FormattedMessage>
+          <h2 className="sign_title">
+            프리미엄 기업 카셰어링 서비스,
+            <br /> 카플랫 비즈니스에 오신 것을 환영합니다.
           </h2>
           <form className="sign_bottom" onSubmit={handleSubmit}>
             <SignInput {...propsList} />

@@ -31,6 +31,9 @@ const Wrap = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    .sign_title {
+      font-size: 1.2rem;
+    }
     .sign_container {
       width: 100%;
       margin: 0px;

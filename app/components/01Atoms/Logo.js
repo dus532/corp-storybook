@@ -7,6 +7,12 @@ const Logo = styled.div`
   height: 67px;
   margin: 68px 0;
   background: url(${LogoImg}) center / contain no-repeat;
+
+  @media screen and (max-width: 768px) {
+    width: 170px;
+    height: 37px;
+    margin: 48px 0;
+  }
 `;
 
 export default Logo;

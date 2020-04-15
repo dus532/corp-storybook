@@ -38,7 +38,7 @@ const RequestManager = (method, url, data, header) => {
     // axios 통신을 시도합니다.
     axios({
       method,
-      url: `${configs.local.apiServerURL}${url}`,
+      url: `${configs.dev.apiServerURL}${url}`,
       data,
       headers: {
         'Access-Control-Allow-Origin': '*',

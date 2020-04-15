@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import moment from 'utils/moment';
 import UserManager from 'utils/userManager';
-import config from 'config';
+import configs from 'config';
 
 const RequestManager = (method, url, data, header) => {
   // Promise 문입니다.
@@ -38,7 +38,7 @@ const RequestManager = (method, url, data, header) => {
     // axios 통신을 시도합니다.
     axios({
       method,
-      url: `${config.apiServerURL}${url}`,
+      url: `${configs.local.apiServerURL}${url}`,
       data,
       headers: {
         'Access-Control-Allow-Origin': '*',

@@ -15,11 +15,19 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
 
+// react-toastify
+import { ToastContainer } from 'react-toastify';
+import './react-toastify.css';
+
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
+import Modals from 'modals';
+import Toast from 'utils/toast';
+
+import { Sending } from 'components';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -53,6 +61,10 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <App />
+          <ToastContainer autoClose={4000} position="top-center" />
+          <Modals />
+          <Toast />
+          <Sending />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,
@@ -78,7 +90,7 @@ if (!window.Intl) {
     .then(() =>
       Promise.all([
         import('intl/locale-data/jsonp/en.js'),
-        import('intl/locale-data/jsonp/de.js'),
+        import('intl/locale-data/jsonp/ko.js'),
       ]),
     ) // eslint-disable-line prettier/prettier
     .then(() => render(translationMessages))

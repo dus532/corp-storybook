@@ -1,37 +1,23 @@
-#
-# CARPLAT ADMIN (https://admin.carplat.co.kr)
-#
-# build (at the repo root):
-#   docker build --no-cache -t platdev/carplat-admin -f Dockerfile .
-# run:
-#   docker run --env-file=path/to/.env --name admin-server -d -p 80:80 -it platdev/carplat-admin
-#
+# Dockerfile for S3
 
-FROM node:lts as builder
+FROM node:12.16.1 as node_image
 
-# Create app directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+# Source
+WORKDIR /project
 
-ENV PATH /usr/src/app/node_modules/.bin:$PATH 
-#ENV NODE_ENV=production 
+COPY . ./
+RUN rm -rf .git
 
-# Install
-COPY package.json /usr/src/app/package.json
-COPY yarn.lock /usr/src/app/yarn.lock
-RUN yarn install --ignore-scripts
+RUN yarn install
+RUN yarn build:dev
 
-# Build
-COPY . /usr/src/app
-RUN yarn build
+FROM mesosphere/aws-cli:latest
+WORKDIR /project
+# update ENTROYPINT ["aws"] of mesosphere/aws-cli
+ENTRYPOINT [""]
 
-FROM nginx:1.13.9-alpine
+COPY --from=node_image /project/build build
+COPY --from=node_image /project/internals/deploy internals/deploy
 
-# set nginx conf
-RUN rm -rf /etc/nginx/conf.d
-COPY server/conf /etc/nginx
+CMD ["sh", "internals/deploy/deploy.sh"]
 
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
-
-EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]

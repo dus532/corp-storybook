@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { Helmet } from 'react-helmet';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 
@@ -11,6 +10,7 @@ import {
   InitIntroduce,
   InitPayment,
   InitUsage,
+  Payment,
 } from 'pages';
 import { Header } from 'components';
 
@@ -59,6 +59,8 @@ const App = () => {
         <Route path="/initial/usage" exact component={InitUsage} />
         {/* 대쉬보드 */}
         <Route path="/home" exact component={DashBoard} />
+        {/* 결제내역 */}
+        <Route path="/payment" exact component={Payment} />
       </Switch>
       <GlobalStyle />
     </>

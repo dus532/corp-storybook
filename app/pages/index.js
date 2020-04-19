@@ -9,3 +9,6 @@ export { default as InitIntroduce } from 'pages/initialSetting/Introduce';
 export { default as InitRegisterCard } from 'pages/initialSetting/RegisterCard';
 export { default as InitPayment } from 'pages/initialSetting/Payment';
 export { default as InitUsage } from 'pages/initialSetting/Usage';
+
+// Payment 결제내역
+export { default as Payment } from 'pages/payment';

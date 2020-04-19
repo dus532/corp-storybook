@@ -9,9 +9,9 @@ import {
 } from './constants';
 
 export default resourceName => ({
-  read: ({ url = `/corp/${resourceName}`, meta = {} }) => ({
+  read: ({ url = `/corp/${resourceName}`, params = {}, meta = {} }) => ({
     type: GET_REQUEST,
-    promise: RequestManager('get', url),
+    promise: RequestManager('get', url, params),
     meta: {
       ...meta,
       resourceName,

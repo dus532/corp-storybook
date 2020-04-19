@@ -39,7 +39,8 @@ const RequestManager = (method, url, data, header) => {
     axios({
       method,
       url: `${configs.dev.apiServerURL}${url}`,
-      data,
+      data: method !== 'get' && data,
+      params: method === 'get' && data,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
@@ -52,7 +53,7 @@ const RequestManager = (method, url, data, header) => {
       .then(res => {
         console.log(
           `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) ${url}`,
-          res.data.Data,
+          res.data,
         );
         resolve(res);
       })

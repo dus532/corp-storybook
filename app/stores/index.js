@@ -20,3 +20,5 @@ export {
 } from 'stores/actions/initial';
 
 export { actionGetDashBoard } from 'stores/actions/dashboard';
+
+export { actionGetManagePayments } from 'stores/actions/payment';

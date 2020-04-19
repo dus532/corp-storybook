@@ -42,6 +42,7 @@ export {
 } from 'components/03Organisms/TeamPaymentPanel';
 export { default as Filter } from 'components/03Organisms/Filter';
 export { default as Table } from 'components/03Organisms/Table';
+export { default as Summary } from 'components/03Organisms/Summary';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';

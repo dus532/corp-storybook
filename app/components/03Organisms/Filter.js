@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import SearchIMG from 'images/icon_search.png';
 
@@ -170,5 +170,11 @@ const Filter = ({ filter, handleChange, onClick }) => (
     </div>
   </StyledFilter>
 );
+
+Filter.propTypes = {
+  filter: PropTypes.object,
+  handleChange: PropTypes.func,
+  onClick: PropTypes.func,
+};
 
 export default Filter;

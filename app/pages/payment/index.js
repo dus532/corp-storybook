@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import moment from 'utils/moment';
-import { Container, Filter, Table, AsyncDiv } from 'components';
+import { Container, Filter, Table, AsyncDiv, Summary } from 'components';
 import { actionGetManagePayments } from 'stores';
 
 const Payment = () => {
@@ -34,8 +34,17 @@ const Payment = () => {
     <Container>
       <Filter filter={filter} handleChange={handleChange} onClick={onSearch} />
       <AsyncDiv store={paymentData}>
+        <Summary data={paymentData.data} />
         <Table
-          title={['결제 시각', '결제 취소 시각']}
+          title={[
+            ['결제 시각', 'date', 2],
+            ['결제 취소 시각', '', 2],
+            ['결제 카드', 'card_corp', 1.7],
+            ['금액', 'amount', 1.4],
+            ['항목', 'item', 1.4],
+            ['상태', 'status', 1.4],
+            ['연관 예약번호', 'rental_number', 1.2],
+          ]}
           data={paymentData.data.payments}
         />
       </AsyncDiv>

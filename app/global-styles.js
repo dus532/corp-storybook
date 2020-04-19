@@ -3,8 +3,6 @@ import { createGlobalStyle } from 'styled-components';
 import Color from 'config/color';
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto&display=swap');
-
   ul{
     margin:0;
   }
@@ -138,7 +136,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     .box_overflow {
-      margin-left: -20px;
+      position:relative;
+      left:-20px;
       width: 100vw;
     }
   }

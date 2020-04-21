@@ -22,3 +22,5 @@ export {
 export { actionGetDashBoard } from 'stores/actions/dashboard';
 
 export { actionGetManagePayments } from 'stores/actions/payment';
+
+export { actionGetManageEmployees } from 'stores/actions/employee';

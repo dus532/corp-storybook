@@ -3,17 +3,11 @@ import createActions from 'stores/controller/createActions';
 
 const { read } = createActions('managePayments');
 
-export const actionGetManagePayments = ({
-  page,
-  item,
-  status,
-  startDate,
-  endDate,
-  cardNumber,
-  reservationNumber,
-}) =>
+export const actionGetManagePayments = (
+  { page, item, status, startDate, endDate, cardNumber, reservationNumber },
+  onSuccess,
+) =>
   read({
-    url: `/corp/managePayments`,
     params: {
       page,
       item,
@@ -23,4 +17,5 @@ export const actionGetManagePayments = ({
       cardNumber,
       reservationNumber,
     },
+    meta: { onSuccess },
   });

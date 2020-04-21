@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import moment from 'utils/moment';
-import { Container, Filter, Table, AsyncDiv, Summary } from 'components';
+import {
+  Container,
+  Filter,
+  Table,
+  AsyncDiv,
+  Summary,
+  Pagination,
+} from 'components';
 import { actionGetManagePayments } from 'stores';
+
+const useQuery = () => new URLSearchParams(useLocation().search);
 
 const Payment = () => {
   const dispatch = useDispatch();
   const paymentData = useSelector(state => state.managePayments);
+
+  const history = useHistory();
+  const nowPage = useQuery().get('page');
 
   const [filter, setFilter] = useState({
     startDate: moment()
@@ -23,12 +36,18 @@ const Payment = () => {
   };
 
   const onSearch = () => {
-    dispatch(actionGetManagePayments({ ...filter }));
+    dispatch(
+      actionGetManagePayments({ ...filter }, () => {
+        history.push(`${document.location.pathname}?page=1`);
+      }),
+    );
   };
 
   useEffect(() => {
-    dispatch(actionGetManagePayments({ ...filter }));
-  }, []);
+    dispatch(
+      actionGetManagePayments({ page: !nowPage ? 1 : nowPage, ...filter }),
+    );
+  }, [nowPage]);
 
   return (
     <Container>
@@ -46,6 +65,10 @@ const Payment = () => {
             ['연관 예약번호', 'rental_number', 1.2],
           ]}
           data={paymentData.data.payments}
+        />
+        <Pagination
+          now={!nowPage ? 1 : nowPage}
+          total={paymentData.data.total_page}
         />
       </AsyncDiv>
     </Container>

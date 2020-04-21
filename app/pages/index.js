@@ -12,3 +12,6 @@ export { default as InitUsage } from 'pages/initialSetting/Usage';
 
 // Payment 결제내역
 export { default as Payment } from 'pages/payment';
+
+// Employee 사원관리
+export { default as Employee } from 'pages/employee';

@@ -11,6 +11,7 @@ import {
   InitPayment,
   InitUsage,
   Payment,
+  Employee,
 } from 'pages';
 import { Header } from 'components';
 
@@ -55,12 +56,14 @@ const App = () => {
           exact
           component={InitRegisterCard}
         />
-        <Route path="/initial/payment" exact component={InitPayment} />
+        <Route path="/initial/payment?page" exact component={InitPayment} />
         <Route path="/initial/usage" exact component={InitUsage} />
         {/* 대쉬보드 */}
         <Route path="/home" exact component={DashBoard} />
         {/* 결제내역 */}
         <Route path="/payment" exact component={Payment} />
+        {/* 사원관리 */}
+        <Route path="/employee" exact component={Employee} />
       </Switch>
       <GlobalStyle />
     </>

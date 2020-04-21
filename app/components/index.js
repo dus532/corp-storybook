@@ -14,6 +14,7 @@ export { default as Container } from 'components/01Atoms/Container';
 export { default as Container580 } from 'components/01Atoms/Container580';
 export { default as IconError } from 'components/01Atoms/IconError';
 export { default as IconOK } from 'components/01Atoms/IconOK';
+export { default as IconArrow } from 'components/01Atoms/IconArrow';
 export { default as IconRightText } from 'components/01Atoms/IconRightText';
 export { default as DropBox } from 'components/01Atoms/DropBox';
 export { default as DatePicker } from 'components/01Atoms/DatePicker';
@@ -43,6 +44,7 @@ export {
 export { default as Filter } from 'components/03Organisms/Filter';
 export { default as Table } from 'components/03Organisms/Table';
 export { default as Summary } from 'components/03Organisms/Summary';
+export { default as Pagination } from 'components/03Organisms/Pagination';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';

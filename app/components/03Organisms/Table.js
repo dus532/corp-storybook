@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import moment from 'utils/moment';
+
 const StyledTable = styled.div``;
 
 const Th = styled.div`
@@ -71,6 +73,19 @@ const Td = styled.div`
   }
 `;
 
+const RegData = (name, value) => {
+  if (name.indexOf('amount') !== -1) {
+    return `${value[name].toLocaleString('en')}`;
+  }
+  if (name.indexOf('date') !== -1) {
+    return `${moment(value[name]).format('YYYY. MM. DD')}`;
+  }
+  if (name === 'edit_employee') {
+    return <span className="pc">수정</span>;
+  }
+  return value[name];
+};
+
 const Table = ({ data = [], title = [] }) => (
   <StyledTable>
     <Th>
@@ -86,11 +101,7 @@ const Table = ({ data = [], title = [] }) => (
         {title.map(t => (
           <Td size={t[2]} key={t[1]}>
             <div className="mobile_header">{t[0]}</div>
-            <div>
-              {t[1].indexOf('amount') !== -1
-                ? `${d[t[1]].toLocaleString('en')}`
-                : d[t[1]]}
-            </div>
+            <div>{RegData(t[1], d)}</div>
           </Td>
         ))}
       </Tr>

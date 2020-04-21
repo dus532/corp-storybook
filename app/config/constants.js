@@ -30,6 +30,12 @@ const C = {
     HI_PASS: 4,
     SUBSCRIBE: 5,
   },
+
+  LICENSE_TYPE: {
+    ALL: 0,
+    REGISTERD: 1,
+    NOT_REGISTERD: 2,
+  },
 };
 
 export default C;

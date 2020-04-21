@@ -135,6 +135,10 @@ const GlobalStyle = createGlobalStyle`
       display:inherit;
     }
 
+    .pc{
+      display:none;
+    }
+
     .box_overflow {
       position:relative;
       left:-20px;

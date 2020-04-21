@@ -15,6 +15,7 @@ const StyledSummary = styled.div`
   justify-content: space-between;
   font-size: 1.2rem;
   align-items: center;
+  min-height: 86px;
 
   .blue {
     color: ${Color.Blue};
@@ -61,25 +62,41 @@ const ExcelDownload = styled.button`
   }
 `;
 
-const Summary = ({ data }) => (
-  <StyledSummary>
-    <div className="left">
-      이용요금 :{' '}
-      <span className="blue">
-        {data.total_amount && data.total_amount.toLocaleString('en')}원
-      </span>
-    </div>
-    <div className="right">
-      <span className="bold">전체 {data.total_count}건</span> <span>- ~ -</span>{' '}
-      <ExcelDownload>
-        <div className="img" />
-        엑셀 다운로드
-      </ExcelDownload>
-    </div>
-  </StyledSummary>
-);
+const Summary = ({ data, type }) => {
+  switch (type) {
+    case 'employee':
+      // 사원관리
+      return (
+        <StyledSummary>
+          <div className="left">
+            총 {data.total_count}명의 사원이 등록된 상태입니다.
+          </div>
+        </StyledSummary>
+      );
+    default:
+      // 결제내역
+      return (
+        <StyledSummary>
+          <div className="left">
+            이용요금 :{' '}
+            <span className="blue">
+              {data.total_amount && data.total_amount.toLocaleString('en')}원
+            </span>
+          </div>
+          <div className="right">
+            <span className="bold">전체 {data.total_count}건</span>{' '}
+            <ExcelDownload>
+              <div className="img" />
+              엑셀 다운로드
+            </ExcelDownload>
+          </div>
+        </StyledSummary>
+      );
+  }
+};
 
 Summary.propTypes = {
+  type: PropTypes.string,
   data: PropTypes.any,
 };
 

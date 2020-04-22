@@ -14,11 +14,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Test
+          name: Scancode
           command: |
-            echo Test
+            echo Scancode
             mkdir -p ~/reports
-            # test script
+            docker run -i --rm -v "$PWD":/wd --workdir=/wd sixarm/scancode -f html ./ scancode_result.html
+            cp scancode_result.html ~/reports
+      - store_test_results:
+          path: ~/reports
+      - store_artifacts:
+          path: ~/reports
 
   build:
     executor: api_server_exec

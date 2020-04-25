@@ -35,11 +35,7 @@ const Payment = () => {
   };
 
   const onSearch = () => {
-    dispatch(
-      actionGetManageEmployees({ ...filter }, () => {
-        history.push(`${document.location.pathname}?page=1`);
-      }),
-    );
+    history.push(`${document.location.pathname}?page=1`);
   };
 
   useEffect(() => {
@@ -61,19 +57,19 @@ const Payment = () => {
         <Table
           title={[
             ['사번', 'number', 1],
-            ['부서명', 'user_group_name', 1.4],
+            ['부서명', 'userGroupName', 1.4],
             ['사원 이름', 'name', 1.4],
-            ['전화번호', 'phone_number', 1.8],
+            ['전화번호', 'phoneNumber', 1.8],
             ['이메일', 'email', 2.2],
-            ['가입 일시', 'join_date', 1.4],
+            ['가입 일시', 'joinDate', 1.4],
             ['면허증', 'lisence', 1.4],
-            ['', 'edit_employee', 0.7],
+            ['', 'editEmployee', 0.7],
           ]}
           data={paymentData.data.employees}
         />
         <Pagination
           now={!nowPage ? 1 : nowPage}
-          total={paymentData.data.total_page}
+          total={paymentData.data.totalPage}
         />
       </AsyncDiv>
     </Container>

@@ -22,10 +22,15 @@ const RequestManager = (method, url, data, header) => {
     // 현재 localStorage에 auth 데이터가 있는지 판독합니다.
     // 있을 경우 header에 Auth가 자동으로 들어갑니다.
     const dataString = window.localStorage.getItem(String('UUINFO'));
-    let AUTHORIZATION = {};
+    let AUTHORIZATION = {
+      authorization:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIiwicmFpZGVhIl0sInNvSWQiOiJjYXJwbGF0Iiwic2NvcGUiOlsicmVhZCJdLCJleHAiOjE2MDIwNjE1NTIsImF1dGhvcml0aWVzIjpbIkNBUlBMQVQiXSwianRpIjoiYTg0MWFjZjgtZGJhZS00ZWY5LWJlN2YtOTc5ZTVhN2M0NzdiIiwiY2xpZW50X2lkIjoiY2FycGxhdCJ9.Von4qp7D2fAwyrZjIKpY7pj8-1_NYos1GiIJUhYEra0',
+    };
     if (dataString) {
       AUTHORIZATION = {
-        authorization: JSON.parse(dataString).accessToken,
+        // authorization: JSON.parse(dataString).accessToken,
+        authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIiwicmFpZGVhIl0sInNvSWQiOiJjYXJwbGF0Iiwic2NvcGUiOlsicmVhZCJdLCJleHAiOjE2MDIwNjE1NTIsImF1dGhvcml0aWVzIjpbIkNBUlBMQVQiXSwianRpIjoiYTg0MWFjZjgtZGJhZS00ZWY5LWJlN2YtOTc5ZTVhN2M0NzdiIiwiY2xpZW50X2lkIjoiY2FycGxhdCJ9.Von4qp7D2fAwyrZjIKpY7pj8-1_NYos1GiIJUhYEra0',
       };
     }
 

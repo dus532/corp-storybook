@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useHistory } from 'react-router-dom';
@@ -24,6 +25,7 @@ const StyledHeader = styled.div`
   width: 100%;
   box-sizing: border-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: ${Color.White};
 
   .container {
     display: flex;
@@ -46,8 +48,8 @@ const StyledHeader = styled.div`
 
   .header_bottom {
     width: 100%;
-    height: 80px;
-    margin: 0 auto;
+    height: 60px;
+    margin: 20px auto 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,6 +110,7 @@ const StyledHeader = styled.div`
     }
     .header_bottom {
       height: 60px;
+      margin: 0;
       background: white;
     }
 
@@ -222,10 +225,43 @@ const MobileMenu = styled.div`
   }
 `;
 
+const SettingMenu = styled.div`
+  width: 150px;
+  margin-left: 900px;
+  left: calc((100% - 1600px) / 2 + 316px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  animation: opacity 0.35s;
+
+  .menu {
+    padding: 16px;
+    display: block;
+    text-align: right;
+    background: white;
+    transition: 0.35s;
+  }
+
+  .menu:hover {
+    background: ${Color.SubGray};
+    transition: 0.35s;
+  }
+
+  @media screen and (max-width: 1199px) {
+    left: inherit;
+    right: 20px;
+    margin-left: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const Header = ({ isSigned, location }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [menu, setMenu] = useState(false);
+  const [setting, setSetting] = useState(false);
 
   const nowInitPage = () => {
     if (location.indexOf('/registercard') !== -1) {
@@ -280,6 +316,7 @@ const Header = ({ isSigned, location }) => {
 
   const onClose = () => {
     setMenu(false);
+    setSetting(false);
   };
 
   const onOpen = () => {
@@ -296,7 +333,7 @@ const Header = ({ isSigned, location }) => {
         <span>대시보드</span>
       </NavLink>
       <NavLink
-        to="/reservation"
+        to="/rental"
         onClick={onClose}
         activeClassName="header_bottom-active"
       >
@@ -316,9 +353,15 @@ const Header = ({ isSigned, location }) => {
       >
         <span>사원관리</span>
       </NavLink>
-      <NavLink to="/setting" activeClassName="header_bottom-active">
-        <span>설정</span>
-      </NavLink>
+      <button
+        style={{ cursor: 'pointer', fontWeight: 700 }}
+        type="button"
+        onClick={() => {
+          setSetting(!setting);
+        }}
+      >
+        설정
+      </button>
     </>
   );
 
@@ -444,6 +487,39 @@ const Header = ({ isSigned, location }) => {
               </div>
             </div>
           </MobileMenu>
+        )}
+        {setting && (
+          <SettingMenu>
+            <NavLink
+              className="menu"
+              onClick={onClose}
+              to="/setting/announcements"
+            >
+              <span>공지사항</span>
+            </NavLink>
+            <NavLink
+              className="menu"
+              onClick={onClose}
+              to="/setting/subscription"
+            >
+              <span>구독 관리</span>
+            </NavLink>
+            <NavLink className="menu" onClick={onClose} to="/setting">
+              <span>기업 정보 관리</span>
+            </NavLink>
+            <NavLink className="menu" onClick={onClose} to="/setting">
+              <span>결제카드 관리</span>
+            </NavLink>
+            <NavLink className="menu" onClick={onClose} to="/setting">
+              <span>고객센터</span>
+            </NavLink>
+            <NavLink className="menu" onClick={onClose} to="/setting">
+              <span>FAQ</span>
+            </NavLink>
+            <NavLink className="menu" onClick={onClose} to="/setting">
+              <span>약관 및 정책</span>
+            </NavLink>
+          </SettingMenu>
         )}
       </>
     );

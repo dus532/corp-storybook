@@ -59,13 +59,13 @@ const Tag = styled.span`
   padding: 6px 20px;
   border-radius: 4px;
   font-weight: 500;
-  color: ${props => (props.is_new_announcement ? '#2946b0' : 'black')};
-  background: ${props => (props.is_new_announcement ? '#e1e7ff' : `#f7f7f7`)};
+  color: ${props => (props.isRepresentativeCard ? '#2946b0' : 'black')};
+  background: ${props => (props.isRepresentativeCard ? '#e1e7ff' : `#f7f7f7`)};
   margin-right: 10px;
 `;
 
 const TeamPaymentPanel = ({ store, className }) => {
-  const data = store.data.user_groups;
+  const data = store.data.userGroups;
 
   return (
     <StyledPanel className={className}>
@@ -79,14 +79,14 @@ const TeamPaymentPanel = ({ store, className }) => {
             <Card key={d.id}>
               <h3 className="team_name">{d.name}</h3>
               <div className="team_info">
-                <Tag type={d.is_new_announcement}>
-                  {d.is_new_announcement ? '대표 결제카드' : '부서 전용카드'}
+                <Tag isRepresentativeCard={d.isRepresentativeCard}>
+                  {d.isRepresentativeCard ? '대표 결제카드' : '부서 전용카드'}
                 </Tag>
-                {d.card_corp} / {d.card_number} /{' '}
-                {d.card_type === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
+                {d.cardCorp} / {d.cardNumber} /{' '}
+                {d.cardType === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
               </div>
               <div className="team_amount">
-                {d.payment_amount && d.payment_amount.toLocaleString('en')}원
+                {d.paymentAmount && d.paymentAmount.toLocaleString('en')}원
               </div>
             </Card>
           ))}

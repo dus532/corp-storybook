@@ -8,6 +8,11 @@ const StyledBillPaper = styled.div`
   padding: 24px 20px;
   background: ${Color.White};
   position: relative;
+
+  h3 {
+    margin-bottom: 28px;
+    font-weight: 700;
+  }
 `;
 
 const Line = styled.div`
@@ -17,6 +22,7 @@ const Line = styled.div`
   border-top: 1px solid ${Color.LineGray};
   padding-top: 4px;
   padding-bottom: 12px;
+  max-width: ${props => (props.type ? '572px' : '100%')};
   width: 100%;
 
   .title {
@@ -48,10 +54,24 @@ const Amount = styled.div`
   }
 `;
 
-const BillPaper = ({ className, data, amount, startDate, endDate }) => (
+const Bottom = styled.div`
+  margin-top: 60px;
+  margin-bottom: 36px;
+`;
+
+const BillPaper = ({
+  className,
+  title,
+  data,
+  amount,
+  startDate,
+  endDate,
+  bottom,
+}) => (
   <StyledBillPaper className={className}>
+    <h3>{title}</h3>
     {data.map(d => (
-      <Line key={d.title}>
+      <Line type={title} key={d.title}>
         <span className="title">{d.title}</span>
         <span className="body">{d.body}</span>
       </Line>
@@ -66,15 +86,18 @@ const BillPaper = ({ className, data, amount, startDate, endDate }) => (
         <h2 className="price">{amount}</h2>
       </Amount>
     )}
+    <Bottom>{bottom}</Bottom>
   </StyledBillPaper>
 );
 
 BillPaper.propTypes = {
   data: PropTypes.array,
   amount: PropTypes.string,
+  title: PropTypes.string,
   startDate: PropTypes.string,
   endDate: PropTypes.string,
   className: PropTypes.any,
+  bottom: PropTypes.any,
 };
 
 export default BillPaper;

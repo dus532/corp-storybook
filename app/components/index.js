@@ -18,6 +18,7 @@ export { default as IconArrow } from 'components/01Atoms/IconArrow';
 export { default as IconRightText } from 'components/01Atoms/IconRightText';
 export { default as DropBox } from 'components/01Atoms/DropBox';
 export { default as DatePicker } from 'components/01Atoms/DatePicker';
+export { default as BigTitle } from 'components/01Atoms/BigTitle';
 
 // 02 Molecules
 export { default as InfoBox } from 'components/02Molecules/InfoBox';
@@ -45,9 +46,13 @@ export { default as Filter } from 'components/03Organisms/Filter';
 export { default as Table } from 'components/03Organisms/Table';
 export { default as Summary } from 'components/03Organisms/Summary';
 export { default as Pagination } from 'components/03Organisms/Pagination';
+export { default as Board } from 'components/03Organisms/Board';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';
+export {
+  default as FloatingDivBig,
+} from 'components/04Templates/FloatingDivBig';
 export { default as FloatingDiv } from 'components/04Templates/FloatingDiv';
 export { default as SignExtra } from 'components/04Templates/SignExtra';
 export { default as SignWrap } from 'components/04Templates/SignWrap';

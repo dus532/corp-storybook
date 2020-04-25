@@ -29,7 +29,7 @@ const NoData = styled.div`
 `;
 
 const RecentPaymentPanel = ({ store, className }) => {
-  const data = store.data.monthly_payments;
+  const data = store.data.monthlyPayments;
 
   return (
     <StyledPanel className={className}>

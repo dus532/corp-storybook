@@ -69,10 +69,27 @@ const Summary = ({ data, type }) => {
       return (
         <StyledSummary>
           <div className="left">
-            총 {data.total_count}명의 사원이 등록된 상태입니다.
+            총 {data.totalCount}명의 사원이 등록된 상태입니다.
           </div>
         </StyledSummary>
       );
+
+    case 'rental':
+      // 예약조회
+      return (
+        <StyledSummary>
+          <div className="left">
+            이용요금 :{' '}
+            <span className="blue">
+              {data.totalAmount && data.totalAmount.toLocaleString('en')}원
+            </span>
+          </div>
+          <div className="right">
+            <span className="bold">{data.totalCount}건</span>{' '}
+          </div>
+        </StyledSummary>
+      );
+
     default:
       // 결제내역
       return (
@@ -80,11 +97,11 @@ const Summary = ({ data, type }) => {
           <div className="left">
             이용요금 :{' '}
             <span className="blue">
-              {data.total_amount && data.total_amount.toLocaleString('en')}원
+              {data.totalAmount && data.totalAmount.toLocaleString('en')}원
             </span>
           </div>
           <div className="right">
-            <span className="bold">전체 {data.total_count}건</span>{' '}
+            <span className="bold">전체 {data.totalCount}건</span>{' '}
             <ExcelDownload>
               <div className="img" />
               엑셀 다운로드

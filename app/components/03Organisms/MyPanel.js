@@ -38,7 +38,7 @@ const Line = styled.div`
 `;
 
 const MyPanel = ({ store, className }) => {
-  const data = store.data.business_subs;
+  const data = store.data.businessSubs;
 
   return (
     <StyledMyPanel className={className}>

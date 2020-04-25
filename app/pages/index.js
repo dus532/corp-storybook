@@ -15,3 +15,12 @@ export { default as Payment } from 'pages/payment';
 
 // Employee 사원관리
 export { default as Employee } from 'pages/employee';
+
+// Employee 사원관리
+export { default as Rental } from 'pages/rental';
+
+// Setting 설정
+export { default as SettingAnnouncements } from 'pages/setting/Announcements';
+export {
+  default as SettingSubscription,
+} from 'pages/setting/Subscription/Manage';

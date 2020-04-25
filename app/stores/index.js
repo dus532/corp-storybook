@@ -24,3 +24,9 @@ export { actionGetDashBoard } from 'stores/actions/dashboard';
 export { actionGetManagePayments } from 'stores/actions/payment';
 
 export { actionGetManageEmployees } from 'stores/actions/employee';
+
+export { actionGetManageRentals } from 'stores/actions/rental';
+
+export { actionGetAnnouncements } from 'stores/actions/announcements';
+
+export { actionGetSubscription } from 'stores/actions/subscription';

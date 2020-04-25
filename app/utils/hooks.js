@@ -11,5 +11,5 @@ export const useToast = () => {
 export const useModal = () => {
   const dispatch = useDispatch();
 
-  return body => dispatch(onModal(body));
+  return (body, data) => dispatch(onModal(body, data));
 };

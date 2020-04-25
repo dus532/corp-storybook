@@ -19,6 +19,9 @@ const apiReducer = createReducers(
   'dashboard',
   'managePayments',
   'manageEmployees',
+  'manageRentals',
+  'announcements',
+  'manageSubscription',
 );
 
 export default function createReducer(injectedReducers = {}) {

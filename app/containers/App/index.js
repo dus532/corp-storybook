@@ -12,6 +12,9 @@ import {
   InitUsage,
   Payment,
   Employee,
+  Rental,
+  SettingAnnouncements,
+  SettingSubscription,
 } from 'pages';
 import { Header } from 'components';
 
@@ -19,7 +22,7 @@ import { actionSetUser, actionSignOut } from 'stores';
 
 import GlobalStyle from 'global-styles';
 
-import UserManager from 'utils/userManager';
+// import UserManager from 'utils/userManager';
 
 const App = () => {
   const userData = useSelector(state => state.user);
@@ -30,7 +33,8 @@ const App = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const USER = UserManager().getUser();
+    // const USER = UserManager().getUser();
+    const USER = '1';
     if (USER && !userData.data) {
       dispatch(actionSetUser(USER));
     } else if (!USER && document.location.pathname !== '/') {
@@ -56,7 +60,7 @@ const App = () => {
           exact
           component={InitRegisterCard}
         />
-        <Route path="/initial/payment?page" exact component={InitPayment} />
+        <Route path="/initial/payment" exact component={InitPayment} />
         <Route path="/initial/usage" exact component={InitUsage} />
         {/* 대쉬보드 */}
         <Route path="/home" exact component={DashBoard} />
@@ -64,6 +68,19 @@ const App = () => {
         <Route path="/payment" exact component={Payment} />
         {/* 사원관리 */}
         <Route path="/employee" exact component={Employee} />
+        {/* 예약조회 */}
+        <Route path="/rental" exact component={Rental} />
+        {/* 설정 */}
+        <Route
+          path="/setting/announcements"
+          exact
+          component={SettingAnnouncements}
+        />
+        <Route
+          path="/setting/subscription"
+          exact
+          component={SettingSubscription}
+        />
       </Switch>
       <GlobalStyle />
     </>

@@ -19,5 +19,5 @@ ENTRYPOINT [""]
 COPY --from=node_image /project/build build
 COPY --from=node_image /project/internals/deploy internals/deploy
 
-CMD ["sh", "internals/deploy/deploy.sh"]
+CMD ["sh", "internals/deploy/deploy-preprod.sh"]
 

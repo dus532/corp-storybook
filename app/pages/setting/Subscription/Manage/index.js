@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import {
   Container,
@@ -16,6 +17,7 @@ import moment from 'utils/moment';
 
 const Subscription = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const SubscriptionsData = useSelector(state => state.manageSubscription);
 
   const current = useSelector(
@@ -36,7 +38,7 @@ const Subscription = () => {
           {current && (
             <BillPaper
               className="box_overflow"
-              title="최근 결제 금액"
+              title="구독 상품 정보"
               data={[
                 {
                   title: '구독 정보',
@@ -70,7 +72,13 @@ const Subscription = () => {
                   <ButtonBottom
                     type="big"
                     left="구독 해지"
+                    onClickLeft={() => {
+                      history.push('/setting/subscription/expires');
+                    }}
                     right="구독 상품 변경"
+                    onClickRight={() => {
+                      history.push('/setting/subscription/update');
+                    }}
                   />
                 </>
               }

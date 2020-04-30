@@ -3,8 +3,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { offModal } from 'stores/modals';
-import { FindEmail, Announcements } from 'modals/src';
-import { SIGN_FIND_EMAIL, ANNOUNCEMENTS_DETAIL } from 'modals/constants';
+import { FindEmail, Announcements, SubscriptionExpires } from 'modals/src';
+import {
+  SIGN_FIND_EMAIL,
+  ANNOUNCEMENTS_DETAIL,
+  SUBSCRIPTION_EXPIRES,
+} from 'modals/constants';
 
 const Modals = () => {
   const modal = useSelector(state => state.modal);
@@ -20,6 +24,8 @@ const Modals = () => {
       return <FindEmail {...propsAll} />;
     case ANNOUNCEMENTS_DETAIL:
       return <Announcements {...propsAll} />;
+    case SUBSCRIPTION_EXPIRES:
+      return <SubscriptionExpires {...propsAll} />;
     default:
       return <></>;
   }

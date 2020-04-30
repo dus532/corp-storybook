@@ -232,6 +232,7 @@ const SettingMenu = styled.div`
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   position: absolute;
   animation: opacity 0.35s;
+  z-index: 99;
 
   .menu {
     padding: 16px;
@@ -504,7 +505,7 @@ const Header = ({ isSigned, location }) => {
             >
               <span>구독 관리</span>
             </NavLink>
-            <NavLink className="menu" onClick={onClose} to="/setting">
+            <NavLink className="menu" onClick={onClose} to="/setting/corp">
               <span>기업 정보 관리</span>
             </NavLink>
             <NavLink className="menu" onClick={onClose} to="/setting">

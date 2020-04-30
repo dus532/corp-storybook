@@ -6,11 +6,11 @@ import DataInput from 'components/02Molecules/DataInput';
 const SignInInput = ({ userData, handleChange }) => (
   <>
     <DataInput
-      name="email"
-      value={userData.email}
+      name="adminLoginId"
+      value={userData.adminLoginId}
       onChange={handleChange}
       error={userData.emailError}
-      status={userData.email && !userData.emailError ? 1 : 2}
+      status={userData.adminLoginId && !userData.emailError ? 1 : 2}
       placeholder="아이디"
     />
     <DataInput

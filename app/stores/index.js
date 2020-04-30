@@ -29,4 +29,9 @@ export { actionGetManageRentals } from 'stores/actions/rental';
 
 export { actionGetAnnouncements } from 'stores/actions/announcements';
 
-export { actionGetSubscription } from 'stores/actions/subscription';
+export {
+  actionGetSubscription,
+  actionPushSubscription,
+  actionPutSubscription,
+  actionDeleteSubscription,
+} from 'stores/actions/subscription';

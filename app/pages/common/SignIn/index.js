@@ -23,7 +23,7 @@ const SignIn = () => {
   const modal = useModal();
 
   const [userData, setUserData] = useState({
-    email: '',
+    adminLoginId: '',
     emailError: '',
     password: '',
     passwordError: '',
@@ -48,7 +48,7 @@ const SignIn = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (userData.email && userData.password) {
+    if (userData.adminLoginId && userData.password) {
       dispatch(actionPostSignIn(userData));
     } else {
       toast('빈칸을 채워주세요.');

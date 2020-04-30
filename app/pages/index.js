@@ -24,3 +24,13 @@ export { default as SettingAnnouncements } from 'pages/setting/Announcements';
 export {
   default as SettingSubscription,
 } from 'pages/setting/Subscription/Manage';
+export {
+  default as SettingSubscriptionUpdate,
+} from 'pages/setting/Subscription/Update';
+export {
+  default as SettingSubscriptionPayment,
+} from 'pages/setting/Subscription/Payment';
+export {
+  default as SettingSubscriptionExpires,
+} from 'pages/setting/Subscription/Expires';
+export { default as SettingCorpInfo } from 'pages/setting/Corporation/Info';

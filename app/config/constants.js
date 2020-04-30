@@ -36,6 +36,17 @@ const C = {
     REGISTERD: 1,
     NOT_REGISTERD: 2,
   },
+
+  ITEM_TYPE: {
+    PREMIUM: 1,
+    STANDARD: 2,
+    BASIC: 3,
+  },
+
+  EXPIRES_TYPE: {
+    NEXT_MONTH: 0,
+    IMMEDIATELY: 1,
+  },
 };
 
 export default C;

@@ -12,6 +12,10 @@ const utilsMiddleware = store => next => action => {
     if (action.payload && action.payload.response) {
       const { response } = action.payload;
       switch (response.status) {
+        case 401:
+          // 인증 오류입니다. 아이디나 비빌먼호가 틀렸을까요?
+          store.dispatch(onToast(`${response.status} : 인증에 실패했습니다.`));
+          break;
         case 404:
           // 데이터가 없습니다. 즉, 존재하지 않는 라운터라는 이야기죠
           store.dispatch(

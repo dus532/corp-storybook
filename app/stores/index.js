@@ -35,3 +35,5 @@ export {
   actionPutSubscription,
   actionDeleteSubscription,
 } from 'stores/actions/subscription';
+
+export { actionGetCorpInfo } from 'stores/actions/corpInfo';

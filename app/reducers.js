@@ -22,6 +22,7 @@ const apiReducer = createReducers(
   'manageRentals',
   'announcements',
   'manageSubscription',
+  'info',
 );
 
 export default function createReducer(injectedReducers = {}) {

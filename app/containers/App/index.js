@@ -19,6 +19,7 @@ import {
   SettingSubscriptionPayment,
   SettingSubscriptionExpires,
   SettingCorpInfo,
+  SettingCorpInfoUpdate,
 } from 'pages';
 import { Header } from 'components';
 
@@ -105,6 +106,11 @@ const App = () => {
         />
         {/* 기업정보 */}
         <Route path="/setting/corp" exact component={SettingCorpInfo} />
+        <Route
+          path="/setting/corp/update"
+          exact
+          component={SettingCorpInfoUpdate}
+        />
       </Switch>
       <GlobalStyle />
     </>

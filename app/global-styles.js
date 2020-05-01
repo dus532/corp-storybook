@@ -130,6 +130,11 @@ const GlobalStyle = createGlobalStyle`
     display:none;
   }
 
+  .hidden{
+    pointer-events:none;
+    opacity:0.5;
+  }
+
   @media screen and (max-width: 768px) {
     .mobile{
       display:inherit;

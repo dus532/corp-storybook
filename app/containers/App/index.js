@@ -20,6 +20,7 @@ import {
   SettingSubscriptionExpires,
   SettingCorpInfo,
   SettingCorpInfoUpdate,
+  SettingPaymentCard,
 } from 'pages';
 import { Header } from 'components';
 
@@ -110,6 +111,12 @@ const App = () => {
           path="/setting/corp/update"
           exact
           component={SettingCorpInfoUpdate}
+        />
+        {/* 결제카드관리 */}
+        <Route
+          path="/setting/paymentcard"
+          exact
+          component={SettingPaymentCard}
         />
       </Switch>
       <GlobalStyle />

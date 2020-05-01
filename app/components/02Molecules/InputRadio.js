@@ -50,8 +50,17 @@ const StyledInput = styled.div`
   }
 `;
 
-const InputRadio = ({ id, name, body, checked, onChange, value, inputRef }) => (
-  <StyledInput>
+const InputRadio = ({
+  id,
+  name,
+  body,
+  checked,
+  onChange,
+  value,
+  inputRef,
+  className,
+}) => (
+  <StyledInput className={className}>
     <input
       name={name}
       type="radio"
@@ -73,6 +82,7 @@ InputRadio.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.any,
   inputRef: PropTypes.any,
+  className: PropTypes.string,
 };
 
 export default InputRadio;

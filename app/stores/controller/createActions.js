@@ -10,6 +10,7 @@ import {
   PUSH,
   RESET,
   PUSH_DETAIL,
+  HANDLE_CHANGE,
 } from './constants';
 
 export default resourceName => ({
@@ -78,6 +79,14 @@ export default resourceName => ({
   push: data => ({
     type: PUSH,
     payload: data,
+    meta: {
+      resourceName,
+    },
+  }),
+
+  handleChange: (name, value) => ({
+    type: HANDLE_CHANGE,
+    payload: { name, value },
     meta: {
       resourceName,
     },

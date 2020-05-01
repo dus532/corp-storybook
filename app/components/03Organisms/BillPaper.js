@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Color from 'config/color';
+import UserGroups from 'components/03Organisms/UserGroups';
 
 const StyledBillPaper = styled.div`
   padding: 24px 20px;
@@ -13,31 +14,6 @@ const StyledBillPaper = styled.div`
   h3 {
     margin-bottom: 28px;
     font-weight: 700;
-  }
-`;
-
-const Table = styled.table`
-  margin: 0 auto;
-  max-width: ${props => (props.type ? '572px' : '100%')};
-  width: 100%;
-  border: 1px solid ${Color.LineGray};
-  box-sizing: border-box;
-  border-collapse: collapse;
-  padding: 0 12px;
-
-  .thead_tr {
-    height: 40px;
-    background: rgba(0, 0, 0, 0.04);
-  }
-
-  tr,
-  td {
-    height: 40px;
-    padding: 0 28px;
-  }
-
-  .right {
-    text-align: right;
   }
 `;
 
@@ -154,29 +130,12 @@ const BillPaper = ({
           <span className="body">{d.body}</span>
         </Line>
       ) : (
-        <>
-          <Line type={title} key={d.title} blue={blue}>
+        <React.Fragment key={d.title}>
+          <Line type={title} blue={blue}>
             <span className="title">{d.title}</span>
           </Line>
-          <Table type={title}>
-            <thead>
-              <tr className="thead_tr">
-                <th>부서명</th>
-                <th>사원수</th>
-                <th>부서 결제카드</th>
-              </tr>
-            </thead>
-            <tbody>
-              {d.table.map(t => (
-                <tr key={t.id}>
-                  <td>{t.name}</td>
-                  <td>{t.employeeNumber} 명</td>
-                  <td>{t.isCardRegistered ? '등록 됨' : '등록 안됨'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </>
+          <UserGroups type={title} data={d.table} />
+        </React.Fragment>
       ),
     )}
     {amount && (

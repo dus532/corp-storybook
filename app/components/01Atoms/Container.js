@@ -5,6 +5,7 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box;
+  background: ${props => props.white && 'white'};
 
   .padding {
     padding-left: 20px;

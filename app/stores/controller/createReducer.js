@@ -78,8 +78,10 @@ export default (...reducerNames) =>
             });
 
           case HANDLE_CHANGE:
-            draft[payload.name] = payload.value;
-            return draft;
+            // 여긴 draft로 하면 렌더링이 이뤄지지 않습니다.
+            // 그래서 기본적인 redux로 사용합니다.
+            state.data[payload.name] = payload.value;
+            return Object.assign({}, state);
 
           case PUSH_DETAIL:
             draft.detail = payload;

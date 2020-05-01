@@ -17,7 +17,7 @@ const Div = styled.div`
 
   .floating_container {
     padding: 24px;
-    max-width: 428px;
+    width: 428px;
     margin: 0 20px;
     box-sizing: border-box;
     background: white;
@@ -50,6 +50,13 @@ const Div = styled.div`
 
     *:last-child {
       margin-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .floating_container {
+      max-width: 428px;
+      width: 100%;
     }
   }
 

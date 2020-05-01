@@ -508,16 +508,20 @@ const Header = ({ isSigned, location }) => {
             <NavLink className="menu" onClick={onClose} to="/setting/corp">
               <span>기업 정보 관리</span>
             </NavLink>
-            <NavLink className="menu" onClick={onClose} to="/setting">
+            <NavLink
+              className="menu"
+              onClick={onClose}
+              to="/setting/paymentcard"
+            >
               <span>결제카드 관리</span>
             </NavLink>
-            <NavLink className="menu" onClick={onClose} to="/setting">
+            <NavLink className="menu" onClick={onClose} to="/setting/cs">
               <span>고객센터</span>
             </NavLink>
-            <NavLink className="menu" onClick={onClose} to="/setting">
+            <NavLink className="menu" onClick={onClose} to="/setting/faq">
               <span>FAQ</span>
             </NavLink>
-            <NavLink className="menu" onClick={onClose} to="/setting">
+            <NavLink className="menu" onClick={onClose} to="/setting/terms">
               <span>약관 및 정책</span>
             </NavLink>
           </SettingMenu>

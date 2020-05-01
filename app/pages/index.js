@@ -38,3 +38,7 @@ export { default as SettingCorpInfo } from 'pages/setting/Corporation/Manage';
 export {
   default as SettingCorpInfoUpdate,
 } from 'pages/setting/Corporation/Update';
+// 결제 카드 관리
+export {
+  default as SettingPaymentCard,
+} from 'pages/setting/PaymentCard/Manage';

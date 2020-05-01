@@ -23,6 +23,7 @@ const apiReducer = createReducers(
   'announcements',
   'manageSubscription',
   'info',
+  'card',
 );
 
 export default function createReducer(injectedReducers = {}) {

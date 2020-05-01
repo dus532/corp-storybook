@@ -36,4 +36,10 @@ export {
   actionDeleteSubscription,
 } from 'stores/actions/subscription';
 
-export { actionGetCorpInfo } from 'stores/actions/corpInfo';
+export {
+  actionGetCorpInfo,
+  actionHandleChangeCorpInfo,
+  actionPutCorpInfo,
+} from 'stores/actions/corpInfo';
+
+export { actionGetCards } from 'stores/actions/paymentCard';

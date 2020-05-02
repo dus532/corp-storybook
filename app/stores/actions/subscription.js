@@ -1,9 +1,11 @@
 // 액션!
 import createActions from 'stores/controller/createActions';
+import UserManager from 'utils/userManager';
 
 const { read, update, del, pushDetail } = createActions('manageSubscription');
 
-export const actionGetSubscription = () => read({});
+export const actionGetSubscription = () =>
+  read({ url: `/action/subscription/${UserManager().getUser().corpId}` });
 
 export const actionPushSubscription = data => pushDetail(data);
 

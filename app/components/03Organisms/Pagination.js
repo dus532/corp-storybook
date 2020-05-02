@@ -83,7 +83,7 @@ const Pagination = ({ now, total }) => {
 
 Pagination.propTypes = {
   now: PropTypes.any,
-  total: PropTypes.number,
+  total: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export default Pagination;

@@ -15,9 +15,9 @@ import { actionGetManageEmployees } from 'stores';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
-const Payment = () => {
+const Employees = () => {
   const dispatch = useDispatch();
-  const paymentData = useSelector(state => state.manageEmployees);
+  const employeeData = useSelector(state => state.manageEmployees);
 
   const history = useHistory();
   const nowPage = useQuery().get('page');
@@ -52,9 +52,10 @@ const Payment = () => {
         handleChange={handleChange}
         onClick={onSearch}
       />
-      <AsyncDiv store={paymentData}>
-        <Summary type="employee" data={paymentData.data} />
+      <AsyncDiv store={employeeData}>
+        <Summary type="employee" data={employeeData.data} />
         <Table
+          now={!nowPage ? 1 : nowPage}
           title={[
             ['사번', 'number', 1],
             ['부서명', 'userGroupName', 1.4],
@@ -65,15 +66,18 @@ const Payment = () => {
             ['면허증', 'lisence', 1.4],
             ['', 'editEmployee', 0.7],
           ]}
-          data={paymentData.data.employees}
+          data={employeeData.data.employees}
         />
         <Pagination
           now={!nowPage ? 1 : nowPage}
-          total={paymentData.data.totalPage}
+          total={
+            employeeData.data &&
+            Math.ceil(employeeData.data.employees.length / 10)
+          }
         />
       </AsyncDiv>
     </Container>
   );
 };
 
-export default Payment;
+export default Employees;

@@ -69,7 +69,7 @@ const Summary = ({ data, type }) => {
       return (
         <StyledSummary>
           <div className="left">
-            총 {data.totalCount}명의 사원이 등록된 상태입니다.
+            총 {data.employees.length}명의 사원이 등록된 상태입니다.
           </div>
         </StyledSummary>
       );

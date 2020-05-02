@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
+import produce from 'immer';
 
 import { useHistory } from 'react-router-dom';
 
@@ -44,7 +45,7 @@ const Update = () => {
     name: '',
     companyNumber: '',
     address: '',
-    emailDomain: '',
+    emailDomains: ['', ''],
     employeeNumberUsage: true,
     userGroupUsage: true,
     add: '',
@@ -62,10 +63,11 @@ const Update = () => {
   }, [corpInfo]);
 
   const handleChange = e => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
+    setData(
+      produce(data, draft => {
+        draft[e.target.name] = e.target.value;
+      }),
+    );
   };
 
   const handleRaidoChecked = (e, d) => {
@@ -78,7 +80,7 @@ const Update = () => {
   const onAdd = () => {
     const t = userGroups.concat({
       name: data.add,
-      employeeNumber: 0,
+      memberNumber: 0,
       isCardRegistered: false,
     });
     dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
@@ -86,7 +88,7 @@ const Update = () => {
   };
 
   const onSubmit = () => {
-    const body = { ...data, userGroups };
+    const body = { corpInfo: data, userGroups };
     dispatch(
       actionPutCorpInfo(body, () => {
         history.push('/setting/corp');
@@ -136,20 +138,31 @@ const Update = () => {
               <div className="input">
                 <h5>이메일 도메인1</h5>
                 <Input
-                  name="emailDomain"
                   placeholder="이메일 도메인 1"
-                  value={data.emailDomain}
-                  onChange={handleChange}
+                  value={data.emailDomains[0]}
+                  onChange={e => {
+                    setData(
+                      produce(data, draft => {
+                        draft.emailDomains[0] = e.target.value;
+                      }),
+                    );
+                  }}
                   required
                 />
               </div>
               <div className="input">
                 <h5>이메일 도메인2</h5>
                 <Input
-                  name="emailDomain"
+                  name="emailDomains[1]"
                   placeholder="이메일 도메인 2"
-                  value={data.emailDomain}
-                  onChange={handleChange}
+                  value={data.emailDomains[1]}
+                  onChange={e => {
+                    setData(
+                      produce(data, draft => {
+                        draft.emailDomains[1] = e.target.value;
+                      }),
+                    );
+                  }}
                   required
                 />
               </div>
@@ -198,7 +211,9 @@ const Update = () => {
                     name="add"
                     placeholder="부서 이름"
                     onChange={handleChange}
-                    onKeyDown={e => e.keyCode === 13 && onAdd()}
+                    onKeyDown={e =>
+                      e.keyCode === 13 && e.target.value && onAdd()
+                    }
                     value={data.add}
                   />
                   <Button onClick={onAdd} type="button">

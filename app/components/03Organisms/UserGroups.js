@@ -54,22 +54,25 @@ const UserGroups = ({ type, edit, data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((t, index) => (
-          <tr key={index}>
-            <td>{t.name}</td>
-            <td>{t.employeeNumber} 명</td>
-            <td>{t.isCardRegistered ? '등록 됨' : '등록 안됨'}</td>
-            {edit && (
-              <td>
-                <Edit
-                  onClick={() => {
-                    modal(EDIT_CORP_INFO, { data: t, index });
-                  }}
-                />
-              </td>
-            )}
-          </tr>
-        ))}
+        {data.map(
+          (t, index) =>
+            !t.isDeleted && (
+              <tr key={index}>
+                <td>{t.name}</td>
+                <td>{t.memberNumber} 명</td>
+                <td>{t.isCardRegistered ? '등록 됨' : '등록 안됨'}</td>
+                {edit && (
+                  <td>
+                    <Edit
+                      onClick={() => {
+                        modal(EDIT_CORP_INFO, { data: t, index });
+                      }}
+                    />
+                  </td>
+                )}
+              </tr>
+            ),
+        )}
       </tbody>
     </Table>
   );

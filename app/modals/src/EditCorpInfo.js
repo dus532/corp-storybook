@@ -21,7 +21,8 @@ const EditCorpInfo = ({ onClickExit, data }) => {
   const [page, setPage] = useState(0);
 
   const onDelete = () => {
-    const t = userGroups.filter((d, index) => index !== data.index);
+    const t = userGroups;
+    t[data.index].isDeleted = true;
     dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
     onClickExit();
   };
@@ -29,6 +30,7 @@ const EditCorpInfo = ({ onClickExit, data }) => {
   const onEdit = e => {
     e.preventDefault();
     const t = userGroups;
+    t[data.index].isEdited = true;
     t[data.index].name = edit;
     dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
     onClickExit();

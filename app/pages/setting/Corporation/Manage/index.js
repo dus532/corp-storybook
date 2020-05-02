@@ -30,7 +30,12 @@ const Manage = () => {
               { title: '기업이름', body: corpInfo.name },
               { title: '사업자 등록번호', body: corpInfo.companyNumber },
               { title: '기업 주소 ', body: corpInfo.address },
-              { title: '이메일 도메인', body: corpInfo.emailDomain },
+              {
+                title: '이메일 도메인',
+                body: `${corpInfo.emailDomains[0]} / ${
+                  corpInfo.emailDomains[1]
+                }`,
+              },
               {
                 title: '사원 번호 사용 유무',
                 body: corpInfo.employeeNumberUsage ? '사용' : '사용안함',

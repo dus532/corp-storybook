@@ -18,10 +18,10 @@ import moment from 'utils/moment';
 const Subscription = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const SubscriptionsData = useSelector(state => state.manageSubscription);
+  const SubscriptionsData = useSelector(state => state.subscription);
 
   const current = useSelector(
-    state => state.manageSubscription.data.currentBusinessSubs,
+    state => state.subscription.data.currentBusinessSubs,
   );
 
   useEffect(() => {

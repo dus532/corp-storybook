@@ -7,7 +7,6 @@ import {
   Container,
   BigTitle,
   AsyncDiv,
-  MyPanel,
   BillPaper,
   ButtonBottom,
 } from 'components';
@@ -18,10 +17,10 @@ import moment from 'utils/moment';
 const Subscription = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const SubscriptionsData = useSelector(state => state.manageSubscription);
+  const SubscriptionsData = useSelector(state => state.subscription);
 
   const current = useSelector(
-    state => state.manageSubscription.data.currentBusinessSubs,
+    state => state.subscription.data.currentBusinessSubs,
   );
 
   useEffect(() => {
@@ -31,10 +30,8 @@ const Subscription = () => {
   return (
     <div>
       <Container>
-        <BigTitle>구독 관리</BigTitle>
+        <BigTitle>기업 정보 관리</BigTitle>
         <AsyncDiv store={SubscriptionsData}>
-          <MyPanel className="box_overflow" store={SubscriptionsData} />
-          <br />
           {current && (
             <BillPaper
               className="box_overflow"

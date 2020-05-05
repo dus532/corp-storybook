@@ -29,9 +29,9 @@ const Payment = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const current = useSelector(
-    state => state.manageSubscription.data.currentBusinessSubs,
+    state => state.subscription.data.currentBusinessSubs,
   );
-  const next = useSelector(state => state.manageSubscription.detail);
+  const next = useSelector(state => state.subscription.detail);
 
   let isUpgrade = true;
   const update = {

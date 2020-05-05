@@ -35,3 +35,11 @@ export {
   actionPutSubscription,
   actionDeleteSubscription,
 } from 'stores/actions/subscription';
+
+export {
+  actionGetCorpInfo,
+  actionHandleChangeCorpInfo,
+  actionPutCorpInfo,
+} from 'stores/actions/corpInfo';
+
+export { actionGetCards } from 'stores/actions/paymentCard';

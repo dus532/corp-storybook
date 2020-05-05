@@ -1,7 +1,13 @@
 // 상수 정의
 const C = {
+  SUB_TYPE: {
+    SUBSCRIBING: 1,
+    EXPIRED_SUBSCRIBING: 2,
+    NEXT_MONTH_SUBSCRIBING: 3,
+  },
+
   CARD_TYPE: {
-    PERSONAL: 1,
+    PERSONAL: 3,
     COMPANY: 2,
   },
 

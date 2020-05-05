@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Color from 'config/color';
+import UserGroups from 'components/03Organisms/UserGroups';
 
 const StyledBillPaper = styled.div`
   padding: 24px 20px;
@@ -62,6 +63,44 @@ const Bottom = styled.div`
   display: ${props => (props.noPadding ? 'none' : 'block')};
 `;
 
+const H3 = styled.h3`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ButtonSpecial = styled.button`
+  width: 164px;
+  height: 40px;
+  border: 1px solid ${Color.LineGray};
+  text-align: center;
+  line-height: 40px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: 0.25s;
+
+  &:hover {
+    background: ${Color.LineGray};
+    transition: 0.25s;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 20px auto 0;
+    max-width: ${props => (props.type ? '572px' : '100%')};
+    width: 100%;
+    .pc {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+  }
+`;
+
 const BillPaper = ({
   className,
   title,
@@ -70,17 +109,35 @@ const BillPaper = ({
   startDate,
   endDate,
   bottom,
+  buttonSpecial,
+  buttonSpecialOnClick,
   noPadding,
   blue,
 }) => (
   <StyledBillPaper noPadding={noPadding} className={className}>
-    <h3>{title}</h3>
-    {data.map(d => (
-      <Line type={title} key={d.title} blue={blue}>
-        <span className="title">{d.title}</span>
-        <span className="body">{d.body}</span>
-      </Line>
-    ))}
+    <H3>
+      <span>{title}</span>
+      {buttonSpecial && (
+        <ButtonSpecial className="pc" onClick={buttonSpecialOnClick}>
+          {buttonSpecial}
+        </ButtonSpecial>
+      )}
+    </H3>
+    {data.map(d =>
+      d.body ? (
+        <Line type={title} key={d.title} blue={blue}>
+          <span className="title">{d.title}</span>
+          <span className="body">{d.body}</span>
+        </Line>
+      ) : (
+        <React.Fragment key={d.title}>
+          <Line type={title} blue={blue}>
+            <span className="title">{d.title}</span>
+          </Line>
+          <UserGroups type={title} data={d.table} />
+        </React.Fragment>
+      ),
+    )}
     {amount && (
       <Amount>
         <div className="info">
@@ -90,6 +147,15 @@ const BillPaper = ({
         </div>
         <h2 className="price">{amount}</h2>
       </Amount>
+    )}
+    {buttonSpecial && (
+      <ButtonSpecial
+        type={title}
+        className="mobile"
+        onClick={buttonSpecialOnClick}
+      >
+        {buttonSpecial}
+      </ButtonSpecial>
     )}
     <Bottom noPadding={noPadding}>{bottom}</Bottom>
   </StyledBillPaper>
@@ -103,6 +169,8 @@ BillPaper.propTypes = {
   endDate: PropTypes.string,
   className: PropTypes.any,
   bottom: PropTypes.any,
+  buttonSpecial: PropTypes.any,
+  buttonSpecialOnClick: PropTypes.any,
   noPadding: PropTypes.bool,
   blue: PropTypes.bool,
 };

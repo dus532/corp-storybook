@@ -20,11 +20,15 @@ export const actionPostSignIn = data =>
     },
   });
 
-export const actionPostResetPassword = (data, onSuccess) =>
+export const actionPostResetPassword = data =>
   onlyCreate({
     url: '/action/resetPassword',
     params: data,
-    meta: { onSuccess },
+    meta: {
+      onSuccess: () => {
+        UserManager().setUser('');
+      },
+    },
   });
 
 export const actionSetUser = data => push(data);

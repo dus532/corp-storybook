@@ -33,4 +33,12 @@ export {
 export {
   default as SettingSubscriptionExpires,
 } from 'pages/setting/Subscription/Expires';
-export { default as SettingCorpInfo } from 'pages/setting/Corporation/Info';
+// 기업 정보
+export { default as SettingCorpInfo } from 'pages/setting/Corporation/Manage';
+export {
+  default as SettingCorpInfoUpdate,
+} from 'pages/setting/Corporation/Update';
+// 결제 카드 관리
+export {
+  default as SettingPaymentCard,
+} from 'pages/setting/PaymentCard/Manage';

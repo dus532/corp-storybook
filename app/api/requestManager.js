@@ -21,18 +21,7 @@ const RequestManager = (method, url, data, header) => {
     // 01. auth를 판독합니다.
     // 현재 localStorage에 auth 데이터가 있는지 판독합니다.
     // 있을 경우 header에 Auth가 자동으로 들어갑니다.
-    const dataString = window.localStorage.getItem(String('UUINFO'));
-    let AUTHORIZATION = {
-      authorization:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIiwicmFpZGVhIl0sInNvSWQiOiJjYXJwbGF0Iiwic2NvcGUiOlsicmVhZCJdLCJleHAiOjE2MDIwNjE1NTIsImF1dGhvcml0aWVzIjpbIkNBUlBMQVQiXSwianRpIjoiYTg0MWFjZjgtZGJhZS00ZWY5LWJlN2YtOTc5ZTVhN2M0NzdiIiwiY2xpZW50X2lkIjoiY2FycGxhdCJ9.Von4qp7D2fAwyrZjIKpY7pj8-1_NYos1GiIJUhYEra0',
-    };
-    if (dataString) {
-      AUTHORIZATION = {
-        // authorization: JSON.parse(dataString).accessToken,
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIiwicmFpZGVhIl0sInNvSWQiOiJjYXJwbGF0Iiwic2NvcGUiOlsicmVhZCJdLCJleHAiOjE2MDIwNjE1NTIsImF1dGhvcml0aWVzIjpbIkNBUlBMQVQiXSwianRpIjoiYTg0MWFjZjgtZGJhZS00ZWY5LWJlN2YtOTc5ZTVhN2M0NzdiIiwiY2xpZW50X2lkIjoiY2FycGxhdCJ9.Von4qp7D2fAwyrZjIKpY7pj8-1_NYos1GiIJUhYEra0',
-      };
-    }
+    const AUTHORIZATION = UserManager().getUser();
 
     // DEV. 모든 데이터 통신을 콘솔화 합니다.
     // 이는 추후 서버쪽 로그 기록으로도 활용될 수 있습니다.
@@ -52,7 +41,7 @@ const RequestManager = (method, url, data, header) => {
         'Access-Control-Allow-Headers':
           'Content-Type, Authorization, Content-Length, X-Requested-With',
         ...header,
-        ...AUTHORIZATION,
+        authorization: `Bearer ${AUTHORIZATION.accessToken}`,
       },
     })
       .then(res => {

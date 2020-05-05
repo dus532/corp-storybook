@@ -3,11 +3,17 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { offModal } from 'stores/modals';
-import { FindEmail, Announcements, SubscriptionExpires } from 'modals/src';
+import {
+  FindEmail,
+  Announcements,
+  SubscriptionExpires,
+  EditCorpInfo,
+} from 'modals/src';
 import {
   SIGN_FIND_EMAIL,
   ANNOUNCEMENTS_DETAIL,
   SUBSCRIPTION_EXPIRES,
+  EDIT_CORP_INFO,
 } from 'modals/constants';
 
 const Modals = () => {
@@ -26,6 +32,8 @@ const Modals = () => {
       return <Announcements {...propsAll} />;
     case SUBSCRIPTION_EXPIRES:
       return <SubscriptionExpires {...propsAll} />;
+    case EDIT_CORP_INFO:
+      return <EditCorpInfo {...propsAll} />;
     default:
       return <></>;
   }

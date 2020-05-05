@@ -33,6 +33,7 @@ export {
   default as SubscriptionPanel,
 } from 'components/02Molecules/SubscriptionPanel';
 export { default as ExpiresPanel } from 'components/02Molecules/ExpiresPanel';
+export { default as CardPanel } from 'components/02Molecules/CardPanel';
 
 // 03 Organisms
 export { default as SignInput } from 'components/03Organisms/SignInput';
@@ -52,6 +53,7 @@ export { default as Summary } from 'components/03Organisms/Summary';
 export { default as Pagination } from 'components/03Organisms/Pagination';
 export { default as Board } from 'components/03Organisms/Board';
 export { default as InputPeople } from 'components/03Organisms/InputPeople';
+export { default as UserGroups } from 'components/03Organisms/UserGroups';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';

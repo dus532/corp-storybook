@@ -16,6 +16,7 @@ const StyledButtonBottom = styled.div`
 const ButtonBottom = ({
   type,
   left,
+  style,
   onClickLeft,
   typeLeft = 'button',
   right,
@@ -24,7 +25,7 @@ const ButtonBottom = ({
   disabledLeft,
   disabledRight,
 }) => (
-  <StyledButtonBottom type={type}>
+  <StyledButtonBottom type={type} style={style}>
     {left && (
       <SubButton
         type={typeLeft}
@@ -46,6 +47,7 @@ const ButtonBottom = ({
 ButtonBottom.propTypes = {
   type: PropTypes.string,
   left: PropTypes.string,
+  style: PropTypes.object,
   right: PropTypes.string,
   typeLeft: PropTypes.string,
   typeRight: PropTypes.string,

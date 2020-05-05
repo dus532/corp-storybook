@@ -137,7 +137,7 @@ const FloatingDivBig = ({ title, subtitle, body, footer, onClickExit }) => (
 FloatingDivBig.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  body: PropTypes.element,
+  body: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   onClickExit: PropTypes.func,
   footer: PropTypes.element,
 };

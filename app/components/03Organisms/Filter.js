@@ -128,16 +128,60 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
             <div className="bottom_box">
               <DropBox
                 className="dropbox "
-                title="예약 상태"
+                title="부서"
                 data={[
                   { value: 0, body: '전체 예약상태' },
                   { value: C.PAYMENT_STATUS.FINISH, body: '결제 완료' },
                   { value: C.PAYMENT_STATUS.CANCEL, body: '결제 취소' },
                 ]}
                 onChange={d => {
+                  handleChange(d, 'userGroupId');
+                }}
+                value={filter.status}
+              />
+              <DropBox
+                className="dropbox dropbox_last"
+                title="사원"
+                data={[
+                  { value: 0, body: '전체 예약상태' },
+                  { value: C.PAYMENT_STATUS.FINISH, body: '결제 완료' },
+                  { value: C.PAYMENT_STATUS.CANCEL, body: '결제 취소' },
+                ]}
+                onChange={d => {
+                  handleChange(d, 'employeeId');
+                }}
+                value={filter.employeeId}
+              />
+            </div>
+            <div className="bottom_box">
+              <DropBox
+                className="dropbox "
+                title="예약 상태"
+                data={[
+                  { value: C.RENATL_STATUS.ALL, body: '전체 예약상태' },
+                  { value: C.RENATL_STATUS.CAR_RESERVATION, body: '차량 예약' },
+                  { value: C.RENATL_STATUS.CAR_RENTAL, body: '차량 대여' },
+                  { value: C.RENATL_STATUS.RENTAL_CANCEL, body: '예약 취소' },
+                  { value: C.RENATL_STATUS.RETURN_DELAY, body: '반납 지연' },
+                  { value: C.RENATL_STATUS.COMPLETE, body: '이용 완료' },
+                ]}
+                onChange={d => {
                   handleChange(d, 'status');
                 }}
                 value={filter.status}
+              />
+              <DropBox
+                className="dropbox dropbox_last"
+                title="목적"
+                data={[
+                  { value: 0, body: '전체 예약상태' },
+                  { value: C.PAYMENT_STATUS.FINISH, body: '결제 완료' },
+                  { value: C.PAYMENT_STATUS.CANCEL, body: '결제 취소' },
+                ]}
+                onChange={d => {
+                  handleChange(d, 'purpose');
+                }}
+                value={filter.purpose}
               />
             </div>
             <div className="search">

@@ -56,7 +56,7 @@ const UserGroups = ({ type, edit, data }) => {
       <tbody>
         {data.map(
           (t, index) =>
-            !t.isDeleted && (
+            t.changeType !== 3 && (
               <tr key={index}>
                 <td>{t.name}</td>
                 <td>{t.memberNumber} 명</td>

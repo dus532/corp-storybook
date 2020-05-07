@@ -54,6 +54,22 @@ export { default as Pagination } from 'components/03Organisms/Pagination';
 export { default as Board } from 'components/03Organisms/Board';
 export { default as InputPeople } from 'components/03Organisms/InputPeople';
 export { default as UserGroups } from 'components/03Organisms/UserGroups';
+export {
+  default as RegisterCardForm,
+} from 'components/03Organisms/RegisterCardForm';
+export {
+  default as RegisterEnterCard,
+} from 'components/03Organisms/RegisterEnterCard';
+export {
+  default as RegisterIsName,
+} from 'components/03Organisms/RegisterIsName';
+export {
+  default as RegisterCardDetail,
+} from 'components/03Organisms/RegisterCardDetail';
+export {
+  default as RegisterCardExpired,
+} from 'components/03Organisms/RegisterCardExpired';
+export { default as RegisterBirth } from 'components/03Organisms/RegisterBirth';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';

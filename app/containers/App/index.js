@@ -21,6 +21,7 @@ import {
   SettingCorpInfo,
   SettingCorpInfoUpdate,
   SettingPaymentCard,
+  SettingPaymentCardCreate,
 } from 'pages';
 import { Header } from 'components';
 
@@ -114,6 +115,11 @@ const App = () => {
           path="/setting/paymentcard"
           exact
           component={SettingPaymentCard}
+        />
+        <Route
+          path="/setting/paymentcard/create"
+          exact
+          component={SettingPaymentCardCreate}
         />
       </Switch>
       <GlobalStyle />

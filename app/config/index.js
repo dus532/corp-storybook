@@ -18,7 +18,7 @@ const configs = {
     apiServerURL: process.env.PROD_API_SERVER,
   },
   test: {
-    apiServerURL: `http://172.30.1.24:8080`,
+    apiServerURL: `http://192.168.0.34:8080`,
   },
 };
 

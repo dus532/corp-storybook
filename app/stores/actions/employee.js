@@ -1,7 +1,8 @@
 // 액션!
 import createActions from 'stores/controller/createActions';
+import UserManager from 'utils/userManager';
 
-const { read } = createActions('manageEmployees');
+const { read, onlyRead } = createActions('manageEmployees');
 
 export const actionGetManageEmployees = (
   { page, employeeNumber, license, startDate, endDate, userGroupId },
@@ -16,5 +17,11 @@ export const actionGetManageEmployees = (
       endDate,
       startDate,
     },
+    meta: { onSuccess },
+  });
+
+export const actionGetEmployeesList = onSuccess =>
+  onlyRead({
+    url: `/corp/employees/${UserManager().getUser().corpId}`,
     meta: { onSuccess },
   });

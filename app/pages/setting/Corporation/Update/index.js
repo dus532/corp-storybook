@@ -78,13 +78,16 @@ const Update = () => {
   };
 
   const onAdd = () => {
-    const t = userGroups.concat({
-      name: data.add,
-      memberNumber: 0,
-      isCardRegistered: false,
-    });
-    dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
-    setData({ ...data, add: '' });
+    if (data.add) {
+      const t = userGroups.concat({
+        name: data.add,
+        memberNumber: 0,
+        isCardRegistered: false,
+        changeType: 1,
+      });
+      dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
+      setData({ ...data, add: '' });
+    }
   };
 
   const onSubmit = () => {

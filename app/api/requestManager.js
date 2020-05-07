@@ -41,7 +41,9 @@ const RequestManager = (method, url, data, header) => {
         'Access-Control-Allow-Headers':
           'Content-Type, Authorization, Content-Length, X-Requested-With',
         ...header,
-        authorization: `Bearer ${AUTHORIZATION.accessToken}`,
+        authorization: `Bearer ${
+          AUTHORIZATION ? AUTHORIZATION.accessToken : ''
+        }`,
       },
     })
       .then(res => {

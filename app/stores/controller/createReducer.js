@@ -8,6 +8,7 @@ import {
   POST_REQUEST,
   PUT_REQUEST,
   POST_REQUEST_ONLY,
+  GET_REQUEST_ONLY,
   HANDLE_CHANGE,
   RESET,
   PUSH,
@@ -100,6 +101,7 @@ export default (...reducerNames) =>
           case PUT_REQUEST:
           case DELETE_REQUEST:
           case POST_REQUEST_ONLY:
+          case GET_REQUEST_ONLY:
           default:
             return draft;
         }

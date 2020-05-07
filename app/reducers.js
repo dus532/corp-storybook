@@ -21,7 +21,7 @@ const apiReducer = createReducers(
   'manageEmployees',
   'manageRentals',
   'announcements',
-  'manageSubscription',
+  'subscription',
   'info',
   'card',
 );

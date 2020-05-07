@@ -20,9 +20,7 @@ const Subscription = () => {
   const history = useHistory();
   const SubscriptionsData = useSelector(state => state.subscription);
 
-  const current = useSelector(
-    state => state.subscription.data.currentBusinessSubs,
-  );
+  const current = useSelector(state => state.subscription.data.businessSubs);
 
   useEffect(() => {
     dispatch(actionGetSubscription());
@@ -50,7 +48,9 @@ const Subscription = () => {
                 },
                 {
                   title: '구독 갱신일',
-                  body: moment(current.renewDate).format('YYYY년 MM월 DD일'),
+                  body: current.renewDate
+                    ? moment(current.renewDate).format('YYYY년 MM월 DD일')
+                    : '-',
                 },
                 { title: '결제 카드', body: current.cardNumber },
                 {

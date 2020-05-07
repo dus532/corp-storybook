@@ -1,11 +1,14 @@
 /* eslint-disable indent */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Container, BigTitle, AsyncDiv, CardPanel, InfoBox } from 'components';
 import { actionGetCards } from 'stores';
 import AddIMG from 'images/icon_add.png';
+import { useModal } from 'utils/hooks';
+import { EDIT_CARD } from 'modals/constants';
 
 const AddCard = styled.div`
   width: 100%;
@@ -27,11 +30,16 @@ const AddCard = styled.div`
 
 const Manage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const modal = useModal();
 
   const cardStore = useSelector(state => state.card);
   const cardData = useSelector(state =>
     state.card.data
-      ? [{ main: true, ...state.card.data.mainCard }, ...state.card.data.cards]
+      ? [
+          { main: true, ...state.card.data.mainCard },
+          ...state.card.data.groupCards,
+        ]
       : [],
   );
 
@@ -39,16 +47,25 @@ const Manage = () => {
     dispatch(actionGetCards());
   }, []);
 
-  console.log(cardData);
-
   return (
     <Container>
       <BigTitle>결제 카드 관리</BigTitle>
       <AsyncDiv store={cardStore}>
         {cardData.map(d => (
-          <CardPanel key={d.number} data={d} />
+          <CardPanel
+            key={d.number}
+            data={d}
+            onClickSetting={() => {
+              modal(EDIT_CARD, d);
+            }}
+          />
         ))}
-        <AddCard className="box_overflow">
+        <AddCard
+          className="box_overflow"
+          onClick={() => {
+            history.push('/setting/paymentcard/create');
+          }}
+        >
           <div className="plus" />
           <div>부서 결제카드 등록하기</div>
         </AddCard>

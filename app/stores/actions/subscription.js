@@ -5,7 +5,7 @@ import UserManager from 'utils/userManager';
 const { read, update, del, pushDetail } = createActions('subscription');
 
 export const actionGetSubscription = () =>
-  read({ url: `/action/subscription/${UserManager().getUser().corpId}` });
+  read({ url: `/corp/manageSubscription/${UserManager().getUser().corpId}` });
 
 export const actionPushSubscription = data => pushDetail(data);
 

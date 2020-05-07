@@ -6,6 +6,8 @@ import moment from 'utils/moment';
 import { Container, Filter, AsyncDiv, Summary } from 'components';
 import { actionGetManageRentals } from 'stores';
 
+import UserManager from 'utils/userManager';
+
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 const Rental = () => {
@@ -18,9 +20,14 @@ const Rental = () => {
   const [filter, setFilter] = useState({
     startDate: moment()
       .startOf('month')
-      .format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+      .valueOf(),
+    endDate: moment().valueOf(),
     status: 0,
+    purpose: 0,
+    userGroupId: 0,
+    employeeId: 0,
+    number: 0,
+    corpId: UserManager().getUser().corpId,
   });
 
   const handleChange = (data, name) => {
@@ -37,7 +44,8 @@ const Rental = () => {
 
   useEffect(() => {
     dispatch(
-      actionGetManageRentals({ page: !nowPage ? 1 : nowPage, ...filter }),
+      // actionGetManageRentals({ page: !nowPage ? 1 : nowPage, ...filter }),
+      actionGetManageRentals({}),
     );
   }, [nowPage]);
 

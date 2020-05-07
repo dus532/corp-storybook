@@ -52,7 +52,7 @@ const MyPanel = ({ store, className }) => {
       </Part>
       <Line />
       <Part>
-        동시 이용자 수<h2>{data.user_number}명</h2>
+        동시 이용자 수<h2>{data.userNumber}명</h2>
       </Part>
       <Line />
       <Part>

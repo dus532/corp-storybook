@@ -23,7 +23,10 @@ export { actionGetDashBoard } from 'stores/actions/dashboard';
 
 export { actionGetManagePayments } from 'stores/actions/payment';
 
-export { actionGetManageEmployees } from 'stores/actions/employee';
+export {
+  actionGetManageEmployees,
+  actionGetEmployeesList,
+} from 'stores/actions/employee';
 
 export { actionGetManageRentals } from 'stores/actions/rental';
 
@@ -40,6 +43,7 @@ export {
   actionGetCorpInfo,
   actionHandleChangeCorpInfo,
   actionPutCorpInfo,
+  actionGetUserGroupsList,
 } from 'stores/actions/corpInfo';
 
 export { actionGetCards } from 'stores/actions/paymentCard';

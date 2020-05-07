@@ -22,7 +22,7 @@ const EditCorpInfo = ({ onClickExit, data }) => {
 
   const onDelete = () => {
     const t = userGroups;
-    t[data.index].isDeleted = true;
+    t[data.index].changeType = 3;
     dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
     onClickExit();
   };
@@ -30,7 +30,7 @@ const EditCorpInfo = ({ onClickExit, data }) => {
   const onEdit = e => {
     e.preventDefault();
     const t = userGroups;
-    t[data.index].isEdited = true;
+    t[data.index].changeType = 2;
     t[data.index].name = edit;
     dispatch(actionHandleChangeCorpInfo(`userGroups`, t));
     onClickExit();

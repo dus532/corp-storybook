@@ -5,6 +5,7 @@ import {
   POST_REQUEST,
   PUT_REQUEST,
   DELETE_REQUEST,
+  GET_REQUEST_ONLY,
   POST_REQUEST_ONLY,
   GET_REQUEST_DETAIL,
   PUSH,
@@ -44,6 +45,15 @@ export default resourceName => ({
   del: ({ url = `/action/${resourceName}`, params = {}, meta = {} }) => ({
     type: DELETE_REQUEST,
     promise: RequestManager('delete', url, params),
+    meta: {
+      ...meta,
+      resourceName,
+    },
+  }),
+
+  onlyRead: ({ url = `/corp/${resourceName}`, params = {}, meta = {} }) => ({
+    type: GET_REQUEST_ONLY,
+    promise: RequestManager('get', url, params),
     meta: {
       ...meta,
       resourceName,

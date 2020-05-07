@@ -42,3 +42,6 @@ export {
 export {
   default as SettingPaymentCard,
 } from 'pages/setting/PaymentCard/Manage';
+export {
+  default as SettingPaymentCardCreate,
+} from 'pages/setting/PaymentCard/Create';

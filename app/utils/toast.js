@@ -56,7 +56,10 @@ const Toast = () => {
           }, 2500);
           if (t.on) {
             return (
-              <StyledToast key={index}>
+              <StyledToast
+                key={index}
+                onClick={() => dispatch(delToast(index))}
+              >
                 {t.status === 'error' ? <IconError /> : <IconOK />}
                 {t.body}
               </StyledToast>

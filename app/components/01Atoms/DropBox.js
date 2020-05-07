@@ -121,11 +121,21 @@ const Select = styled.div`
   }
 `;
 
-const DropBox = ({ data, name, title, value = 1, className, onChange }) => {
+const DropBox = ({
+  data,
+  name,
+  title,
+  value = 1,
+  className,
+  onChange,
+  width,
+  inputRef,
+}) => {
   const [viewBox, setViewBox] = useState(false);
   return (
-    <StyledDropBox className={className}>
+    <StyledDropBox style={{ width }} className={className}>
       <input
+        ref={inputRef}
         name={name}
         readOnly
         value={data.filter(d => d.value === value)[0].body}
@@ -168,8 +178,10 @@ const DropBox = ({ data, name, title, value = 1, className, onChange }) => {
 };
 
 DropBox.propTypes = {
+  width: PropTypes.string,
   value: PropTypes.number,
   title: PropTypes.string,
+  inputRef: PropTypes.any,
   data: PropTypes.array,
   name: PropTypes.string,
   className: PropTypes.string,

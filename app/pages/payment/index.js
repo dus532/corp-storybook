@@ -13,6 +13,8 @@ import {
 } from 'components';
 import { actionGetManagePayments } from 'stores';
 
+import UserManager from 'utils/userManager';
+
 const useQuery = () => new URLSearchParams(useLocation().search);
 
 const Payment = () => {
@@ -25,10 +27,13 @@ const Payment = () => {
   const [filter, setFilter] = useState({
     startDate: moment()
       .startOf('month')
-      .format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+      .valueOf(),
+    endDate: moment().valueOf(),
     status: 0,
+    cardId: null,
     item: 0,
+    rentalId: 0,
+    corpId: UserManager().getUser().corpId,
   });
 
   const handleChange = (data, name) => {
@@ -44,9 +49,8 @@ const Payment = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      actionGetManagePayments({ page: !nowPage ? 1 : nowPage, ...filter }),
-    );
+    // { page: !nowPage ? 1 : nowPage, ...filter }
+    dispatch(actionGetManagePayments({}));
   }, [nowPage]);
 
   return (
@@ -57,12 +61,12 @@ const Payment = () => {
         <Table
           title={[
             ['결제 시각', 'date', 2],
-            ['결제 취소 시각', '', 2],
             ['결제 카드', 'card_corp', 1.7],
             ['금액', 'amount', 1.4],
             ['항목', 'item', 1.4],
-            ['상태', 'status', 1.4],
-            ['연관 예약번호', 'rental_number', 1.2],
+            ['구분', 'type', 1],
+            ['상태', 'status', 1],
+            ['연관 예약번호', 'rentalId', 1.6],
           ]}
           data={paymentData.data.payments}
         />

@@ -22,6 +22,15 @@ const C = {
     SMS: 3,
   },
 
+  RENATL_STATUS: {
+    ALL: 0,
+    CAR_RESERVATION: 1,
+    CAR_RENTAL: 2,
+    RENTAL_CANCEL: 3,
+    RETURN_DELAY: 4,
+    COMPLETE: 5,
+  },
+
   PAYMENT_STATUS: {
     ALL: 0,
     FINISH: 1,

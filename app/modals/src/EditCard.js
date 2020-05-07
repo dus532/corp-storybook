@@ -1,0 +1,99 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+
+// import { useDispatch, useSelector } from 'react-redux';
+
+import { FloatingDiv, SubButton } from 'components';
+
+const C_LOCAL = {
+  CHOICE: 0,
+  IS_DELETE: 1,
+};
+
+const EditCard = ({ onClickExit, data }) => {
+  console.log(data);
+  const history = useHistory();
+
+  const [page, setPage] = useState(0);
+
+  // const onDelete = () => {
+  //   console.log(1);
+  // };
+
+  switch (page) {
+    case C_LOCAL.CHOICE:
+      return (
+        <FloatingDiv
+          title="부서 결제카드 설정 옵션"
+          body={
+            <>
+              선택한 부서에 대한 옵션을 선택하세요.
+              <br />
+            </>
+          }
+          footer={
+            <>
+              <div style={{ width: `100%` }}>
+                <SubButton
+                  style={{ marginBottom: 12 }}
+                  white
+                  blue
+                  size="small"
+                  onClick={() => {
+                    history.push('/setting');
+                  }}
+                >
+                  <span>결제카드 변경</span>
+                </SubButton>
+                <SubButton
+                  white
+                  size="small"
+                  onClick={() => {
+                    setPage(C_LOCAL.IS_DELETE);
+                  }}
+                >
+                  <span>결제카드 삭제</span>
+                </SubButton>
+              </div>
+            </>
+          }
+          onClickExit={onClickExit}
+        />
+      );
+    case C_LOCAL.IS_DELETE:
+      return (
+        <FloatingDiv
+          title="부서 결제카드 삭제"
+          body={
+            <>
+              부서 결제카드가 삭제된 이후에는 대표결제카드로 결제 처리됩니 다.
+              부서 결제카드를 삭제하시겠습니까?
+              <br />
+              <br />
+            </>
+          }
+          footer={
+            <>
+              <SubButton white blue size="small" type="submit">
+                <span>네</span>
+              </SubButton>
+              <SubButton white size="small" onClick={onClickExit}>
+                <span>아니오</span>
+              </SubButton>
+            </>
+          }
+          onClickExit={onClickExit}
+        />
+      );
+    default:
+      return <></>;
+  }
+};
+
+EditCard.propTypes = {
+  onClickExit: PropTypes.func,
+  data: PropTypes.any,
+};
+
+export default EditCard;

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -13,70 +12,16 @@ import {
   InputRadio,
   RegisterInformation,
   SegmentControl,
+  RegisterBirth,
+  RegisterCardForm,
+  RegisterEnterCard,
+  RegisterIsName,
+  RegisterCardDetail,
+  RegisterCardExpired,
 } from 'components';
 
 import { actionPostInitialCard } from 'stores';
-
-const RegisterCardForm = styled.form`
-  h4 {
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-`;
-
-const RegisterEnterCard = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  input {
-    width: 24%;
-    text-align: center;
-  }
-`;
-
-const RegisterIsName = styled.div`
-  display: flex;
-  div {
-    width: 40%;
-  }
-`;
-
-const RegisterCardDetail = styled.div`
-  display: flex;
-
-  @media screen and (max-width: 768px) {
-    flex-wrap: wrap;
-  }
-`;
-
-const RegisterCardExpired = styled.div`
-  width: 100%;
-  margin-bottom: 20px;
-
-  .center {
-    display: flex;
-  }
-
-  span {
-    font-size: 28px;
-  }
-
-  input {
-    text-align: center;
-    width: 80px;
-    margin-right: 4px;
-  }
-`;
-
-const RegisterBirth = styled.div`
-  width: 50%;
-  margin-bottom: 100px;
-
-  input {
-    text-align: center;
-  }
-`;
+import UserManager from 'utils/userManager';
 
 const RegisterCard = () => {
   const history = useHistory();
@@ -84,13 +29,13 @@ const RegisterCard = () => {
 
   const { handleSubmit, register, errors } = useForm({
     defaultValues: {
-      is_name_on: 'true',
+      isNameOn: 'true',
     },
   });
 
   const [state, setState] = useState({
-    card_type: C.CARD_TYPE.COMPANY, // 개인, 법인
-    register_type: C.REGISTER_TYPE.MAIN, // 대표카드, 팀별카드
+    cardType: C.CARD_TYPE.COMPANY, // 개인, 법인
+    registerType: C.REGISTER_TYPE.MAIN, // 대표카드, 팀별카드
   });
 
   const maxInput = (e, num) => {
@@ -111,9 +56,10 @@ const RegisterCard = () => {
       actionPostInitialCard(
         {
           page: 1,
+          corpId: UserManager().getUser().coprId,
           ...state,
           ...data,
-          card_number: data.card1 + data.card2 + data.card3 + data.card4,
+          cardNumber: data.card1 + data.card2 + data.card3 + data.card4,
           expiration: data.expirationMM + data.expirationYY,
         },
         () => history.push('/initial/payment'),
@@ -138,33 +84,33 @@ const RegisterCard = () => {
         <SegmentControl
           data={[
             {
-              key: 2,
+              key: C.CARD_TYPE.COMPANY,
               body: '법인카드',
               onClick: () =>
-                setState({ ...state, card_type: C.CARD_TYPE.COMPANY }),
+                setState({ ...state, cardType: C.CARD_TYPE.COMPANY }),
             },
             {
-              key: 1,
+              key: C.CARD_TYPE.PERSONAL,
               body: '개인카드',
               onClick: () =>
-                setState({ ...state, card_type: C.CARD_TYPE.PERSONAL }),
+                setState({ ...state, cardType: C.CARD_TYPE.PERSONAL }),
             },
           ]}
-          clicked={state.card_type}
+          clicked={state.cardType}
         />
-        {state.card_type === C.CARD_TYPE.COMPANY && (
+        {state.cardType === C.CARD_TYPE.COMPANY && (
           <>
             <h4>법인카드에 본인 이름이 있으세요?</h4>
             <RegisterIsName>
               <InputRadio
-                name="is_name_on"
+                name="isNameOn"
                 id="yes"
                 body="예"
                 inputRef={register({ required: true })}
                 value
               />
               <InputRadio
-                name="is_name_on"
+                name="isNameOn"
                 id="no"
                 body="아니오"
                 inputRef={register({ required: true })}
@@ -254,7 +200,7 @@ const RegisterCard = () => {
             <h4>카드 비밀번호 (앞 두자리)</h4>
             <div className="center">
               <Input
-                name="two_password_digits"
+                name="twoPasswordDigits"
                 ref={register({ minLength: 2, maxLength: 2 })}
                 placeholder="**"
                 type="number"
@@ -266,20 +212,20 @@ const RegisterCard = () => {
               />
               <span>●●</span>
             </div>
-            {errors.two_password_digits && (
+            {errors.twoPasswordDigits && (
               <h5 className="error">
                 비밀번호를 정확하게 입력하세요 ( 2자리 )
               </h5>
             )}
           </RegisterCardExpired>
         </RegisterCardDetail>
-        {state.card_type === C.CARD_TYPE.COMPANY ? (
+        {state.cardType === C.CARD_TYPE.COMPANY ? (
           <>
             <h4>사업자 등록번호</h4>
             <RegisterBirth>
               <Input
                 name="birthday"
-                ref={register({ minLength: 10, maxLength: 10 })}
+                ref={register}
                 placeholder="ex) 1234567890"
                 type="number"
                 onKeyDown={e => {
@@ -287,9 +233,6 @@ const RegisterCard = () => {
                 }}
                 required
               />
-              {errors.birthday && (
-                <h5 className="error">사업자 등록번호를 정확하게 입력하세요</h5>
-              )}
             </RegisterBirth>
           </>
         ) : (
@@ -298,7 +241,7 @@ const RegisterCard = () => {
             <RegisterBirth>
               <Input
                 name="birthday"
-                ref={register({ minLength: 6, maxLength: 6 })}
+                ref={register}
                 placeholder="ex) 951018"
                 type="number"
                 onKeyDown={e => {
@@ -306,11 +249,6 @@ const RegisterCard = () => {
                 }}
                 required
               />
-              {errors.birthday && (
-                <h5 className="error">
-                  주민번호를 정확하게 입력하세요 ( 6자리 )
-                </h5>
-              )}
             </RegisterBirth>
           </>
         )}

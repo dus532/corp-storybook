@@ -46,4 +46,8 @@ export {
   actionGetUserGroupsList,
 } from 'stores/actions/corpInfo';
 
-export { actionGetCards } from 'stores/actions/paymentCard';
+export {
+  actionGetCards,
+  actionDelCard,
+  actionPutCard,
+} from 'stores/actions/paymentCard';

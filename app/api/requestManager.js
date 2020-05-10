@@ -33,8 +33,8 @@ const RequestManager = (method, url, data, header) => {
     axios({
       method,
       url: `${configs.dev.apiServerURL}${url}`,
-      data: method !== 'get' && data,
-      params: method === 'get' && data,
+      data: (method === 'post' || method === 'put') && data,
+      params: (method === 'get' || method === 'delete') && data,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',

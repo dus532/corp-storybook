@@ -117,6 +117,11 @@ const App = () => {
           component={SettingPaymentCard}
         />
         <Route
+          path="/setting/paymentcard/:id"
+          exact
+          component={SettingPaymentCardCreate}
+        />
+        <Route
           path="/setting/paymentcard/create"
           exact
           component={SettingPaymentCardCreate}

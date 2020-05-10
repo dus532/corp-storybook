@@ -86,41 +86,38 @@ const RegData = (name, value) => {
   return value[name];
 };
 
-const Table = ({ now = '1', data = [], title = [] }) => {
-  console.log(now);
-  return (
-    <>
-      <StyledTable>
-        <Th>
-          {title.map(d => (
-            <div style={{ flex: d[2] ? d[2] : 1 }} key={d[0]}>
-              {d[0]}
-            </div>
-          ))}
-        </Th>
-        <Line />
-        {data.map((d, index) => {
-          if (index > (now * 1 - 1) * 10 && index < now * 10) {
-            return (
-              <Tr key={index} className="box_overflow">
-                {title.map(t => (
-                  <Td size={t[2]} key={t[1]}>
-                    <div className="mobile_header">{t[0]}</div>
-                    <div>{RegData(t[1], d)}</div>
-                  </Td>
-                ))}
-              </Tr>
-            );
-          }
-          return null;
-        })}
-      </StyledTable>
-    </>
-  );
-};
+const Table = ({ now = '1', data = [], title = [] }) => (
+  <>
+    <StyledTable>
+      <Th>
+        {title.map(d => (
+          <div style={{ flex: d[2] ? d[2] : 1 }} key={d[0]}>
+            {d[0]}
+          </div>
+        ))}
+      </Th>
+      <Line />
+      {data.map((d, index) => {
+        if (index > (now * 1 - 1) * 10 && index < now * 10) {
+          return (
+            <Tr key={index} className="box_overflow">
+              {title.map(t => (
+                <Td size={t[2]} key={t[1]}>
+                  <div className="mobile_header">{t[0]}</div>
+                  <div>{RegData(t[1], d)}</div>
+                </Td>
+              ))}
+            </Tr>
+          );
+        }
+        return null;
+      })}
+    </StyledTable>
+  </>
+);
 
 Table.propTypes = {
-  now: PropTypes.string,
+  now: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   data: PropTypes.array,
   title: PropTypes.array,
 };

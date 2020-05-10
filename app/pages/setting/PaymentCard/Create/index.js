@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import C from 'config/constants';
@@ -23,18 +23,30 @@ import {
   RegisterCardExpired,
   DropBox,
 } from 'components';
-import { actionGetUserGroupsList, actionPostInitialCard } from 'stores';
+import {
+  actionGetUserGroupsList,
+  actionPostInitialCard,
+  actionPutCard,
+} from 'stores';
 import UserManager from 'utils/userManager';
 import { useToast } from 'utils/hooks';
+
+const useQuery = () => new URLSearchParams(useLocation().search);
 
 const Create = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const toast = useToast();
+  const isMain = useQuery().get('main') === 'true' ? '대표' : '부서';
+
+  // 수정과 삭제를 구분합니다.
+  const { id } = useParams();
+  const status = id === 'create' ? 'CREATE' : 'UPDATE';
+
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    // 부서 선택 리스트를 불러오기 위함
     dispatch(
       actionGetUserGroupsList(res => setList(res.data.payload.userGroups)),
     );
@@ -66,34 +78,46 @@ const Create = () => {
   };
 
   const onSubmit = data => {
+    const body = {
+      cardId: status === 'UPDATE' && id,
+      corpId: UserManager().getUser().corpId,
+      ...state,
+      ...data,
+      cardNumber: data.card1 + data.card2 + data.card3 + data.card4,
+      expiration: `20${data.expirationYY}${data.expirationMM}`,
+    };
     if (state.userGroupId) {
       dispatch(
-        actionPostInitialCard(
-          {
-            corpId: UserManager().getUser().corpId,
-            ...state,
-            ...data,
-            cardNumber: data.card1 + data.card2 + data.card3 + data.card4,
-            expiration: `20${data.expirationYY}${data.expirationMM}`,
-          },
-          () => {
-            history.push('/setting/paymentcard');
-            toast('부서 결제카드 등록이 완료되었습니다.', 'ok');
-          },
-        ),
+        status === 'CREATE'
+          ? // 등록시
+            actionPostInitialCard(body, () => {
+              history.push('/setting/paymentcard');
+              toast(`${isMain} 결제카드 등록이 완료되었습니다.`, 'ok');
+            })
+          : // 재등록(수정)시
+            actionPutCard({ editType: isMain ? 1 : 2, ...body }, () => {
+              history.push('/setting/paymentcard');
+              toast(`${isMain} 결제카드 등록이 완료되었습니다.`, 'ok');
+            }),
       );
+    } else {
+      toast('부서를 선택하세요.');
     }
   };
 
   return (
     <Container>
-      <BigTitle>부서 결제카드 등록</BigTitle>
+      <BigTitle>{isMain} 결제카드 등록</BigTitle>
       <Container className="box_overflow" white>
         <Container580>
           <br />
           <RegisterInformation type1>
-            <h2>새로운 부서 결제카드를 등록하세요.</h2>
-            부서 결제카드 정보를 입력 하신 후 <span>완료</span> 버튼을 누르세요.
+            <h2>
+              새로운 {isMain} 결제카드를 {status === 'UPDATE' && '재'}
+              등록하세요.
+            </h2>
+            {isMain} 결제카드 정보를 입력 하신 후 <span>완료</span> 버튼을
+            누르세요.
           </RegisterInformation>
           <RegisterCardForm onSubmit={handleSubmit(onSubmit)}>
             <SegmentControl

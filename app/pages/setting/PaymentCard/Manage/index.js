@@ -63,7 +63,7 @@ const Manage = () => {
         <AddCard
           className="box_overflow"
           onClick={() => {
-            history.push('/setting/paymentcard/create');
+            history.push(`/setting/paymentcard/create`);
           }}
         >
           <div className="plus" />

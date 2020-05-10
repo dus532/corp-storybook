@@ -25,8 +25,8 @@ const Employees = () => {
   const [filter, setFilter] = useState({
     startDate: moment()
       .startOf('month')
-      .format('YYYY-MM-DD'),
-    endDate: moment().format('YYYY-MM-DD'),
+      .valueOf(),
+    endDate: moment().valueOf(),
     license: 0,
   });
 
@@ -35,14 +35,16 @@ const Employees = () => {
   };
 
   const onSearch = () => {
-    history.push(`${document.location.pathname}?page=1`);
+    dispatch(
+      actionGetManageEmployees(filter, () => {
+        history.push(`${document.location.pathname}?page=1`);
+      }),
+    );
   };
 
   useEffect(() => {
-    dispatch(
-      actionGetManageEmployees({ page: !nowPage ? 1 : nowPage, ...filter }),
-    );
-  }, [nowPage]);
+    dispatch(actionGetManageEmployees(filter));
+  }, []);
 
   return (
     <Container>

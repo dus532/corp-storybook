@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import moment from 'utils/moment';
 import {
@@ -42,16 +42,15 @@ const Payment = () => {
 
   const onSearch = () => {
     dispatch(
-      actionGetManagePayments({ ...filter }, () => {
+      actionGetManagePayments(filter, () => {
         history.push(`${document.location.pathname}?page=1`);
       }),
     );
   };
 
   useEffect(() => {
-    // { page: !nowPage ? 1 : nowPage, ...filter }
-    dispatch(actionGetManagePayments({}));
-  }, [nowPage]);
+    dispatch(actionGetManagePayments(filter));
+  }, []);
 
   return (
     <Container>
@@ -72,7 +71,9 @@ const Payment = () => {
         />
         <Pagination
           now={!nowPage ? 1 : nowPage}
-          total={paymentData.data.total_page}
+          total={
+            paymentData.data && Math.ceil(paymentData.data.payments.length / 10)
+          }
         />
       </AsyncDiv>
     </Container>

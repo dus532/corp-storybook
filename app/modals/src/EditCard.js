@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { FloatingDiv, SubButton } from 'components';
+import { actionDelCard } from 'stores';
 
 const C_LOCAL = {
   CHOICE: 0,
@@ -12,23 +13,24 @@ const C_LOCAL = {
 };
 
 const EditCard = ({ onClickExit, data }) => {
-  console.log(data);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const [page, setPage] = useState(0);
 
-  // const onDelete = () => {
-  //   console.log(1);
-  // };
+  const onDelete = () => {
+    dispatch(actionDelCard(data.id));
+    onClickExit();
+  };
 
   switch (page) {
     case C_LOCAL.CHOICE:
       return (
         <FloatingDiv
-          title="부서 결제카드 설정 옵션"
+          title={`${data.main ? '대표' : '부서'} 결제카드 설정 옵션`}
           body={
             <>
-              선택한 부서에 대한 옵션을 선택하세요.
+              선택한 카드에 대한 옵션을 선택하세요.
               <br />
             </>
           }
@@ -41,7 +43,12 @@ const EditCard = ({ onClickExit, data }) => {
                   blue
                   size="small"
                   onClick={() => {
-                    history.push('/setting');
+                    history.push(
+                      `/setting/paymentcard/${data.id}?main=${
+                        data.main ? 'true' : 'false'
+                      }`,
+                    );
+                    onClickExit();
                   }}
                 >
                   <span>결제카드 변경</span>
@@ -75,7 +82,13 @@ const EditCard = ({ onClickExit, data }) => {
           }
           footer={
             <>
-              <SubButton white blue size="small" type="submit">
+              <SubButton
+                white
+                blue
+                size="small"
+                type="submit"
+                onClick={onDelete}
+              >
                 <span>네</span>
               </SubButton>
               <SubButton white size="small" onClick={onClickExit}>

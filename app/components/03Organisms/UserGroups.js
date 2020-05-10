@@ -47,7 +47,7 @@ const UserGroups = ({ type, edit, data }) => {
     <Table type={type}>
       <thead>
         <tr className="thead_tr">
-          <th>부서명</th>
+          <th width="120">부서명</th>
           <th>사원수</th>
           <th>부서 결제카드</th>
           {edit && <th className="edit" />}

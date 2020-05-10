@@ -26,6 +26,7 @@ export { actionGetManagePayments } from 'stores/actions/payment';
 export {
   actionGetManageEmployees,
   actionGetEmployeesList,
+  actionDelEmployee,
 } from 'stores/actions/employee';
 
 export { actionGetManageRentals } from 'stores/actions/rental';
@@ -51,3 +52,5 @@ export {
   actionDelCard,
   actionPutCard,
 } from 'stores/actions/paymentCard';
+
+export { actionGetMyPage } from 'stores/actions/mypage';

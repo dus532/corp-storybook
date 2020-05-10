@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container580 = styled.div`
   max-width: 580px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: ${props => (props.noPadding ? '10px 0' : '10px 20px')};
   box-sizing: content-box;
 
   .padding {
@@ -35,7 +35,8 @@ const Container580 = styled.div`
 
   @media screen and (max-width: 768px) {
     .input {
-      margin-top: 20px;
+      margin: 0;
+      padding-top: 20px;
       display: block;
       height: auto;
     }

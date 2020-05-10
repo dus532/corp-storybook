@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Color from 'config/color';
 
 import DL_IMG from 'images/icon_download.png';
+import DL_IMG_M from 'images/icon_download_mobile.png';
 
 const StyledSummary = styled.div`
   width: 100%;
@@ -26,6 +27,7 @@ const StyledSummary = styled.div`
   }
 
   .left {
+    flex: 1;
     font-weight: 700;
   }
 
@@ -35,6 +37,20 @@ const StyledSummary = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: auto;
+
+    .left {
+      width: 100%;
+    }
+
+    .right {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;
 
@@ -60,6 +76,19 @@ const ExcelDownload = styled.button`
     background: ${Color.SubGray};
     transition: 0.35s;
   }
+
+  @media screen and (max-width: 768px) {
+    border: none;
+    padding: 4px;
+    margin-left: 0;
+    .img {
+      margin: 0;
+      background: url(${DL_IMG_M}) center / contain;
+    }
+    span {
+      display: none;
+    }
+  }
 `;
 
 const Summary = ({ data, type }) => {
@@ -67,7 +96,7 @@ const Summary = ({ data, type }) => {
     case 'employee':
       // 사원관리
       return (
-        <StyledSummary>
+        <StyledSummary className="box_overflow">
           <div className="left">
             총 {data.employees.length}명의 사원이 등록된 상태입니다.
           </div>
@@ -77,7 +106,7 @@ const Summary = ({ data, type }) => {
     case 'rental':
       // 예약조회
       return (
-        <StyledSummary>
+        <StyledSummary className="box_overflow">
           <div className="left">
             이용요금 :{' '}
             <span className="blue">
@@ -93,7 +122,7 @@ const Summary = ({ data, type }) => {
     default:
       // 결제내역
       return (
-        <StyledSummary>
+        <StyledSummary className="box_overflow">
           <div className="left">
             이용요금 :{' '}
             <span className="blue">
@@ -101,10 +130,10 @@ const Summary = ({ data, type }) => {
             </span>
           </div>
           <div className="right">
-            <span className="bold">전체 {data.totalCount}건</span>{' '}
+            <span className="bold">{data.totalCount}건</span>{' '}
             <ExcelDownload>
               <div className="img" />
-              엑셀 다운로드
+              <span>엑셀 다운로드</span>
             </ExcelDownload>
           </div>
         </StyledSummary>

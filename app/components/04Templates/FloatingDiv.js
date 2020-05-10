@@ -55,8 +55,28 @@ const Div = styled.div`
 
   @media screen and (max-width: 768px) {
     .floating_container {
-      max-width: 428px;
       width: 100%;
+      max-width: 428px;
+    }
+
+    .floating_big {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      height: 100%;
+    }
+
+    .floating_big > .floating_header {
+      flex-direction: column;
+    }
+
+    .floating_big > .floating_header > h3 {
+      order: 2;
+    }
+
+    .floating_big > .floating_header > button {
+      order: 1;
+      text-align: right;
     }
   }
 
@@ -95,11 +115,11 @@ const BG = styled.div`
   }
 `;
 
-const FloatingDiv = ({ title, body, footer, onClickExit }) => (
+const FloatingDiv = ({ title, body, footer, onClickExit, fullScreen }) => (
   <>
     <BG onClick={onClickExit} />
     <Div>
-      <div className="floating_container">
+      <div className={`${fullScreen ? 'floating_big' : ''} floating_container`}>
         <div className="floating_header">
           <h3>{title}</h3>
           <button type="button" onClick={onClickExit}>
@@ -120,6 +140,7 @@ FloatingDiv.propTypes = {
   body: PropTypes.element,
   onClickExit: PropTypes.func,
   footer: PropTypes.element,
+  fullScreen: PropTypes.bool,
 };
 
 export default FloatingDiv;

@@ -9,6 +9,10 @@ const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
   padding: 24px 20px;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const Filter = styled.div`

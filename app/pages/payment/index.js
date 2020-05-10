@@ -10,6 +10,7 @@ import {
   AsyncDiv,
   Summary,
   Pagination,
+  NoData,
 } from 'components';
 import { actionGetManagePayments } from 'stores';
 
@@ -68,6 +69,7 @@ const Payment = () => {
             ['연관 예약번호', 'rentalId', 1.6],
           ]}
           data={paymentData.data.payments}
+          nodata={<NoData />}
         />
         <Pagination
           now={!nowPage ? 1 : nowPage}

@@ -28,22 +28,28 @@ const Line = styled.div`
   }
 `;
 
-const Board = ({ data, onClick }) => (
+const Board = ({ now = '1', data, onClick }) => (
   <StyledBoard>
-    {data.map(d => (
-      <Line key={d.id} onClick={() => onClick(d)}>
-        <div>
-          <span>{d.title}</span>
-          <br />
-          {moment(d.createdAt).format('YYYY년 MM월 DD일 hh:mm')}
-        </div>
-        <div>이동</div>
-      </Line>
-    ))}
+    {data.map((d, index) => {
+      if (index > (now * 1 - 1) * 10 && index < now * 10) {
+        return (
+          <Line key={d.id} onClick={() => onClick(d)}>
+            <div>
+              <span>{d.title}</span>
+              <br />
+              {moment(d.createdAt).format('YYYY년 MM월 DD일 hh:mm')}
+            </div>
+            <div>이동</div>
+          </Line>
+        );
+      }
+      return null;
+    })}
   </StyledBoard>
 );
 
 Board.propTypes = {
+  now: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   data: PropTypes.array,
   onClick: PropTypes.func,
 };

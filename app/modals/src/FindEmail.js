@@ -31,6 +31,7 @@ const FindEmail = ({ onClickExit }) => {
   if (page === 0) {
     return (
       <FloatingDiv
+        fullScreen
         title="이메일 주소로 계정 찾기"
         body={
           <>

@@ -9,6 +9,7 @@ import {
   SubscriptionExpires,
   EditCorpInfo,
   EditCard,
+  EditEmployee,
 } from 'modals/src';
 import {
   SIGN_FIND_EMAIL,
@@ -16,6 +17,7 @@ import {
   SUBSCRIPTION_EXPIRES,
   EDIT_CORP_INFO,
   EDIT_CARD,
+  EDIT_EMPLOYEE,
 } from 'modals/constants';
 
 const Modals = () => {
@@ -38,6 +40,8 @@ const Modals = () => {
       return <EditCorpInfo {...propsAll} />;
     case EDIT_CARD:
       return <EditCard {...propsAll} />;
+    case EDIT_EMPLOYEE:
+      return <EditEmployee {...propsAll} />;
     default:
       return <></>;
   }

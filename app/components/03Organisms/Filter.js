@@ -38,6 +38,12 @@ const StyledFilter = styled.div`
     align-items: center;
     margin-bottom: 16px;
   }
+  .search_pc {
+    display: flex;
+  }
+  .search_mobile {
+    display: none;
+  }
   .search_input {
     background: white url(${SearchIMG}) 12px center / 24px 24px no-repeat;
     text-indent: 32px;
@@ -58,12 +64,26 @@ const StyledFilter = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    margin-top: 0;
+
     .datepicker {
       margin-right: 0;
     }
 
     .middle {
       margin: 0 5px;
+    }
+
+    .search_mobile {
+      display: flex;
+      box-sizing: border-box;
+      background: white;
+      padding: 0px 20px 10px;
+      border-bottom: 1px solid ${Color.LineGray};
+    }
+
+    .search_pc {
+      display: none;
     }
 
     .top_date {
@@ -111,12 +131,6 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 onChange={d => handleChange(d, 'license')}
                 value={filter.license}
               />
-            </div>
-            <div className="search">
-              <Input className="search_input" placeholder="사원번호 입력" />
-              <button type="button" className="search_button" onClick={onClick}>
-                조회하기
-              </button>
             </div>
           </div>
         );
@@ -184,29 +198,12 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 value={filter.purpose}
               />
             </div>
-            <div className="search">
-              <Input className="search_input" placeholder="예약번호 입력" />
-              <button type="button" className="search_button" onClick={onClick}>
-                조회하기
-              </button>
-            </div>
           </div>
         );
 
       case 'announcements':
         // 공지사항
-        return (
-          <div className="search">
-            <Input
-              className="search_input"
-              onChange={d => handleChange(d.target.value, 'keyword')}
-              placeholder="예약번호 입력"
-            />
-            <button type="button" className="search_button" onClick={onClick}>
-              조회하기
-            </button>
-          </div>
-        );
+        return <></>;
 
       default:
         // 결제내역
@@ -256,53 +253,62 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 value={filter.item}
               />
             </div>
-            <div className="search">
-              <Input className="search_input" placeholder="예약번호 입력" />
-              <button type="button" className="search_button" onClick={onClick}>
-                조회하기
-              </button>
-            </div>
           </div>
         );
     }
   };
   return (
     <StyledFilter>
-      {type === 'announcements' ? (
-        Bottom()
-      ) : (
-        <>
-          <div className="top">
-            <div className="top_date">
-              <DatePicker
-                className="datepicker"
-                value={new Date(filter.startDate)}
-                onChange={d =>
-                  handleChange(moment(d).format('YYYY-MM-DD'), 'startDate')
-                }
-              />
-              <span className="middle">~</span>
-              <DatePicker
-                className="datepicker"
-                value={new Date(filter.endDate)}
-                onChange={d =>
-                  handleChange(moment(d).format('YYYY-MM-DD'), 'endDate')
-                }
+      <>
+        <form
+          className="search search_mobile box_overflow"
+          onSubmit={e => {
+            e.preventDefault();
+            onClick();
+          }}
+        >
+          <Input className="search_input" placeholder="예약번호 입력" />
+        </form>
+        {type !== 'announcements' && (
+          <>
+            <div className="top">
+              <div className="top_date">
+                <DatePicker
+                  className="datepicker"
+                  value={new Date(filter.startDate)}
+                  onChange={d =>
+                    handleChange(moment(d).format('YYYY-MM-DD'), 'startDate')
+                  }
+                />
+                <span className="middle">~</span>
+                <DatePicker
+                  className="datepicker"
+                  value={new Date(filter.endDate)}
+                  onChange={d =>
+                    handleChange(moment(d).format('YYYY-MM-DD'), 'endDate')
+                  }
+                />
+              </div>
+              <DropBox
+                className="dropbox period"
+                name="ex"
+                title="기간 선택"
+                data={[
+                  { value: 1, body: '기간 선택' },
+                  { value: 2, body: '이번' },
+                ]}
               />
             </div>
-            <DropBox
-              className="dropbox period"
-              name="ex"
-              title="기간 선택"
-              data={[
-                { value: 1, body: '기간 선택' },
-                { value: 2, body: '이번' },
-              ]}
-            />
-          </div>
-          {Bottom()}
-        </>
-      )}
+          </>
+        )}
+        {Bottom()}
+        <div className="search search_pc ">
+          <Input className="search_input" placeholder="예약번호 입력" />
+          <button type="button" className="search_button" onClick={onClick}>
+            조회하기
+          </button>
+        </div>
+      </>
     </StyledFilter>
   );
 };

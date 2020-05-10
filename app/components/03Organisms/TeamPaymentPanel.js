@@ -11,6 +11,10 @@ const StyledPanel = styled.div`
   background: ${Color.White};
   padding: 24px 20px;
   padding-bottom: 0px;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const Filter = styled.div`
@@ -41,6 +45,25 @@ const Card = styled.div`
     color: ${Color.Blue};
     font-weight: 700;
   }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+
+    .team_name {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .team_amount {
+      margin-top: 4px;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+  }
 `;
 
 const NoData = styled.div`
@@ -62,10 +85,22 @@ const Tag = styled.span`
   color: ${props => (props.isRepresentativeCard ? '#2946b0' : 'black')};
   background: ${props => (props.isRepresentativeCard ? '#e1e7ff' : `#f7f7f7`)};
   margin-right: 10px;
+  display: ${props => (props.mobile ? 'none' : 'inline-block')};
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+    margin-right: 0px;
+    display: ${props => (props.mobile ? 'inline-block' : 'none')};
+  }
 `;
 
 const TeamPaymentPanel = ({ store, className }) => {
   const data = store.data.userGroups;
+  const tag = (d, mobile) => (
+    <Tag mobile={mobile} isRepresentativeCard={d.isRepresentativeCard}>
+      {d.isRepresentativeCard ? '대표 결제카드' : '부서 전용카드'}
+    </Tag>
+  );
 
   return (
     <StyledPanel className={className}>
@@ -77,11 +112,12 @@ const TeamPaymentPanel = ({ store, className }) => {
         <Table>
           {data.map(d => (
             <Card key={d.id}>
-              <h3 className="team_name">{d.name}</h3>
+              <h3 className="team_name">
+                {d.name}
+                {tag(d, true)}
+              </h3>
               <div className="team_info">
-                <Tag isRepresentativeCard={d.isRepresentativeCard}>
-                  {d.isRepresentativeCard ? '대표 결제카드' : '부서 전용카드'}
-                </Tag>
+                {tag(d)}
                 {d.cardCorp} / {d.cardNumber} /{' '}
                 {d.cardType === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
               </div>

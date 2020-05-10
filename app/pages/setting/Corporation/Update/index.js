@@ -105,8 +105,7 @@ const Update = () => {
       <AsyncDiv store={corpInfoStore}>
         {corpInfo && (
           <Container className="box_overflow" white>
-            <Container580>
-              <br />
+            <Container580 noPadding>
               <div className="input">
                 <h5>기업 이름</h5>
                 <Input

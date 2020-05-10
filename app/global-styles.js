@@ -97,6 +97,8 @@ const GlobalStyle = createGlobalStyle`
   #app {
     min-height: 100%;
     min-width: 100%;    
+    padding-bottom: 80px;
+
   }
 
   p,

@@ -36,7 +36,6 @@ CustomPicker.propTypes = {
 };
 
 const StyledDatePicer = styled.div`
-  z-index: 0;
   width: 252px;
   display: inline-block;
   height: 40px;
@@ -55,6 +54,7 @@ const DatePick = ({ name, className, value, onChange }) => (
       onChange={onChange}
       locale="ko"
       customInput={<CustomPicker />}
+      withPortal={document.body.offsetWidth < 768}
     />
   </StyledDatePicer>
 );

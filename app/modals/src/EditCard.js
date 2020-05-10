@@ -19,8 +19,7 @@ const EditCard = ({ onClickExit, data }) => {
   const [page, setPage] = useState(0);
 
   const onDelete = () => {
-    dispatch(actionDelCard(data.id));
-    onClickExit();
+    dispatch(actionDelCard(data.id, () => onClickExit()));
   };
 
   switch (page) {
@@ -53,15 +52,17 @@ const EditCard = ({ onClickExit, data }) => {
                 >
                   <span>결제카드 변경</span>
                 </SubButton>
-                <SubButton
-                  white
-                  size="small"
-                  onClick={() => {
-                    setPage(C_LOCAL.IS_DELETE);
-                  }}
-                >
-                  <span>결제카드 삭제</span>
-                </SubButton>
+                {!data.main && (
+                  <SubButton
+                    white
+                    size="small"
+                    onClick={() => {
+                      setPage(C_LOCAL.IS_DELETE);
+                    }}
+                  >
+                    <span>결제카드 삭제</span>
+                  </SubButton>
+                )}
               </div>
             </>
           }

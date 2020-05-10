@@ -24,6 +24,7 @@ const apiReducer = createReducers(
   'subscription',
   'info',
   'card',
+  'myPage',
 );
 
 export default function createReducer(injectedReducers = {}) {

@@ -43,15 +43,13 @@ const Announcements = () => {
   };
 
   useEffect(() => {
-    dispatch(
-      actionGetAnnouncements({ page: !nowPage ? 1 : nowPage, ...filter }),
-    );
-  }, [nowPage]);
+    dispatch(actionGetAnnouncements(filter));
+  }, []);
 
   return (
     <div>
       <Container>
-        <BigTitle>공지사항</BigTitle>
+        <BigTitle noBorder>공지사항</BigTitle>
         <Filter
           type="announcements"
           handleChange={handleChange}
@@ -59,12 +57,16 @@ const Announcements = () => {
         />
         <AsyncDiv store={AnnouncementsData}>
           <Board
+            now={!nowPage ? 1 : nowPage}
             data={AnnouncementsData.data.announcements}
             onClick={onDetail}
           />
           <Pagination
             now={!nowPage ? 1 : nowPage}
-            total={AnnouncementsData.data.totalPage}
+            total={
+              AnnouncementsData.data &&
+              Math.ceil(AnnouncementsData.data.announcements.length / 10)
+            }
           />
         </AsyncDiv>
       </Container>

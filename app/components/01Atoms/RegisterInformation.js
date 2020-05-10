@@ -21,6 +21,14 @@ const RegisterInformation = styled.div`
     text-decoration: underline;
     font-weight: 500;
   }
+
+  @media screen and (max-width: 768px) {
+    h2 {
+      margin-top: 40px;
+      font-size: 1.4rem;
+    }
+    font-size: 1rem;
+  }
 `;
 
 export default RegisterInformation;

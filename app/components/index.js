@@ -34,9 +34,11 @@ export {
 } from 'components/02Molecules/SubscriptionPanel';
 export { default as ExpiresPanel } from 'components/02Molecules/ExpiresPanel';
 export { default as CardPanel } from 'components/02Molecules/CardPanel';
+export { default as ModalLabel } from 'components/02Molecules/ModalLabel';
 
 // 03 Organisms
 export { default as SignInput } from 'components/03Organisms/SignInput';
+export { default as NoData } from 'components/03Organisms/NoData';
 export { default as Header } from 'components/03Organisms/Header';
 export { default as BillPaper } from 'components/03Organisms/BillPaper';
 export { default as MyPanel } from 'components/03Organisms/MyPanel';

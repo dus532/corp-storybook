@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import SubButton from 'components/01Atoms/SubButton';
+
 import Color from 'config/color';
 
 const StyledWelcomePanel = styled.div`
@@ -14,6 +16,28 @@ const StyledWelcomePanel = styled.div`
   justify-content: space-between;
   align-items: center;
   background: ${Color.White};
+
+  .btn_mobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 0px;
+    flex-direction: column;
+    padding: 20px;
+    height: auto;
+    text-align: left;
+
+    * {
+      width: 100%;
+    }
+
+    .btn_mobile {
+      height: 32px;
+      margin-top: 10px;
+      display: block;
+    }
+  }
 `;
 
 const Button = styled.button`
@@ -36,7 +60,10 @@ const WelcomePanel = ({ store, className }) => {
   return (
     <StyledWelcomePanel className={className}>
       <div>{data.name}님, 안녕하세요!</div>
-      <Button>이용안내 확인</Button>
+      <Button className="pc">이용안내 확인</Button>
+      <SubButton white size="small" className="btn_mobile">
+        이용안내 확인
+      </SubButton>
     </StyledWelcomePanel>
   );
 };

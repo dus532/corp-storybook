@@ -4,16 +4,38 @@ import PropTypes from 'prop-types';
 
 import Color from 'config/color';
 import IconRightText from 'components/01Atoms/IconRightText';
+import SubButton from 'components/01Atoms/SubButton';
 
 const StyledMyPanel = styled.div`
   width: 100%;
   background: ${Color.White};
-  height: 154px;
+  min-height: 154px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   align-items: center;
   margin-top: 30px;
+
+  .button_mobile {
+    display: none;
+  }
+
+  .inner {
+    display: flex;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+    margin-top: 10px;
+    min-height: 128px;
+
+    .button_mobile {
+      display: block;
+      height: 32px;
+    }
+  }
 `;
 
 const Part = styled.div`
@@ -29,12 +51,30 @@ const Part = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+    height: auto;
+    margin-bottom: 12px;
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    h5 {
+      display: none;
+    }
+  }
 `;
 
 const Line = styled.div`
   width: 1px;
   background: ${Color.LineGray};
   height: 48px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const MyPanel = ({ store, className }) => {
@@ -42,23 +82,23 @@ const MyPanel = ({ store, className }) => {
 
   return (
     <StyledMyPanel className={className}>
-      <Part>
-        이용중인 서비스 상품
-        <h2>{data.product}</h2>
-        <h5>
-          <span>가입 상품 확인</span>&nbsp;
-          <IconRightText />
-        </h5>
-      </Part>
-      <Line />
-      <Part>
-        동시 이용자 수<h2>{data.userNumber}명</h2>
-      </Part>
-      <Line />
-      <Part>
-        동시 이용자 초과
-        <h2>{data.excess_number}건</h2>
-      </Part>
+      <div className="inner">
+        <Part>
+          이용중인 상품
+          <h2>{data.product}</h2>
+          <h5>
+            <span>가입 상품 확인</span>&nbsp;
+            <IconRightText />
+          </h5>
+        </Part>
+        <Line />
+        <Part>
+          동시 이용자 수<h2>{data.userNumber}명</h2>
+        </Part>
+      </div>
+      <SubButton className="button_mobile" white size="small">
+        <span>가입 상품 확인</span>
+      </SubButton>
     </StyledMyPanel>
   );
 };

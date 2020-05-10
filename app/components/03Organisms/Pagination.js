@@ -23,6 +23,12 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
 `;
 
 const Pagination = ({ now, total }) => {

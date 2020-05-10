@@ -110,7 +110,6 @@ const Create = () => {
       <BigTitle>{isMain} 결제카드 등록</BigTitle>
       <Container className="box_overflow" white>
         <Container580>
-          <br />
           <RegisterInformation type1>
             <h2>
               새로운 {isMain} 결제카드를 {status === 'UPDATE' && '재'}

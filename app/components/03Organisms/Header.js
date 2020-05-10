@@ -24,7 +24,8 @@ import IconStatusWait from 'components/01Atoms/IconStatusWait';
 const StyledHeader = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: ${props =>
+    props.borderBottom ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'};
   background: ${Color.White};
 
   .container {
@@ -135,12 +136,11 @@ const StyledHeader = styled.div`
 const MobileMenu = styled.div`
   display: none;
   width: 100%;
-  height: 110vh;
-  display: fixed;
-  position: absolute;
+  height: 100%;
+  display: block;
+  position: fixed;
   top: 0;
   left: 0;
-  overflow: hidden;
   z-index: 999;
 
   .menu_bg {
@@ -151,7 +151,9 @@ const MobileMenu = styled.div`
   }
 
   .menu {
+    overflow: auto;
     position: absolute;
+    top: 0;
     right: 0;
     width: 230px;
     height: 100%;
@@ -183,6 +185,14 @@ const MobileMenu = styled.div`
     font-size: 1.2rem;
     display: block;
     padding: 10px 0 10px 28px;
+  }
+
+  .setting_button {
+    width: 100%;
+    font-size: 1.2rem;
+    display: block;
+    padding: 10px 0 10px 28px;
+    text-align: left;
   }
 
   .header_bottom-active > span {
@@ -255,6 +265,21 @@ const SettingMenu = styled.div`
 
   @media screen and (max-width: 768px) {
     display: none;
+  }
+`;
+
+const SettingMenuMobile = styled.div`
+  width: 100%;
+  display: none;
+
+  .setting_menu {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -355,6 +380,7 @@ const Header = ({ isSigned, location }) => {
         <span>사원관리</span>
       </NavLink>
       <button
+        className="setting_button"
         style={{ cursor: 'pointer', fontWeight: 700 }}
         type="button"
         onClick={() => {
@@ -363,6 +389,51 @@ const Header = ({ isSigned, location }) => {
       >
         설정
       </button>
+      {setting && (
+        <SettingMenuMobile>
+          <NavLink
+            className="setting_menu"
+            onClick={onClose}
+            to="/setting/announcements"
+          >
+            <span>공지사항</span>
+          </NavLink>
+          <NavLink
+            className="setting_menu"
+            onClick={onClose}
+            to="/setting/subscription"
+          >
+            <span>구독 관리</span>
+          </NavLink>
+          <NavLink
+            className="setting_menu"
+            onClick={onClose}
+            to="/setting/corp"
+          >
+            <span>기업 정보 관리</span>
+          </NavLink>
+          <NavLink
+            className="setting_menu"
+            onClick={onClose}
+            to="/setting/paymentcard"
+          >
+            <span>결제카드 관리</span>
+          </NavLink>
+          <NavLink className="setting_menu" onClick={onClose} to="/setting/cs">
+            <span>고객센터</span>
+          </NavLink>
+          <NavLink className="setting_menu" onClick={onClose} to="/setting/faq">
+            <span>FAQ</span>
+          </NavLink>
+          <NavLink
+            className="setting_menu"
+            onClick={onClose}
+            to="/setting/terms"
+          >
+            <span>약관 및 정책</span>
+          </NavLink>
+        </SettingMenuMobile>
+      )}
     </>
   );
 
@@ -372,10 +443,17 @@ const Header = ({ isSigned, location }) => {
     history.push('/');
   };
 
+  const noBorderBottom = () => {
+    if (location === '/home') {
+      return false;
+    }
+    return true;
+  };
+
   if (isSigned) {
     return (
       <>
-        <StyledHeader>
+        <StyledHeader borderBottom={noBorderBottom()}>
           <div className="header_top">
             <Container padding className="container">
               {location.indexOf('/initial') !== -1 ? (
@@ -392,7 +470,14 @@ const Header = ({ isSigned, location }) => {
                 >
                   초기설정
                 </SmallButton>
-                <SmallButton>마이 페이지</SmallButton>
+                <SmallButton
+                  onClick={() => {
+                    history.push('/mypage');
+                    onClose();
+                  }}
+                >
+                  마이 페이지
+                </SmallButton>
                 <SmallButton onClick={onSignOut}>로그아웃</SmallButton>
               </div>
             </Container>
@@ -455,7 +540,13 @@ const Header = ({ isSigned, location }) => {
             </>
           ) : (
             <Container padding className="header_bottom">
-              <LogoHeader className="logo_header" />
+              <LogoHeader
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  history.push('/home');
+                }}
+                className="logo_header"
+              />
               <div className="header_bottom-menu">{menus}</div>
               <IconMenu className="mobile" onClick={onOpen} />
             </Container>
@@ -479,7 +570,14 @@ const Header = ({ isSigned, location }) => {
               <hr />
               <div className="info">
                 <h5 className="info_text">{isSigned.access_token} 님</h5>
-                <SmallButton className="info_button" mobile>
+                <SmallButton
+                  onClick={() => {
+                    history.push('/mypage');
+                    onClose();
+                  }}
+                  className="info_button"
+                  mobile
+                >
                   마이 페이지
                 </SmallButton>
                 <SmallButton onClick={onSignOut} mobile>

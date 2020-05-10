@@ -45,3 +45,6 @@ export {
 export {
   default as SettingPaymentCardCreate,
 } from 'pages/setting/PaymentCard/Create';
+
+// 마이페이지
+export { default as MyPage } from 'pages/mypage/Manage';

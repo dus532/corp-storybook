@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -30,7 +30,7 @@ const StyledDropBox = styled.div`
 `;
 
 const Select = styled.div`
-  position: absolute;
+  position: relative;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
   animation: opacity 0.25s;
@@ -38,7 +38,7 @@ const Select = styled.div`
 
   .box {
     text-indent: 8px;
-    width: 170px;
+    width: 100%;
     height: 40px;
     line-height: 40px;
     background: white;
@@ -132,8 +132,23 @@ const DropBox = ({
   inputRef,
 }) => {
   const [viewBox, setViewBox] = useState(false);
+  const iRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (iRef.current && !iRef.current.contains(event.target)) {
+        setViewBox(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [iRef]);
+
   return (
-    <StyledDropBox style={{ width }} className={className}>
+    <StyledDropBox ref={iRef} style={{ width }} className={className}>
       <input
         ref={inputRef}
         name={name}

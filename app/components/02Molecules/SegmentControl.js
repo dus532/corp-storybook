@@ -37,7 +37,14 @@ const Part = styled.div`
 const SegmentControl = ({ data, clicked }) => (
   <StyledControl>
     {data.map(d => (
-      <Part key={d.key} checked={clicked === d.key} onClick={d.onClick}>
+      <Part
+        key={d.key}
+        checked={clicked === d.key}
+        onClick={() => {
+          window.scroll(0, 0);
+          d.onClick();
+        }}
+      >
         {d.body}
       </Part>
     ))}

@@ -10,8 +10,11 @@ import {
   AsyncDiv,
   Summary,
   Pagination,
+  NoData,
 } from 'components';
 import { actionGetManageEmployees } from 'stores';
+import { useModal } from 'utils/hooks';
+import { EDIT_EMPLOYEE } from 'modals/constants';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
 
@@ -19,6 +22,7 @@ const Employees = () => {
   const dispatch = useDispatch();
   const employeeData = useSelector(state => state.manageEmployees);
 
+  const modal = useModal();
   const history = useHistory();
   const nowPage = useQuery().get('page');
 
@@ -66,9 +70,17 @@ const Employees = () => {
             ['이메일', 'email', 2.2],
             ['가입 일시', 'joinDate', 1.4],
             ['면허증', 'lisence', 1.4],
-            ['', 'editEmployee', 0.7],
+            [
+              '',
+              'editEmployee',
+              0.1,
+              e => {
+                modal(EDIT_EMPLOYEE, e);
+              },
+            ],
           ]}
           data={employeeData.data.employees}
+          nodata={<NoData />}
         />
         <Pagination
           now={!nowPage ? 1 : nowPage}

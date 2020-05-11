@@ -9,7 +9,7 @@ COPY . ./
 RUN rm -rf .git
 
 RUN yarn install
-RUN yarn build:dev
+RUN yarn build:staging
 
 FROM mesosphere/aws-cli:latest
 WORKDIR /project

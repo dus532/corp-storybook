@@ -24,7 +24,7 @@ const DashBoard = () => {
   return (
     <Container>
       <AsyncDiv store={dashboardStore}>
-        <WelcomePanel className="box_overflow" store={dashboardStore} />
+        <WelcomePanel className="box_overflow" />
         <MyPanel className="box_overflow" store={dashboardStore} />
         <RecentPaymentPanel className="box_overflow" store={dashboardStore} />
         <TeamPaymentPanel className="box_overflow" store={dashboardStore} />

@@ -462,7 +462,7 @@ const Header = ({ isSigned, location }) => {
                 <div />
               )}
               <div className="header_right">
-                <h5 className="header_name">{isSigned.access_token} 님</h5>
+                <h5 className="header_name">{isSigned.name} 님</h5>
                 <SmallButton
                   onClick={() => {
                     history.push('/initial/introduce');

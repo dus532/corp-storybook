@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import SubButton from 'components/01Atoms/SubButton';
+import UserManager from 'utils/userManager';
 
 import Color from 'config/color';
 
@@ -54,12 +55,12 @@ const Button = styled.button`
   }
 `;
 
-const WelcomePanel = ({ store, className }) => {
-  const data = store.data.admin;
+const WelcomePanel = ({ className }) => {
+  const user = UserManager().getUser();
 
   return (
     <StyledWelcomePanel className={className}>
-      <div>{data.name}님, 안녕하세요!</div>
+      <div>{user.name} 님, 안녕하세요!</div>
       <Button className="pc">이용안내 확인</Button>
       <SubButton white size="small" className="btn_mobile">
         이용안내 확인
@@ -69,7 +70,6 @@ const WelcomePanel = ({ store, className }) => {
 };
 
 WelcomePanel.propTypes = {
-  store: PropTypes.object,
   className: PropTypes.any,
 };
 

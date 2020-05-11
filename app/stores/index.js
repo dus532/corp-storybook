@@ -53,4 +53,8 @@ export {
   actionPutCard,
 } from 'stores/actions/paymentCard';
 
-export { actionGetMyPage } from 'stores/actions/mypage';
+export {
+  actionGetMyPage,
+  actionPutAdminInfo,
+  actionPutPassword,
+} from 'stores/actions/mypage';

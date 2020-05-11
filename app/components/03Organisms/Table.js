@@ -98,7 +98,7 @@ const RegData = (name, value, onClick, t) => {
     return `${value[name].toLocaleString('en')}`;
   }
   if (name.indexOf('date') !== -1) {
-    return `${moment(value[name]).format('YYYY. MM. DD')}`;
+    return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;
   }
   if (name.indexOf('edit') !== -1) {
     return <Edit type="button" className="edit" onClick={() => onClick(t)} />;

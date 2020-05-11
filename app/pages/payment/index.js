@@ -28,12 +28,12 @@ const Payment = () => {
   const [filter, setFilter] = useState({
     startDate: moment()
       .startOf('month')
-      .valueOf(),
-    endDate: moment().valueOf(),
+      .format('X'),
+    endDate: moment().format('X'),
     status: 0,
     cardId: null,
     item: 0,
-    rentalId: 0,
+    rentalId: null,
     corpId: UserManager().getUser().corpId,
   });
 
@@ -51,7 +51,7 @@ const Payment = () => {
 
   useEffect(() => {
     dispatch(actionGetManagePayments(filter));
-  }, []);
+  }, [filter]);
 
   return (
     <Container>
@@ -59,9 +59,10 @@ const Payment = () => {
       <AsyncDiv store={paymentData}>
         <Summary data={paymentData.data} />
         <Table
+          now={!nowPage ? 1 : nowPage}
           title={[
             ['결제 시각', 'date', 2],
-            ['결제 카드', 'card_corp', 1.7],
+            ['결제 카드', 'cardCorp', 1.7],
             ['금액', 'amount', 1.4],
             ['항목', 'item', 1.4],
             ['구분', 'type', 1],

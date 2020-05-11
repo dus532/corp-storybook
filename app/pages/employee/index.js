@@ -29,8 +29,8 @@ const Employees = () => {
   const [filter, setFilter] = useState({
     startDate: moment()
       .startOf('month')
-      .valueOf(),
-    endDate: moment().valueOf(),
+      .format('X'),
+    endDate: moment().format('X'),
     license: 0,
   });
 
@@ -48,7 +48,7 @@ const Employees = () => {
 
   useEffect(() => {
     dispatch(actionGetManageEmployees(filter));
-  }, []);
+  }, [filter]);
 
   return (
     <Container>

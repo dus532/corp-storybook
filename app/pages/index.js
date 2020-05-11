@@ -45,6 +45,12 @@ export {
 export {
   default as SettingPaymentCardCreate,
 } from 'pages/setting/PaymentCard/Create';
+// 기타
+export { default as SettingFAQ } from 'pages/setting/FAQ';
+export { default as SettingService } from 'pages/setting/Service';
+export { default as SettingTerms } from 'pages/setting/Terms';
 
 // 마이페이지
 export { default as MyPage } from 'pages/mypage/Manage';
+export { default as ChangePW } from 'pages/mypage/ChangePW';
+export { default as ChangeInfo } from 'pages/mypage/ChangeInfo';

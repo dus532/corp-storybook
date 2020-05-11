@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import moment from 'utils/moment';
-import { Container, Filter, AsyncDiv, Summary } from 'components';
+import { Container, Filter, AsyncDiv, Summary, RentalList } from 'components';
 import { actionGetManageRentals } from 'stores';
 
 import UserManager from 'utils/userManager';
@@ -17,13 +17,13 @@ const Rental = () => {
   const [filter, setFilter] = useState({
     startDate: moment()
       .startOf('month')
-      .valueOf(),
-    endDate: moment().valueOf(),
+      .format('X'),
+    endDate: moment().format('X'),
     status: 0,
     purpose: 0,
-    userGroupId: 0,
-    employeeId: 0,
-    number: 0,
+    userGroupId: null,
+    employeeId: null,
+    number: null,
     corpId: UserManager().getUser().corpId,
   });
 
@@ -41,7 +41,7 @@ const Rental = () => {
 
   useEffect(() => {
     dispatch(actionGetManageRentals(filter));
-  }, []);
+  }, [filter]);
 
   return (
     <Container>
@@ -53,6 +53,7 @@ const Rental = () => {
       />
       <AsyncDiv store={rentalData}>
         <Summary type="rental" data={rentalData.data} />
+        <RentalList data={rentalData.data.rentals} />
       </AsyncDiv>
     </Container>
   );

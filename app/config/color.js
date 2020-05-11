@@ -2,6 +2,7 @@ const color = {
   White: '#FFFFFF',
   Black: '#000000',
   Red: '#ff6b6b',
+  RedAlert: '#fc2b38',
   BlackHover: '#555555',
   Blue: '#2946b0',
   BlueHover: '#1a3495',

@@ -110,7 +110,8 @@ const Summary = ({ data, type }) => {
           <div className="left">
             이용요금 :{' '}
             <span className="blue">
-              {data.totalAmount && data.totalAmount.toLocaleString('en')}원
+              {data.totalAmount && (data.totalAmount * 1).toLocaleString('en')}
+              원
             </span>
           </div>
           <div className="right">
@@ -126,7 +127,8 @@ const Summary = ({ data, type }) => {
           <div className="left">
             이용요금 :{' '}
             <span className="blue">
-              {data.totalAmount && data.totalAmount.toLocaleString('en')}원
+              {data.totalAmount && (data.totalAmount * 1).toLocaleString('en')}
+              원
             </span>
           </div>
           <div className="right">

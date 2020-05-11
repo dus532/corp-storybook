@@ -22,7 +22,12 @@ import {
   SettingCorpInfoUpdate,
   SettingPaymentCard,
   SettingPaymentCardCreate,
+  SettingFAQ,
+  SettingTerms,
+  SettingService,
   MyPage,
+  ChangePW,
+  ChangeInfo,
 } from 'pages';
 import { Header } from 'components';
 
@@ -127,8 +132,14 @@ const App = () => {
           exact
           component={SettingPaymentCardCreate}
         />
+        {/* 기타 */}
+        <Route path="/setting/faq" exact component={SettingFAQ} />
+        <Route path="/setting/cs" exact component={SettingService} />
+        <Route path="/setting/terms" exact component={SettingTerms} />
         {/* 마이페이지 */}
         <Route path="/mypage" exact component={MyPage} />
+        <Route path="/mypage/changepw" exact component={ChangePW} />
+        <Route path="/mypage/changeinfo" exact component={ChangeInfo} />
       </Switch>
       <GlobalStyle />
     </>

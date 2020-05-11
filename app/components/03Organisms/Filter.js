@@ -151,7 +151,7 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 onChange={d => {
                   handleChange(d, 'userGroupId');
                 }}
-                value={filter.status}
+                value={filter.status ? filter.status : 0}
               />
               <DropBox
                 className="dropbox dropbox_last"
@@ -164,7 +164,7 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 onChange={d => {
                   handleChange(d, 'employeeId');
                 }}
-                value={filter.employeeId}
+                value={filter.employeeId ? filter.employeeId : 0}
               />
             </div>
             <div className="bottom_box">
@@ -182,7 +182,7 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 onChange={d => {
                   handleChange(d, 'status');
                 }}
-                value={filter.status}
+                value={filter.status ? filter.status : 0}
               />
               <DropBox
                 className="dropbox dropbox_last"
@@ -195,7 +195,7 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
                 onChange={d => {
                   handleChange(d, 'purpose');
                 }}
-                value={filter.purpose}
+                value={filter.purpose ? filter.purpose : 0}
               />
             </div>
           </div>
@@ -275,18 +275,14 @@ const Filter = ({ filter, handleChange, onClick, type }) => {
               <div className="top_date">
                 <DatePicker
                   className="datepicker"
-                  value={new Date(filter.startDate)}
-                  onChange={d =>
-                    handleChange(moment(d).format('YYYY-MM-DD'), 'startDate')
-                  }
+                  value={new Date(moment.unix(filter.startDate))}
+                  onChange={d => handleChange(moment(d).unix(), 'startDate')}
                 />
                 <span className="middle">~</span>
                 <DatePicker
                   className="datepicker"
-                  value={new Date(filter.endDate)}
-                  onChange={d =>
-                    handleChange(moment(d).format('YYYY-MM-DD'), 'endDate')
-                  }
+                  value={new Date(moment.unix(filter.endDate))}
+                  onChange={d => handleChange(moment(d).unix(), 'endDate')}
                 />
               </div>
               <DropBox

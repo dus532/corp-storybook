@@ -45,6 +45,9 @@ export {
 export {
   default as SettingPaymentCardCreate,
 } from 'pages/setting/PaymentCard/Create';
+export {
+  default as SettingPaymentCardUsage,
+} from 'pages/setting/PaymentCard/Usage';
 // 기타
 export { default as SettingFAQ } from 'pages/setting/FAQ';
 export { default as SettingService } from 'pages/setting/Service';

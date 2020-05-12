@@ -12,11 +12,15 @@ import {
   Pagination,
   NoData,
 } from 'components';
-import { actionGetManageEmployees } from 'stores';
+import { actionGetManageEmployees, actionGetUserGroupsList } from 'stores';
 import { useModal } from 'utils/hooks';
 import { EDIT_EMPLOYEE } from 'modals/constants';
 
+import UserManager from 'utils/userManager';
+
 const useQuery = () => new URLSearchParams(useLocation().search);
+
+const list = { userGroups: [] };
 
 const Employees = () => {
   const dispatch = useDispatch();
@@ -32,30 +36,63 @@ const Employees = () => {
       .format('X'),
     endDate: moment().format('X'),
     license: 0,
+    userGroupId: null,
+    search: null,
+    corpId: UserManager().getUser().corpId,
   });
 
   const handleChange = (data, name) => {
     setFilter({ ...filter, [name]: data });
   };
 
+  const handleDateChange = (sDate, eDate) => {
+    setFilter({
+      ...filter,
+      startDate: sDate,
+      endDate: eDate,
+    });
+  };
+
   const onSearch = () => {
     dispatch(
-      actionGetManageEmployees(filter, () => {
-        history.push(`${document.location.pathname}?page=1`);
-      }),
+      actionGetManageEmployees(
+        { ...filter, employeeNumber: filter.search },
+        () => {
+          history.push(`${document.location.pathname}?page=1`);
+        },
+      ),
     );
   };
 
   useEffect(() => {
-    dispatch(actionGetManageEmployees(filter));
-  }, [filter]);
+    dispatch(
+      actionGetManageEmployees({ ...filter, employeeNumber: filter.search }),
+    );
+  }, [
+    filter.startDate,
+    filter.endDate,
+    filter.license,
+    filter.userGroupId,
+    filter.corpId,
+  ]);
+
+  useEffect(() => {
+    dispatch(
+      actionGetUserGroupsList(res => {
+        list.userGroups = res.data.payload.userGroups;
+      }),
+    );
+  }, []);
 
   return (
     <Container>
       <Filter
+        list={list}
         type="employee"
         filter={filter}
         handleChange={handleChange}
+        handleDateChange={handleDateChange}
+        placeholder="사원 이름 또는 사원 번호 입력"
         onClick={onSearch}
       />
       <AsyncDiv store={employeeData}>

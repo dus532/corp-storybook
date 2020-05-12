@@ -52,6 +52,21 @@ const EditCard = ({ onClickExit, data }) => {
                 >
                   <span>결제카드 변경</span>
                 </SubButton>
+                <SubButton
+                  style={{ marginBottom: 12 }}
+                  white
+                  size="small"
+                  onClick={() => {
+                    history.push(
+                      `/setting/paymentcard/usage/${data.id}?main=${
+                        data.main ? 'true' : 'false'
+                      }`,
+                    );
+                    onClickExit();
+                  }}
+                >
+                  <span>이용한도 설정</span>
+                </SubButton>
                 {!data.main && (
                   <SubButton
                     white

@@ -51,6 +51,8 @@ export {
   actionGetCards,
   actionDelCard,
   actionPutCard,
+  actionGetCardList,
+  actionPostCardUsageLimit,
 } from 'stores/actions/paymentCard';
 
 export {

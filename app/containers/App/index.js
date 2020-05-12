@@ -22,6 +22,7 @@ import {
   SettingCorpInfoUpdate,
   SettingPaymentCard,
   SettingPaymentCardCreate,
+  SettingPaymentCardUsage,
   SettingFAQ,
   SettingTerms,
   SettingService,
@@ -131,6 +132,11 @@ const App = () => {
           path="/setting/paymentcard/create"
           exact
           component={SettingPaymentCardCreate}
+        />
+        <Route
+          path="/setting/paymentcard/usage/:id"
+          exact
+          component={SettingPaymentCardUsage}
         />
         {/* 기타 */}
         <Route path="/setting/faq" exact component={SettingFAQ} />

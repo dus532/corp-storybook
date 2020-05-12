@@ -44,9 +44,9 @@ const Usage = () => {
   const dispatch = useDispatch();
 
   const [state, setState] = useState({
-    is_limited: false,
-    limited_amount: 0,
-    notice_type: C.NOTICE_TYPE.ALL,
+    isLimited: false,
+    limitedAmount: 0,
+    noticeType: C.NOTICE_TYPE.ALL,
   });
 
   const handleSubmit = e => {
@@ -81,21 +81,19 @@ const Usage = () => {
             name="is_limited"
             id="no"
             body="설정하지 않음"
-            checked={!state.is_limited}
-            onChange={() => setState({ ...state, is_limited: false })}
+            checked={!state.isLimited}
+            onChange={() => setState({ ...state, isLimited: false })}
           />
           <InputRadio
             name="is_limited"
             id="yes"
             body="설정 함"
-            checked={state.is_limited}
-            onChange={() => setState({ ...state, is_limited: true })}
+            checked={state.isLimited}
+            onChange={() => setState({ ...state, isLimited: true })}
           />
         </RegisterRadio>
         <div
-          style={
-            state.is_limited ? {} : { pointerEvents: 'none', opacity: 0.4 }
-          }
+          style={state.isLimited ? {} : { pointerEvents: 'none', opacity: 0.4 }}
         >
           <br />
           <br />
@@ -107,10 +105,10 @@ const Usage = () => {
               onChange={e =>
                 setState({
                   ...state,
-                  limited_amount: Number(e.target.value.replace(/\D/g, '')),
+                  limitedAmount: Number(e.target.value.replace(/\D/g, '')),
                 })
               }
-              value={state.limited_amount.toLocaleString('en')}
+              value={state.limitedAmount.toLocaleString('en')}
             />{' '}
             원
           </RegisterInputText>
@@ -121,28 +119,19 @@ const Usage = () => {
             <InputRadio
               name="notice_type"
               id="all"
-              body="모든 방식"
-              checked={state.notice_type === C.NOTICE_TYPE.ALL}
+              body="설정하지 않음"
+              checked={state.noticeType === C.NOTICE_TYPE.NONE}
               onChange={() =>
-                setState({ ...state, notice_type: C.NOTICE_TYPE.ALL })
+                setState({ ...state, noticeType: C.NOTICE_TYPE.NONE })
               }
             />
             <InputRadio
               name="notice_type"
               id="email"
-              body="이메일 알림"
-              checked={state.notice_type === C.NOTICE_TYPE.EMAIL}
+              body="설정 함"
+              checked={state.noticeType === C.NOTICE_TYPE.EMAIL}
               onChange={() =>
-                setState({ ...state, notice_type: C.NOTICE_TYPE.EMAIL })
-              }
-            />
-            <InputRadio
-              name="notice_type"
-              id="sms"
-              body="문자 알림"
-              checked={state.notice_type === C.NOTICE_TYPE.SMS}
-              onChange={() =>
-                setState({ ...state, notice_type: C.NOTICE_TYPE.SMS })
+                setState({ ...state, noticeType: C.NOTICE_TYPE.EMAIL })
               }
             />
           </RegisterRadio>

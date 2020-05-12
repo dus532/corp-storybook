@@ -32,7 +32,7 @@ const Subscription = () => {
         <BigTitle>구독 관리</BigTitle>
         <AsyncDiv store={SubscriptionsData}>
           <MyPanel className="box_overflow" store={SubscriptionsData} />
-          <br />
+          <div style={{ marginTop: 10 }} />
           {current && (
             <BillPaper
               className="box_overflow"

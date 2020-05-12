@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const Wrap = styled.div`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 95vh;
   justify-content: center;
   align-items: center;
   background: #f7f7f7;

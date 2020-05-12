@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
 import C from 'config/constants';
 import {
@@ -11,6 +12,15 @@ import {
 } from 'components';
 import { useModal } from 'utils/hooks';
 import { SUBSCRIPTION_EXPIRES } from 'modals/constants';
+
+const SubTitle = styled.div`
+  margin-bottom: 10px;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 18px;
+    margin-bottom: 4px;
+  }
+`;
 
 const Expires = () => {
   const history = useHistory();
@@ -26,8 +36,7 @@ const Expires = () => {
     <div>
       <Container>
         <BigTitle marginSmall>구독 해지</BigTitle>
-        <div>구독 해지 방식을 선택하세요.</div>
-        <br />
+        <SubTitle>구독 해지 방식을 선택하세요.</SubTitle>
         <ExpiresPanel
           type={C.EXPIRES_TYPE.NEXT_MONTH}
           handleChange={handleChange}

@@ -28,8 +28,23 @@ const Table = styled.table`
     padding: 0 28px;
   }
 
+  .th_name {
+    width: 250px;
+  }
+
   .edit {
     width: 28px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+    .th_name {
+      width: auto;
+    }
+
+    .edit {
+      width: 20px;
+    }
   }
 `;
 
@@ -47,7 +62,7 @@ const UserGroups = ({ type, edit, data }) => {
     <Table type={type}>
       <thead>
         <tr className="thead_tr">
-          <th width="120">부서명</th>
+          <th className="th_name">부서명</th>
           <th>사원수</th>
           <th>부서 결제카드</th>
           {edit && <th className="edit" />}

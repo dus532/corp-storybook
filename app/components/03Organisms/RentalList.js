@@ -27,10 +27,10 @@ const StyledPanel = styled.div`
   }
 
   .header_status {
-    min-width: 90px;
+    width: 120px;
     font-size: 1.4rem;
     font-weight: 700;
-    margin-right: 52px;
+    margin-right: 20px;
     color: ${props => (props.mainColor ? props.mainColor : 'black')};
   }
 

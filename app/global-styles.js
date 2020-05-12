@@ -95,8 +95,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
+    width:100%;
     min-height: 100%;
-    min-width: 100%;    
+    min-width: 1200px;    
     padding-bottom: 80px;
 
   }
@@ -138,6 +139,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @media screen and (max-width: 768px) {
+
+    #app{
+      min-width:100%;
+    }
+
     .mobile{
       display:inherit;
     }

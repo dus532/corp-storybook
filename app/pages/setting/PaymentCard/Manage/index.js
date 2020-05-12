@@ -51,9 +51,10 @@ const Manage = () => {
     <Container>
       <BigTitle>결제 카드 관리</BigTitle>
       <AsyncDiv store={cardStore}>
-        {cardData.map(d => (
+        {cardData.map((d, index) => (
           <CardPanel
-            key={d.number}
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
             data={d}
             onClickSetting={() => {
               modal(EDIT_CARD, d);

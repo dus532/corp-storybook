@@ -290,19 +290,24 @@ const Create = () => {
                 </RegisterBirth>
               </>
             )}
-            <h4>부서 선택</h4>
-            <DropBox
-              width="50%"
-              name="userGroupId"
-              className="dropbox"
-              title="부서 선택"
-              data={[
-                { value: 0, body: '선택하세요' },
-                ...list.map(l => ({ value: l.id, body: l.name })),
-              ]}
-              onChange={data => setState({ ...state, userGroupId: data })}
-              value={state.userGroupId}
-            />
+
+            {status === 'CREATE' && (
+              <>
+                <h4>부서 선택</h4>
+                <DropBox
+                  width="50%"
+                  name="userGroupId"
+                  className="dropbox"
+                  title="부서 선택"
+                  data={[
+                    { value: 0, body: '선택하세요' },
+                    ...list.map(l => ({ value: l.id, body: l.name })),
+                  ]}
+                  onChange={data => setState({ ...state, userGroupId: data })}
+                  value={state.userGroupId}
+                />
+              </>
+            )}
             <br />
             <br />
             <br />

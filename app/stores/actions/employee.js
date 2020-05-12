@@ -5,7 +5,7 @@ import UserManager from 'utils/userManager';
 const { read, onlyRead, del } = createActions('manageEmployees');
 
 export const actionGetManageEmployees = (
-  { page, employeeNumber, license, startDate, endDate, userGroupId },
+  { page, employeeNumber, license, startDate, endDate, userGroupId, corpId },
   onSuccess,
 ) =>
   read({
@@ -16,6 +16,7 @@ export const actionGetManageEmployees = (
       userGroupId,
       endDate,
       startDate,
+      corpId,
     },
     meta: { onSuccess },
   });
@@ -26,10 +27,10 @@ export const actionGetEmployeesList = onSuccess =>
     meta: { onSuccess },
   });
 
-export const actionDelEmployee = (eId, userGroupId, onSuccess) =>
+export const actionDelEmployee = (employeeId, userGroupId, onSuccess) =>
   del({
-    url: `/action/employees/${eId}`,
-    params: { corpId: UserManager().getUser().corpId, userGroupId },
+    url: `/action/employees`,
+    params: { corpId: UserManager().getUser().corpId, employeeId, userGroupId },
     meta: {
       onSuccess,
       read: `/corp/employees/${UserManager().getUser().corpId}`,

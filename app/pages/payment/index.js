@@ -12,11 +12,13 @@ import {
   Pagination,
   NoData,
 } from 'components';
-import { actionGetManagePayments } from 'stores';
+import { actionGetManagePayments, actionGetCardList } from 'stores';
 
 import UserManager from 'utils/userManager';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
+
+const list = { cards: [] };
 
 const Payment = () => {
   const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const Payment = () => {
     status: 0,
     cardId: null,
     item: 0,
-    rentalId: null,
+    search: null,
     corpId: UserManager().getUser().corpId,
   });
 
@@ -41,21 +43,51 @@ const Payment = () => {
     setFilter({ ...filter, [name]: data });
   };
 
+  const handleDateChange = (sDate, eDate) => {
+    setFilter({
+      ...filter,
+      startDate: sDate,
+      endDate: eDate,
+    });
+  };
+
   const onSearch = () => {
     dispatch(
-      actionGetManagePayments(filter, () => {
+      actionGetManagePayments({ ...filter, rentalId: filter.search }, () => {
         history.push(`${document.location.pathname}?page=1`);
       }),
     );
   };
 
   useEffect(() => {
-    dispatch(actionGetManagePayments(filter));
-  }, [filter]);
+    dispatch(actionGetManagePayments({ ...filter, rentalId: filter.search }));
+  }, [
+    filter.startDate,
+    filter.endDate,
+    filter.status,
+    filter.cardId,
+    filter.item,
+    filter.corpId,
+  ]);
+
+  useEffect(() => {
+    dispatch(
+      actionGetCardList(res => {
+        list.cards = res.data.payload.cards;
+      }),
+    );
+  }, []);
 
   return (
     <Container>
-      <Filter filter={filter} handleChange={handleChange} onClick={onSearch} />
+      <Filter
+        type="payment"
+        list={list}
+        filter={filter}
+        handleChange={handleChange}
+        handleDateChange={handleDateChange}
+        onClick={onSearch}
+      />
       <AsyncDiv store={paymentData}>
         <Summary data={paymentData.data} />
         <Table

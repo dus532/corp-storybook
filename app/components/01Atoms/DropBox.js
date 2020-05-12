@@ -25,7 +25,7 @@ const StyledDropBox = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    width: 50%;
+    width: 48%;
   }
 `;
 
@@ -35,6 +35,8 @@ const Select = styled.div`
   z-index: 1;
   animation: opacity 0.25s;
   border: solid 1px #d6d6d6;
+  max-height: 300px;
+  overflow: auto;
 
   .box {
     text-indent: 8px;
@@ -63,7 +65,9 @@ const Select = styled.div`
   @media screen and (max-width: 768px) {
     display: flex;
     position: fixed;
+    overflow: none;
     width: 100%;
+    max-height: 100%;
     height: 100%;
     top: 0;
     left: 0;
@@ -91,7 +95,8 @@ const Select = styled.div`
     .select {
       width: 328px;
       background: white;
-      height: 300px;
+      min-height: 300px;
+      height: 70vh;
       display: block;
       z-index: 2;
       box-sizing: border-box;
@@ -170,20 +175,23 @@ const DropBox = ({
                 }}
               />
             </div>
-            {data.map(d => (
-              <div
-                key={d.value}
-                role="button"
-                tabIndex={0}
-                className="box"
-                onClick={() => {
-                  setViewBox(false);
-                  onChange(d.value);
-                }}
-              >
-                {d.body}
-              </div>
-            ))}
+            {data.map(
+              d =>
+                d && (
+                  <div
+                    key={d.value}
+                    role="button"
+                    tabIndex={0}
+                    className="box"
+                    onClick={() => {
+                      setViewBox(false);
+                      onChange(d.value);
+                    }}
+                  >
+                    {d.body && d.body}
+                  </div>
+                ),
+            )}
           </div>
           <div className="bg" />
         </Select>

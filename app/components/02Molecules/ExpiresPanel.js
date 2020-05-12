@@ -15,6 +15,13 @@ const Div = styled.div`
   align-items: center;
   height: 144px;
   flex: 1;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 20px;
+    height: 100%;
+    min-height: 112px;
+    margin-bottom: 10px;
+  }
 `;
 
 const Check = styled.div`
@@ -41,6 +48,22 @@ const Check = styled.div`
     transition: 0.25s;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 768px) {
+    margin: 0 16px 0 0;
+    position: relative;
+    top: -20px;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    input[type='radio'] + label {
+      width: 24px;
+      height: 24px;
+    }
+    input[type='radio']:checked + label {
+      background: ${Color.Blue} url(${CheckIMG}) center / 12px no-repeat;
+    }
+  }
 `;
 
 const View = styled.div`
@@ -53,10 +76,19 @@ const View = styled.div`
     font-size: 1.1rem;
     margin-top: 4px;
   }
+
+  @media screen and (max-width: 768px) {
+    .title {
+      font-size: 1.1rem;
+    }
+    .body {
+      font-size: 0.75rem;
+    }
+  }
 `;
 
-const ExpiresPanel = ({ handleChange, value, type, title, body }) => (
-  <Div className="box_overflow">
+const ExpiresPanel = ({ handleChange, value, type, title, body, style }) => (
+  <Div style={style} className="box_overflow">
     <Check>
       <input
         id={type}
@@ -80,6 +112,7 @@ ExpiresPanel.propTypes = {
   body: PropTypes.element,
   title: PropTypes.string,
   handleChange: PropTypes.func,
+  style: PropTypes.object,
 };
 
 export default ExpiresPanel;

@@ -92,34 +92,32 @@ const Payment = () => {
         <BillPaper
           className="box_overflow"
           data={[
-            { title: '기업이름', body: cardData.company_name },
+            { title: '기업이름', body: cardData.companyName },
             { title: '주소', body: cardData.address },
-            { title: '사업자 등록번호', body: cardData.company_number },
-            { title: '구독 상품', body: cardData.business_subs },
-            { title: '동시 사용자 수', body: cardData.usage_number },
-            { title: '결제 카드', body: cardData.card_corp },
-            { title: '결제 카드번호', body: cardData.card_number },
+            { title: '사업자 등록번호', body: cardData.companyNumber },
+            { title: '구독 상품', body: cardData.businessSubs },
+            { title: '동시 사용자 수', body: cardData.usageNumber },
+            { title: '결제 카드', body: cardData.cardCorp },
+            { title: '결제 카드번호', body: cardData.cardNumber },
             {
               title: '구독 시작 일',
-              body: moment(cardData.subscription_start_date).format(
+              body: moment(cardData.subscriptionStartDate).format(
                 'YYYY년 MM월 YY일',
               ),
             },
             {
               title: '이번달 결제 금액',
-              body: `${cardData.this_month_price.toLocaleString('en')} 원`,
+              body: `${cardData.thisMonthPrice.toLocaleString('en')} 원`,
             },
             {
               title: '다음 달 결제일',
-              body: moment(cardData.next_payment_date).format(
-                'YYYY년 MM월 YY일',
-              ),
+              body: moment(cardData.nextPaymentDate).format('YYYY년 MM월 YY일'),
             },
             {
               title: '다음 달 결제 금액',
-              body: `${cardData.next_month_price.toLocaleString('en')} 원`,
+              body: `${cardData.nextMonthPrice.toLocaleString('en')} 원`,
             },
-            { title: '업무 시간', body: cardData.open_hours },
+            { title: '업무 시간', body: cardData.openHours },
           ]}
           amount={`${cardData.this_month_price.toLocaleString('en')} 원`}
           startDate="2020년 TEMP"

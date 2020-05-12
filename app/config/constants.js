@@ -17,6 +17,7 @@ const C = {
   },
 
   NOTICE_TYPE: {
+    NONE: 0,
     ALL: 1,
     EMAIL: 2,
     SMS: 3,
@@ -29,6 +30,13 @@ const C = {
     RENTAL_CANCEL: 3,
     RETURN_DELAY: 4,
     COMPLETE: 5,
+  },
+
+  PURPOSE: {
+    ALL: 0,
+    OUTSIDE: 1,
+    BUSINESS_TRIP: 2,
+    INHOUSE_EVENT: 3,
   },
 
   PAYMENT_STATUS: {

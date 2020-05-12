@@ -40,7 +40,13 @@ const Container580 = styled.div`
       display: block;
       height: auto;
     }
-    .radio {
+
+    .input > button {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .input .radio {
       padding: 8px 0;
     }
   }

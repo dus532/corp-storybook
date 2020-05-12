@@ -32,7 +32,7 @@ const Announcements = () => {
 
   const onSearch = () => {
     dispatch(
-      actionGetAnnouncements(filter, () => {
+      actionGetAnnouncements({ keyword: filter.search }, () => {
         history.push(`${document.location.pathname}?page=1`);
       }),
     );
@@ -52,7 +52,9 @@ const Announcements = () => {
         <BigTitle noBorder>공지사항</BigTitle>
         <Filter
           type="announcements"
+          filter={filter}
           handleChange={handleChange}
+          placeholder="검색어 입력"
           onClick={onSearch}
         />
         <AsyncDiv store={AnnouncementsData}>

@@ -18,9 +18,16 @@ export const actionPostChargeSubscription = (data, onSuccess) =>
     meta: { onSuccess },
   });
 
+export const actionRePostChargeSubscription = (data, onSuccess) =>
+  onlyCreate({
+    url: '/action/reSubscribe',
+    params: { ...data, corpId: UserManager().getUser().corpId },
+    meta: { onSuccess },
+  });
+
 export const actionPostInitialUsage = (data, onSuccess) =>
   onlyCreate({
     url: '/action/usageLimit',
-    params: data,
+    params: { ...data, corpId: UserManager().getUser().corpId },
     meta: { onSuccess },
   });

@@ -46,6 +46,7 @@ const Usage = () => {
   const toast = useToast();
 
   const [state, setState] = useState({
+    type: 1,
     isLimited: false,
     limitedAmount: 0,
     noticeType: C.NOTICE_TYPE.NONE,

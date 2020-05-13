@@ -105,10 +105,13 @@ const Payment = () => {
     if (state.all) {
       const body = {
         ...cardData,
-        subscriptionStartDate: cardData.startDat,
-        thisMonthPrice: paymentAmount().thisMonth,
+        subscriptionStartDate: moment().format('X'),
+        // thisMonthPrice: paymentAmount().thisMonth,
+        thisMonthPrice: 100,
         nextPaymentDate: cardData.periodicPaymentDate,
         nextMonthPrice: paymentAmount().amount,
+        // periodicPaymentPrice: paymentAmount().total,
+        periodicPaymentPrice: 100,
       };
 
       dispatch(
@@ -141,12 +144,12 @@ const Payment = () => {
             { title: '주소', body: cardData.address },
             { title: '사업자 등록번호', body: cardData.companyNumber },
             { title: '구독 상품', body: cardData.product },
-            { title: '동시 사용자 수', body: cardData.usageNumber },
+            { title: '동시 사용자 수', body: `${cardData.userNumber} 명` },
             { title: '결제 카드', body: cardData.cardCorp },
             { title: '결제 카드번호', body: cardData.cardNumber },
             {
               title: '구독 시작 일',
-              body: moment.unix(cardData.startDate).format('YYYY년 MM월 DD일'),
+              body: moment().format('YYYY년 MM월 DD일'),
             },
             {
               title: '이번달 결제 금액',
@@ -163,7 +166,7 @@ const Payment = () => {
             { title: '업무 시간', body: cardData.openHours },
           ]}
           amount={`${paymentAmount().total.toLocaleString('en')} 원`}
-          startDate={moment.unix(cardData.startDate).format('YYYY년 MM월 DD일')}
+          startDate={moment().format('YYYY년 MM월 DD일')}
           endDate={paymentAmount().lastPaymentDay}
         />
         <InfoBox>

@@ -18,6 +18,7 @@ export {
   actionPostInitialCard,
   actionPostInitialUsage,
   actionPostChargeSubscription,
+  actionRePostChargeSubscription,
 } from 'stores/actions/initial';
 
 export { actionGetDashBoard } from 'stores/actions/dashboard';

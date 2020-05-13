@@ -21,6 +21,7 @@ const Subscription = () => {
   const SubscriptionsData = useSelector(state => state.subscription);
 
   const current = useSelector(state => state.subscription.data.businessSubs);
+  console.log(SubscriptionsData.data);
 
   useEffect(() => {
     dispatch(actionGetSubscription());
@@ -37,6 +38,7 @@ const Subscription = () => {
             <BillPaper
               className="box_overflow"
               title="구독 상품 정보"
+              noPadding
               data={[
                 {
                   title: '구독 정보',

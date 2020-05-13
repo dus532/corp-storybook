@@ -21,7 +21,7 @@
     "preinstall": "npm run npmcheckversion",
     "prebuild": "npm run build:clean",
     "build": "cross-env NODE_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
-    "build:dev": "cross-env NODE_ENV=development RUN_TIME_ENV=development webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
+    "build:dev": "cross-env NODE_ENV=development RUN_TIME_ENV=development webpack --config internals/webpack/webpack.dev.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:staging": "cross-env NODE_ENV=staging RUN_TIME_ENV=staging webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:preprod": "cross-env NODE_ENV=production RUN_TIME_ENV=production webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "build:clean": "rimraf ./build",

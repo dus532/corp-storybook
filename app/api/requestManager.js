@@ -33,7 +33,11 @@ const RequestManager = (method, url, data, header) => {
     // axios 통신을 시도합니다.
     axios({
       method,
-      url: `${configs[process.env.NODE_ENV].apiServerURL}${url}`,
+      url: `${
+        configs[process.env.NODE_ENV].apiServerURL
+          ? configs[process.env.NODE_ENV].apiServerURL
+          : configs.dev.apiServerURL
+      }${url}`,
       data: (method === 'post' || method === 'put') && data,
       params: (method === 'get' || method === 'delete') && data,
       headers: {

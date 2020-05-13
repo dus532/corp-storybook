@@ -5,17 +5,17 @@ const configs = {
   },
   local: {
     apiServerURL:
-      process.env.LOCAL_API_SERVER ||
+      // process.env.LOCAL_API_SERVER ||
       'https://biz-corp-admin-api.dev.platdev.net',
   },
   development: {
     apiServerURL:
-      process.env.DEV_API_SERVER ||
+      // process.env.DEV_API_SERVER ||
       'https://biz-corp-admin-api.dev.platdev.net',
   },
   staging: {
     apiServerURL:
-      process.env.STAGING_API_SERVER ||
+      // process.env.STAGING_API_SERVER ||
       'https://biz-corp-admin-api.staging.platdev.net',
   },
   production: {

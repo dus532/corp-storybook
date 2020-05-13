@@ -16,7 +16,7 @@ const configs = {
   staging: {
     apiServerURL:
       process.env.STAGING_API_SERVER ||
-      'https://biz-corp-admin-api.staging.platdev.net/',
+      'https://biz-corp-admin-api.staging.platdev.net',
   },
   production: {
     apiServerURL: process.env.PROD_API_SERVER,

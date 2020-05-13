@@ -36,10 +36,11 @@ const StyledToast = styled.div`
   width: 100%;
   opacity: 0;
   box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.1);
-  animation: top-down 2.5s;
+  animation: top-down 5s;
 
   *:first-child {
     margin-right: 10px;
+    flex-shrink: 0;
   }
 `;
 
@@ -53,7 +54,7 @@ const Toast = () => {
         {toast.data.map((t, index) => {
           setTimeout(() => {
             dispatch(delToast(index));
-          }, 2500);
+          }, 5000);
           if (t.on) {
             return (
               <StyledToast

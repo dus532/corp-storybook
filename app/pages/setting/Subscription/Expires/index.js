@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import C from 'config/constants';
@@ -12,6 +13,8 @@ import {
 } from 'components';
 import { useModal } from 'utils/hooks';
 import { SUBSCRIPTION_EXPIRES } from 'modals/constants';
+import { actionGetSubscription } from 'stores';
+import moment from 'utils/moment';
 
 const SubTitle = styled.div`
   margin-bottom: 10px;
@@ -25,12 +28,26 @@ const SubTitle = styled.div`
 const Expires = () => {
   const history = useHistory();
   const modal = useModal();
+  const dispatch = useDispatch();
 
   const [data, setData] = useState({ type: C.EXPIRES_TYPE.NEXT_MONTH });
+  const SubscriptionsData = useSelector(state => state.subscription);
 
   const handleChange = (name, value) => {
     setData({ ...data, [name]: value });
   };
+
+  const expireData = () => ({
+    subscriptionId: SubscriptionsData.data.nextSubs.id,
+    cancelReqTime: moment().format('X'),
+    cancelApplyTime: moment().format('X'),
+  });
+
+  useEffect(() => {
+    if (!SubscriptionsData.data) {
+      dispatch(actionGetSubscription());
+    }
+  }, []);
 
   return (
     <div>
@@ -70,7 +87,9 @@ const Expires = () => {
         <ButtonBottom
           left="해지 동의"
           right="취소"
-          onClickLeft={() => modal(SUBSCRIPTION_EXPIRES, data)}
+          onClickLeft={() =>
+            modal(SUBSCRIPTION_EXPIRES, { ...data, ...expireData() })
+          }
           onClickRight={() => {
             history.goBack();
           }}

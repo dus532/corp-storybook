@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -12,6 +13,8 @@ import {
 } from 'components';
 import moment from 'utils/moment';
 
+import C from 'config/constants';
+import { useToast } from 'utils/hooks';
 import { actionPutSubscription } from 'stores';
 
 const Text = styled.div`
@@ -28,17 +31,17 @@ const Text = styled.div`
 const Payment = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const toast = useToast();
+
+  const subData = useSelector(state => state.subscription.data);
+  if (!subData) {
+    history.push('/setting/subscription');
+  }
+
   const current = useSelector(state => state.subscription.data.businessSubs);
   const next = useSelector(state => state.subscription.detail);
 
   let isUpgrade = true;
-  const update = {
-    product: next.type,
-    userNumber: next.people,
-    cardCorp: current.cardCorp,
-    cardNumber: current.cardNumber,
-    openHours: current.businessHour,
-  };
   // 이 부분은 현재 구독 상품과 비교하여 업그레이드인지 다운그레이드인지를 확인합니다.
 
   // 다운그레이드 조건
@@ -50,15 +53,57 @@ const Payment = () => {
     isUpgrade = false;
   }
 
-  if (isUpgrade) {
-    update.subscriptionStartDate = '';
-    update.nextMonthPrice = 500000;
-  } else {
-    update.subscriptionStartDate = moment(current.startDate)
-      .add(1, 'month')
-      .startOf('month');
-    update.nextMonthPrice = 500000;
+  const update = {
+    ...current,
+    ...next,
+    type: isUpgrade ? 1 : 2,
+    subscriptionId: current.id,
+    product: next.type,
+    userNumber: next.people,
+    cardCorp: current.cardCorp,
+    cardNumber: current.cardNumber,
+    openHours: current.businessHour,
+    periodicPrice:
+      C.ITEM_TYPE_ARRAY.filter(it => it.value === next.type)[0].price *
+      next.people,
+  };
+
+  if (update.product === C.ITEM_TYPE.PREMIUM.value) {
+    update.periodicPrice =
+      C.ITEM_TYPE_ARRAY.filter(it => it.value === next.type)[0].price *
+      (next.people - 1);
   }
+
+  if (isUpgrade) {
+    update.subscriptionStartDate =
+      C.ITEM_TYPE_ARRAY.filter(it => it.value === next.type)[0].price *
+      update.userNumber;
+  } else {
+    const today = moment().date();
+    update.subscriptionStartDate =
+      today >= 25
+        ? moment()
+            .add(2, 'month')
+            .startOf('month')
+            .format('X')
+        : moment()
+            .add(1, 'month')
+            .startOf('month')
+            .format('X');
+  }
+
+  const onReqeust = () => {
+    dispatch(
+      actionPutSubscription(update, () => {
+        history.push('/setting/subscription');
+        toast('구독 상품 변경을 요청한 상태입니다. ', 'Ok');
+        toast(
+          '기업 구독상품 혹은 동시 구독자 인원이 업그레이드 될 경우 고객님들이 이용할 수 있는 차량 대수가 충분한지 확인한 후 기업 관리자분에게 연락을 드릴 예정입니다.',
+          'ok',
+        );
+      }),
+    );
+  };
 
   return (
     <Container>
@@ -74,11 +119,13 @@ const Payment = () => {
           },
           {
             title: '구독 시작일',
-            body: moment(current.startDate).format('YYYY년 MM월 DD일'),
+            body: moment.unix(current.startDate).format('YYYY년 MM월 DD일'),
           },
           {
             title: '구독 갱신일',
-            body: moment(current.renewDate).format('YYYY년 MM월 DD일'),
+            body: current.renewDate
+              ? moment.unix(current.renewDate).format('YYYY년 MM월 DD일')
+              : '-',
           },
           {
             title: '결제 카드',
@@ -96,7 +143,10 @@ const Payment = () => {
               ? `월 ${current.periodicPaymentAmount.toLocaleString('en')}원`
               : '-',
           },
-          { title: '업무 시간', body: current.businessHour },
+          {
+            title: '업무 시간',
+            body: `${current.startHour} ~ ${current.endHour}`,
+          },
         ]}
       />
       <BillPaper
@@ -112,30 +162,31 @@ const Payment = () => {
           {
             title: '구독 시작일',
             body: update.subscriptionStartDate
-              ? moment(update.subscriptionStartDate).format('YYYY년 MM월 DD일')
+              ? moment
+                  .unix(update.subscriptionStartDate)
+                  .format('YYYY년 MM월 DD일')
               : '-',
           },
           {
-            title: '구독 갱신일',
-            body: '-',
-          },
-          {
             title: '결제 카드',
-            body: `${current.cardCorp}카드 / ${current.cardNumber} / ${
-              current.cardType
+            body: `${update.cardCorp}카드 / ${update.cardNumber} / ${
+              update.cardType
             }`,
           },
           {
             title: '정기 결제일',
-            body: `매월 ${current.periodicPaymentDate}일`,
+            body: `매월 ${update.periodicPaymentDate}일`,
           },
           {
             title: '정기 결제 금액',
-            body: update.nextMonthPrice
-              ? `월 ${update.nextMonthPrice.toLocaleString('en')}원`
+            body: update.periodicPrice
+              ? `월 ${update.periodicPrice.toLocaleString('en')}원`
               : '-',
           },
-          { title: '업무 시간', body: current.businessHour },
+          {
+            title: '업무 시간',
+            body: `${update.startHour} ~ ${update.endHour}`,
+          },
         ]}
       />
       <InfoBox>
@@ -143,22 +194,16 @@ const Payment = () => {
         업무 시간 변경을 원하실 경우 1544-7198로 연락바랍니다.
       </InfoBox>
       <Text>
-        위의 사항을 확인하고 상품 변경에 동의하시면{' '}
-        <span>{isUpgrade ? `변경 신청` : `변경 동의`}</span> 버튼을 선택하세요.
+        위의 사항을 확인하고 상품 변경에 동의하시면 <span>변경 신청</span>{' '}
+        버튼을 선택하세요.
       </Text>
       <ButtonBottom
         left="취소"
-        right={isUpgrade ? `변경 신청` : `변경 동의`}
+        right="변경 신청"
         onClickLeft={() => {
           history.goBack();
         }}
-        onClickRight={() => {
-          dispatch(
-            actionPutSubscription(update, () => {
-              history.push('/setting/subscription');
-            }),
-          );
-        }}
+        onClickRight={onReqeust}
       />
     </Container>
   );

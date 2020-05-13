@@ -6,10 +6,12 @@ import { useHistory } from 'react-router-dom';
 import C from 'config/constants';
 import { FloatingDiv, ButtonBottom } from 'components';
 import { actionDeleteSubscription } from 'stores';
+import { useToast } from 'utils/hooks';
 
 const Announcements = ({ onClickExit, data }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const toast = useToast();
 
   return (
     <FloatingDiv
@@ -45,9 +47,10 @@ const Announcements = ({ onClickExit, data }) => {
             right="네"
             onClickRight={() => {
               dispatch(
-                actionDeleteSubscription(() => {
+                actionDeleteSubscription(data, () => {
                   onClickExit();
                   history.push('/setting/subscription');
+                  toast('구독 해지 설정이 완료되었습니다.', 'ok');
                 }),
               );
             }}

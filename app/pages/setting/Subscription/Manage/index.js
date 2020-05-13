@@ -14,6 +14,7 @@ import {
 import { actionGetSubscription } from 'stores';
 
 import moment from 'utils/moment';
+import C from 'config/constants';
 
 const Subscription = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Subscription = () => {
   const SubscriptionsData = useSelector(state => state.subscription);
 
   const current = useSelector(state => state.subscription.data.businessSubs);
+  const next = useSelector(state => state.subscription.data.nextSubs);
   console.log(SubscriptionsData.data);
 
   useEffect(() => {
@@ -38,7 +40,12 @@ const Subscription = () => {
             <BillPaper
               className="box_overflow"
               title="구독 상품 정보"
-              noPadding
+              noPadding={
+                SubscriptionsData.data.status ===
+                  C.SUB_TYPE.UPGRADE_SUBSCRIBING ||
+                SubscriptionsData.data.status ===
+                  C.SUB_TYPE.DOWNGRADE_SUBSCRIBING
+              }
               data={[
                 {
                   title: '구독 정보',
@@ -46,12 +53,14 @@ const Subscription = () => {
                 },
                 {
                   title: '구독 시작일',
-                  body: moment(current.startDate).format('YYYY년 MM월 DD일'),
+                  body: moment
+                    .unix(current.startDate)
+                    .format('YYYY년 MM월 DD일'),
                 },
                 {
                   title: '구독 갱신일',
                   body: current.renewDate
-                    ? moment(current.renewDate).format('YYYY년 MM월 DD일')
+                    ? moment.unix(current.renewDate).format('YYYY년 MM월 DD일')
                     : '-',
                 },
                 { title: '결제 카드', body: current.cardNumber },
@@ -67,7 +76,77 @@ const Subscription = () => {
                       )}원`
                     : '-',
                 },
-                { title: '업무 시간', body: current.businessHour },
+                {
+                  title: '업무 시간',
+                  body: `${current.startHour} ~ ${current.endHour}`,
+                },
+              ]}
+              bottom={
+                SubscriptionsData.data.status ===
+                C.SUB_TYPE.EXPIRED_SUBSCRIBING ? (
+                  <>
+                    <ButtonBottom
+                      type="big"
+                      left="구독 상품 재신청"
+                      onClickLeft={() => {
+                        history.push('/setting/subscription/update');
+                      }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <ButtonBottom
+                      type="big"
+                      left="구독 해지"
+                      onClickLeft={() => {
+                        history.push('/setting/subscription/expires');
+                      }}
+                      right="구독 상품 변경"
+                      onClickRight={() => {
+                        history.push('/setting/subscription/update');
+                      }}
+                    />
+                  </>
+                )
+              }
+            />
+          )}
+          {(SubscriptionsData.data.status === C.SUB_TYPE.UPGRADE_SUBSCRIBING ||
+            SubscriptionsData.data.status ===
+              C.SUB_TYPE.DOWNGRADE_SUBSCRIBING) && (
+            <BillPaper
+              className="box_overflow"
+              title="변경 구독 상품 정보"
+              data={[
+                {
+                  title: '구독 정보',
+                  body: `${next.product} / ${next.userNumber} 명`,
+                },
+                {
+                  title: '구독 시작일',
+                  body: moment.unix(next.startDate).format('YYYY년 MM월 DD일'),
+                },
+                {
+                  title: '구독 갱신일',
+                  body: next.renewDate
+                    ? moment.unix(next.renewDate).format('YYYY년 MM월 DD일')
+                    : '-',
+                },
+                { title: '결제 카드', body: next.cardNumber },
+                {
+                  title: '정기 결제일',
+                  body: `매월 ${next.periodicPaymentDate}일`,
+                },
+                {
+                  title: '정기 결제 금액',
+                  body: next.periodicPaymentAmount
+                    ? `월 ${next.periodicPaymentAmount.toLocaleString('en')}원`
+                    : '-',
+                },
+                {
+                  title: '업무 시간',
+                  body: `${next.startHour} ~ ${next.endHour}`,
+                },
               ]}
               bottom={
                 <>
@@ -77,7 +156,12 @@ const Subscription = () => {
                     onClickLeft={() => {
                       history.push('/setting/subscription/expires');
                     }}
-                    right="구독 상품 변경"
+                    right={
+                      SubscriptionsData.data.status ===
+                      C.SUB_TYPE.DOWNGRADE_SUBSCRIBING
+                        ? '구독 상품 변경'
+                        : ''
+                    }
                     onClickRight={() => {
                       history.push('/setting/subscription/update');
                     }}

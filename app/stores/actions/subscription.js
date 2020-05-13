@@ -9,13 +9,14 @@ export const actionGetSubscription = () =>
 
 export const actionPushSubscription = data => pushDetail(data);
 
-export const actionPutSubscription = (data, onSuccess) =>
+export const actionPutSubscription = (params, onSuccess) =>
   update({
-    params: data,
+    params: { ...params, corpId: UserManager().getUser().corpId },
     meta: { onSuccess },
   });
 
-export const actionDeleteSubscription = onSuccess =>
+export const actionDeleteSubscription = (params, onSuccess) =>
   del({
+    params: { ...params, corpId: UserManager().getUser().corpId },
     meta: { onSuccess },
   });

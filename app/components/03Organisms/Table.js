@@ -97,7 +97,7 @@ const RegData = (name, value, onClick, t) => {
   if (name.indexOf('amount') !== -1) {
     return `${value[name].toLocaleString('en')}`;
   }
-  if (name.indexOf('date') !== -1) {
+  if (name.indexOf('date') !== -1 || name.indexOf('Date') !== -1) {
     return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;
   }
   if (name.indexOf('edit') !== -1) {

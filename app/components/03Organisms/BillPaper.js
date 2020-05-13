@@ -10,6 +10,7 @@ const StyledBillPaper = styled.div`
   background: ${Color.White};
   position: relative;
   margin-top: ${props => props.noPadding && '2px'};
+  margin-bottom: ${props => props.noPadding && '2px'};
 
   h3 {
     margin-bottom: 28px;

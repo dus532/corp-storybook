@@ -79,7 +79,7 @@ const Payment = () => {
 
     const totalAmount = Math.ceil((amount / monthLast) * today);
 
-    if (today >= 26) {
+    if (today >= 25) {
       return {
         amount,
         thisMonth: totalAmount,

@@ -109,7 +109,7 @@ const SubscriptionPanel = ({
   return (
     <Div>
       <View>
-        {type === C.ITEM_TYPE.PREMIUM && <div className="medal" />}
+        {type === C.ITEM_TYPE.PREMIUM.value && <div className="medal" />}
         <input
           id={type}
           name="sub"
@@ -119,7 +119,9 @@ const SubscriptionPanel = ({
         />
         <label htmlFor={type}> </label>
         <div
-          style={{ color: `${type === C.ITEM_TYPE.PREMIUM && Color.Blue}` }}
+          style={{
+            color: `${type === C.ITEM_TYPE.PREMIUM.value && Color.Blue}`,
+          }}
           className="title"
         >
           {title}

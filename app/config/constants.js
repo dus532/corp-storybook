@@ -3,7 +3,8 @@ const C = {
   SUB_TYPE: {
     SUBSCRIBING: 1,
     EXPIRED_SUBSCRIBING: 2,
-    NEXT_MONTH_SUBSCRIBING: 3,
+    UPGRADE_SUBSCRIBING: 3,
+    DOWNGRADE_SUBSCRIBING: 4,
   },
 
   CARD_TYPE: {
@@ -61,14 +62,20 @@ const C = {
   },
 
   ITEM_TYPE: {
-    PREMIUM: 1,
-    STANDARD: 2,
-    BASIC: 3,
+    PREMIUM: { value: 3, price: 15 },
+    STANDARD: { value: 2, price: 10 },
+    BASIC: { value: 1, price: 5 },
   },
 
+  ITEM_TYPE_ARRAY: [
+    { value: 3, price: 15 },
+    { value: 2, price: 10 },
+    { value: 1, price: 5 },
+  ],
+
   EXPIRES_TYPE: {
-    NEXT_MONTH: 0,
     IMMEDIATELY: 1,
+    NEXT_MONTH: 2,
   },
 
   RENTAL_TYPE: {

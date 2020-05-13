@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import C from 'config/constants';
+import { useToast } from 'utils/hooks';
 
 import {
   Container,
@@ -21,11 +22,24 @@ const Flex = styled.div`
 const SubscriptionUpdate = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const toast = useToast();
 
-  const [data, setData] = useState({ type: C.ITEM_TYPE.PREMIUM, people: 1 });
+  const [data, setData] = useState({
+    type: C.ITEM_TYPE.PREMIUM.value,
+    people: 1,
+  });
 
   const handleChange = (name, value) => {
     setData({ ...data, [name]: value });
+  };
+
+  const onNext = () => {
+    if (data.type === C.ITEM_TYPE.PREMIUM.value && data.people < 2) {
+      toast('프리미엄 상품의 최소 구독인원은 2명입니다.');
+    } else {
+      dispatch(actionPushSubscription(data));
+      history.push(`/setting/subscription/payment`);
+    }
   };
 
   return (
@@ -34,7 +48,7 @@ const SubscriptionUpdate = () => {
         <BigTitle>구독 상품 변경</BigTitle>
         <Flex>
           <SubscriptionPanel
-            type={C.ITEM_TYPE.PREMIUM}
+            type={C.ITEM_TYPE.PREMIUM.value}
             title="프리미엄"
             people={2}
             car={4}
@@ -43,7 +57,7 @@ const SubscriptionUpdate = () => {
             handleChange={handleChange}
           />
           <SubscriptionPanel
-            type={C.ITEM_TYPE.STANDARD}
+            type={C.ITEM_TYPE.STANDARD.value}
             title="스탠다드"
             people={1}
             car={3}
@@ -52,7 +66,7 @@ const SubscriptionUpdate = () => {
             handleChange={handleChange}
           />
           <SubscriptionPanel
-            type={C.ITEM_TYPE.BASIC}
+            type={C.ITEM_TYPE.BASIC.value}
             title="베이직"
             people={1}
             car={2}
@@ -68,10 +82,7 @@ const SubscriptionUpdate = () => {
             history.goBack();
           }}
           right="다음"
-          onClickRight={() => {
-            dispatch(actionPushSubscription(data));
-            history.push(`/setting/subscription/payment`);
-          }}
+          onClickRight={onNext}
         />
       </Container>
     </div>

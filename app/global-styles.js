@@ -209,15 +209,15 @@ const GlobalStyle = createGlobalStyle`
       transform: translateY(-120px);
       opacity:0;
     }
-    10%{
+    5%{
       transform: translateY(20px);
       opacity:1;
     }
-    20%{
+    10%{
       transform: translateY(0px);
       opacity:1;
     }
-    90%{
+    95%{
       transform: translateY(0px);
       opacity:1;
     }

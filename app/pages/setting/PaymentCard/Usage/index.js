@@ -62,7 +62,7 @@ const Usage = () => {
       ...state,
     };
     if (state.isLimited && state.limitedAmount < 500000) {
-      toast('최소 50만원 이상 설정해주세요.');
+      toast('월 이용한도 금액이 너무 낮습니다.');
     } else {
       dispatch(
         actionPostCardUsageLimit(body, () => {

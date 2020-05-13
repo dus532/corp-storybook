@@ -11,6 +11,7 @@ import {
   Input,
 } from 'components';
 import { actionPostInitialUsage } from 'stores';
+import { useToast } from 'utils/hooks';
 
 import C from 'config/constants';
 
@@ -42,20 +43,25 @@ const RegisterRadio = styled.div`
 const Usage = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const [state, setState] = useState({
     isLimited: false,
     limitedAmount: 0,
-    noticeType: C.NOTICE_TYPE.ALL,
+    noticeType: C.NOTICE_TYPE.NONE,
   });
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(
-      actionPostInitialUsage(state, () => {
-        history.push('/home');
-      }),
-    );
+    if (state.isLimited && state.limitedAmount < 500000) {
+      toast('월 이용한도 금액이 너무 낮습니다.');
+    } else {
+      dispatch(
+        actionPostInitialUsage(state, () => {
+          history.push('/home');
+        }),
+      );
+    }
   };
 
   return (
@@ -97,7 +103,7 @@ const Usage = () => {
         >
           <br />
           <br />
-          <h4>월 이용 한도 금액 입력</h4>
+          <h4>월 이용 한도 금액 입력 (최소 50만원 이상)</h4>
           <RegisterInputText>
             <Input
               name="limited_amount"
@@ -114,7 +120,7 @@ const Usage = () => {
           </RegisterInputText>
           <br />
           <br />
-          <h4>한도 금액 도달 시 알림 방식</h4>
+          <h4>한도 금액 도달 시 이메일 알림</h4>
           <RegisterRadio>
             <InputRadio
               name="notice_type"

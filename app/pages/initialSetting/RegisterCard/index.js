@@ -38,19 +38,6 @@ const RegisterCard = () => {
     registerType: C.REGISTER_TYPE.MAIN, // 대표카드, 팀별카드
   });
 
-  const maxInput = (e, num) => {
-    if (e.target.value.length + 1 > num) {
-      if (
-        e.keyCode !== 8 &&
-        e.keyCode !== 9 &&
-        e.keyCode !== 46 &&
-        e.keyCode !== 13
-      ) {
-        e.preventDefault();
-      }
-    }
-  };
-
   const onSubmit = data => {
     dispatch(
       actionPostInitialCard(
@@ -60,7 +47,7 @@ const RegisterCard = () => {
           ...state,
           ...data,
           cardNumber: data.card1 + data.card2 + data.card3 + data.card4,
-          expiration: data.expirationMM + data.expirationYY,
+          expiration: 20 + data.expirationYY + data.expirationMM,
         },
         () => history.push('/initial/payment'),
       ),
@@ -126,40 +113,32 @@ const RegisterCard = () => {
             name="card1"
             ref={register({ minLength: 4, maxLength: 4 })}
             placeholder="0000"
-            type="number"
-            onKeyDown={e => {
-              maxInput(e, 4);
-            }}
+            type="tel"
+            maxLength="4"
             required
           />
           <Input
             name="card2"
             ref={register({ minLength: 4, maxLength: 4 })}
             placeholder="0000"
-            type="number"
-            onKeyDown={e => {
-              maxInput(e, 4);
-            }}
+            type="tel"
+            maxLength="4"
             required
           />
           <Input
             name="card3"
             ref={register({ minLength: 4, maxLength: 4 })}
             placeholder="0000"
-            type="number"
-            onKeyDown={e => {
-              maxInput(e, 4);
-            }}
+            type="tel"
+            maxLength="4"
             required
           />
           <Input
             name="card4"
             ref={register({ minLength: 4, maxLength: 4 })}
             placeholder="0000"
-            type="number"
-            onKeyDown={e => {
-              maxInput(e, 4);
-            }}
+            type="tel"
+            maxLength="4"
             required
           />
         </RegisterEnterCard>
@@ -175,20 +154,16 @@ const RegisterCard = () => {
                 name="expirationMM"
                 ref={register({ minLength: 2, maxLength: 2 })}
                 placeholder="MM"
-                type="number"
-                onKeyDown={e => {
-                  maxInput(e, 2);
-                }}
+                type="tel"
+                maxLength="2"
                 required
               />
               <Input
                 name="expirationYY"
                 ref={register({ minLength: 2, maxLength: 2 })}
                 placeholder="YY"
-                type="number"
-                onKeyDown={e => {
-                  maxInput(e, 2);
-                }}
+                type="tel"
+                maxLength="2"
                 required
               />
             </div>
@@ -203,11 +178,9 @@ const RegisterCard = () => {
                 name="twoPasswordDigits"
                 ref={register({ minLength: 2, maxLength: 2 })}
                 placeholder="**"
-                type="number"
                 autocomplete="new-password"
-                onKeyDown={e => {
-                  maxInput(e, 2);
-                }}
+                type="tel"
+                maxLength="2"
                 required
               />
               <span>●●</span>
@@ -227,10 +200,8 @@ const RegisterCard = () => {
                 name="birthday"
                 ref={register}
                 placeholder="ex) 1234567890"
-                type="number"
-                onKeyDown={e => {
-                  maxInput(e, 10);
-                }}
+                type="tel"
+                maxLength="10"
                 required
               />
             </RegisterBirth>
@@ -243,10 +214,8 @@ const RegisterCard = () => {
                 name="birthday"
                 ref={register}
                 placeholder="ex) 951018"
-                type="number"
-                onKeyDown={e => {
-                  maxInput(e, 6);
-                }}
+                type="tel"
+                maxLength="6"
                 required
               />
             </RegisterBirth>

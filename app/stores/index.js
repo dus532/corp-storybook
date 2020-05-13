@@ -17,6 +17,7 @@ export { toggleSending } from 'stores/actions/global';
 export {
   actionPostInitialCard,
   actionPostInitialUsage,
+  actionPostChargeSubscription,
 } from 'stores/actions/initial';
 
 export { actionGetDashBoard } from 'stores/actions/dashboard';

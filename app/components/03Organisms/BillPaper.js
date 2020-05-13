@@ -157,7 +157,7 @@ const BillPaper = ({
         {buttonSpecial}
       </ButtonSpecial>
     )}
-    <Bottom noPadding={noPadding}>{bottom}</Bottom>
+    {bottom && <Bottom noPadding={noPadding}>{bottom}</Bottom>}
   </StyledBillPaper>
 );
 

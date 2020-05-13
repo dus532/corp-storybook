@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { Container580, ButtonBottom } from 'components';
 import InitialCardsIMG from 'images/initial_cards.png';
+import UserManager from 'utils/userManager';
 
 const IntroTop = styled.div`
   display: flex;
@@ -19,8 +19,12 @@ const IntroTop = styled.div`
   h2 {
     font-weight: 700;
   }
+  .intro_top-left {
+    flex: 1;
+  }
 
   .intro_top-img {
+    flex-shrink: 0;
     width: 331px;
     height: 291px;
     position: relative;
@@ -60,7 +64,7 @@ const IntroBottom = styled.div`
 `;
 
 const Introduce = () => {
-  const userData = useSelector(state => state.user);
+  const userData = UserManager().getUser();
   const history = useHistory();
 
   return (
@@ -68,7 +72,7 @@ const Introduce = () => {
       <IntroTop>
         <div className="intro_top-left">
           <h2>
-            {userData.name}님,
+            {userData.name} 님,
             <br />
             환영합니다!
           </h2>

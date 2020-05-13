@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useToast } from 'utils/hooks';
 
@@ -16,6 +16,7 @@ import {
   ButtonBottom,
 } from 'components';
 import Color from 'config/color';
+import { actionPostChargeSubscription } from 'stores';
 
 const PaymentCheckBox = styled.div`
   margin-top: 12px;
@@ -34,6 +35,7 @@ const PaymentCheckBox = styled.div`
 const Payment = () => {
   const history = useHistory();
   const toast = useToast();
+  const dispatch = useDispatch();
   const cardData = useSelector(state => state.initial.data);
   const [state, setState] = useState({
     all: false,
@@ -67,10 +69,53 @@ const Payment = () => {
     }
   };
 
+  // 계산할 금액을 저장합니다
+  const paymentAmount = () => {
+    const amount = cardData.periodicPaymentAmount;
+    const monthLast = moment()
+      .endOf('month')
+      .date();
+    const today = moment().date();
+
+    const totalAmount = Math.ceil((amount / monthLast) * today);
+
+    if (today >= 26) {
+      return {
+        amount,
+        thisMonth: totalAmount,
+        total: totalAmount + amount,
+        lastPaymentDay: moment()
+          .add(1, 'month')
+          .endOf('month')
+          .format('YYYY년 MM월 DD일'),
+      };
+    }
+    return {
+      amount,
+      thisMonth: totalAmount,
+      total: totalAmount,
+      lastPaymentDay: moment()
+        .endOf('month')
+        .format('YYYY년 MM월 DD일'),
+    };
+  };
+
   // 다음장
   const onNext = () => {
     if (state.all) {
-      history.push('/initial/usage');
+      const body = {
+        ...cardData,
+        subscriptionStartDate: cardData.startDat,
+        thisMonthPrice: paymentAmount().thisMonth,
+        nextPaymentDate: cardData.periodicPaymentDate,
+        nextMonthPrice: paymentAmount().amount,
+      };
+
+      dispatch(
+        actionPostChargeSubscription(body, () => {
+          history.push('/initial/usage');
+        }),
+      );
     } else {
       toast('약관에 동의해주세요.');
     }
@@ -95,33 +140,31 @@ const Payment = () => {
             { title: '기업이름', body: cardData.companyName },
             { title: '주소', body: cardData.address },
             { title: '사업자 등록번호', body: cardData.companyNumber },
-            { title: '구독 상품', body: cardData.businessSubs },
+            { title: '구독 상품', body: cardData.product },
             { title: '동시 사용자 수', body: cardData.usageNumber },
             { title: '결제 카드', body: cardData.cardCorp },
             { title: '결제 카드번호', body: cardData.cardNumber },
             {
               title: '구독 시작 일',
-              body: moment(cardData.subscriptionStartDate).format(
-                'YYYY년 MM월 YY일',
-              ),
+              body: moment.unix(cardData.startDate).format('YYYY년 MM월 DD일'),
             },
             {
               title: '이번달 결제 금액',
-              body: `${cardData.thisMonthPrice.toLocaleString('en')} 원`,
+              body: `${paymentAmount().thisMonth.toLocaleString('en')} 원`,
             },
             {
               title: '다음 달 결제일',
-              body: moment(cardData.nextPaymentDate).format('YYYY년 MM월 YY일'),
+              body: `매월 ${cardData.periodicPaymentDate}일`,
             },
             {
               title: '다음 달 결제 금액',
-              body: `${cardData.nextMonthPrice.toLocaleString('en')} 원`,
+              body: `${paymentAmount().amount.toLocaleString('en')} 원`,
             },
             { title: '업무 시간', body: cardData.openHours },
           ]}
-          amount={`${cardData.this_month_price.toLocaleString('en')} 원`}
-          startDate="2020년 TEMP"
-          endDate="2020년 TEMP"
+          amount={`${paymentAmount().total.toLocaleString('en')} 원`}
+          startDate={moment.unix(cardData.startDate).format('YYYY년 MM월 DD일')}
+          endDate={paymentAmount().lastPaymentDay}
         />
         <InfoBox>
           정기 구독 결제는 매월 25일에 대표 결제카드로 자동 결제됩니다.

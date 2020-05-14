@@ -21,9 +21,6 @@ const configs = {
   production: {
     apiServerURL: process.env.PROD_API_SERVER,
   },
-  test: {
-    apiServerURL: `http://192.168.0.34:8080`,
-  },
 };
 
 export default configs;

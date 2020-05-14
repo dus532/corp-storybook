@@ -15,6 +15,10 @@ const Div = styled.div`
   background: white;
   margin-right: 28px;
   flex: 1;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const View = styled.div`
@@ -66,6 +70,55 @@ const View = styled.div`
     height: 61px;
     background: url(${MedalIMG}) center / cover no-repeat;
   }
+
+  @media screen and (max-width: 768px) {
+    height: auto;
+    display: flex;
+    padding: 20px;
+
+    .medal {
+      display: none;
+    }
+
+    .con {
+      flex: 1;
+      margin-left: 16px;
+    }
+
+    .title {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .body {
+      margin-top: 4px;
+      font-size: 0.8rem;
+    }
+
+    .nextline {
+      display: inline-block;
+    }
+
+    .nextline:after {
+      content: ',';
+      margin-right: 4px;
+    }
+
+    .mobile {
+      display: block;
+      width: 24px;
+      height: 28px;
+    }
+    input[type='radio'] + label {
+      width: 24px;
+      height: 24px;
+      border: 2px solid ${Color.LineGray};
+    }
+
+    input[type='radio']:checked + label {
+      background: ${Color.DarkBlue} url(${CheckIMG}) center / 12px no-repeat;
+    }
+  }
 `;
 
 const Amount = styled.div`
@@ -75,6 +128,18 @@ const Amount = styled.div`
 
   h2 {
     font-weight: 700;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-size: 0.8rem;
+    padding: 12px 20px;
+    h2 {
+      margin-left: 4px;
+      font-size: 1.2rem;
+    }
   }
 `;
 
@@ -107,7 +172,7 @@ const SubscriptionPanel = ({
   }
 
   return (
-    <Div>
+    <Div className="box_overflow">
       <View>
         {type === C.ITEM_TYPE.PREMIUM.value && <div className="medal" />}
         <input
@@ -118,23 +183,25 @@ const SubscriptionPanel = ({
           checked={value === type}
         />
         <label htmlFor={type}> </label>
-        <div
-          style={{
-            color: `${type === C.ITEM_TYPE.PREMIUM.value && Color.Blue}`,
-          }}
-          className="title"
-        >
-          {title}
+        <div className="con">
+          <div
+            style={{
+              color: `${type === C.ITEM_TYPE.PREMIUM.value && Color.Blue}`,
+            }}
+            className="title"
+          >
+            {title}
+          </div>
+          <div className="body">
+            <div className="nextline">동시 이용자 기본 {people}명</div>
+            최대 {car}개의 지원 차종 보장
+          </div>
+          <div className="icon">
+            {peopleIcon}
+            {carIcon}
+          </div>
         </div>
-        <div className="body">
-          동시 이용자 기본 {people}명
-          <br />
-          최대 {car}개의 지원 차종 보장
-        </div>
-        <div className="icon">
-          {peopleIcon}
-          {carIcon}
-        </div>
+        {type === C.ITEM_TYPE.PREMIUM.value && <div className="medal mobile" />}
       </View>
       <Amount>
         기본 정기 구독료

@@ -17,6 +17,10 @@ import { actionPushSubscription } from 'stores';
 
 const Flex = styled.div`
   display: flex;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const SubscriptionUpdate = () => {

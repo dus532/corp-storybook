@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Color from 'config/color';
 import IconNoData from 'components/01Atoms/IconNoData';
+import SegmentControl from 'components/02Molecules/SegmentControl';
+
 import C from 'config/constants';
+import moment from 'utils/moment';
 
 const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
   padding: 24px 20px;
   padding-bottom: 0px;
+
+  h3 {
+    font-size: 0.9rem;
+  }
 
   @media screen and (max-width: 768px) {
     margin-top: 10px;
@@ -20,8 +27,32 @@ const StyledPanel = styled.div`
 const Filter = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 32px;
   font-weight: 700;
+
+  .control {
+    width: 480px;
+  }
+
+  .date {
+    flex: 1;
+    text-align: right;
+    margin-right: 12px;
+  }
+
+  @media screen and (max-width: 768px) {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 16px;
+    .date {
+      display: none;
+    }
+    .control {
+      width: 100%;
+      margin-top: 12px;
+    }
+  }
 `;
 
 const Table = styled.div``;
@@ -94,8 +125,10 @@ const Tag = styled.span`
   }
 `;
 
-const TeamPaymentPanel = ({ store, className }) => {
+const TeamPaymentPanel = ({ store, className, setDate, date }) => {
   const data = store.data.userGroups;
+  const [state, setState] = useState(0);
+
   const tag = (d, mobile) => (
     <Tag mobile={mobile} isRepresentativeCard={d.isRepresentativeCard}>
       {d.isRepresentativeCard ? '대표 결제카드' : '부서 전용카드'}
@@ -106,7 +139,80 @@ const TeamPaymentPanel = ({ store, className }) => {
     <StyledPanel className={className}>
       <Filter>
         <div>부서별 결제 금액</div>
-        <div>1</div>
+        <div className="date">
+          {moment
+            .unix(date.userGroupPaymentsStartDate)
+            .format('YYYY년 MM월 DD일')}{' '}
+          ~{' '}
+          {moment
+            .unix(date.userGroupPaymentsEndDate)
+            .format('YYYY년 MM월 DD일')}{' '}
+        </div>
+        <div className="control">
+          <SegmentControl
+            height={30}
+            data={[
+              {
+                key: 0,
+                body: '이번 달',
+                onClick: () => {
+                  setState(0);
+                  setDate({
+                    userGroupPaymentsStartDate: moment()
+                      .startOf('month')
+                      .format('X'),
+                    userGroupPaymentsEndDate: moment()
+                      .endOf('month')
+                      .format('X'),
+                  });
+                },
+              },
+              {
+                key: 1,
+                body: '1개월',
+                onClick: () => {
+                  setState(1);
+                  setDate({
+                    userGroupPaymentsStartDate: moment()
+                      .subtract(1, 'month')
+                      .format('X'),
+                    userGroupPaymentsEndDate: moment().format('X'),
+                  });
+                },
+              },
+              {
+                key: 2,
+                body: '3개월',
+                onClick: () => {
+                  setState(2);
+                  setDate({
+                    userGroupPaymentsStartDate: moment()
+                      .subtract(3, 'month')
+                      .startOf('month')
+                      .format('X'),
+                    userGroupPaymentsEndDate: moment().format('X'),
+                  });
+                },
+              },
+              {
+                key: 3,
+                body: '6개월',
+                onClick: () => {
+                  setState(3);
+                  setDate({
+                    userGroupPaymentsStartDate: moment()
+                      .subtract(6, 'month')
+                      .startOf('month')
+                      .format('X'),
+                    userGroupPaymentsEndDate: moment().format('X'),
+                  });
+                },
+              },
+            ]}
+            noMargin
+            clicked={state}
+          />
+        </div>
       </Filter>
       {data.length > 0 ? (
         <Table>
@@ -130,8 +236,8 @@ const TeamPaymentPanel = ({ store, className }) => {
       ) : (
         <NoData>
           <IconNoData />
-          <br />
           <h3>부서별 결제 금액이 없습니다.</h3>
+          <br />
         </NoData>
       )}
     </StyledPanel>
@@ -141,6 +247,8 @@ const TeamPaymentPanel = ({ store, className }) => {
 TeamPaymentPanel.propTypes = {
   store: PropTypes.object,
   className: PropTypes.any,
+  setDate: PropTypes.func,
+  date: PropTypes.object,
 };
 
 export default TeamPaymentPanel;

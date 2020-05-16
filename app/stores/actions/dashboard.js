@@ -4,12 +4,11 @@ import UserManager from 'utils/userManager';
 
 const { read, onlyCreate } = createActions('dashboard');
 
-export const actionGetDashBoard = () =>
+export const actionGetDashBoard = data =>
   read({
     params: {
+      ...data,
       corpId: UserManager().getUser().corpId,
-      userGroupPaymentsStartDate: 1578036043,
-      userGroupPaymentsEndDate: 1588836088,
     },
   });
 

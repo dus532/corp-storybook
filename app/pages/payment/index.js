@@ -105,9 +105,11 @@ const Payment = () => {
           nodata={<NoData />}
         />
         <Pagination
-          now={!nowPage ? 1 : nowPage}
+          now={nowPage > 0 ? nowPage : 1}
           total={
-            paymentData.data && Math.ceil(paymentData.data.payments.length / 10)
+            paymentData.data && paymentData.data.payments.length > 0
+              ? Math.ceil(paymentData.data.payments.length / 10)
+              : 1
           }
         />
       </AsyncDiv>

@@ -9,7 +9,7 @@ const StyledControl = styled.div`
   display: flex;
   border: 1px solid ${Color.LineGray};
   border-radius: 4px;
-  margin-bottom: 30px;
+  margin-bottom: ${props => (props.noMargin ? 0 : 30)};
 
   div:first-child {
     border: 0;
@@ -25,23 +25,28 @@ const Part = styled.div`
   flex: 1;
   border-left: 1px solid ${Color.LineGray};
   text-align: center;
-  height: 40px;
-  line-height: 40px;
+  height: ${props => (props.heig ? props.heig : 40)}px;
+  line-height: ${props => (props.heig ? props.heig : 40)}px;
+  font-size: ${props => (props.heig ? 0.8 : 1)}rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: ${props => (props.checked ? 4 : 0)};
   transition: 0.35s;
-  background: ${props => props.checked && Color.DarkBlue};
+  background: ${props => props.checked && Color.Blue};
   color: ${props => props.checked && Color.White};
 `;
 
-const SegmentControl = ({ data, clicked }) => (
+const SegmentControl = ({ data, clicked, noMargin, height }) => (
   <StyledControl>
     {data.map(d => (
       <Part
         key={d.key}
         checked={clicked === d.key}
+        noMargin={noMargin}
+        heig={height}
         onClick={() => {
-          window.scroll(0, 0);
+          if (!noMargin) {
+            window.scroll(0, 0);
+          }
           d.onClick();
         }}
       >
@@ -53,6 +58,8 @@ const SegmentControl = ({ data, clicked }) => (
 
 SegmentControl.propTypes = {
   data: PropTypes.array,
+  noMargin: PropTypes.bool,
+  height: PropTypes.number,
   clicked: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 

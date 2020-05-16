@@ -122,8 +122,9 @@ const Employees = () => {
         <Pagination
           now={!nowPage ? 1 : nowPage}
           total={
-            employeeData.data &&
-            Math.ceil(employeeData.data.employees.length / 10)
+            employeeData.data && employeeData.data.employees.length > 0
+              ? Math.ceil(employeeData.data.employees.length / 10)
+              : 1
           }
         />
       </AsyncDiv>

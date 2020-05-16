@@ -12,8 +12,6 @@ const EditEmployee = ({ onClickExit, data }) => {
   const [state, setState] = useState(data);
   const [page, setPage] = useState(0);
 
-  console.log(data);
-
   useEffect(() => {
     // 부서 선택 리스트를 불러오기 위함
     dispatch(

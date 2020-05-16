@@ -18,10 +18,9 @@ import {
   RegisterIsName,
   RegisterCardDetail,
   RegisterCardExpired,
-  Button,
 } from 'components';
 
-import { actionPostInitialCard, actionRePostChargeSubscription } from 'stores';
+import { actionPostInitialCard } from 'stores';
 import UserManager from 'utils/userManager';
 
 const RegisterCard = () => {
@@ -52,27 +51,27 @@ const RegisterCard = () => {
     );
   };
 
-  const onTest = () => {
-    dispatch(
-      actionRePostChargeSubscription(
-        {
-          corpId: UserManager().getUser().coprId,
-          product: 1,
-          userNumber: 2,
-          cardId: '561f661f-48db-4c09-86e7-e51ffc786dfb',
-          cardCorp: '[KB국민]',
-          cardNumber: '94909400',
-          periodicPaymentDate: 25,
-          periodicPrice: 100,
-          startHour: '12:00',
-          endHour: '12:00',
-        },
-        () => {
-          history.push('/home');
-        },
-      ),
-    );
-  };
+  // const onTest = () => {
+  //   dispatch(
+  //     actionRePostChargeSubscription(
+  //       {
+  //         corpId: UserManager().getUser().coprId,
+  //         product: 1,
+  //         userNumber: 2,
+  //         cardId: '561f661f-48db-4c09-86e7-e51ffc786dfb',
+  //         cardCorp: '[KB국민]',
+  //         cardNumber: '94909400',
+  //         periodicPaymentDate: 25,
+  //         periodicPrice: 100,
+  //         startHour: '12:00',
+  //         endHour: '12:00',
+  //       },
+  //       () => {
+  //         history.push('/home');
+  //       },
+  //     ),
+  //   );
+  // };
 
   return (
     <Container580>
@@ -242,6 +241,7 @@ const RegisterCard = () => {
             </RegisterBirth>
           </>
         )}
+        <br />
         <ButtonBottom
           left="취소"
           onClickLeft={() => history.push('/initial/introduce')}
@@ -249,9 +249,6 @@ const RegisterCard = () => {
           typeRight="submit"
         />
         <br />
-        <Button blue onClick={onTest}>
-          테스트 재구독
-        </Button>
       </RegisterCardForm>
     </Container580>
   );

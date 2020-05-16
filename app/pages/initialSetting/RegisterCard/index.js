@@ -203,7 +203,8 @@ const RegisterCard = () => {
                 maxLength="2"
                 required
               />
-              <span>●●</span>
+              <div className="circle" />
+              <div className="circle" />
             </div>
             {errors.twoPasswordDigits && (
               <h5 className="error">
@@ -219,7 +220,7 @@ const RegisterCard = () => {
               <Input
                 name="companyNumber"
                 ref={register}
-                placeholder="ex) 1234567890"
+                placeholder="ex) 12312341234"
                 type="tel"
                 maxLength="10"
                 required

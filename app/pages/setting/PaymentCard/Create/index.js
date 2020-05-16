@@ -218,7 +218,8 @@ const Create = () => {
                     autocomplete="new-password"
                     required
                   />
-                  <span>●●</span>
+                  <div className="circle" />
+                  <div className="circle" />
                 </div>
                 {errors.twoPasswordDigits && (
                   <h5 className="error">
@@ -234,7 +235,7 @@ const Create = () => {
                   <Input
                     name="companyNumber"
                     ref={register}
-                    placeholder="ex) 1234567890"
+                    placeholder="ex) 12312341234"
                     type="tel"
                     maxLength="10"
                     required
@@ -278,9 +279,9 @@ const Create = () => {
             <br />
             <br />
             <ButtonBottom
-              left="취소"
+              left="이전"
               onClickLeft={() => history.goBack()}
-              right="다음"
+              right="완료"
               typeRight="submit"
             />
             <br />

@@ -52,16 +52,13 @@ const Create = () => {
     );
   }, []);
 
+  const { handleSubmit, register, errors } = useForm();
+
   const [state, setState] = useState({
     cardType: C.CARD_TYPE.COMPANY, // 개인, 법인
     registerType: C.REGISTER_TYPE.TEAM, // 대표카드, 팀별카드
     userGroupId: 0,
-  });
-
-  const { handleSubmit, register, errors } = useForm({
-    defaultValues: {
-      isNameOn: 'true',
-    },
+    isNameOn: false,
   });
 
   const onSubmit = data => {
@@ -131,15 +128,15 @@ const Create = () => {
                     name="isNameOn"
                     id="yes"
                     body="예"
-                    inputRef={register({ required: true })}
-                    value
+                    onChange={() => setState({ ...state, isNameOn: true })}
+                    checked={state.isNameOn}
                   />
                   <InputRadio
                     name="isNameOn"
                     id="no"
                     body="아니오"
-                    inputRef={register({ required: true })}
-                    value={false}
+                    onChange={() => setState({ ...state, isNameOn: false })}
+                    checked={!state.isNameOn}
                   />
                 </RegisterIsName>
                 <br />
@@ -230,7 +227,7 @@ const Create = () => {
                 )}
               </RegisterCardExpired>
             </RegisterCardDetail>
-            {state.cardType === C.CARD_TYPE.COMPANY ? (
+            {state.cardType === C.CARD_TYPE.COMPANY && !state.isNameOn ? (
               <>
                 <h4>사업자 등록번호</h4>
                 <RegisterBirth>

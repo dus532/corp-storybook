@@ -9,27 +9,38 @@ const utilsMiddleware = store => next => action => {
 
   // 통신 오류를 잡아 토스트로 표현합니다.
   if (meta && meta[KEY.LIFECYCLE] === LIFECYCLE.FAILURE) {
-    if (action.payload && action.payload.response) {
-      const { response } = action.payload;
-      switch (response.status) {
+    const errReg = status => {
+      switch (status) {
         case 401:
           // 인증 오류입니다. 아이디나 비빌먼호가 틀렸을까요?
-          store.dispatch(onToast(`${response.status} : 인증에 실패했습니다.`));
+          store.dispatch(onToast(`${status} : 인증에 실패했습니다.`));
           break;
         case 404:
           // 데이터가 없습니다. 즉, 존재하지 않는 라운터라는 이야기죠
-          store.dispatch(
-            onToast(`${response.status} : 존재하지 않는 라우터입니다.`),
-          );
+          store.dispatch(onToast(`${status} : 존재하지 않는 라우터입니다.`));
           break;
         case 500:
           // 서버 오류입니다.
-          store.dispatch(
-            onToast(`${response.status} : 서버에서 오류가 발생했어요!`),
-          );
+          store.dispatch(onToast(`${status} : 서버에서 오류가 발생했어요!`));
           break;
 
         default:
+          break;
+      }
+    };
+
+    if (action.payload && action.payload.response) {
+      const { response } = action.payload;
+      switch (response.data.message) {
+        case 'Login Failed':
+          store.dispatch(onToast(`로그인에 실패했습니다.`));
+          break;
+        case 'Charge Subscription Failed':
+          store.dispatch(onToast(`결제에 실패했습니다.`));
+          store.dispatch(onToast(`혹시 100원 미만의 결제인가요?`));
+          break;
+        default:
+          errReg(response.status);
           break;
       }
     }

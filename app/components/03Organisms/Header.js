@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -35,6 +36,10 @@ const StyledHeader = styled.div`
     height: 60px;
     max-width: 1172px;
     margin: 0 auto;
+  }
+
+  h2 {
+    font-weight: 700;
   }
 
   .header_top {
@@ -86,6 +91,7 @@ const StyledHeader = styled.div`
 
   .initial_status {
     width: 100%;
+    color: ${Color.SubGray};
     text-align: center;
   }
 
@@ -103,6 +109,10 @@ const StyledHeader = styled.div`
 
   .initial_ok {
     color: #101c4c;
+  }
+
+  .initial_01 {
+    color: black;
   }
 
   @media screen and (max-width: 768px) {
@@ -506,7 +516,7 @@ const Header = ({ isSigned, location }) => {
                         <h3>결제카드 등록</h3>
                       </div>
                     ) : (
-                      <div className="initial_status">
+                      <div className="initial_status initial_01">
                         <h2>01</h2>
                         <h3>결제카드 등록</h3>
                       </div>
@@ -517,17 +527,29 @@ const Header = ({ isSigned, location }) => {
                         <IconConfirm />
                         <h3>정기 구독 결제</h3>
                       </div>
+                    ) : nowInitPage() === 2 ? (
+                      <div className="initial_status initial_ok">
+                        <h2>02</h2>
+                        <h3>정기 구독 결제</h3>
+                      </div>
                     ) : (
-                      <div className="initial_status">
+                      <div className="initial_status ">
                         <h2>02</h2>
                         <h3>정기 구독 결제</h3>
                       </div>
                     )}
                     <div className="initial_arrow" />
-                    <div className="initial_status">
-                      <h2>03</h2>
-                      <h3>결제 한도 상향</h3>
-                    </div>
+                    {nowInitPage() === 3 ? (
+                      <div className="initial_status initial_ok">
+                        <h2>03</h2>
+                        <h3>결제 한도 상향</h3>
+                      </div>
+                    ) : (
+                      <div className="initial_status ">
+                        <h2>03</h2>
+                        <h3>결제 한도 상향</h3>
+                      </div>
+                    )}
                   </Container>
                   <Container
                     padding

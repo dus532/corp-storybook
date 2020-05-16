@@ -18,23 +18,19 @@ import {
   RegisterIsName,
   RegisterCardDetail,
   RegisterCardExpired,
-  Button,
 } from 'components';
 
-import { actionPostInitialCard, actionRePostChargeSubscription } from 'stores';
+import { actionPostInitialCard } from 'stores';
 import UserManager from 'utils/userManager';
 
 const RegisterCard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const { handleSubmit, register, errors } = useForm({
-    defaultValues: {
-      isNameOn: 'true',
-    },
-  });
+  const { handleSubmit, register, errors } = useForm();
 
   const [state, setState] = useState({
+    isNameOn: false,
     cardType: C.CARD_TYPE.COMPANY, // 개인, 법인
     registerType: C.REGISTER_TYPE.MAIN, // 대표카드, 팀별카드
   });
@@ -55,27 +51,27 @@ const RegisterCard = () => {
     );
   };
 
-  const onTest = () => {
-    dispatch(
-      actionRePostChargeSubscription(
-        {
-          corpId: UserManager().getUser().coprId,
-          product: 1,
-          userNumber: 2,
-          cardId: '561f661f-48db-4c09-86e7-e51ffc786dfb',
-          cardCorp: '[KB국민]',
-          cardNumber: '94909400',
-          periodicPaymentDate: 25,
-          periodicPrice: 100,
-          startHour: '12:00',
-          endHour: '12:00',
-        },
-        () => {
-          history.push('/home');
-        },
-      ),
-    );
-  };
+  // const onTest = () => {
+  //   dispatch(
+  //     actionRePostChargeSubscription(
+  //       {
+  //         corpId: UserManager().getUser().coprId,
+  //         product: 1,
+  //         userNumber: 2,
+  //         cardId: '561f661f-48db-4c09-86e7-e51ffc786dfb',
+  //         cardCorp: '[KB국민]',
+  //         cardNumber: '94909400',
+  //         periodicPaymentDate: 25,
+  //         periodicPrice: 100,
+  //         startHour: '12:00',
+  //         endHour: '12:00',
+  //       },
+  //       () => {
+  //         history.push('/home');
+  //       },
+  //     ),
+  //   );
+  // };
 
   return (
     <Container580>
@@ -116,15 +112,15 @@ const RegisterCard = () => {
                 name="isNameOn"
                 id="yes"
                 body="예"
-                inputRef={register({ required: true })}
-                value
+                onChange={() => setState({ ...state, isNameOn: true })}
+                checked={state.isNameOn}
               />
               <InputRadio
                 name="isNameOn"
                 id="no"
                 body="아니오"
-                inputRef={register({ required: true })}
-                value={false}
+                onChange={() => setState({ ...state, isNameOn: false })}
+                checked={!state.isNameOn}
               />
             </RegisterIsName>
             <br />
@@ -206,7 +202,8 @@ const RegisterCard = () => {
                 maxLength="2"
                 required
               />
-              <span>●●</span>
+              <div className="circle" />
+              <div className="circle" />
             </div>
             {errors.twoPasswordDigits && (
               <h5 className="error">
@@ -215,14 +212,14 @@ const RegisterCard = () => {
             )}
           </RegisterCardExpired>
         </RegisterCardDetail>
-        {state.cardType === C.CARD_TYPE.COMPANY ? (
+        {state.cardType === C.CARD_TYPE.COMPANY && !state.isNameOn ? (
           <>
             <h4>사업자 등록번호</h4>
             <RegisterBirth>
               <Input
-                name="birthday"
+                name="companyNumber"
                 ref={register}
-                placeholder="ex) 1234567890"
+                placeholder="ex) 12312341234"
                 type="tel"
                 maxLength="10"
                 required
@@ -244,15 +241,14 @@ const RegisterCard = () => {
             </RegisterBirth>
           </>
         )}
+        <br />
         <ButtonBottom
           left="취소"
           onClickLeft={() => history.push('/initial/introduce')}
           right="다음"
           typeRight="submit"
         />
-        <Button blue onClick={onTest}>
-          테스트 재구독
-        </Button>
+        <br />
       </RegisterCardForm>
     </Container580>
   );

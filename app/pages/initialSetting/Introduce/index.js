@@ -11,16 +11,15 @@ const IntroTop = styled.div`
   justify-content: space-between;
   height: 240px;
   margin-top: 160px;
+
   .intro_top-left {
     width: 100px;
     margin-top: 48px;
+    flex: 1;
   }
 
   h2 {
     font-weight: 700;
-  }
-  .intro_top-left {
-    flex: 1;
   }
 
   .intro_top-img {
@@ -39,6 +38,12 @@ const IntroTop = styled.div`
     margin-bottom: 40px;
     height: auto;
 
+    .intro_top-left {
+      width: 100%;
+      order: 2;
+      margin-top: 0;
+    }
+
     .intro_top-img {
       width: 100%;
       height: 180px;
@@ -47,11 +52,6 @@ const IntroTop = styled.div`
       background-repeat: no-repeat;
       order: 1;
       top: 0;
-    }
-
-    .intro_top-left {
-      order: 2;
-      margin-top: 0;
     }
   }
 `;

@@ -6,6 +6,7 @@ const RegisterCardExpired = styled.div`
 
   .center {
     display: flex;
+    align-items: center;
   }
 
   span {
@@ -15,7 +16,16 @@ const RegisterCardExpired = styled.div`
   input {
     text-align: center;
     width: 80px;
-    margin-right: 4px;w
+    margin-right: 4px;
+  }
+
+  .circle {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: black;
+    border-radius: 50%;
+    margin-left: 4px;
   }
 `;
 

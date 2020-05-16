@@ -279,7 +279,7 @@ const Create = () => {
             <br />
             <br />
             <ButtonBottom
-              left="이전"
+              left="취소"
               onClickLeft={() => history.goBack()}
               right="완료"
               typeRight="submit"

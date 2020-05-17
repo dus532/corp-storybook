@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { CSVLink } from 'react-csv/lib';
+
 import Color from 'config/color';
+import moment from 'utils/moment';
 
 import DL_IMG from 'images/icon_download.png';
 import DL_IMG_M from 'images/icon_download_mobile.png';
@@ -92,6 +95,18 @@ const ExcelDownload = styled.button`
 `;
 
 const Summary = ({ data, type }) => {
+  const headerData = [
+    { label: 'ID', key: 'id' },
+    { label: '결제 시각', key: 'date' },
+    { label: '결제 회사', key: 'cardCorp' },
+    { label: '결제 카드', key: 'cardNumber' },
+    { label: '금액', key: 'amount' },
+    { label: '항목', key: 'item' },
+    { label: '구분', key: 'type' },
+    { label: '상태', key: 'status' },
+    { label: '연관 예약번호', key: 'rentalId' },
+  ];
+
   switch (type) {
     case 'employee':
       // 사원관리
@@ -122,6 +137,7 @@ const Summary = ({ data, type }) => {
 
     default:
       // 결제내역
+
       return (
         <StyledSummary className="box_overflow">
           <div className="left">
@@ -134,8 +150,16 @@ const Summary = ({ data, type }) => {
           <div className="right">
             <span className="bold">{data.totalCount}건</span>{' '}
             <ExcelDownload>
-              <div className="img" />
-              <span>엑셀 다운로드</span>
+              <CSVLink
+                headers={headerData}
+                data={data.payments}
+                filename={`carplat_payment_${moment().format(
+                  'YYYYMMDDHHmmss',
+                )}.csv`}
+              >
+                <div className="img" />
+                <span>엑셀 다운로드</span>
+              </CSVLink>
             </ExcelDownload>
           </div>
         </StyledSummary>

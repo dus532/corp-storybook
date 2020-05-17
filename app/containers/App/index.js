@@ -54,6 +54,13 @@ const App = () => {
     } else if (!USER && document.location.pathname !== '/') {
       dispatch(actionSignOut());
       history.push('/');
+    } else if (
+      USER &&
+      !USER.isCardRegistered &&
+      location.pathname.indexOf('initial') === -1 &&
+      location.pathname.indexOf('mypage') === -1
+    ) {
+      history.push('/initial/introduce');
     }
   }, [location]);
 

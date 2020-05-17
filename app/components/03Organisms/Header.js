@@ -542,12 +542,12 @@ const Header = ({ isSigned, location }) => {
                     {nowInitPage() === 3 ? (
                       <div className="initial_status initial_ok">
                         <h2>03</h2>
-                        <h3>결제 한도 상향</h3>
+                        <h3>이용 한도 설정</h3>
                       </div>
                     ) : (
                       <div className="initial_status ">
                         <h2>03</h2>
-                        <h3>결제 한도 상향</h3>
+                        <h3>이용 한도 설정</h3>
                       </div>
                     )}
                   </Container>

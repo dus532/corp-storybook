@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -296,8 +296,27 @@ const SettingMenuMobile = styled.div`
 const Header = ({ isSigned, location }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const iRef = useRef(null);
+
   const [menu, setMenu] = useState(false);
   const [setting, setSetting] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        iRef.current &&
+        !iRef.current.contains(event.target) &&
+        document.body.clientWidth > 768
+      ) {
+        setSetting(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [iRef]);
 
   const nowInitPage = () => {
     if (location.indexOf('/registercard') !== -1) {
@@ -610,7 +629,7 @@ const Header = ({ isSigned, location }) => {
           </MobileMenu>
         )}
         {setting && (
-          <SettingMenu>
+          <SettingMenu ref={iRef}>
             <NavLink
               className="menu"
               onClick={onClose}

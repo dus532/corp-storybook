@@ -27,7 +27,7 @@ const RequestManager = (method, url, data, header) => {
     // 이는 추후 서버쪽 로그 기록으로도 활용될 수 있습니다.
     const now = moment().format('MM.DD a h:mm:ss');
     console.log(`${now} 📡 서버 통신 ( ${method.toUpperCase()} ) ${url}`, data);
-    console.log(configs[process.env.NODE_ENV], process.env.NODE_ENV);
+    console.log(configs[process.env.NODE_ENV], process.env.NODE_ENV, '');
 
     // 02. axios 통신
     // axios 통신을 시도합니다.

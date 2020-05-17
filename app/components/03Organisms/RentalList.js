@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import TEMPIMG from 'images/no_car.png';
 import SubButton from 'components/01Atoms/SubButton';
@@ -10,6 +11,7 @@ import NoData from 'components/03Organisms/NoData';
 import moment from 'utils/moment';
 import C from 'config/constants';
 import Color from 'config/color';
+import { actionGetRentalStatement } from 'stores';
 
 const StyledPanel = styled.div`
   width: 100%;
@@ -126,6 +128,12 @@ const toStringStatus = v => {
 
 const RentalPanel = ({ data }) => {
   const isRental = data.status === C.RENTAL_TYPE.RENTAL;
+  const dispatch = useDispatch();
+
+  const onStatement = rentalId => {
+    dispatch(actionGetRentalStatement(rentalId));
+  };
+
   return (
     <StyledPanel
       className="box_overflow"
@@ -161,7 +169,7 @@ const RentalPanel = ({ data }) => {
       <div className="footer">
         {(data.status === C.RENTAL_TYPE.CANCEL ||
           data.status === C.RENTAL_TYPE.FINISH) && (
-          <SubButton size="small" white>
+          <SubButton size="small" onClick={() => onStatement(data.id)} white>
             이용 내역서 확인
           </SubButton>
         )}

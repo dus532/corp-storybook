@@ -77,7 +77,7 @@ const Payment = () => {
       .date();
     const today = moment().date();
 
-    const totalAmount = Math.ceil((amount / monthLast) * today);
+    const totalAmount = Math.ceil((amount / monthLast) * (monthLast - today));
 
     if (today >= 25) {
       return {
@@ -99,6 +99,8 @@ const Payment = () => {
         .format('YYYY년 MM월 DD일'),
     };
   };
+
+  console.log(paymentAmount());
 
   // 다음장
   const onNext = () => {

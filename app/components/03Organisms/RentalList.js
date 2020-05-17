@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import TEMPIMG from 'images/no_car.png';
 import SubButton from 'components/01Atoms/SubButton';
 import IconOK from 'components/01Atoms/IconOK';
+import NoData from 'components/03Organisms/NoData';
 
 import moment from 'utils/moment';
 import C from 'config/constants';
@@ -169,13 +170,19 @@ const RentalPanel = ({ data }) => {
   );
 };
 
-const RentalList = ({ data }) => (
-  <>
-    {data.map(d => (
-      <RentalPanel data={d} key={d.id} />
-    ))}
-  </>
-);
+const RentalList = ({ data }) =>
+  data.length > 0 ? (
+    <>
+      {data.map(d => (
+        <RentalPanel data={d} key={d.id} />
+      ))}
+    </>
+  ) : (
+    <NoData>
+      <h3>최근 결제 금액이 없습니다.</h3>
+      <br />
+    </NoData>
+  );
 
 RentalPanel.propTypes = {
   data: PropTypes.object,

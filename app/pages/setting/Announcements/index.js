@@ -59,7 +59,7 @@ const Announcements = () => {
         />
         <AsyncDiv store={AnnouncementsData}>
           <Board
-            now={!nowPage ? 1 : nowPage}
+            now={nowPage}
             data={AnnouncementsData.data.announcements}
             onClick={onDetail}
           />

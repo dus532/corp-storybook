@@ -24,6 +24,7 @@ import {
   SettingPaymentCardCreate,
   SettingPaymentCardUsage,
   SettingFAQ,
+  SettingFAQBoard,
   SettingTerms,
   SettingService,
   MyPage,
@@ -140,6 +141,7 @@ const App = () => {
         />
         {/* 기타 */}
         <Route path="/setting/faq" exact component={SettingFAQ} />
+        <Route path="/setting/faq/board" exact component={SettingFAQBoard} />
         <Route path="/setting/cs" exact component={SettingService} />
         <Route path="/setting/terms" exact component={SettingTerms} />
         {/* 마이페이지 */}

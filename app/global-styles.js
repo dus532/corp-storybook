@@ -3,6 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 import Color from 'config/color';
 
 const GlobalStyle = createGlobalStyle`
+
+  *:active {
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  }
+
   ul{
     margin:0;
   }

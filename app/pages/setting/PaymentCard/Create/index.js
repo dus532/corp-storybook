@@ -70,7 +70,7 @@ const Create = () => {
       cardNumber: data.card1 + data.card2 + data.card3 + data.card4,
       expiration: `20${data.expirationYY}${data.expirationMM}`,
     };
-    if (state.userGroupId) {
+    if (status === 'UPDATE' || state.userGroupId) {
       dispatch(
         status === 'CREATE'
           ? // 등록시
@@ -81,7 +81,7 @@ const Create = () => {
           : // 재등록(수정)시
             actionPutCard({ editType: isMain ? 1 : 2, ...body }, () => {
               history.push('/setting/paymentcard');
-              toast(`${isMain} 결제카드 등록이 완료되었습니다.`, 'ok');
+              toast(`${isMain} 결제카드 재등록이 완료되었습니다.`, 'ok');
             }),
       );
     } else {
@@ -120,6 +120,7 @@ const Create = () => {
               ]}
               clicked={state.cardType}
             />
+            <br />
             {state.cardType === C.CARD_TYPE.COMPANY && (
               <>
                 <h4>법인카드에 본인 이름이 있으세요?</h4>

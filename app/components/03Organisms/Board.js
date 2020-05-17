@@ -29,7 +29,7 @@ const Line = styled.div`
 `;
 
 const Board = ({ now = '1', data, onClick }) => (
-  <StyledBoard>
+  <StyledBoard className="box_overflow">
     {data.map((d, index) => {
       if (index > (now * 1 - 1) * 10 && index < now * 10) {
         return (

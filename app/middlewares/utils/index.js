@@ -35,6 +35,9 @@ const utilsMiddleware = store => next => action => {
         case 'Login Failed':
           store.dispatch(onToast(`로그인에 실패했습니다.`));
           break;
+        case 'No Approved Subscription':
+          store.dispatch(onToast(`구독을 승인할 수 없습니다.`));
+          break;
         case 'Charge Subscription Failed':
           store.dispatch(onToast(`결제에 실패했습니다.`));
           store.dispatch(onToast(`혹시 100원 미만의 결제인가요?`));

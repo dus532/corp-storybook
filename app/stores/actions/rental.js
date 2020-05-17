@@ -1,7 +1,8 @@
 // 액션!
 import createActions from 'stores/controller/createActions';
+import UserManager from 'utils/userManager';
 
-const { read } = createActions('manageRentals');
+const { read, onlyRead } = createActions('manageRentals');
 
 export const actionGetManageRentals = (
   {
@@ -27,5 +28,12 @@ export const actionGetManageRentals = (
       endDate,
       startDate,
     },
+    meta: { onSuccess },
+  });
+
+export const actionGetRentalStatement = (rentalId, onSuccess) =>
+  onlyRead({
+    url: '/corp/manageRentals/statement',
+    params: { rentalId, corpId: UserManager().getUser().corpId },
     meta: { onSuccess },
   });

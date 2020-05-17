@@ -49,10 +49,12 @@ const C = {
   PAYMENT_ITEM: {
     ALL: 0,
     RENTAL_FEE: 1,
-    CANCELLATION_FEE: 2,
-    RETURN_DELAY: 3,
-    HI_PASS: 4,
-    SUBSCRIBE: 5,
+    EXTRA_FEE: 2,
+    FEE: 3,
+    PANALTY: 5,
+    CANCELLATION_FEE: 6,
+    HI_PASS: 7,
+    ETC: 99,
   },
 
   LICENSE_TYPE: {

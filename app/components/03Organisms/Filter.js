@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import SearchIMG from 'images/icon_search.png';
 
 import C from 'config/constants';
+import F from 'config/filter';
 import Color from 'config/color';
 import moment from 'utils/moment';
 
@@ -137,11 +138,7 @@ const Filter = ({
               <DropBox
                 className="dropbox "
                 title="면허증"
-                data={[
-                  { value: C.LICENSE_TYPE.ALL, body: '전체 면허증' },
-                  { value: C.LICENSE_TYPE.REGISTERD, body: '등록완료' },
-                  { value: C.LICENSE_TYPE.NOT_REGISTERD, body: '미인증' },
-                ]}
+                data={F.licenseType}
                 onChange={d => handleChange(d, 'license')}
                 value={filter.license ? filter.license : 0}
               />
@@ -175,7 +172,10 @@ const Filter = ({
                 title="부서"
                 data={[
                   { value: 0, body: '전체 부서' },
-                  ...list.userGroups.map(l => ({ value: l.id, body: l.name })),
+                  ...list.userGroups.map(l => ({
+                    value: l.id,
+                    body: l.name,
+                  })),
                 ]}
                 onChange={d => {
                   handleChange(d === 0 ? null : d, 'userGroupId');
@@ -191,7 +191,10 @@ const Filter = ({
                     ? list.employees.reduce((prev, now) => {
                         if (filter.userGroupId) {
                           if (filter.userGroupId === now.id) {
-                            prev.push({ value: now.id, body: now.name });
+                            prev.push({
+                              value: now.id,
+                              body: now.name,
+                            });
                             return prev;
                           }
                         } else {
@@ -211,14 +214,7 @@ const Filter = ({
               <DropBox
                 className="dropbox "
                 title="예약 상태"
-                data={[
-                  { value: C.RENATL_STATUS.ALL, body: '전체 예약' },
-                  { value: C.RENATL_STATUS.CAR_RESERVATION, body: '차량 예약' },
-                  { value: C.RENATL_STATUS.CAR_RENTAL, body: '차량 대여' },
-                  { value: C.RENATL_STATUS.RENTAL_CANCEL, body: '예약 취소' },
-                  { value: C.RENATL_STATUS.RETURN_DELAY, body: '반납 지연' },
-                  { value: C.RENATL_STATUS.COMPLETE, body: '이용 완료' },
-                ]}
+                data={F.rentalStatus}
                 onChange={d => {
                   handleChange(d, 'status');
                 }}
@@ -227,12 +223,7 @@ const Filter = ({
               <DropBox
                 className="dropbox dropbox_last"
                 title="목적"
-                data={[
-                  { value: 0, body: '전체 목적' },
-                  { value: C.PURPOSE.OUTSIDE, body: '외근' },
-                  { value: C.PURPOSE.BUSINESS_TRIP, body: '출장' },
-                  { value: C.PURPOSE.INHOUSE_EVENT, body: '사내 행사' },
-                ]}
+                data={F.rentalPuropose}
                 onChange={d => {
                   handleChange(d, 'purpose');
                 }}
@@ -253,11 +244,7 @@ const Filter = ({
               <DropBox
                 className="dropbox "
                 title="결제상태"
-                data={[
-                  { value: C.PAYMENT_STATUS.ALL, body: '전체 결제상태' },
-                  { value: C.PAYMENT_STATUS.FINISH, body: '결제완료' },
-                  { value: C.PAYMENT_STATUS.CANCEL, body: '결제취소' },
-                ]}
+                data={F.Paymentstatus}
                 onChange={d => {
                   handleChange(d, 'status');
                 }}
@@ -267,7 +254,10 @@ const Filter = ({
                 className="dropbox dropbox_last"
                 title="결제카드"
                 data={[
-                  { value: C.PAYMENT_STATUS.ALL, body: '전체 결제카드' },
+                  {
+                    value: C.PAYMENT_STATUS.ALL,
+                    body: '전체 결제카드',
+                  },
                   ...list.cards.map(l => ({
                     value: l.id,
                     body: `${l.cardCorp} / ${l.cardNumber.substr(
@@ -286,17 +276,7 @@ const Filter = ({
               <DropBox
                 className="dropbox "
                 title="결제항목"
-                data={[
-                  { value: C.PAYMENT_ITEM.ALL, body: '전체 항목' },
-                  { value: C.PAYMENT_ITEM.RENTAL_FEE, body: '대여료' },
-                  {
-                    value: C.PAYMENT_ITEM.CANCELLATION_FEE,
-                    body: '취소 수수료',
-                  },
-                  { value: C.PAYMENT_ITEM.RETURN_DELAY, body: '반납지연' },
-                  { value: C.PAYMENT_ITEM.HI_PASS, body: '하이패스' },
-                  { value: C.PAYMENT_ITEM.SUBSCRIBE, body: '정기구독' },
-                ]}
+                data={F.Paymentitem}
                 onChange={d => handleChange(d, 'item')}
                 value={filter.item ? filter.item : 0}
               />

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import moment from 'utils/moment';
 import EditIMG from 'images/icon_edit.png';
+import F from 'config/filter';
 
 const StyledTable = styled.div``;
 
@@ -93,15 +94,26 @@ const Td = styled.div`
   }
 `;
 
+const Reg = (type, value) => type.filter(t => t.value === value)[0].body;
+
 const RegData = (name, value, onClick, t) => {
   if (name.indexOf('amount') !== -1) {
-    return `${value[name].toLocaleString('en')}`;
+    return `${value[name].toLocaleString('en')} 원`;
   }
   if (name.indexOf('date') !== -1 || name.indexOf('Date') !== -1) {
     return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;
   }
   if (name.indexOf('edit') !== -1) {
     return <Edit type="button" className="edit" onClick={() => onClick(t)} />;
+  }
+  if (name.indexOf('item') !== -1) {
+    return Reg(F.Paymentitem, value[name]);
+  }
+  if (name.indexOf('status') !== -1) {
+    return Reg(F.Paymentstatus, value[name]);
+  }
+  if (name.indexOf('lisence') !== -1) {
+    return Reg(F.Boolean, value[name]);
   }
   return value[name];
 };

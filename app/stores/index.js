@@ -31,7 +31,10 @@ export {
   actionDelEmployee,
 } from 'stores/actions/employee';
 
-export { actionGetManageRentals } from 'stores/actions/rental';
+export {
+  actionGetManageRentals,
+  actionGetRentalStatement,
+} from 'stores/actions/rental';
 
 export { actionGetAnnouncements } from 'stores/actions/announcements';
 

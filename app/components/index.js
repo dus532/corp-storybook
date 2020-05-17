@@ -73,6 +73,8 @@ export {
 } from 'components/03Organisms/RegisterCardExpired';
 export { default as RegisterBirth } from 'components/03Organisms/RegisterBirth';
 export { default as RentalList } from 'components/03Organisms/RentalList';
+export { default as ItemPanel } from 'components/03Organisms/ItemPanel';
+export { default as Category } from 'components/03Organisms/Category';
 
 // 04 Templates
 export { default as AsyncDiv } from 'components/04Templates/AsyncDiv';

@@ -104,6 +104,7 @@ const RegisterCard = () => {
           ]}
           clicked={state.cardType}
         />
+        <br />
         {state.cardType === C.CARD_TYPE.COMPANY && (
           <>
             <h4>법인카드에 본인 이름이 있으세요?</h4>

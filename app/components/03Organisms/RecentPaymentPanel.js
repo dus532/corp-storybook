@@ -13,6 +13,7 @@ import {
 
 import Color from 'config/color';
 import IconNoData from 'components/01Atoms/IconNoData';
+import NoData from 'components/03Organisms/NoData';
 
 const StyledPanel = styled.div`
   margin-top: 30px;
@@ -34,17 +35,6 @@ const Filter = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: 700;
-`;
-
-const NoData = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  text-align: center;
-  margin-bottom: 24px;
 `;
 
 const renderCustomizedLabel = props => {
@@ -168,7 +158,10 @@ const RecentPaymentPanel = ({ store, className }) => {
                 axisLine={false}
                 tickLine={false}
               />
-              {viewport !== 'pc' && <Tooltip content={<CustomTooltip />} />}
+              <Tooltip
+                cursor={{ fill: 'rgba(0,0,0,0.01)' }}
+                content={<CustomTooltip />}
+              />
               <Bar
                 dataKey="amount"
                 fill={Color.DarkBlue}

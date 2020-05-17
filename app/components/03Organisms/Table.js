@@ -119,7 +119,7 @@ const Table = ({ now = '1', data = [], title = [], nodata }) =>
         </Th>
         <Line />
         {data.map((d, index) => {
-          if (index > (now * 1 - 1) * 10 && index < now * 10) {
+          if (index >= (now * 1 - 1) * 10 && index < now * 10) {
             return (
               <Tr key={index} className="box_overflow">
                 {title.map(t => (

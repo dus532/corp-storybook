@@ -15,7 +15,6 @@ import {
 import { actionPostSignIn } from 'stores';
 import { SIGN_FIND_EMAIL } from 'modals/constants';
 import { useToast, useModal } from 'utils/hooks';
-import UserManager from 'utils/userManager';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -81,20 +80,6 @@ const SignIn = () => {
             </Button>
             <br />
             <br />
-            <Button
-              type="button"
-              onClick={() => {
-                UserManager().setUser({
-                  corpId: 'b9360949-c6b4-4e49-833f-ae5b86bb8d2b',
-                  accessToken:
-                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIiwicmFpZGVhIl0sInNvSWQiOiJjYXJwbGF0IiwidXNlcl9uYW1lIjoiZGI1OWIwMGMtNmE5YS00ZjAyLTk0YWItMzVlMDBiMjk3MDI1Iiwic2NvcGUiOlsicmVhZCJdLCJleHAiOjE2MDQyMDAyOTksImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiOTZlZTYzNjQtYmU0OC00YzkxLWEyMzQtNTgyMzcyNmFhNDk3IiwiY2xpZW50X2lkIjoiY2FycGxhdCJ9.u4ZKetnrJebeJeBd1IKiMlMh5OHqCmseF7KX1deo4eY',
-                  refreshToken:
-                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIiwicmFpZGVhIl0sInNvSWQiOiJjYXJwbGF0IiwidXNlcl9uYW1lIjoiZGI1OWIwMGMtNmE5YS00ZjAyLTk0YWItMzVlMDBiMjk3MDI1Iiwic2NvcGUiOlsicmVhZCJdLCJhdGkiOiI5NmVlNjM2NC1iZTQ4LTRjOTEtYTIzNC01ODIzNzI2YWE0OTciLCJleHAiOjE2MjAxODQyOTksImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiNjc2N2E5OWYtYWI0YS00YmFmLWExZmMtNzFmOTAyZjQ3MTZlIiwiY2xpZW50X2lkIjoiY2FycGxhdCJ9.sfzWrymg69yOl5MluPjkSWyiQundQrXflwCdDuB3wTs',
-                });
-              }}
-            >
-              <span>임시 로그인</span>
-            </Button>
             <InfoBox>카플랫에 문의하기 : 1544-7198</InfoBox>
           </form>
         </div>

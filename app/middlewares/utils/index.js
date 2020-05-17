@@ -42,6 +42,11 @@ const utilsMiddleware = store => next => action => {
           store.dispatch(onToast(`결제에 실패했습니다.`));
           store.dispatch(onToast(`혹시 100원 미만의 결제인가요?`));
           break;
+        case 'Raidea Server Error registerCardResult':
+          store.dispatch(
+            onToast(`카드 정보가 정확하지 않습니다. 다시 확인해주세요.`),
+          );
+          break;
         default:
           errReg(response.status);
           break;

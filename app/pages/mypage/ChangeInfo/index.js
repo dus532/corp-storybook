@@ -34,7 +34,7 @@ const ChangeInfo = () => {
 
   const onSubmit = data => {
     dispatch(
-      actionPutAdminInfo({ adminId: adminData.adminLoginId, ...data }, () => {
+      actionPutAdminInfo({ uuid: adminData.adminLoginId, ...data }, () => {
         history.push('/mypage');
         toast('관리자 정보가 변경되었습니다', 'ok');
       }),

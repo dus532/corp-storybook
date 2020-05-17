@@ -23,7 +23,6 @@ const Subscription = () => {
 
   const current = useSelector(state => state.subscription.data.businessSubs);
   const next = useSelector(state => state.subscription.data.nextSubs);
-  console.log(SubscriptionsData.data);
 
   useEffect(() => {
     dispatch(actionGetSubscription());

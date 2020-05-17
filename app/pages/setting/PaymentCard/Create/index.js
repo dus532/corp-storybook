@@ -38,6 +38,7 @@ const Create = () => {
   const history = useHistory();
   const toast = useToast();
   const isMain = useQuery().get('main') === 'true' ? '대표' : '부서';
+  const userGroupId = useQuery().get('userGroupId');
 
   // 수정과 삭제를 구분합니다.
   const { id } = useParams();
@@ -57,13 +58,13 @@ const Create = () => {
   const [state, setState] = useState({
     cardType: C.CARD_TYPE.COMPANY, // 개인, 법인
     registerType: C.REGISTER_TYPE.TEAM, // 대표카드, 팀별카드
-    userGroupId: 0,
+    userGroupId: isMain === '부서' ? userGroupId || 0 : null,
     isNameOn: false,
   });
 
   const onSubmit = data => {
     const body = {
-      cardId: status === 'UPDATE' && id,
+      cardId: status === 'UPDATE' ? id : null,
       corpId: UserManager().getUser().corpId,
       ...state,
       ...data,
@@ -79,10 +80,13 @@ const Create = () => {
               toast(`${isMain} 결제카드 등록이 완료되었습니다.`, 'ok');
             })
           : // 재등록(수정)시
-            actionPutCard({ editType: isMain ? 1 : 2, ...body }, () => {
-              history.push('/setting/paymentcard');
-              toast(`${isMain} 결제카드 재등록이 완료되었습니다.`, 'ok');
-            }),
+            actionPutCard(
+              { editType: isMain === '대표' ? 1 : 2, ...body },
+              () => {
+                history.push('/setting/paymentcard');
+                toast(`${isMain} 결제카드 재등록이 완료되었습니다.`, 'ok');
+              },
+            ),
       );
     } else {
       toast('부서를 선택하세요.');

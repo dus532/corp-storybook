@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -75,7 +77,13 @@ const Tag = styled.span`
 const CardPanel = ({ data, onClickSetting }) => (
   <StyledPanel className="box_overflow">
     <div className="head">
-      {data.main ? `전체 부서` : data.userGroupName}
+      <div>
+        {data.main
+          ? `전체 부서`
+          : data.userGroupName
+          ? data.userGroupName
+          : '부서 카드'}
+      </div>
       <button type="button" onClick={onClickSetting} className="menu_mobile" />
     </div>
     <div className="tag">

@@ -44,6 +44,7 @@ const Usage = () => {
   const history = useHistory();
   const toast = useToast();
   const isMain = useQuery().get('main') === 'true' ? '대표' : '부서';
+  const userGroupId = useQuery().get('userGroupId');
 
   // 수정과 삭제를 구분합니다.
   const { id } = useParams();
@@ -57,8 +58,10 @@ const Usage = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const body = {
+      type: isMain === '대표' ? 1 : 2,
       corpId: UserManager().getUser().corpId,
-      userGroupId: isMain === '대표' ? null : id,
+      cardId: id,
+      userGroupId: isMain === '대표' ? null : userGroupId,
       ...state,
     };
     if (state.isLimited && state.limitedAmount < 500000) {

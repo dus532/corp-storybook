@@ -45,6 +45,10 @@ const EditCard = ({ onClickExit, data }) => {
                     history.push(
                       `/setting/paymentcard/${data.id}?main=${
                         data.main ? 'true' : 'false'
+                      }${
+                        data.userGroupId
+                          ? `&userGroupId=${data.userGroupId}`
+                          : ''
                       }`,
                     );
                     onClickExit();
@@ -60,6 +64,10 @@ const EditCard = ({ onClickExit, data }) => {
                     history.push(
                       `/setting/paymentcard/usage/${data.id}?main=${
                         data.main ? 'true' : 'false'
+                      }${
+                        data.userGroupId
+                          ? `&userGroupId=${data.userGroupId}`
+                          : ''
                       }`,
                     );
                     onClickExit();

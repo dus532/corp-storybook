@@ -31,7 +31,7 @@ import {
   ChangePW,
   ChangeInfo,
 } from 'pages';
-import { Header } from 'components';
+import { Header, Footer } from 'components';
 
 import { actionSetUser, actionSignOut } from 'stores';
 
@@ -54,16 +54,14 @@ const App = () => {
     } else if (!USER && document.location.pathname !== '/') {
       dispatch(actionSignOut());
       history.push('/');
+    } else if (
+      USER &&
+      !USER.isCardRegistered &&
+      location.pathname.indexOf('initial') === -1 &&
+      location.pathname.indexOf('mypage') === -1
+    ) {
+      history.push('/initial/introduce');
     }
-
-    // else if (
-    //   USER &&
-    //   !USER.isCardRegistered &&
-    //   location.pathname.indexOf('initial') === -1 &&
-    //   location.pathname.indexOf('mypage') === -1
-    // ) {
-    //   history.push('/initial/introduce');
-    // }
   }, [location]);
 
   return (
@@ -158,6 +156,7 @@ const App = () => {
         <Route path="/mypage/changepw" exact component={ChangePW} />
         <Route path="/mypage/changeinfo" exact component={ChangeInfo} />
       </Switch>
+      <Footer />
       <GlobalStyle />
     </>
   );

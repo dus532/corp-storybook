@@ -610,7 +610,7 @@ const Header = ({ isSigned, location }) => {
               <br />
               <hr />
               <div className="info">
-                <h5 className="info_text">{isSigned.access_token} 님</h5>
+                <h5 className="info_text">{isSigned.name} 님</h5>
                 <SmallButton
                   onClick={() => {
                     history.push('/mypage');

@@ -60,24 +60,18 @@ const ChangePW = () => {
                 <br />
                 <h4>현재 비밀번호</h4>
                 <Input
-                  name="nowPW"
-                  ref={register({
-                    pattern: {
-                      value: REG,
-                      message:
-                        '영문, 숫자, 특수문자를 조합하여 8~12자로 입력하세요',
-                    },
-                  })}
+                  name="password"
+                  ref={register}
                   type="password"
                   required
                 />
-                {errors.nowPW && (
-                  <h5 className="error">{errors.nowPW.message}</h5>
+                {errors.password && (
+                  <h5 className="error">{errors.password.message}</h5>
                 )}
                 <br />
                 <h4>새 비밀번호</h4>
                 <Input
-                  name="newPW"
+                  name="newPassword"
                   ref={register({
                     pattern: {
                       value: REG,
@@ -88,8 +82,8 @@ const ChangePW = () => {
                   type="password"
                   required
                 />
-                {errors.newPW && (
-                  <h5 className="error">{errors.newPW.message}</h5>
+                {errors.newPassword && (
+                  <h5 className="error">{errors.newPassword.message}</h5>
                 )}
                 <br />
                 <h4>새 비밀번호 확인</h4>
@@ -97,7 +91,7 @@ const ChangePW = () => {
                   name="newPWCheck"
                   ref={register({
                     validate: value =>
-                      value === getValues().newPW ||
+                      value === getValues().newPassword ||
                       '비밀번호 확인이 맞지 않습니다.',
                   })}
                   type="password"

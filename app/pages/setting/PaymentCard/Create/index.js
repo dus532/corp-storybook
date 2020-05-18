@@ -273,7 +273,9 @@ const Create = () => {
                   title="부서 선택"
                   data={[
                     { value: 0, body: '선택하세요' },
-                    ...list.map(l => ({ value: l.id, body: l.name })),
+                    ...list.map(
+                      l => !l.isCardRegisteded && { value: l.id, body: l.name },
+                    ),
                   ]}
                   onChange={data => setState({ ...state, userGroupId: data })}
                   value={state.userGroupId}

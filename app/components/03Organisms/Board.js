@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Color from 'config/color';
 import moment from 'utils/moment';
+import ArrowIMG from 'images/icon_arrow_black.png';
 
 const StyledBoard = styled.div`
   background: white;
@@ -26,12 +27,18 @@ const Line = styled.div`
   span {
     font-weight: 700;
   }
+
+  .arrow {
+    width: 20px;
+    min-height: 80px;
+    background: url(${ArrowIMG}) center / contain no-repeat;
+  }
 `;
 
 const Board = ({ now = '1', data, onClick }) => (
   <StyledBoard className="box_overflow">
     {data.map((d, index) => {
-      if (index > (now * 1 - 1) * 10 && index < now * 10) {
+      if (index >= (now * 1 - 1) * 10 && index < now * 10) {
         return (
           <Line key={d.id} onClick={() => onClick(d)}>
             <div>
@@ -39,7 +46,7 @@ const Board = ({ now = '1', data, onClick }) => (
               <br />
               {moment(d.createdAt).format('YYYY년 MM월 DD일 hh:mm')}
             </div>
-            <div>이동</div>
+            <div className="arrow" />
           </Line>
         );
       }

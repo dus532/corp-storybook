@@ -8,7 +8,7 @@ const Announcements = ({ onClickExit, data }) => (
   <FloatingDivBig
     title={data.title}
     subtitle={moment(data.createdAt).format('YYYY년 MM월 DD일 hh:mm')}
-    body={data.conent}
+    body={data.content}
     onClickExit={onClickExit}
   />
 );

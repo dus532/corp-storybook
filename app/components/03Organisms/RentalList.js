@@ -186,10 +186,7 @@ const RentalList = ({ data }) =>
       ))}
     </>
   ) : (
-    <NoData>
-      <h3>최근 결제 금액이 없습니다.</h3>
-      <br />
-    </NoData>
+    <NoData type="rental" />
   );
 
 RentalPanel.propTypes = {

@@ -103,7 +103,7 @@ const Payment = () => {
             ['연관 예약번호', 'rentalId', 1.6],
           ]}
           data={paymentData.data.payments}
-          nodata={<NoData />}
+          nodata={<NoData type="payment" />}
         />
         <Pagination
           now={nowPage > 0 ? nowPage : 1}

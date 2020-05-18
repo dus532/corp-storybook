@@ -112,7 +112,7 @@ const RegData = (name, value, onClick, t) => {
   if (name.indexOf('status') !== -1) {
     return Reg(F.Paymentstatus, value[name]);
   }
-  if (name.indexOf('lisence') !== -1) {
+  if (name.indexOf('license') !== -1) {
     return Reg(F.Boolean, value[name]);
   }
   return value[name];

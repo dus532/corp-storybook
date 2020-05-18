@@ -122,7 +122,7 @@ const Filter = ({
   onClick,
   type,
   list,
-  placeholder = '예약번호 조회',
+  placeholder = '예약번호 입력',
 }) => {
   const [date, setDate] = useState(0);
 
@@ -329,9 +329,9 @@ const Filter = ({
               <DropBox
                 className="dropbox period"
                 name="ex"
-                title="기간 선택"
+                title="기간 직접 설정"
                 data={[
-                  { value: 0, body: '기간 선택' },
+                  { value: 0, body: '기간 직접 설정' },
                   { value: 1, body: '최근 1개월' },
                   { value: 2, body: '최근 3개월' },
                   { value: 3, body: '최근 6개월' },
@@ -339,14 +339,42 @@ const Filter = ({
                 value={date}
                 onChange={d => {
                   setDate(d);
-                  handleDateChange(
-                    moment()
-                      .startOf('month')
-                      .unix(),
-                    moment()
-                      .endOf('month')
-                      .unix(),
-                  );
+                  switch (d * 1) {
+                    case 1:
+                      handleDateChange(
+                        moment()
+                          .subtract(1, 'month')
+                          .unix(),
+                        moment().unix(),
+                      );
+                      break;
+                    case 2:
+                      handleDateChange(
+                        moment()
+                          .subtract(3, 'month')
+                          .unix(),
+                        moment().unix(),
+                      );
+                      break;
+                    case 3:
+                      handleDateChange(
+                        moment()
+                          .subtract(6, 'month')
+                          .unix(),
+                        moment().unix(),
+                      );
+                      break;
+                    default:
+                      handleDateChange(
+                        moment()
+                          .startOf('month')
+                          .unix(),
+                        moment()
+                          .endOf('month')
+                          .unix(),
+                      );
+                      break;
+                  }
                 }}
               />
             </div>

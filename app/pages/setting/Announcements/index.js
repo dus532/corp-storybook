@@ -59,12 +59,12 @@ const Announcements = () => {
         />
         <AsyncDiv store={AnnouncementsData}>
           <Board
-            now={nowPage}
+            now={nowPage || 1}
             data={AnnouncementsData.data.announcements}
             onClick={onDetail}
           />
           <Pagination
-            now={!nowPage ? 1 : nowPage}
+            now={nowPage || 1}
             total={
               AnnouncementsData.data &&
               Math.ceil(AnnouncementsData.data.announcements.length / 10)

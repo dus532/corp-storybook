@@ -41,6 +41,20 @@ const Employees = () => {
     corpId: UserManager().getUser().corpId,
   });
 
+  const employeeList = useSelector(state => {
+    const listData = state.manageEmployees.data.employees;
+
+    if (filter.search) {
+      if (listData.filter(l => l.name === filter.search).length > 0) {
+        return listData.filter(l => l.name === filter.search);
+      }
+      if (listData.filter(l => l.number === filter.search).length > 0) {
+        return listData.filter(l => l.number === filter.search);
+      }
+    }
+    return listData;
+  });
+
   const handleChange = (data, name) => {
     setFilter({ ...filter, [name]: data });
   };
@@ -54,15 +68,19 @@ const Employees = () => {
   };
 
   const onSearch = () => {
-    dispatch(
-      actionGetManageEmployees(
-        { ...filter, employeeNumber: filter.search },
-        () => {
-          history.push(`${document.location.pathname}?page=1`);
-        },
-      ),
-    );
+    // dispatch(
+    //   actionGetManageEmployees(
+    //     { ...filter, employeeNumber: filter.search },
+    //     () => {
+    //       history.push(`${document.location.pathname}?page=1`);
+    //     },
+    //   ),
+    // );
   };
+
+  useEffect(() => {
+    history.push(`${document.location.pathname}?page=1`);
+  }, [filter.search]);
 
   useEffect(() => {
     dispatch(
@@ -116,14 +134,14 @@ const Employees = () => {
               },
             ],
           ]}
-          data={employeeData.data.employees}
-          nodata={<NoData />}
+          data={employeeList}
+          nodata={<NoData type="employee" />}
         />
         <Pagination
           now={!nowPage ? 1 : nowPage}
           total={
-            employeeData.data && employeeData.data.employees.length > 0
-              ? Math.ceil(employeeData.data.employees.length / 10)
+            employeeData.data && employeeList > 0
+              ? Math.ceil(employeeList / 10)
               : 1
           }
         />

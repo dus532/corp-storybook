@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import Color from 'config/color';
 import IconRightText from 'components/01Atoms/IconRightText';
@@ -79,6 +82,7 @@ const Line = styled.div`
 
 const MyPanel = ({ store, className }) => {
   const data = store.data.businessSubs;
+  const history = useHistory();
 
   return (
     <StyledMyPanel className={className}>
@@ -86,7 +90,11 @@ const MyPanel = ({ store, className }) => {
         <Part>
           이용중인 상품
           <h2>{data.product}</h2>
-          <h5>
+          <h5
+            tabIndex={0}
+            role="button"
+            onClick={() => history.push('/setting/subscription')}
+          >
             <span>가입 상품 확인</span>&nbsp;
             <IconRightText />
           </h5>
@@ -96,7 +104,12 @@ const MyPanel = ({ store, className }) => {
           동시 이용자 수<h2>{data.userNumber}명</h2>
         </Part>
       </div>
-      <SubButton className="button_mobile" white size="small">
+      <SubButton
+        className="button_mobile"
+        white
+        size="small"
+        onClick={() => history.push('/setting/subscription')}
+      >
         <span>가입 상품 확인</span>
       </SubButton>
     </StyledMyPanel>

@@ -40,20 +40,24 @@ const Employees = () => {
     search: null,
     corpId: UserManager().getUser().corpId,
   });
+  const [search, setSearch] = useState('');
 
   const employeeList = useSelector(state => {
     const listData = state.manageEmployees.data.employees;
 
-    if (filter.search) {
-      if (listData.filter(l => l.name === filter.search).length > 0) {
-        return listData.filter(l => l.name === filter.search);
+    if (search) {
+      if (listData.filter(l => l.name.indexOf(search) !== -1).length > 0) {
+        return listData.filter(l => l.name.indexOf(search) !== -1);
       }
-      if (listData.filter(l => l.number === filter.search).length > 0) {
-        return listData.filter(l => l.number === filter.search);
+      if (listData.filter(l => l.number.indexOf(search) !== -1).length > 0) {
+        return listData.filter(l => l.number.indexOf(search) !== -1);
       }
+      return [];
     }
     return listData;
   });
+
+  const modalType = useSelector(state => state.modal.type);
 
   const handleChange = (data, name) => {
     setFilter({ ...filter, [name]: data });
@@ -76,22 +80,26 @@ const Employees = () => {
     //     },
     //   ),
     // );
+    setSearch(filter.search);
   };
 
   useEffect(() => {
     history.push(`${document.location.pathname}?page=1`);
-  }, [filter.search]);
+  }, [search]);
 
   useEffect(() => {
-    dispatch(
-      actionGetManageEmployees({ ...filter, employeeNumber: filter.search }),
-    );
+    if (!modalType) {
+      dispatch(
+        actionGetManageEmployees({ ...filter, employeeNumber: filter.search }),
+      );
+    }
   }, [
     filter.startDate,
     filter.endDate,
     filter.license,
     filter.userGroupId,
     filter.corpId,
+    modalType,
   ]);
 
   useEffect(() => {
@@ -140,8 +148,8 @@ const Employees = () => {
         <Pagination
           now={!nowPage ? 1 : nowPage}
           total={
-            employeeData.data && employeeList > 0
-              ? Math.ceil(employeeList / 10)
+            employeeData.data && employeeList.length > 0
+              ? Math.ceil(employeeList.length / 10)
               : 1
           }
         />

@@ -1,12 +1,19 @@
+/* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
 import { FloatingDiv, SubButton, ModalLabel, Input, DropBox } from 'components';
-import { actionGetUserGroupsList, actionDelEmployee } from 'stores';
+import {
+  actionGetUserGroupsList,
+  actionDelEmployee,
+  actionPutEmployee,
+} from 'stores';
+import { useToast } from 'utils/hooks';
 
 const EditEmployee = ({ onClickExit, data }) => {
   const dispatch = useDispatch();
+  const toast = useToast();
 
   const [list, setList] = useState([]);
   const [state, setState] = useState(data);
@@ -18,6 +25,24 @@ const EditEmployee = ({ onClickExit, data }) => {
       actionGetUserGroupsList(res => setList(res.data.payload.userGroups)),
     );
   }, []);
+
+  const onEdit = () => {
+    dispatch(
+      actionPutEmployee(state.id, state, () => {
+        toast('사원이 수정되었습니다.', 'ok');
+        onClickExit();
+      }),
+    );
+  };
+
+  const onDelete = () => {
+    dispatch(
+      actionDelEmployee(state.id, state.userGroupId, () => {
+        toast('사원이 삭제되었습니다.', 'ok');
+        onClickExit();
+      }),
+    );
+  };
 
   switch (page) {
     case 0: // 첫 화면
@@ -34,35 +59,39 @@ const EditEmployee = ({ onClickExit, data }) => {
               <ModalLabel title="이메일" body={state.email} />
               <ModalLabel title="사원 이름" body={state.name} />
               <ModalLabel title="전화번호" body={state.phoneNumber} />
-              <ModalLabel
-                title="사원 번호"
-                body={
-                  <Input
-                    onChange={e =>
-                      setState({ ...state, number: e.target.value })
+              {state.number && (
+                <ModalLabel
+                  title="사원 번호"
+                  body={
+                    <Input
+                      onChange={e =>
+                        setState({ ...state, number: e.target.value })
+                      }
+                      value={state.number}
+                    />
+                  }
+                />
+              )}
+              {state.userGroupId &&
+                list.filter(l => l.id === state.userGroupId).length > 0 && (
+                  <ModalLabel
+                    title="소속 부서"
+                    body={
+                      <DropBox
+                        width="100%"
+                        name="userGroupId"
+                        className="dropbox"
+                        title="부서 선택"
+                        data={[
+                          { value: 0, body: '선택하세요' },
+                          ...list.map(l => ({ value: l.id, body: l.name })),
+                        ]}
+                        onChange={d => setState({ ...state, userGroupId: d })}
+                        value={state.userGroupId}
+                      />
                     }
-                    value={state.number}
                   />
-                }
-              />
-              <ModalLabel
-                title="소속 부서"
-                body={
-                  <DropBox
-                    width="100%"
-                    name="userGroupId"
-                    className="dropbox"
-                    title="부서 선택"
-                    data={[
-                      { value: 0, body: '선택하세요' },
-                      ...list.map(l => ({ value: l.id, body: l.name })),
-                    ]}
-                    onChange={d => setState({ ...state, userGroupId: d })}
-                    // value={state.userGroupId}
-                    value={0}
-                  />
-                }
-              />
+                )}
               <br />
               <SubButton
                 white
@@ -80,7 +109,7 @@ const EditEmployee = ({ onClickExit, data }) => {
               <SubButton white size="small" onClick={onClickExit}>
                 <span>취소</span>
               </SubButton>
-              <SubButton blue white size="small">
+              <SubButton blue white size="small" onClick={onEdit}>
                 <span>저장</span>
               </SubButton>
             </>
@@ -101,18 +130,7 @@ const EditEmployee = ({ onClickExit, data }) => {
           }
           footer={
             <>
-              <SubButton
-                blue
-                white
-                size="small"
-                onClick={() => {
-                  dispatch(
-                    actionDelEmployee(state.id, state.userGroupId, () => {
-                      onClickExit();
-                    }),
-                  );
-                }}
-              >
+              <SubButton blue white size="small" onClick={onDelete}>
                 <span>예</span>
               </SubButton>
               <SubButton white size="small" onClick={onClickExit}>

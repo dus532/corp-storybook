@@ -28,6 +28,7 @@ export { actionGetManagePayments } from 'stores/actions/payment';
 export {
   actionGetManageEmployees,
   actionGetEmployeesList,
+  actionPutEmployee,
   actionDelEmployee,
 } from 'stores/actions/employee';
 

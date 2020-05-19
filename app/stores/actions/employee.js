@@ -2,7 +2,7 @@
 import createActions from 'stores/controller/createActions';
 import UserManager from 'utils/userManager';
 
-const { read, onlyRead, del } = createActions('manageEmployees');
+const { read, onlyRead, update, del } = createActions('manageEmployees');
 
 export const actionGetManageEmployees = (
   { page, employeeNumber, license, startDate, endDate, userGroupId, corpId },
@@ -33,6 +33,14 @@ export const actionDelEmployee = (employeeId, userGroupId, onSuccess) =>
     params: { corpId: UserManager().getUser().corpId, employeeId, userGroupId },
     meta: {
       onSuccess,
-      read: `/corp/employees/${UserManager().getUser().corpId}`,
+    },
+  });
+
+export const actionPutEmployee = (employeeId, params, onSuccess) =>
+  update({
+    url: `/action/employees/${employeeId}`,
+    params: { ...params, corpId: UserManager().getUser().corpId },
+    meta: {
+      onSuccess,
     },
   });

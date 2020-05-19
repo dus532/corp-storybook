@@ -52,10 +52,10 @@ const Toast = () => {
     return (
       <StyledBG>
         {toast.data.map((t, index) => {
-          setTimeout(() => {
-            dispatch(delToast(index));
-          }, 5000);
           if (t.on) {
+            setTimeout(() => {
+              dispatch(delToast(index));
+            }, 5000);
             return (
               <StyledToast
                 key={index}

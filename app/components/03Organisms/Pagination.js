@@ -38,7 +38,7 @@ const Pagination = ({ now, total }) => {
   const min = Math.floor((now * 1 - 1) / 10) * 10;
   const max = Math.ceil(now / 10) * 10;
 
-  for (let i = 1; i <= total; i += 1) {
+  for (let i = 0; i <= total; i += 1) {
     arr.push(i);
   }
 

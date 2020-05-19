@@ -12,11 +12,11 @@ import SubButton from 'components/01Atoms/SubButton';
 const StyledMyPanel = styled.div`
   width: 100%;
   background: ${Color.White};
-  min-height: 154px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  height: 100%;
   align-items: center;
   margin-top: 30px;
 
@@ -27,12 +27,12 @@ const StyledMyPanel = styled.div`
   .inner {
     display: flex;
     width: 100%;
+    align-items: center;
   }
 
   @media screen and (max-width: 768px) {
     padding: 20px;
     margin-top: 10px;
-    min-height: 128px;
 
     .button_mobile {
       display: block;
@@ -43,7 +43,7 @@ const StyledMyPanel = styled.div`
 
 const Part = styled.div`
   flex: 1;
-  height: 92px;
+  padding: 32px 0;
 
   h5 {
     margin-top: 4px;
@@ -56,6 +56,7 @@ const Part = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    padding: 0;
     font-size: 0.8rem;
     height: auto;
     margin-bottom: 12px;
@@ -80,7 +81,7 @@ const Line = styled.div`
   }
 `;
 
-const MyPanel = ({ store, className }) => {
+const MyPanel = ({ store, className, isSetting }) => {
   const data = store.data.businessSubs;
   const history = useHistory();
 
@@ -90,28 +91,32 @@ const MyPanel = ({ store, className }) => {
         <Part>
           이용중인 상품
           <h2>{data.product}</h2>
-          <h5
-            tabIndex={0}
-            role="button"
-            onClick={() => history.push('/setting/subscription')}
-          >
-            <span>가입 상품 확인</span>&nbsp;
-            <IconRightText />
-          </h5>
+          {!isSetting && (
+            <h5
+              tabIndex={0}
+              role="button"
+              onClick={() => history.push('/setting/subscription')}
+            >
+              <span>가입 상품 확인</span>&nbsp;
+              <IconRightText />
+            </h5>
+          )}
         </Part>
         <Line />
-        <Part>
+        <Part className="other">
           동시 이용자 수<h2>{data.userNumber}명</h2>
         </Part>
       </div>
-      <SubButton
-        className="button_mobile"
-        white
-        size="small"
-        onClick={() => history.push('/setting/subscription')}
-      >
-        <span>가입 상품 확인</span>
-      </SubButton>
+      {!isSetting && (
+        <SubButton
+          className="button_mobile"
+          white
+          size="small"
+          onClick={() => history.push('/setting/subscription')}
+        >
+          <span>가입 상품 확인</span>
+        </SubButton>
+      )}
     </StyledMyPanel>
   );
 };
@@ -119,6 +124,7 @@ const MyPanel = ({ store, className }) => {
 MyPanel.propTypes = {
   store: PropTypes.object,
   className: PropTypes.any,
+  isSetting: PropTypes.bool,
 };
 
 export default MyPanel;

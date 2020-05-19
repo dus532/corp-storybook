@@ -70,8 +70,7 @@ const Payment = () => {
   };
 
   // 계산할 금액을 저장합니다
-  const paymentAmount = () => {
-    const amount = cardData.periodicPaymentAmount;
+  const caleAmount = amount => {
     const monthLast = moment()
       .endOf('month')
       .date();
@@ -100,7 +99,7 @@ const Payment = () => {
     };
   };
 
-  console.log(paymentAmount());
+  const paymentAmount = caleAmount(cardData.periodicPaymentAmount);
 
   // 다음장
   const onNext = () => {
@@ -108,9 +107,9 @@ const Payment = () => {
       const body = {
         ...cardData,
         subscriptionStartDate: moment().format('X'),
-        thisMonthPrice: paymentAmount().total,
+        thisMonthPrice: paymentAmount.total,
         nextPaymentDate: cardData.periodicPaymentDate,
-        nextMonthPrice: paymentAmount().amount,
+        nextMonthPrice: paymentAmount.amount,
         periodicPaymentPrice: cardData.periodicPaymentDate,
       };
 
@@ -153,7 +152,7 @@ const Payment = () => {
             },
             {
               title: '이번달 결제 금액',
-              body: `${paymentAmount().thisMonth.toLocaleString('en')} 원`,
+              body: `${paymentAmount.thisMonth.toLocaleString('en')} 원`,
             },
             {
               title: '다음 달 결제일',
@@ -161,13 +160,13 @@ const Payment = () => {
             },
             {
               title: '다음 달 결제 금액',
-              body: `${paymentAmount().amount.toLocaleString('en')} 원`,
+              body: `${paymentAmount.amount.toLocaleString('en')} 원`,
             },
             { title: '업무 시간', body: cardData.openHours },
           ]}
-          amount={`${paymentAmount().total.toLocaleString('en')} 원`}
+          amount={`${paymentAmount.total.toLocaleString('en')} 원`}
           startDate={moment().format('YYYY년 MM월 DD일')}
-          endDate={paymentAmount().lastPaymentDay}
+          endDate={paymentAmount.lastPaymentDay}
         />
         <InfoBox>
           정기 구독 결제는 매월 25일에 대표 결제카드로 자동 결제됩니다.

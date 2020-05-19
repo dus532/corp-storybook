@@ -38,7 +38,9 @@ const SubscriptionUpdate = () => {
   };
 
   const onNext = () => {
-    if (data.type === C.ITEM_TYPE.PREMIUM.value && data.people < 2) {
+    if (data.people < 1) {
+      toast('선택한 상품의 최소 구독인원은 1명입니다.');
+    } else if (data.type === C.ITEM_TYPE.PREMIUM.value && data.people < 2) {
       toast('프리미엄 상품의 최소 구독인원은 2명입니다.');
     } else {
       dispatch(actionPushSubscription(data));

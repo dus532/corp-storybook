@@ -33,7 +33,11 @@ const Subscription = () => {
       <Container>
         <BigTitle>구독 관리</BigTitle>
         <AsyncDiv store={SubscriptionsData}>
-          <MyPanel className="box_overflow" store={SubscriptionsData} />
+          <MyPanel
+            className="box_overflow"
+            store={SubscriptionsData}
+            isSetting
+          />
           <div style={{ marginTop: 10 }} />
           {current && (
             <BillPaper

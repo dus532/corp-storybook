@@ -59,7 +59,7 @@ const EditEmployee = ({ onClickExit, data }) => {
               <ModalLabel title="이메일" body={state.email} />
               <ModalLabel title="사원 이름" body={state.name} />
               <ModalLabel title="전화번호" body={state.phoneNumber} />
-              {state.number && (
+              {
                 <ModalLabel
                   title="사원 번호"
                   body={
@@ -71,27 +71,30 @@ const EditEmployee = ({ onClickExit, data }) => {
                     />
                   }
                 />
-              )}
-              {state.userGroupId &&
-                list.filter(l => l.id === state.userGroupId).length > 0 && (
-                  <ModalLabel
-                    title="소속 부서"
-                    body={
-                      <DropBox
-                        width="100%"
-                        name="userGroupId"
-                        className="dropbox"
-                        title="부서 선택"
-                        data={[
-                          { value: 0, body: '선택하세요' },
-                          ...list.map(l => ({ value: l.id, body: l.name })),
-                        ]}
-                        onChange={d => setState({ ...state, userGroupId: d })}
-                        value={state.userGroupId}
-                      />
-                    }
-                  />
-                )}
+              }
+              {
+                <ModalLabel
+                  title="소속 부서"
+                  body={
+                    <DropBox
+                      width="100%"
+                      name="userGroupId"
+                      className="dropbox"
+                      title="부서 선택"
+                      data={[
+                        { value: 0, body: '선택하세요' },
+                        ...list.map(l => ({ value: l.id, body: l.name })),
+                      ]}
+                      onChange={d => setState({ ...state, userGroupId: d })}
+                      value={
+                        list.filter(l => l.id === state.userGroupId).length > 0
+                          ? state.userGroupId
+                          : 0
+                      }
+                    />
+                  }
+                />
+              }
               <br />
               <SubButton
                 white

@@ -24,6 +24,10 @@ const StyledDropBox = styled.div`
     background: white url(${DBIMG}) right / 24px 24px no-repeat;
   }
 
+  input:read-only {
+    color: black;
+  }
+
   @media screen and (max-width: 768px) {
     width: 48%;
   }

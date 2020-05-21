@@ -33,7 +33,9 @@ const utilsMiddleware = store => next => action => {
       const { response } = action.payload;
       switch (response.data.message) {
         case 'Login Failed':
-          store.dispatch(onToast(`로그인에 실패했습니다.`));
+          store.dispatch(
+            onToast(`등록되지 않은 아이디거나, 잘못된 비밀번호입니다.`),
+          );
           break;
         case 'No Approved Subscription':
           store.dispatch(onToast(`구독을 승인할 수 없습니다.`));

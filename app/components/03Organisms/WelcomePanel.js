@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import SubButton from 'components/01Atoms/SubButton';
-import UserManager from 'utils/userManager';
 
 import Color from 'config/color';
 
@@ -55,22 +54,19 @@ const Button = styled.button`
   }
 `;
 
-const WelcomePanel = ({ className }) => {
-  const user = UserManager().getUser();
-
-  return (
-    <StyledWelcomePanel className={className}>
-      <div>{user.name} 님, 안녕하세요!</div>
-      <Button className="pc">이용안내 확인</Button>
-      <SubButton white size="small" className="btn_mobile">
-        이용안내 확인
-      </SubButton>
-    </StyledWelcomePanel>
-  );
-};
+const WelcomePanel = ({ className, store }) => (
+  <StyledWelcomePanel className={className}>
+    <div>{store.data.corpInfo.name} 관리자님, 안녕하세요!</div>
+    <Button className="pc">이용안내 확인</Button>
+    <SubButton white size="small" className="btn_mobile">
+      이용안내 확인
+    </SubButton>
+  </StyledWelcomePanel>
+);
 
 WelcomePanel.propTypes = {
   className: PropTypes.any,
+  store: PropTypes.object,
 };
 
 export default WelcomePanel;

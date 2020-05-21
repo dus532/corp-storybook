@@ -33,7 +33,7 @@ const DashBoard = () => {
   return (
     <Container>
       <AsyncDiv store={dashboardStore}>
-        <WelcomePanel className="box_overflow" />
+        <WelcomePanel className="box_overflow" store={dashboardStore} />
         <MyPanel className="box_overflow" store={dashboardStore} />
         <RecentPaymentPanel className="box_overflow" store={dashboardStore} />
         <TeamPaymentPanel

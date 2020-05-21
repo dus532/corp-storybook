@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -19,10 +19,17 @@ const ChangeInfo = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const toast = useToast();
+
   const MyPageData = useSelector(state => state.myPage);
   const adminData = useSelector(state => state.myPage.data.admin);
+  const [firstEdit, isFirstEdit] = useState(true);
 
   useEffect(() => {
+    document.addEventListener(
+      'keydown',
+      () => firstEdit && isFirstEdit(false),
+      { once: true },
+    );
     if (!adminData) {
       dispatch(actionGetMyPage());
     }
@@ -73,6 +80,7 @@ const ChangeInfo = () => {
                   }}
                   right="저장"
                   typeRight="submit"
+                  disabledRight={firstEdit}
                 />
               </Container580>
             </form>

@@ -119,6 +119,10 @@ const GlobalStyle = createGlobalStyle`
     outline:none;
   }
 
+  input:read-only{
+    color:rgba(0,0,0,0.4);
+  }
+
   a,a:active,a:focus{
     text-decoration:none;
     outline:none;

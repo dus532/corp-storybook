@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -22,12 +22,18 @@ const ChangePW = () => {
   const toast = useToast();
   const MyPageData = useSelector(state => state.myPage);
   const adminData = useSelector(state => state.myPage.data.admin);
+  const [firstEdit, isFirstEdit] = useState(true);
 
   const { handleSubmit, register, errors, getValues } = useForm({});
 
   const REG = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,12}$/;
 
   useEffect(() => {
+    document.addEventListener(
+      'keydown',
+      () => firstEdit && isFirstEdit(false),
+      { once: true },
+    );
     if (!adminData) {
       dispatch(actionGetMyPage());
     }
@@ -111,6 +117,7 @@ const ChangePW = () => {
                   }}
                   right="저장"
                   typeRight="submit"
+                  disabledRight={firstEdit}
                 />
                 <br />
               </Container580>

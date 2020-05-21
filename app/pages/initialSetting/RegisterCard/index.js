@@ -244,7 +244,7 @@ const RegisterCard = () => {
         )}
         <br />
         <ButtonBottom
-          left="취소"
+          left="이전"
           onClickLeft={() => history.push('/initial/introduce')}
           right="다음"
           typeRight="submit"

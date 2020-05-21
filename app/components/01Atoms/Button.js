@@ -15,6 +15,7 @@ const Button = styled.button`
   transition: 0.25s;
   cursor: pointer;
   border-radius: 4px;
+  opacity: ${props => (props.disabled ? 0.4 : 1)};
 
   &:hover {
     background: ${props =>

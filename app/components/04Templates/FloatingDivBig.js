@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -13,12 +14,11 @@ const Div = styled.div`
   height: 100vh;
   position: fixed;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   animation: floating_div 0.25s;
 
   .floating_container {
     position: relative;
-    top: 170px;
     width: 1172px;
     margin: 0 20px;
     box-sizing: border-box;
@@ -41,8 +41,9 @@ const Div = styled.div`
   .floating_body {
     margin-bottom: 36px;
     width: 572px;
-    min-height: 400px;
-    max-height: 756px;
+    min-height: 40vh;
+    height: 100%;
+    max-height: 70vh;
     overflow: auto;
     margin: 20px auto;
     text-align: left;
@@ -78,11 +79,13 @@ const Div = styled.div`
       margin: 0;
       height: 100%;
       top: 60px;
+      display: flex;
+      flex-direction: column;
     }
     .floating_body {
       width: 100%;
-      padding: 0 20px;
-      height: 100%;
+      padding: 0 20px 120px;
+      overflow: auto;
     }
   }
 `;
@@ -111,30 +114,48 @@ const BG = styled.div`
   }
 `;
 
-const FloatingDivBig = ({ title, subtitle, body, footer, onClickExit }) => (
-  <>
-    <BG onClick={onClickExit} />
-    <Div>
-      <div className="floating_container">
-        <div className="floating_header">
-          <div>
-            <h3>{title}</h3>
-            {subtitle}
+const FloatingDivBig = ({
+  title,
+  subtitle,
+  body,
+  html,
+  footer,
+  onClickExit,
+}) => {
+  const makeHTML = () => ({ __html: html });
+
+  return (
+    <>
+      <BG onClick={onClickExit} />
+      <Div>
+        <div className="floating_container">
+          <div className="floating_header">
+            <div>
+              <h3>{title}</h3>
+              {subtitle}
+            </div>
+            <button type="button" onClick={onClickExit}>
+              <span>
+                <IconClose />
+              </span>
+            </button>
           </div>
-          <button type="button" onClick={onClickExit}>
-            <span>
-              <IconClose />
-            </span>
-          </button>
+          {body && <div className="floating_body">{body}</div>}
+          {html && (
+            <div
+              className="floating_body html"
+              dangerouslySetInnerHTML={makeHTML()}
+            />
+          )}
+          <div className="floating_footer">{footer}</div>
         </div>
-        <div className="floating_body">{body}</div>
-        <div className="floating_footer">{footer}</div>
-      </div>
-    </Div>
-  </>
-);
+      </Div>
+    </>
+  );
+};
 
 FloatingDivBig.propTypes = {
+  html: PropTypes.any,
   title: PropTypes.string,
   subtitle: PropTypes.string,
   body: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

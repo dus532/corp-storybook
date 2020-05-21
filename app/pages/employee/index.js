@@ -49,8 +49,13 @@ const Employees = () => {
       if (listData.filter(l => l.name.indexOf(search) !== -1).length > 0) {
         return listData.filter(l => l.name.indexOf(search) !== -1);
       }
-      if (listData.filter(l => l.number.indexOf(search) !== -1).length > 0) {
-        return listData.filter(l => l.number.indexOf(search) !== -1);
+      if (
+        listData.filter(l => l.number && l.number.indexOf(search) !== -1)
+          .length > 0
+      ) {
+        return listData.filter(
+          l => l.number && l.number.indexOf(search) !== -1,
+        );
       }
       return [];
     }

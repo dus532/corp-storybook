@@ -1,7 +1,6 @@
 // 환영합니다!
 // 여기는 API 요청을 담당하는 RequestManager 입니다.
 import axios from 'axios';
-import { toast } from 'react-toastify';
 
 import moment from 'utils/moment';
 import UserManager from 'utils/userManager';
@@ -99,13 +98,6 @@ const RequestManager = (method, url, data, header) => {
                   err.response.data.message
                 }`,
               );
-              if (document.location.pathname !== '/') {
-                toast.error(
-                  `⛔️ 권한이 없습니다. ( Forbidden, 403 ) - ${
-                    err.response.data.message
-                  }`,
-                );
-              }
               break;
             case 404:
               console.log(

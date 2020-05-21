@@ -37,6 +37,9 @@ const utilsMiddleware = store => next => action => {
             onToast(`등록되지 않은 아이디거나, 잘못된 비밀번호입니다.`),
           );
           break;
+        case 'Card Already Registered':
+          store.dispatch(onToast(`카드가 등록되어 있습니다.`));
+          break;
         case 'No Approved Subscription':
           store.dispatch(onToast(`구독을 승인할 수 없습니다.`));
           break;

@@ -26,7 +26,7 @@ const F = {
   ],
 
   // 결제내역
-  Paymentitem: [
+  PaymentItem: [
     { value: C.PAYMENT_ITEM.ALL, body: '전체 구독' },
     { value: C.PAYMENT_ITEM.RENTAL_FEE, body: '정기구독' },
     { value: C.PAYMENT_ITEM.EXTRA_FEE, body: '추가구독' },
@@ -37,10 +37,15 @@ const F = {
     { value: C.PAYMENT_ITEM.ETC, body: '기타' },
   ],
 
-  Paymentstatus: [
+  PaymentStatus: [
     { value: C.PAYMENT_STATUS.ALL, body: '전체 결제상태' },
     { value: C.PAYMENT_STATUS.FINISH, body: '결제완료' },
     { value: C.PAYMENT_STATUS.CANCEL, body: '결제취소' },
+  ],
+
+  PaymentsType: [
+    { value: C.PAYMENT_TYPE.PAYMENT, body: '- ' },
+    { value: C.PAYMENT_TYPE.PAYMENT_FINISH, body: '결제완료' },
   ],
 
   // 존재유무

@@ -57,6 +57,11 @@ const C = {
     ETC: 99,
   },
 
+  PAYMENT_TYPE: {
+    PAYMENT: 0,
+    PAYMENT_FINISH: 1,
+  },
+
   LICENSE_TYPE: {
     ALL: 0,
     REGISTERD: 1,

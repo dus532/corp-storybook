@@ -107,10 +107,13 @@ const RegData = (name, value, onClick, t) => {
     return <Edit type="button" className="edit" onClick={() => onClick(t)} />;
   }
   if (name.indexOf('item') !== -1) {
-    return Reg(F.Paymentitem, value[name]);
+    return Reg(F.PaymentItem, value[name]);
   }
   if (name.indexOf('status') !== -1) {
-    return Reg(F.Paymentstatus, value[name]);
+    return Reg(F.PaymentStatus, value[name]);
+  }
+  if (name.indexOf('type') !== -1) {
+    return Reg(F.PaymentsType, value[name]);
   }
   if (name.indexOf('license') !== -1) {
     return Reg(F.Boolean, value[name]);

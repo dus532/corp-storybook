@@ -220,7 +220,7 @@ const RegisterCard = () => {
               <Input
                 name="companyNumber"
                 ref={register}
-                placeholder="ex) 12312341234"
+                placeholder="사업자 등록번호 10자리 입력"
                 type="tel"
                 maxLength="10"
                 required

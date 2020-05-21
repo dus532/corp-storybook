@@ -45,6 +45,20 @@ const NoData = ({ type }) => {
           검색된 결제 정보가 없습니다.
         </StyledDiv>
       );
+    case 'recentPayment':
+      return (
+        <StyledDiv className="box_overflow">
+          <ICON bg={ICON_PAYMENT} />
+          최근 결제 금액이 없습니다.
+        </StyledDiv>
+      );
+    case 'teamPayment':
+      return (
+        <StyledDiv className="box_overflow">
+          <ICON bg={ICON_PAYMENT} />
+          부서별 결제 금액이 없습니다.
+        </StyledDiv>
+      );
     case 'employee':
       return (
         <StyledDiv className="box_overflow">

@@ -12,7 +12,6 @@ import {
 } from 'recharts';
 
 import Color from 'config/color';
-import IconNoData from 'components/01Atoms/IconNoData';
 import NoData from 'components/03Organisms/NoData';
 
 const StyledPanel = styled.div`
@@ -175,11 +174,7 @@ const RecentPaymentPanel = ({ store, className }) => {
           </div>
         </>
       ) : (
-        <NoData>
-          <IconNoData />
-          <h3>최근 결제 금액이 없습니다.</h3>
-          <br />
-        </NoData>
+        <NoData type="recentPayment" />
       )}
     </StyledPanel>
   );

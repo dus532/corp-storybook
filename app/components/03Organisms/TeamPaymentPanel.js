@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Color from 'config/color';
-import IconNoData from 'components/01Atoms/IconNoData';
 import SegmentControl from 'components/02Molecules/SegmentControl';
 
 import C from 'config/constants';
@@ -234,11 +233,7 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
           ))}
         </Table>
       ) : (
-        <NoData>
-          <IconNoData />
-          <h3>부서별 결제 금액이 없습니다.</h3>
-          <br />
-        </NoData>
+        <NoData type="teamPayment" />
       )}
     </StyledPanel>
   );

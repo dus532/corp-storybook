@@ -244,7 +244,7 @@ const Filter = ({
               <DropBox
                 className="dropbox "
                 title="결제상태"
-                data={F.Paymentstatus}
+                data={F.PaymentStatus}
                 onChange={d => {
                   handleChange(d, 'status');
                 }}
@@ -276,7 +276,7 @@ const Filter = ({
               <DropBox
                 className="dropbox "
                 title="결제항목"
-                data={F.Paymentitem}
+                data={F.PaymentItem}
                 onChange={d => handleChange(d, 'item')}
                 value={filter.item ? filter.item : 0}
               />

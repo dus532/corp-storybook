@@ -69,7 +69,14 @@ const WelcomePanel = ({ className, store }) => {
       >
         이용안내 확인
       </Button>
-      <SubButton white size="small" className="btn_mobile">
+      <SubButton
+        white
+        size="small"
+        className="btn_mobile"
+        onClick={() => {
+          history.push('/setting/announcements/');
+        }}
+      >
         이용안내 확인
       </SubButton>
     </StyledWelcomePanel>

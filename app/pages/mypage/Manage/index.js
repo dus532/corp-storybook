@@ -55,7 +55,7 @@ const MyPage = () => {
                   title: '최근 로그인',
                   body: moment
                     .unix(adminData.recentLogin)
-                    .format('YYYY년 MM월 DD일 a hh:mm:ss'),
+                    .format('YYYY년 MM월 DD일 HH:mm:ss'),
                 },
               ]}
               bottom={

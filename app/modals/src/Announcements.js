@@ -7,7 +7,7 @@ import moment from 'utils/moment';
 const Announcements = ({ onClickExit, data }) => (
   <FloatingDivBig
     title={data.title}
-    subtitle={moment(data.createdAt).format('YYYY년 MM월 DD일 hh:mm')}
+    subtitle={moment(data.createdAt).format('YYYY년 MM월 DD일 HH:mm')}
     html={data.content}
     onClickExit={onClickExit}
   />

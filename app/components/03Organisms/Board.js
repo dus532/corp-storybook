@@ -44,7 +44,7 @@ const Board = ({ now = '1', data, onClick }) => (
             <div>
               <span>{d.title}</span>
               <br />
-              {moment(d.createdAt).format('YYYY년 MM월 DD일 hh:mm')}
+              {moment(d.createdAt).format('YYYY년 MM월 DD일 HH:mm')}
             </div>
             <div className="arrow" />
           </Line>

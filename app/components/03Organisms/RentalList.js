@@ -153,17 +153,18 @@ const RentalPanel = ({ data }) => {
         </div>
         <div className="body_elements">
           <span className="body_elements_bold">대여 기간</span>
-          {moment.unix(data.startDate).format(`MM/DD (ddd) hh:mm`)} ~{' '}
-          {moment.unix(data.endDate).format('MM/DD (ddd) hh:mm')}
+          {moment.unix(data.startDate).format(`MM/DD (ddd) HH:mm`)} ~{' '}
+          {moment.unix(data.endDate).format('MM/DD (ddd) HH:mm')}
         </div>
         <div className="body_elements">
-          <span className="body_elements_bold">대여 차량</span>차 이름,{' '}
-          {data.carNumber}
+          <span className="body_elements_bold">대여 차량</span>
+          {data.carName}, {data.carNumber}
         </div>
         <div className="body_elements">
           <span className="body_elements_bold">사원 정보</span>
           {data.employeeName} / {data.employeePhoneNumber} /{' '}
-          {data.userGroupName} / {data.employeeNumber}
+          {data.userGroupName ? `${data.userGroupName} / ` : ''}
+          {data.employeeNumber}
         </div>
       </div>
       <div className="footer">

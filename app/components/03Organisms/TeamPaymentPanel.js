@@ -168,7 +168,7 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
               },
               {
                 key: 1,
-                body: '1개월',
+                body: '최근 1개월',
                 onClick: () => {
                   setState(1);
                   setDate({
@@ -181,7 +181,7 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
               },
               {
                 key: 2,
-                body: '3개월',
+                body: '최근 3개월',
                 onClick: () => {
                   setState(2);
                   setDate({
@@ -195,7 +195,7 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
               },
               {
                 key: 3,
-                body: '6개월',
+                body: '최근 6개월',
                 onClick: () => {
                   setState(3);
                   setDate({

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 import SubButton from 'components/01Atoms/SubButton';
 
@@ -54,15 +55,26 @@ const Button = styled.button`
   }
 `;
 
-const WelcomePanel = ({ className, store }) => (
-  <StyledWelcomePanel className={className}>
-    <div>{store.data.corpInfo.name} 관리자님, 안녕하세요!</div>
-    <Button className="pc">이용안내 확인</Button>
-    <SubButton white size="small" className="btn_mobile">
-      이용안내 확인
-    </SubButton>
-  </StyledWelcomePanel>
-);
+const WelcomePanel = ({ className, store }) => {
+  const history = useHistory();
+
+  return (
+    <StyledWelcomePanel className={className}>
+      <div>{store.data.corpInfo.name} 관리자님, 안녕하세요!</div>
+      <Button
+        className="pc"
+        onClick={() => {
+          history.push('/setting/announcements/');
+        }}
+      >
+        이용안내 확인
+      </Button>
+      <SubButton white size="small" className="btn_mobile">
+        이용안내 확인
+      </SubButton>
+    </StyledWelcomePanel>
+  );
+};
 
 WelcomePanel.propTypes = {
   className: PropTypes.any,

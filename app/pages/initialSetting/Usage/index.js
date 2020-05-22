@@ -14,6 +14,7 @@ import { actionPostInitialUsage } from 'stores';
 import { useToast } from 'utils/hooks';
 
 import C from 'config/constants';
+import UserManager from 'utils/userManager';
 
 const RegisterCardForm = styled.form`
   margin-top: 60px;
@@ -45,6 +46,8 @@ const Usage = () => {
   const dispatch = useDispatch();
   const toast = useToast();
 
+  const USER = UserManager().getUser();
+
   const [state, setState] = useState({
     type: 1,
     isLimited: false,
@@ -59,6 +62,7 @@ const Usage = () => {
     } else {
       dispatch(
         actionPostInitialUsage(state, () => {
+          UserManager().setUser({ ...USER, isCardRegistered: true });
           history.push('/home');
         }),
       );

@@ -25,6 +25,8 @@ const apiReducer = createReducers(
   'info',
   'card',
   'myPage',
+  'faqs',
+  'terms',
 );
 
 export default function createReducer(injectedReducers = {}) {

@@ -302,7 +302,7 @@ const Filter = ({
             onClick();
           }}
         >
-          <Input className="search_input" placeholder="예약번호 입력" />
+          <Input className="search_input" placeholder={placeholder} />
         </form>
         {type !== 'announcements' && (
           <>

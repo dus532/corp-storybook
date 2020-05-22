@@ -66,3 +66,7 @@ export {
   actionPutAdminInfo,
   actionPutPassword,
 } from 'stores/actions/mypage';
+
+export { actionGetTerms } from 'stores/actions/terms';
+
+export { actionGetFAQs } from 'stores/actions/faq';

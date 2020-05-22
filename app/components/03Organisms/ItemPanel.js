@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -62,6 +63,7 @@ const StyledItemPanel = styled.div`
 
 const Panel = ({ data, board }) => {
   const [state, setState] = useState(false);
+  const makeHTML = () => ({ __html: data.content });
 
   return (
     <div
@@ -69,12 +71,14 @@ const Panel = ({ data, board }) => {
       onClick={() => (board ? setState(!state) : data.onClick())}
     >
       <div className="wrap">
-        <div className={state && 'blue'}>{data.title}</div>
+        <div className={state ? 'blue' : ''}>{data.title}</div>
         <div
           className={board ? (state ? 'arrow_up' : 'arrow_down') : 'arrow'}
         />
       </div>
-      {state && <div className="wrap_body">{data.body}</div>}
+      {state && (
+        <div className="wrap_body" dangerouslySetInnerHTML={makeHTML()} />
+      )}
     </div>
   );
 };
@@ -87,7 +91,7 @@ Panel.propTypes = {
 const ItemPanel = ({ data, board }) => (
   <StyledItemPanel className="box_overflow">
     {data.map(d => (
-      <Panel data={d} board={board} />
+      <Panel key={d.title} data={d} board={board} />
     ))}
   </StyledItemPanel>
 );

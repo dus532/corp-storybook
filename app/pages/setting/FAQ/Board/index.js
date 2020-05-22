@@ -1,29 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Container, BigTitle, ItemPanel, Filter, Category } from 'components';
+import {
+  AsyncDiv,
+  Container,
+  BigTitle,
+  ItemPanel,
+  Filter,
+  // Category,
+} from 'components';
+import { actionGetFAQs } from 'stores';
 
-const tempData = [
-  {
-    title: 'Q. 질문 내용',
-    body: '답변입니다.',
-  },
-];
-
-const tempCatData = [{ id: 0, body: '전체' }, { id: 1, body: '서비스' }];
+// const tempCatData = [{ id: 0, body: '전체' }, { id: 1, body: '서비스' }];
 
 const FAQ = () => {
   const [filter, setFilter] = useState({ search: '' });
+  const [search, setSearch] = useState('');
+
+  const dispatch = useDispatch();
+  const FAQstore = useSelector(state => state.faqs);
+  const FAQdata = useSelector(state => {
+    const { data } = state.faqs;
+    if (search) {
+      return data.faqs.filter(d => d.title.indexOf(search) !== -1);
+    }
+
+    return data.faqs;
+  });
 
   const handleChange = (data, name) => {
     setFilter({ ...filter, [name]: data });
   };
 
+  useEffect(() => {
+    dispatch(actionGetFAQs());
+  }, []);
+
   const onSearch = () => {
-    // dispatch(
-    //   actionGetAnnouncements({ keyword: filter.search }, () => {
-    //     history.push(`${document.location.pathname}?page=1`);
-    //   }),
-    // );
+    setSearch(filter.search);
   };
 
   return (
@@ -36,8 +50,10 @@ const FAQ = () => {
         placeholder="검색어 입력"
         onClick={onSearch}
       />
-      <Category data={tempCatData} />
-      <ItemPanel data={tempData} board />
+      <AsyncDiv store={FAQstore}>
+        {/* <Category data={tempCatData} /> */}
+        <ItemPanel data={FAQdata} board />
+      </AsyncDiv>
     </Container>
   );
 };

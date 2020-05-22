@@ -1,11 +1,13 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import moment from 'utils/moment';
 import EditIMG from 'images/icon_edit.png';
 import F from 'config/filter';
+import IconReorder from 'images/icon_reorder.png';
 
 const StyledTable = styled.div``;
 
@@ -20,6 +22,13 @@ const Th = styled.div`
   display: flex;
   justify-content: space-around;
   white-space: nowrap;
+  cursor: pointer;
+
+  .thead {
+    display: flex;
+    align-items: center;
+    line-height: 24px;
+  }
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -94,6 +103,17 @@ const Td = styled.div`
   }
 `;
 
+const IMGReorder = styled.div`
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background: url(${IconReorder}) center / cover no-repeat;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const Reg = (type, value) => type.filter(t => t.value === value)[0].body;
 
 const RegData = (name, value, onClick, t) => {
@@ -121,19 +141,49 @@ const RegData = (name, value, onClick, t) => {
   return value[name];
 };
 
-const Table = ({ now = '1', data = [], title = [], nodata }) =>
-  data.length > 0 ? (
+const Table = ({ now = '1', data = [], title = [], nodata }) => {
+  const [list, setList] = useState(data);
+  const [sort, isSort] = useState(
+    title.map(t => ({
+      key: t[1],
+      isSort: false,
+    })),
+  );
+
+  const onSort = value => {
+    setList([
+      ...list.sort((a, b) => {
+        if (a[value] > b[value]) {
+          return sort.filter(f => f.key === value)[0].isSort ? 1 : -1;
+        }
+        if (a[value] < b[value]) {
+          return sort.filter(f => f.key === value)[0].isSort ? -1 : 1;
+        }
+        return 0;
+      }),
+    ]);
+    isSort(sort.map(f => (f.key === value ? { ...f, isSort: !f.isSort } : f)));
+  };
+
+  return data.length > 0 ? (
     <>
       <StyledTable>
         <Th>
           {title.map(d => (
-            <div style={{ flex: d[2] ? d[2] : 1 }} key={d[0]}>
-              {d[0]}
+            <div
+              className="thead"
+              style={{ flex: d[2] ? d[2] : 1 }}
+              key={d[0]}
+              onClick={() => d[0] && onSort(d[1])}
+              role="button"
+              tabIndex={0}
+            >
+              {d[0]} {d[0] && <IMGReorder />}
             </div>
           ))}
         </Th>
         <Line />
-        {data.map((d, index) => {
+        {list.map((d, index) => {
           if (index >= (now * 1 - 1) * 10 && index < now * 10) {
             return (
               <Tr key={index} className="box_overflow">
@@ -153,6 +203,7 @@ const Table = ({ now = '1', data = [], title = [], nodata }) =>
   ) : (
     nodata
   );
+};
 
 Table.propTypes = {
   now: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

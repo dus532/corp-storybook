@@ -137,11 +137,11 @@ const Employees = () => {
             ['전화번호', 'phoneNumber', 1.8],
             ['이메일', 'email', 2.2],
             ['가입 일시', 'joinDate', 1.4],
-            ['면허증', 'license', 1.4],
+            ['면허증', 'license', 1.2],
             [
               '',
               'editEmployee',
-              0.1,
+              0.3,
               e => {
                 modal(EDIT_EMPLOYEE, e);
               },

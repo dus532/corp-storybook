@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -149,6 +149,16 @@ const Table = ({ now = '1', data = [], title = [], nodata }) => {
       isSort: false,
     })),
   );
+
+  useEffect(() => {
+    setList(data);
+    isSort(
+      title.map(t => ({
+        key: t[1],
+        isSort: false,
+      })),
+    );
+  }, [data]);
 
   const onSort = value => {
     setList([

@@ -123,7 +123,7 @@ const GlobalStyle = createGlobalStyle`
     color:rgba(0,0,0,0.4);
   }
 
-  a,a:active,a:focus{
+  a,a:active,a:focus,div:active,div:focus{
     text-decoration:none;
     outline:none;
     color:inherit;

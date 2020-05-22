@@ -17,6 +17,8 @@ import {
 } from 'components';
 import Color from 'config/color';
 import { actionPostChargeSubscription } from 'stores';
+import Reg from 'utils/reg';
+import F from 'config/filter';
 
 const PaymentCheckBox = styled.div`
   margin-top: 12px;
@@ -144,7 +146,13 @@ const Payment = () => {
             { title: '사업자 등록번호', body: cardData.companyNumber },
             { title: '구독 상품', body: cardData.product },
             { title: '동시 사용자 수', body: `${cardData.userNumber} 명` },
-            { title: '결제 카드', body: cardData.cardCorp },
+            {
+              title: '결제 카드',
+              body: `${cardData.cardCorp} / ${cardData.cardNumber} / ${Reg(
+                F.cardType,
+                cardData.cardType,
+              )}`,
+            },
             { title: '결제 카드번호', body: cardData.cardNumber },
             {
               title: '구독 시작 일',

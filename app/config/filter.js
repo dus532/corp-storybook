@@ -1,6 +1,12 @@
 import C from './constants';
 
 const F = {
+  // 카드 타입
+  cardType: [
+    { value: C.CARD_TYPE.PERSONAL, body: '개인카드' },
+    { value: C.CARD_TYPE.COMPANY, body: '법인카드' },
+  ],
+
   // 사원관리
   licenseType: [
     { value: C.LICENSE_TYPE.ALL, body: '전체 면허증' },

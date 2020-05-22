@@ -51,28 +51,6 @@ const RegisterCard = () => {
     );
   };
 
-  // const onTest = () => {
-  //   dispatch(
-  //     actionRePostChargeSubscription(
-  //       {
-  //         corpId: UserManager().getUser().coprId,
-  //         product: 1,
-  //         userNumber: 2,
-  //         cardId: '561f661f-48db-4c09-86e7-e51ffc786dfb',
-  //         cardCorp: '[KB국민]',
-  //         cardNumber: '94909400',
-  //         periodicPaymentDate: 25,
-  //         periodicPrice: 100,
-  //         startHour: '12:00',
-  //         endHour: '12:00',
-  //       },
-  //       () => {
-  //         history.push('/home');
-  //       },
-  //     ),
-  //   );
-  // };
-
   return (
     <Container580>
       <RegisterInformation>

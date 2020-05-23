@@ -7,7 +7,6 @@ import {
   Container,
   BigTitle,
   Container580,
-  InfoBox,
   Input,
   ButtonBottom,
   AsyncDiv,
@@ -69,9 +68,6 @@ const ChangeInfo = () => {
                 <br />
                 <h4>이메일 주소</h4>
                 <Input name="email" ref={register} required />
-                <InfoBox>
-                  영문,숫자,특수문자를 조합하여 8~12자로 입력해주세요.
-                </InfoBox>
                 <br />
                 <ButtonBottom
                   left="취소"

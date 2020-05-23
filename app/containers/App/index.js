@@ -56,7 +56,7 @@ const App = () => {
       history.push('/');
     } else if (
       USER &&
-      !USER.isCardRegistered &&
+      !USER.isInitialized &&
       location.pathname.indexOf('initial') === -1 &&
       location.pathname.indexOf('mypage') === -1
     ) {

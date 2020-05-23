@@ -62,7 +62,7 @@ const Usage = () => {
     } else {
       dispatch(
         actionPostInitialUsage(state, () => {
-          UserManager().setUser({ ...USER, isCardRegistered: true });
+          UserManager().setUser({ ...USER, isInitialized: true });
           history.push('/home');
         }),
       );

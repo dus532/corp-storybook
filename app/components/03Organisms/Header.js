@@ -613,6 +613,13 @@ const Header = ({ isSigned, location }) => {
                 <h5 className="info_text">{isSigned.name} 님</h5>
                 <SmallButton
                   onClick={() => {
+                    history.push('/initial/introduce');
+                  }}
+                >
+                  초기설정
+                </SmallButton>
+                <SmallButton
+                  onClick={() => {
                     history.push('/mypage');
                     onClose();
                   }}

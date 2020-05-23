@@ -45,14 +45,16 @@ const Usage = () => {
   const toast = useToast();
   const isMain = useQuery().get('main') === 'true' ? '대표' : '부서';
   const userGroupId = useQuery().get('userGroupId');
+  const limitedAmount = useQuery().get('limitedAmount');
+  const noticeType = useQuery().get('noticeType');
 
   // 수정과 삭제를 구분합니다.
   const { id } = useParams();
 
   const [state, setState] = useState({
-    isLimited: false,
-    limitedAmount: 0,
-    noticeType: C.NOTICE_TYPE.NONE,
+    isLimited: limitedAmount && true,
+    limitedAmount: limitedAmount || 0,
+    noticeType: noticeType || C.NOTICE_TYPE.NONE,
   });
 
   const handleSubmit = e => {

@@ -68,6 +68,12 @@ const EditCard = ({ onClickExit, data }) => {
                         data.userGroupId
                           ? `&userGroupId=${data.userGroupId}`
                           : ''
+                      }${
+                        data.limitedAmount
+                          ? `&limitedAmount=${data.limitedAmount}`
+                          : ''
+                      }${
+                        data.noticeType ? `&noticeType=${data.noticeType}` : ''
                       }`,
                     );
                     onClickExit();

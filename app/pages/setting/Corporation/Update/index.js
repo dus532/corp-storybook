@@ -23,6 +23,8 @@ import {
 } from 'stores';
 
 import Color from 'config/color';
+import { useModal } from 'utils/hooks';
+import { POST_CODE } from 'modals/constants';
 
 const Button = styled.button`
   min-width: 120px;
@@ -36,6 +38,7 @@ const Button = styled.button`
 const Update = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const modal = useModal();
 
   const corpInfoStore = useSelector(state => state.info);
   const corpInfo = useSelector(state => state.info.data.corpInfo);
@@ -139,7 +142,12 @@ const Update = () => {
                   onChange={handleChange}
                   required
                 />
-                <Button type="button">우편 번호 검색</Button>
+                <Button
+                  type="button"
+                  onClick={() => modal(POST_CODE, { data, setData })}
+                >
+                  우편 번호 검색
+                </Button>
               </div>
               <div className="input">
                 <h5>이메일 도메인1</h5>

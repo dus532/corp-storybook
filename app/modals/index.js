@@ -12,6 +12,7 @@ import {
   EditEmployee,
   CheckPW,
   Error,
+  PostCode,
 } from 'modals/src';
 import {
   SIGN_FIND_EMAIL,
@@ -22,6 +23,7 @@ import {
   EDIT_EMPLOYEE,
   CHECK_PW,
   ERROR,
+  POST_CODE,
 } from 'modals/constants';
 
 const Modals = () => {
@@ -50,6 +52,8 @@ const Modals = () => {
       return <CheckPW {...propsAll} />;
     case ERROR:
       return <Error {...propsAll} />;
+    case POST_CODE:
+      return <PostCode {...propsAll} />;
     default:
       return <></>;
   }

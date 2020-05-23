@@ -5,4 +5,5 @@ export const EDIT_CORP_INFO = 'corp/edit';
 export const EDIT_CARD = 'card/edit';
 export const EDIT_EMPLOYEE = 'employee/edit';
 export const CHECK_PW = 'check/pw';
-export const ERROR = 'error';
+export const ERROR = 'etc/error';
+export const POST_CODE = 'etc/postcode';

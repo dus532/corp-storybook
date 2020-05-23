@@ -10,6 +10,7 @@ export {
   actionSetUser,
   actionSignOut,
   actionPostResetPassword,
+  actionPostCheckPW,
 } from 'stores/actions/user';
 
 export { toggleSending } from 'stores/actions/global';

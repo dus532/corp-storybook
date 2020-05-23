@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import {
   Container,
@@ -15,10 +14,13 @@ import { actionGetSubscription } from 'stores';
 
 import moment from 'utils/moment';
 import C from 'config/constants';
+import { useModal } from 'utils/hooks';
+import { CHECK_PW } from 'modals/constants';
 
 const Subscription = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const modal = useModal();
+
   const SubscriptionsData = useSelector(state => state.subscription);
 
   const current = useSelector(state => state.subscription.data.businessSubs);
@@ -92,7 +94,7 @@ const Subscription = () => {
                       type="big"
                       left="구독 상품 재신청"
                       onClickLeft={() => {
-                        history.push('/setting/subscription/update');
+                        modal(CHECK_PW, '/setting/subscription/update');
                       }}
                     />
                   </>
@@ -102,11 +104,11 @@ const Subscription = () => {
                       type="big"
                       left="구독 해지"
                       onClickLeft={() => {
-                        history.push('/setting/subscription/expires');
+                        modal(CHECK_PW, '/setting/subscription/expires');
                       }}
                       right="구독 상품 변경"
                       onClickRight={() => {
-                        history.push('/setting/subscription/update');
+                        modal(CHECK_PW, '/setting/subscription/update');
                       }}
                     />
                   </>
@@ -157,7 +159,7 @@ const Subscription = () => {
                     type="big"
                     left="구독 해지"
                     onClickLeft={() => {
-                      history.push('/setting/subscription/expires');
+                      modal(CHECK_PW, '/setting/subscription/expires');
                     }}
                     right={
                       SubscriptionsData.data.status ===
@@ -166,7 +168,7 @@ const Subscription = () => {
                         : ''
                     }
                     onClickRight={() => {
-                      history.push('/setting/subscription/update');
+                      modal(CHECK_PW, '/setting/subscription/update');
                     }}
                   />
                 </>

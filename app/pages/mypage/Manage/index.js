@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import {
   Container,
@@ -13,10 +12,13 @@ import {
 import { actionGetMyPage } from 'stores';
 
 import moment from 'utils/moment';
+import { useModal } from 'utils/hooks';
+import { CHECK_PW } from 'modals/constants';
 
 const MyPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const modal = useModal();
+
   const MyPageData = useSelector(state => state.myPage);
 
   const adminData = useSelector(state => state.myPage.data.admin);
@@ -64,11 +66,11 @@ const MyPage = () => {
                     type="big"
                     left="비밀번호 변경"
                     onClickLeft={() => {
-                      history.push('/mypage/changepw');
+                      modal(CHECK_PW, '/mypage/changepw');
                     }}
                     right="관리자 정보 변경"
                     onClickRight={() => {
-                      history.push('/mypage/changeinfo');
+                      modal(CHECK_PW, '/mypage/changeinfo');
                     }}
                   />
                 </>

@@ -52,6 +52,10 @@ const Update = () => {
   });
 
   useEffect(() => {
+    if (!window.sessionStorage.getItem('CHECK')) {
+      history.goBack();
+    }
+    window.sessionStorage.clear();
     // 리덕스에 저장된 데이터가 있으면, 저장된 데이터를 이용합니다.
     if (!corpInfo) {
       dispatch(actionGetCorpInfo());

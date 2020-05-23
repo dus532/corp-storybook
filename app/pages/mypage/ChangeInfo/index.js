@@ -24,6 +24,11 @@ const ChangeInfo = () => {
   const [firstEdit, isFirstEdit] = useState(true);
 
   useEffect(() => {
+    if (!window.sessionStorage.getItem('CHECK')) {
+      history.goBack();
+    }
+    window.sessionStorage.clear();
+
     document.addEventListener(
       'keydown',
       () => firstEdit && isFirstEdit(false),

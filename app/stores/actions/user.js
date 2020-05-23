@@ -20,6 +20,18 @@ export const actionPostSignIn = data =>
     },
   });
 
+export const actionPostCheckPW = (data, onSuccess) =>
+  onlyCreate({
+    url: '/action/checkPassword',
+    params: data,
+    meta: {
+      onSuccess: () => {
+        window.sessionStorage.setItem('CHECK', true);
+        onSuccess();
+      },
+    },
+  });
+
 export const actionPostResetPassword = data =>
   onlyCreate({
     url: '/action/resetPassword',

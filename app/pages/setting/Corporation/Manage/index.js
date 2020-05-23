@@ -1,14 +1,16 @@
 /* eslint-disable indent */
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import { Container, BigTitle, AsyncDiv, BillPaper } from 'components';
 import { actionGetCorpInfo } from 'stores';
 
+import { useModal } from 'utils/hooks';
+import { CHECK_PW } from 'modals/constants';
+
 const Manage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const modal = useModal();
 
   const corpInfoStore = useSelector(state => state.info);
   const corpInfo = useSelector(state => state.info.data.corpInfo);
@@ -51,7 +53,7 @@ const Manage = () => {
             ]}
             buttonSpecial="기업 정보 변경"
             buttonSpecialOnClick={() => {
-              history.push('/setting/corp/update');
+              modal(CHECK_PW, '/setting/corp/update');
             }}
           />
         )}

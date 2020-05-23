@@ -10,6 +10,7 @@ import {
   EditCorpInfo,
   EditCard,
   EditEmployee,
+  CheckPW,
 } from 'modals/src';
 import {
   SIGN_FIND_EMAIL,
@@ -18,6 +19,7 @@ import {
   EDIT_CORP_INFO,
   EDIT_CARD,
   EDIT_EMPLOYEE,
+  CHECK_PW,
 } from 'modals/constants';
 
 const Modals = () => {
@@ -42,6 +44,8 @@ const Modals = () => {
       return <EditCard {...propsAll} />;
     case EDIT_EMPLOYEE:
       return <EditEmployee {...propsAll} />;
+    case CHECK_PW:
+      return <CheckPW {...propsAll} />;
     default:
       return <></>;
   }

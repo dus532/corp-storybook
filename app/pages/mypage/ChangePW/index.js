@@ -29,6 +29,11 @@ const ChangePW = () => {
   const REG = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,12}$/;
 
   useEffect(() => {
+    if (!window.sessionStorage.getItem('CHECK')) {
+      history.goBack();
+    }
+    window.sessionStorage.clear();
+
     document.addEventListener(
       'keydown',
       () => firstEdit && isFirstEdit(false),

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -27,6 +27,13 @@ const SubscriptionUpdate = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const toast = useToast();
+
+  useEffect(() => {
+    if (!window.sessionStorage.getItem('CHECK')) {
+      history.goBack();
+    }
+    window.sessionStorage.clear();
+  }, []);
 
   const [data, setData] = useState({
     type: C.ITEM_TYPE.PREMIUM.value,

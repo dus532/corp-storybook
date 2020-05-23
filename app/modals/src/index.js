@@ -5,3 +5,4 @@ export { default as EditCorpInfo } from './EditCorpInfo';
 export { default as EditCard } from './EditCard';
 export { default as EditEmployee } from './EditEmployee';
 export { default as CheckPW } from './CheckPW';
+export { default as Error } from './Error';

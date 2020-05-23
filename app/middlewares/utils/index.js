@@ -1,7 +1,8 @@
 import { KEY, LIFECYCLE } from 'middlewares/pack/constants';
-import { toggleSending, onToast } from 'stores';
+import { toggleSending, onToast, onModal } from 'stores';
 
 import createActions from 'stores/controller/createActions';
+import { ERROR } from 'modals/constants';
 
 const utilsMiddleware = store => next => action => {
   const { type, meta } = action;
@@ -38,7 +39,13 @@ const utilsMiddleware = store => next => action => {
           );
           break;
         case 'Card Already Registered':
-          store.dispatch(onToast(`카드가 등록되어 있습니다.`));
+          store.dispatch(
+            onModal(ERROR, {
+              title: '결제카드 등록 불가',
+              body:
+                '이미 등록된 결제카드입니다. 다른 결제카드를 등록해주십시오.',
+            }),
+          );
           break;
         case 'No Approved Subscription':
           store.dispatch(onToast(`구독을 승인할 수 없습니다.`));

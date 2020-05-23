@@ -15,7 +15,12 @@ export const actionPostChargeSubscription = (data, onSuccess) =>
   onlyCreate({
     url: '/action/chargeSubscription',
     params: { ...data, corpId: UserManager().getUser().corpId },
-    meta: { onSuccess },
+    meta: {
+      onSuccess: () => {
+        onSuccess();
+        window.sessionStorage.clear();
+      },
+    },
   });
 
 export const actionRePostChargeSubscription = (data, onSuccess) =>

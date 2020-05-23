@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -21,32 +21,47 @@ import {
 } from 'components';
 
 import { actionPostInitialCard } from 'stores';
-import UserManager from 'utils/userManager';
 
 const RegisterCard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const temp = JSON.parse(window.sessionStorage.getItem('temp'));
 
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit, register, errors } = useForm({
+    defaultValues: temp || {},
+  });
 
   const [state, setState] = useState({
     isNameOn: false,
     cardType: C.CARD_TYPE.COMPANY, // 개인, 법인
     registerType: C.REGISTER_TYPE.MAIN, // 대표카드, 팀별카드
+    birthday: '',
   });
+
+  useEffect(() => {
+    if (temp) {
+      setState(temp);
+      window.sessionStorage.clear();
+    }
+  }, []);
 
   const onSubmit = data => {
     dispatch(
       actionPostInitialCard(
         {
           page: 1,
-          corpId: UserManager().getUser().coprId,
           ...state,
           ...data,
           cardNumber: data.card1 + data.card2 + data.card3 + data.card4,
           expiration: 20 + data.expirationYY + data.expirationMM,
         },
-        () => history.push('/initial/payment'),
+        () => {
+          window.sessionStorage.setItem(
+            'temp',
+            JSON.stringify({ ...state, ...data }),
+          );
+          history.push('/initial/payment');
+        },
       ),
     );
   };
@@ -197,7 +212,10 @@ const RegisterCard = () => {
             <RegisterBirth>
               <Input
                 name="companyNumber"
-                ref={register}
+                onChange={e => {
+                  setState({ ...state, companyNumber: e.target.value });
+                }}
+                value={state.companyNumber}
                 placeholder="사업자 등록번호 10자리 입력"
                 type="tel"
                 maxLength="10"
@@ -211,7 +229,10 @@ const RegisterCard = () => {
             <RegisterBirth>
               <Input
                 name="birthday"
-                ref={register}
+                onChange={e => {
+                  setState({ ...state, birthday: e.target.value });
+                }}
+                value={state.birthday}
                 placeholder="ex) 951018"
                 type="tel"
                 maxLength="6"

@@ -118,10 +118,13 @@ const Reg = (type, value) => type.filter(t => t.value === value)[0].body;
 
 const RegData = (name, value, onClick, t) => {
   if (name.indexOf('amount') !== -1) {
-    return `${value[name].toLocaleString('en')} 원`;
+    return `${(value[name] * 1).toLocaleString('en')} 원`;
+  }
+  if (name.indexOf('joinDate') !== -1) {
+    return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;
   }
   if (name.indexOf('date') !== -1 || name.indexOf('Date') !== -1) {
-    return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;
+    return `${moment.unix(value[name]).format('YYYY. MM. DD HH:mm:ss')}`;
   }
   if (name.indexOf('edit') !== -1) {
     return <Edit type="button" className="edit" onClick={() => onClick(t)} />;

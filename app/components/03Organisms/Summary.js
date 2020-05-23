@@ -6,6 +6,7 @@ import { CSVLink } from 'react-csv/lib';
 
 import Color from 'config/color';
 import moment from 'utils/moment';
+import F from 'config/filter';
 
 import DL_IMG from 'images/icon_download.png';
 import DL_IMG_M from 'images/icon_download_mobile.png';
@@ -107,6 +108,24 @@ const Summary = ({ data, type }) => {
     { label: '연관 예약번호', key: 'rentalId' },
   ];
 
+  const Reg = (ty, value) => ty.filter(t => t.value === value)[0].body;
+
+  const RegData = (name, value) => {
+    if (name.indexOf('date') !== -1 || name.indexOf('Date') !== -1) {
+      return `${moment.unix(value[name]).format('YYYY. MM. DD HH:mm:ss')}`;
+    }
+    if (name.indexOf('item') !== -1) {
+      return Reg(F.PaymentItem, value[name]);
+    }
+    if (name.indexOf('status') !== -1) {
+      return Reg(F.PaymentStatus, value[name]);
+    }
+    if (name.indexOf('type') !== -1) {
+      return Reg(F.PaymentsType, value[name]);
+    }
+    return value[name];
+  };
+
   switch (type) {
     case 'employee':
       // 사원관리
@@ -137,7 +156,6 @@ const Summary = ({ data, type }) => {
 
     default:
       // 결제내역
-
       return (
         <StyledSummary className="box_overflow">
           <div className="left">
@@ -152,7 +170,15 @@ const Summary = ({ data, type }) => {
             <ExcelDownload>
               <CSVLink
                 headers={headerData}
-                data={data.payments}
+                data={data.payments.map(d => ({
+                  ...d,
+                  item: RegData('item', d),
+                  status: RegData('status', d),
+                  type: RegData('type', d),
+                  date: RegData('date', d),
+                  amount:
+                    d.amount && `${(d.amount * 1).toLocaleString('en')} 원`,
+                }))}
                 filename={`carplat_payment_${moment().format(
                   'YYYYMMDDHHmmss',
                 )}.csv`}

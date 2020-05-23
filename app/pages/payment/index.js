@@ -94,10 +94,10 @@ const Payment = () => {
           now={!nowPage ? 1 : nowPage}
           title={[
             ['결제 시각', 'date', 2],
-            ['카드사', 'cardCorp', 1],
+            ['카드사', 'cardCorp', 1.2],
             ['결제 카드', 'cardNumber', 1.7],
             ['금액', 'amount', 1.4],
-            ['항목', 'item', 1.4],
+            ['항목', 'item', 1],
             ['구분', 'type', 1],
             ['상태', 'status', 1],
             ['연관 예약번호', 'rentalId', 1.6],

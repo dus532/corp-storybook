@@ -48,7 +48,7 @@ const Manage = () => {
               },
               {
                 title: '등록된 부서 정보',
-                table: userGroups,
+                table: corpInfo.userGroupUsage && userGroups,
               },
             ]}
             buttonSpecial="기업 정보 변경"

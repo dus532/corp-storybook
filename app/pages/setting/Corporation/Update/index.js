@@ -161,7 +161,7 @@ const Update = () => {
                 <Input
                   name="emailDomains[1]"
                   placeholder="이메일 도메인 2"
-                  value={data.emailDomains[1]}
+                  value={data.emailDomains[1] || ''}
                   onChange={e => {
                     setData(
                       produce(data, draft => {

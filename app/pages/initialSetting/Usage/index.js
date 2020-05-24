@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -47,6 +47,10 @@ const Usage = () => {
   const toast = useToast();
 
   const USER = UserManager().getUser();
+
+  useEffect(() => {
+    window.localStorage.removeItem('temp');
+  }, []);
 
   const [state, setState] = useState({
     type: 1,

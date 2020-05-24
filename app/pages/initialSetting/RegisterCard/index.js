@@ -25,7 +25,7 @@ import { actionPostInitialCard } from 'stores';
 const RegisterCard = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const temp = JSON.parse(window.sessionStorage.getItem('temp'));
+  const temp = JSON.parse(window.localStorage.getItem('temp'));
 
   const { handleSubmit, register, errors } = useForm({
     defaultValues: temp || {},
@@ -42,11 +42,11 @@ const RegisterCard = () => {
   useEffect(() => {
     if (temp) {
       setState(temp);
-      window.sessionStorage.clear();
     }
   }, []);
 
   const onSubmit = data => {
+    window.localStorage.setItem('temp', JSON.stringify({ ...state, ...data }));
     dispatch(
       actionPostInitialCard(
         {
@@ -57,10 +57,6 @@ const RegisterCard = () => {
           expiration: 20 + data.expirationYY + data.expirationMM,
         },
         () => {
-          window.sessionStorage.setItem(
-            'temp',
-            JSON.stringify({ ...state, ...data }),
-          );
           history.push('/initial/payment');
         },
       ),

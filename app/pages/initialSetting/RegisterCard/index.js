@@ -36,6 +36,7 @@ const RegisterCard = () => {
     cardType: C.CARD_TYPE.COMPANY, // 개인, 법인
     registerType: C.REGISTER_TYPE.MAIN, // 대표카드, 팀별카드
     birthday: '',
+    companyNumber: '',
   });
 
   useEffect(() => {

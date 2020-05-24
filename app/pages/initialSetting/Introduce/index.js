@@ -64,7 +64,7 @@ const IntroBottom = styled.div`
 `;
 
 const Introduce = () => {
-  const userData = UserManager().getUser();
+  const USER = UserManager().getUser();
   const history = useHistory();
 
   return (
@@ -72,7 +72,7 @@ const Introduce = () => {
       <IntroTop>
         <div className="intro_top-left">
           <h2>
-            {userData.name} 님,
+            {USER.corpName} 관리자 님,
             <br />
             환영합니다!
           </h2>

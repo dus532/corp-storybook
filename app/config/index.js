@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const configs = {
   dev: {
-    apiServerURL: 'https://biz-corp-admin-api.dev.platdev.net',
+    apiServerURL: 'https://biz-corp-admin-api.staging.platdev.net',
   },
   local: {
     apiServerURL:

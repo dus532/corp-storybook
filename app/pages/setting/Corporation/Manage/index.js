@@ -34,8 +34,12 @@ const Manage = () => {
               { title: '기업 주소 ', body: corpInfo.address },
               {
                 title: '이메일 도메인',
-                body: `${corpInfo.emailDomains[0]} / ${
+                body: `${
+                  corpInfo.emailDomains[0] ? `${corpInfo.emailDomains[0]}` : '-'
+                } ${
                   corpInfo.emailDomains[1]
+                    ? `/ ${corpInfo.emailDomains[1]}`
+                    : ''
                 }`,
               },
               {

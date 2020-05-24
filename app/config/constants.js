@@ -19,9 +19,7 @@ const C = {
 
   NOTICE_TYPE: {
     NONE: 0,
-    ALL: 1,
-    EMAIL: 2,
-    SMS: 3,
+    EMAIL: 1,
   },
 
   RENATL_STATUS: {

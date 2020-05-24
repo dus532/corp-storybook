@@ -17,7 +17,7 @@ import {
 } from 'components';
 import Color from 'config/color';
 import { actionPostChargeSubscription } from 'stores';
-import Reg from 'utils/reg';
+import { Reg } from 'utils/regData';
 import F from 'config/filter';
 
 const PaymentCheckBox = styled.div`

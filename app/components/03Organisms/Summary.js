@@ -6,10 +6,10 @@ import { CSVLink } from 'react-csv/lib';
 
 import Color from 'config/color';
 import moment from 'utils/moment';
-import F from 'config/filter';
 
 import DL_IMG from 'images/icon_download.png';
 import DL_IMG_M from 'images/icon_download_mobile.png';
+import { RegData } from 'utils/regData';
 
 const StyledSummary = styled.div`
   width: 100%;
@@ -107,24 +107,6 @@ const Summary = ({ data, type }) => {
     { label: '상태', key: 'status' },
     { label: '연관 예약번호', key: 'rentalId' },
   ];
-
-  const Reg = (ty, value) => ty.filter(t => t.value === value)[0].body;
-
-  const RegData = (name, value) => {
-    if (name.indexOf('date') !== -1 || name.indexOf('Date') !== -1) {
-      return `${moment.unix(value[name]).format('YYYY. MM. DD HH:mm:ss')}`;
-    }
-    if (name.indexOf('item') !== -1) {
-      return Reg(F.PaymentItem, value[name]);
-    }
-    if (name.indexOf('status') !== -1) {
-      return Reg(F.PaymentStatus, value[name]);
-    }
-    if (name.indexOf('type') !== -1) {
-      return Reg(F.PaymentsType, value[name]);
-    }
-    return value[name];
-  };
 
   switch (type) {
     case 'employee':

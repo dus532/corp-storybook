@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import Color from 'config/color';
 import SegmentControl from 'components/02Molecules/SegmentControl';
+import NoData from 'components/03Organisms/NoData';
 
 import C from 'config/constants';
 import moment from 'utils/moment';
@@ -94,18 +95,6 @@ const Card = styled.div`
       margin-bottom: 12px;
     }
   }
-`;
-
-const NoData = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 12px;
-
-  width: 100%;
-  height: 112px;
-  text-align: center;
 `;
 
 const Tag = styled.span`

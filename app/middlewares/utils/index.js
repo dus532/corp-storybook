@@ -62,33 +62,36 @@ const utilsMiddleware = store => next => action => {
           );
           break;
         default:
-          if (response.data.message.indexOf('fail to billkey') !== -1) {
-            store.dispatch(
-              onModal(ERROR, {
-                title: '결제카드 등록 실패',
-                body: (
-                  <>
-                    결제카드 정보 인증 및 빌 키 발급에 실패하였습니다.
-                    <br />
-                    <br />[
-                    {
-                      response.data.message
-                        .split('resultCode:')[1]
-                        .split(', ')[0]
-                    }
-                    ]{' '}
-                    {
-                      response.data.message
-                        .split('resultCode:')[1]
-                        .split(', ')[1]
-                        .split('resultMsg:')[1]
-                    }
-                  </>
-                ),
-              }),
-            );
+          if (typeof response.data.message === 'string') {
+            if (response.data.message.includes('fail to billkey')) {
+              store.dispatch(
+                onModal(ERROR, {
+                  title: '결제카드 등록 실패',
+                  body: (
+                    <>
+                      결제카드 정보 인증 및 빌 키 발급에 실패하였습니다.
+                      <br />
+                      <br />[
+                      {
+                        response.data.message
+                          .split('resultCode:')[1]
+                          .split(', ')[0]
+                      }
+                      ]{' '}
+                      {
+                        response.data.message
+                          .split('resultCode:')[1]
+                          .split(', ')[1]
+                          .split('resultMsg:')[1]
+                      }
+                    </>
+                  ),
+                }),
+              );
+            }
+          } else {
+            errReg(response.status);
           }
-          errReg(response.status);
           break;
       }
     }

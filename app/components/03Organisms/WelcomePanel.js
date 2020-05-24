@@ -60,9 +60,11 @@ const WelcomePanel = ({ className, store }) => {
 
   return (
     <StyledWelcomePanel className={className}>
-      <div>{store.data.corpInfo.name} 관리자님, 안녕하세요!</div>
+      <div className="fs01">
+        {store.data.corpInfo.name} 관리자님, 안녕하세요!
+      </div>
       <Button
-        className="pc"
+        className="pc subbutton_size"
         onClick={() => {
           history.push('/setting/announcements/');
         }}

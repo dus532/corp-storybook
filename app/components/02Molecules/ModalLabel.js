@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
   .title {
     width: 100px;
     flex-shrink: 0;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .body {

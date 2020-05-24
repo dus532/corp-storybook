@@ -7,6 +7,7 @@ import SubButton from 'components/01Atoms/SubButton';
 
 const StyledButtonBottom = styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
   max-width: ${props => (props.type === 'big' ? `572px` : `373px`)};
   margin: 0 auto;
@@ -14,6 +15,7 @@ const StyledButtonBottom = styled.div`
 `;
 
 const ButtonBottom = ({
+  white,
   type,
   left,
   style,
@@ -25,13 +27,14 @@ const ButtonBottom = ({
   disabledLeft,
   disabledRight,
 }) => (
-  <StyledButtonBottom type={type} style={style}>
+  <StyledButtonBottom type={type} style={style} white={white}>
     {left && (
       <SubButton
+        white={white}
         type={typeLeft}
         onClick={onClickLeft}
         disabled={disabledLeft}
-        style={{ marginRight: 8 }}
+        style={{ marginRight: 8, maxWidth: 282 }}
       >
         <span>{left}</span>
       </SubButton>
@@ -45,6 +48,7 @@ const ButtonBottom = ({
 );
 
 ButtonBottom.propTypes = {
+  white: PropTypes.bool,
   type: PropTypes.string,
   left: PropTypes.string,
   style: PropTypes.object,

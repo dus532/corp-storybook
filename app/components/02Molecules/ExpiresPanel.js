@@ -69,11 +69,11 @@ const Check = styled.div`
 const View = styled.div`
   .title {
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .body {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-top: 4px;
   }
 
@@ -82,7 +82,7 @@ const View = styled.div`
       font-size: 1.1rem;
     }
     .body {
-      font-size: 0.75rem;
+      font-size: 1rem;
     }
   }
 `;

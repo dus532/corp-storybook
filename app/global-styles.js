@@ -50,6 +50,14 @@ const GlobalStyle = createGlobalStyle`
     font-weight:normal;
   }
 
+  .fs01{
+    font-size:1.1rem;
+  }
+
+  .subbutton_size{
+    font-size:0.8rem;
+  }
+
   hr {
     width:100%;
     height:1px;

@@ -68,7 +68,8 @@ const SignIn = () => {
           <Logo />
           <h2 className="sign_title">
             프리미엄 기업 카셰어링 서비스,
-            <br /> 카플랫 비즈니스에 오신 것을 환영합니다.
+            <br /> <span className="blue">카플랫 비즈</span>에 오신 것을
+            환영합니다.
           </h2>
           <form className="sign_bottom" onSubmit={handleSubmit}>
             <SignInput {...propsList} />

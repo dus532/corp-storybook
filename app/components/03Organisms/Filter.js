@@ -26,14 +26,14 @@ const StyledFilter = styled.div`
     margin-right: 10px;
   }
   .top {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
   .top_date {
     display: inline-block;
   }
   .bottom_box {
     display: inline-block;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
   }
   .search {
     display: flex;
@@ -56,9 +56,10 @@ const StyledFilter = styled.div`
     height: 40px;
     color: white;
     background: ${Color.Blue};
-    margin-left: 20px;
+    margin-left: 8px;
     border-radius: 4px;
     transition: 0.25s;
+    font-size: 0.8rem;
   }
   .search_button:hover {
     background: ${Color.BlueHover};
@@ -67,6 +68,10 @@ const StyledFilter = styled.div`
 
   @media screen and (max-width: 768px) {
     margin-top: 0;
+
+    .top {
+      margin-bottom: 16px;
+    }
 
     .datepicker {
       margin-right: 0;

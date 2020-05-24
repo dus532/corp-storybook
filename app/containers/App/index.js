@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
+import Sticky from 'react-sticky-fill';
 
 import {
   SignIn,
@@ -69,7 +70,9 @@ const App = () => {
       <Helmet titleTemplate="%s - 카플랫 관리자 페이지" defaultTitle="카플랫">
         <meta name="description" content="카플랫 서비스 관리툴입니다." />
       </Helmet>
-      <Header isSigned={userData.data} location={location.pathname} />
+      <Sticky style={{ zIndex: 2 }}>
+        <Header isSigned={userData.data} location={location.pathname} />
+      </Sticky>
       <Switch>
         {/* 로그인 부분 */}
         <Route path="/" exact component={SignIn} />

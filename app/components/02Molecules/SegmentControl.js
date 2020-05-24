@@ -30,17 +30,18 @@ const Part = styled.div`
   font-size: ${props => (props.heig ? 0.8 : 1)}rem;
   cursor: pointer;
   border-radius: ${props => (props.checked ? 4 : 0)};
-  transition: 0.35s;
-  background: ${props => props.checked && Color.Blue};
+  background: ${props =>
+    props.checked && (props.blue ? Color.DarkBlue : Color.Blue)};
   color: ${props => props.checked && Color.White};
 `;
 
-const SegmentControl = ({ data, clicked, noMargin, height }) => (
+const SegmentControl = ({ data, clicked, noMargin, height, blue }) => (
   <StyledControl>
     {data.map(d => (
       <Part
         key={d.key}
         checked={clicked === d.key}
+        blue={blue}
         noMargin={noMargin}
         heig={height}
         onClick={() => {
@@ -60,6 +61,7 @@ SegmentControl.propTypes = {
   data: PropTypes.array,
   noMargin: PropTypes.bool,
   height: PropTypes.number,
+  blue: PropTypes.bool,
   clicked: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 

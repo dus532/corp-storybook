@@ -23,14 +23,14 @@ const Line = styled.div`
   display: flex;
   justify-content: space-between;
   border-top: 1px solid ${Color.LineGray};
-  padding-top: 4px;
+  padding-top: 12px;
   padding-bottom: 12px;
   max-width: ${props => (props.type ? '572px' : '100%')};
   width: 100%;
   color: ${props => (props.blue ? Color.Blue : '#000000')};
 
   .title {
-    font-weight: 700;
+    font-weight: 500;
   }
 `;
 
@@ -66,7 +66,11 @@ const Bottom = styled.div`
 
 const H3 = styled.h3`
   display: flex;
+  margin: 0 auto;
+  max-width: 572px;
+  width: 100%;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const ButtonSpecial = styled.button`
@@ -117,7 +121,7 @@ const BillPaper = ({
 }) => (
   <StyledBillPaper noPadding={noPadding} className={className}>
     <H3>
-      <span>{title}</span>
+      <span className="fs01">{title}</span>
       {buttonSpecial && (
         <ButtonSpecial className="pc" onClick={buttonSpecialOnClick}>
           {buttonSpecial}

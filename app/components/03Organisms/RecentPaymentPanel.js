@@ -118,7 +118,7 @@ const RecentPaymentPanel = ({ store, className }) => {
   return (
     <StyledPanel className={className}>
       <Filter>
-        <div>최근 결제 금액</div>
+        <div className="fs01">최근 결제 금액</div>
       </Filter>
       {data.length > 0 ? (
         <>

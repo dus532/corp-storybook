@@ -35,14 +35,14 @@ const StyledInput = styled.div`
 
   input:checked + label:before {
     text-align: center;
-    color: #3f8ef7;
+    color: #2946be;
     display: inline-block;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid #3f8ef7;
+    border: 1px solid #2946be;
     padding: 4px;
-    background: #3f8ef7;
+    background: #2946be;
     vertical-align: middle;
     background-clip: content-box;
     margin-right: 8px;

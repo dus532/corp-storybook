@@ -101,6 +101,7 @@ const Subscription = () => {
                 C.SUB_TYPE.EXPIRED_SUBSCRIBING ? (
                   <>
                     <ButtonBottom
+                      white
                       type="big"
                       left="구독 상품 재신청"
                       onClickLeft={() => {
@@ -111,6 +112,7 @@ const Subscription = () => {
                 ) : (
                   <>
                     <ButtonBottom
+                      white
                       type="big"
                       left="구독 해지"
                       onClickLeft={() => {
@@ -130,6 +132,7 @@ const Subscription = () => {
             SubscriptionsData.data.status ===
               C.SUB_TYPE.DOWNGRADE_SUBSCRIBING) && (
             <BillPaper
+              blue
               className="box_overflow"
               title="변경 구독 상품 정보"
               data={[
@@ -177,6 +180,7 @@ const Subscription = () => {
                   <ButtonBottom
                     type="big"
                     left="구독 해지"
+                    white
                     onClickLeft={() => {
                       modal(CHECK_PW, '/setting/subscription/expires');
                     }}

@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import Lottie from 'react-lottie';
 
 import LOADINGIMG from 'images/carplet_loading.gif';
+
+import animationData from './loading.json';
 
 const StyledSending = styled.div`
   position: fixed;
@@ -17,6 +20,7 @@ const StyledSending = styled.div`
   flex-direction: column;
   color: white;
   animation: opacity 2s;
+  z-index: 999;
 
   .loading {
     width: 100px;
@@ -25,13 +29,30 @@ const StyledSending = styled.div`
   }
 `;
 
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
 const Sending = () => {
   const globalData = useSelector(state => state.global);
 
   if (globalData.sending) {
     return (
       <StyledSending>
-        <div className="loading" />
+        {/* <div className="loading" /> */}
+        <Lottie
+          options={defaultOptions}
+          height={40}
+          width={40}
+          isStopped={false}
+          isPaused
+        />
+        <br />
         <div>열심히 달리고 있어요!</div>
       </StyledSending>
     );

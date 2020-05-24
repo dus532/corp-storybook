@@ -45,6 +45,10 @@ const Part = styled.div`
   flex: 1;
   padding: 32px 0;
 
+  h2 {
+    font-weight: 700;
+  }
+
   h5 {
     margin-top: 4px;
     color: ${Color.Blue};

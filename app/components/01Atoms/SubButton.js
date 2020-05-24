@@ -8,6 +8,7 @@ const SubButton = styled(Button)`
   border: 1px solid ${props => (props.blue ? Color.Blue : Color.LineGray)};
   color: ${props => (props.blue ? Color.Blue : Color.Black)};
   width: 100%;
+  font-size: 0.8rem;
 
   &:hover {
     background: #eee;

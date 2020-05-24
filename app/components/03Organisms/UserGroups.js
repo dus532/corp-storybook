@@ -22,6 +22,10 @@ const Table = styled.table`
     background: rgba(0, 0, 0, 0.04);
   }
 
+  th {
+    padding: 0 28px;
+  }
+
   tr,
   td {
     height: 40px;
@@ -29,15 +33,29 @@ const Table = styled.table`
   }
 
   .th_name {
-    width: 250px;
+  }
+
+  .th_people {
+    width: 100px;
+  }
+
+  .th_card {
+    width: 180px;
   }
 
   .edit {
     width: 28px;
   }
 
+  .td_edit {
+    padding: 0;
+  }
   @media screen and (max-width: 768px) {
     font-size: 0.8rem;
+    th,
+    td {
+      padding: 0 12px;
+    }
     .th_name {
       width: auto;
     }
@@ -62,9 +80,15 @@ const UserGroups = ({ type, edit, data }) => {
     <Table type={type}>
       <thead>
         <tr className="thead_tr">
-          <th className="th_name">부서명</th>
-          <th>사원수</th>
-          <th>부서 결제카드</th>
+          <th style={{ textAlign: 'left' }} className="th_name">
+            부서명
+          </th>
+          <th style={{ textAlign: 'left' }} className="th_people">
+            사원수
+          </th>
+          <th style={{ textAlign: 'right' }} className="th_card">
+            부서 결제카드
+          </th>
           {edit && <th className="edit" />}
         </tr>
       </thead>
@@ -73,11 +97,13 @@ const UserGroups = ({ type, edit, data }) => {
           (t, index) =>
             t.changeType !== 3 && (
               <tr key={index}>
-                <td>{t.name}</td>
-                <td>{t.memberNumber} 명</td>
-                <td>{t.isCardRegistered ? '등록 됨' : '등록 안됨'}</td>
+                <td style={{ textAlign: 'left' }}>{t.name}</td>
+                <td style={{ textAlign: 'left' }}>{t.memberNumber} 명</td>
+                <td style={{ textAlign: 'right' }}>
+                  {t.isCardRegistered ? '등록 됨' : '등록 안됨'}
+                </td>
                 {edit && (
-                  <td>
+                  <td className="td_edit">
                     <Edit
                       onClick={() => {
                         modal(EDIT_CORP_INFO, { data: t, index });

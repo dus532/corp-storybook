@@ -39,6 +39,7 @@ const Filter = styled.div`
     flex: 1;
     text-align: right;
     margin-right: 12px;
+    font-weight: 300;
   }
 
   @media screen and (max-width: 768px) {
@@ -68,6 +69,7 @@ const Card = styled.div`
   .team_name {
     width: 170px;
     font-weight: 500;
+    font-size: 1.1rem;
   }
   .team_info {
     flex: 1;
@@ -98,13 +100,14 @@ const Card = styled.div`
 `;
 
 const Tag = styled.span`
-  padding: 6px 20px;
+  padding: 6px;
   border-radius: 4px;
-  font-weight: 500;
+  font-weight: 300;
   color: ${props => (props.isRepresentativeCard ? '#2946b0' : 'black')};
   background: ${props => (props.isRepresentativeCard ? '#e1e7ff' : `#f7f7f7`)};
   margin-right: 10px;
   display: ${props => (props.mobile ? 'none' : 'inline-block')};
+  font-size: 0.8rem;
 
   @media screen and (max-width: 768px) {
     font-size: 0.8rem;
@@ -126,7 +129,7 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
   return (
     <StyledPanel className={className}>
       <Filter>
-        <div>부서별 결제 금액</div>
+        <div className="fs01">부서별 결제 금액</div>
         <div className="date">
           {moment
             .unix(date.userGroupPaymentsStartDate)

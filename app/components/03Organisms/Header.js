@@ -28,6 +28,8 @@ const StyledHeader = styled.div`
   border-bottom: ${props =>
     props.borderBottom ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'};
   background: ${Color.White};
+  top: 0;
+  z-index: 2;
 
   .container {
     display: flex;
@@ -101,6 +103,10 @@ const StyledHeader = styled.div`
     height: 100%;
     text-align: center;
     background: url(${ArrowImg}) center / contain no-repeat;
+  }
+
+  .initial_arrow_opacity {
+    opacity: 0.2;
   }
 
   .initial_bottom {
@@ -557,17 +563,22 @@ const Header = ({ isSigned, location }) => {
                         <h3>정기 구독 결제</h3>
                       </div>
                     )}
-                    <div className="initial_arrow" />
                     {nowInitPage() === 3 ? (
-                      <div className="initial_status initial_ok">
-                        <h2>03</h2>
-                        <h3>이용 한도 설정</h3>
-                      </div>
+                      <>
+                        <div className="initial_arrow" />
+                        <div className="initial_status initial_ok">
+                          <h2>03</h2>
+                          <h3>이용 한도 설정</h3>
+                        </div>
+                      </>
                     ) : (
-                      <div className="initial_status ">
-                        <h2>03</h2>
-                        <h3>이용 한도 설정</h3>
-                      </div>
+                      <>
+                        <div className="initial_arrow initial_arrow_opacity" />
+                        <div className="initial_status ">
+                          <h2>03</h2>
+                          <h3>이용 한도 설정</h3>
+                        </div>
+                      </>
                     )}
                   </Container>
                   <Container

@@ -93,6 +93,7 @@ const RegisterCard = () => {
             },
           ]}
           clicked={state.cardType}
+          blue
         />
         <br />
         {state.cardType === C.CARD_TYPE.COMPANY && (

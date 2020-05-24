@@ -7,7 +7,9 @@ import styled from 'styled-components';
 import IconReorder from 'images/icon_reorder.png';
 import { RegData } from 'utils/regData';
 
-const StyledTable = styled.div``;
+const StyledTable = styled.div`
+  background: white;
+`;
 
 const Th = styled.div`
   padding: 0 20px;
@@ -34,10 +36,11 @@ const Th = styled.div`
 `;
 
 const Line = styled.div`
-  width: 100%;
+  width: calc(100% - 40px);
   height: 1px;
   margin: 0 20px;
   background: #eee;
+  box-sizing: border-box;
 
   @media screen and (max-width: 768px) {
     display: none;

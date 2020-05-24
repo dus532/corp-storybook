@@ -45,6 +45,7 @@ const StyledSummary = styled.div`
     justify-content: center;
     align-items: center;
     min-height: auto;
+    padding: 20px;
 
     .left {
       width: 100%;
@@ -111,67 +112,78 @@ const Summary = ({ data, type }) => {
   switch (type) {
     case 'employee':
       // 사원관리
-      return (
-        <StyledSummary className="box_overflow">
-          <div className="left">
-            총 {data.employees.length}명의 사원이 등록된 상태입니다.
-          </div>
-        </StyledSummary>
-      );
+      if (data.employees.length > 0) {
+        return (
+          <StyledSummary className="box_overflow">
+            <div className="left">
+              총 {data.employees.length}명의 사원이 등록된 상태입니다.
+            </div>
+          </StyledSummary>
+        );
+      }
+      return <></>;
 
     case 'rental':
       // 예약조회
-      return (
-        <StyledSummary className="box_overflow">
-          <div className="left">
-            이용요금 :{' '}
-            <span className="blue">
-              {data.totalAmount && (data.totalAmount * 1).toLocaleString('en')}
-              원
-            </span>
-          </div>
-          <div className="right">
-            <span className="bold">{data.totalCount}건</span>{' '}
-          </div>
-        </StyledSummary>
-      );
+      if (data.totalCount > 0) {
+        return (
+          <StyledSummary className="box_overflow">
+            <div className="left">
+              이용요금 :{' '}
+              <span className="blue">
+                {data.totalAmount &&
+                  (data.totalAmount * 1).toLocaleString('en')}
+                원
+              </span>
+            </div>
+            <div className="right">
+              <span className="bold">{data.totalCount}건</span>{' '}
+            </div>
+          </StyledSummary>
+        );
+      }
+      return <></>;
 
     default:
       // 결제내역
-      return (
-        <StyledSummary className="box_overflow">
-          <div className="left">
-            이용요금 :{' '}
-            <span className="blue">
-              {data.totalAmount && (data.totalAmount * 1).toLocaleString('en')}
-              원
-            </span>
-          </div>
-          <div className="right">
-            <span className="bold">{data.totalCount}건</span>{' '}
-            <ExcelDownload>
-              <CSVLink
-                headers={headerData}
-                data={data.payments.map(d => ({
-                  ...d,
-                  item: RegData('item', d),
-                  status: RegData('status', d),
-                  type: RegData('type', d),
-                  date: RegData('date', d),
-                  amount:
-                    d.amount && `${(d.amount * 1).toLocaleString('en')} 원`,
-                }))}
-                filename={`carplat_payment_${moment().format(
-                  'YYYYMMDDHHmmss',
-                )}.csv`}
-              >
-                <div className="img" />
-                <span>엑셀 다운로드</span>
-              </CSVLink>
-            </ExcelDownload>
-          </div>
-        </StyledSummary>
-      );
+      if (data.totalCount > 0) {
+        return (
+          <StyledSummary className="box_overflow">
+            <div className="left">
+              이용요금 :{' '}
+              <span className="blue">
+                {data.totalAmount &&
+                  (data.totalAmount * 1).toLocaleString('en')}
+                원
+              </span>
+            </div>
+            <div className="right">
+              <span className="bold">{data.totalCount}건</span>{' '}
+              <ExcelDownload>
+                <CSVLink
+                  headers={headerData}
+                  data={data.payments.map(d => ({
+                    ...d,
+                    item: RegData('item', d),
+                    status: RegData('status', d),
+                    type: RegData('type', d),
+                    date: RegData('date', d),
+                    amount:
+                      d.amount && `${(d.amount * 1).toLocaleString('en')} 원`,
+                  }))}
+                  filename={`carplat_payment_${moment().format(
+                    'YYYYMMDDHHmmss',
+                  )}.csv`}
+                >
+                  <div className="img" />
+                  <span>엑셀 다운로드</span>
+                </CSVLink>
+              </ExcelDownload>
+            </div>
+          </StyledSummary>
+        );
+      }
+      return <></>;
   }
 };
 

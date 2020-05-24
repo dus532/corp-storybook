@@ -14,6 +14,7 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   animation: floating_div 0.25s;
+  z-index: 99;
 
   .floating_container {
     padding: 24px;
@@ -94,12 +95,13 @@ const Div = styled.div`
 
 const BG = styled.div`
   position: fixed;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.4);
   width: 100%;
   top: 0;
   left: 0;
   height: 100%;
   animation: bg 0.5s;
+  z-index: 99;
 
   @keyframes bg {
     from {

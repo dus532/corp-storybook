@@ -16,6 +16,7 @@ const Div = styled.div`
   justify-content: center;
   align-items: center;
   animation: floating_div 0.25s;
+  z-index: 99;
 
   .floating_container {
     position: relative;
@@ -99,6 +100,7 @@ const BG = styled.div`
   height: 100%;
   cursor: pointer;
   animation: bg 0.5s;
+  z-index: 99;
 
   @keyframes bg {
     from {

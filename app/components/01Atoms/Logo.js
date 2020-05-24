@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import LogoImg from 'images/logo_carplat.png';
 
 const Logo = styled.div`
-  width: 304px;
-  height: 67px;
-  margin: 68px 0;
+  width: 268px;
+  height: 95px;
+  margin: 8px 0;
   background: url(${LogoImg}) center / contain no-repeat;
 
   @media screen and (max-width: 768px) {

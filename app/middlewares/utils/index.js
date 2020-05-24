@@ -61,6 +61,9 @@ const utilsMiddleware = store => next => action => {
             onToast(`카드 정보가 정확하지 않습니다. 다시 확인해주세요.`),
           );
           break;
+        case 'Wrong Password':
+          store.dispatch(onToast(`비밀번호가 맞지 않습니다.`));
+          break;
         default:
           if (typeof response.data.message === 'string') {
             if (response.data.message.includes('fail to billkey')) {

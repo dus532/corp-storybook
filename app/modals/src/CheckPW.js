@@ -15,7 +15,8 @@ const CheckPW = ({ data, onClickExit }) => {
   const dispatch = useDispatch();
 
   const USER = UserManager().getUser();
-  const onNext = () => {
+  const onNext = e => {
+    e.preventDefault();
     dispatch(
       actionPostCheckPW({ password: state }, () => {
         history.push(data);
@@ -25,35 +26,41 @@ const CheckPW = ({ data, onClickExit }) => {
   };
 
   return (
-    <FloatingDiv
-      fullScreen
-      title="비밀번호 입력"
-      body={
-        <>
-          해당 메뉴로 진입하기 위해서 비밀번호를 입력해주세요.
-          <br />
-          <br />
-          <ModalLabel title="아이디" body={USER.corpName} />
-          <ModalLabel
-            title="비밀번호"
-            body={
-              <Input onChange={e => setState(e.target.value)} value={state} />
-            }
-          />
-        </>
-      }
-      footer={
-        <>
-          <SubButton blue white size="small" onClick={onNext}>
-            <span>확인</span>
-          </SubButton>
-          <SubButton white size="small" onClick={onClickExit}>
-            <span>취소</span>
-          </SubButton>
-        </>
-      }
-      onClickExit={onClickExit}
-    />
+    <form onSubmit={onNext}>
+      <FloatingDiv
+        fullScreen
+        title="비밀번호 입력"
+        body={
+          <>
+            해당 메뉴로 진입하기 위해서 비밀번호를 입력해주세요.
+            <br />
+            <br />
+            <ModalLabel title="아이디" body={USER.corpName} />
+            <ModalLabel
+              title="비밀번호"
+              body={
+                <Input
+                  type="password"
+                  onChange={e => setState(e.target.value)}
+                  value={state}
+                />
+              }
+            />
+          </>
+        }
+        footer={
+          <>
+            <SubButton blue white size="small" type="submit">
+              <span>확인</span>
+            </SubButton>
+            <SubButton white size="small" onClick={onClickExit}>
+              <span>취소</span>
+            </SubButton>
+          </>
+        }
+        onClickExit={onClickExit}
+      />
+    </form>
   );
 };
 

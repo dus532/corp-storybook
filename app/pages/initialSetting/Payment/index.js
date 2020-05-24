@@ -17,8 +17,7 @@ import {
 } from 'components';
 import Color from 'config/color';
 import { actionPostChargeSubscription } from 'stores';
-import { Reg } from 'utils/regData';
-import F from 'config/filter';
+import { NormalizeData } from 'utils/regData';
 
 const PaymentCheckBox = styled.div`
   margin-top: 12px;
@@ -148,10 +147,13 @@ const Payment = () => {
             { title: '동시 사용자 수', body: `${cardData.userNumber} 명` },
             {
               title: '결제 카드',
-              body: `${cardData.cardCorp} / ${cardData.cardNumber} / ${Reg(
-                F.cardType,
-                cardData.cardType,
-              )}`,
+              body: `${NormalizeData(
+                'cardCorp',
+                cardData.cardCorp,
+              )} / ${NormalizeData(
+                'cardNumber',
+                cardData.cardNumber,
+              )} / ${NormalizeData('cardType', cardData.cardType)}`,
             },
             { title: '결제 카드번호', body: cardData.cardNumber },
             {

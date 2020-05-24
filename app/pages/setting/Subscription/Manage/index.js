@@ -16,6 +16,7 @@ import moment from 'utils/moment';
 import C from 'config/constants';
 import { useModal } from 'utils/hooks';
 import { CHECK_PW } from 'modals/constants';
+import { NormalizeData } from 'utils/regData';
 
 const Subscription = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,16 @@ const Subscription = () => {
                     ? moment.unix(current.renewDate).format('YYYY년 MM월 DD일')
                     : '-',
                 },
-                { title: '결제 카드', body: current.cardNumber },
+                {
+                  title: '결제 카드',
+                  body: `${NormalizeData(
+                    'cardCorp',
+                    current.cardCorp,
+                  )} / ${NormalizeData(
+                    'cardNumber',
+                    current.cardNumber,
+                  )} / ${NormalizeData('cardType', current.cardType)}`,
+                },
                 {
                   title: '정기 결제일',
                   body: `매월 ${current.periodicPaymentDate}일`,
@@ -137,7 +147,16 @@ const Subscription = () => {
                     ? moment.unix(next.renewDate).format('YYYY년 MM월 DD일')
                     : '-',
                 },
-                { title: '결제 카드', body: next.cardNumber },
+                {
+                  title: '결제 카드',
+                  body: `${NormalizeData(
+                    'cardCorp',
+                    next.cardCorp,
+                  )} / ${NormalizeData(
+                    'cardNumber',
+                    next.cardNumber,
+                  )} / ${NormalizeData('cardType', next.cardType)}`,
+                },
                 {
                   title: '정기 결제일',
                   body: `매월 ${next.periodicPaymentDate}일`,

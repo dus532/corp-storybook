@@ -45,7 +45,29 @@ const RegData = (name, value, onClick, t) => {
   if (name.includes('license')) {
     return Reg(F.Boolean, value[name]);
   }
+  if (name.includes('cardNumber')) {
+    return `${value.cardCorp.split('[')[1].split(']')[0]}(${value[name].slice(
+      0,
+      4,
+    )})`;
+  }
+  if (name.includes('cardCorp')) {
+    return `${value[name].split('[')[1].split(']')[0]}`;
+  }
   return value[name];
 };
 
-export { Reg, RegData };
+const NormalizeData = (name, value) => {
+  if (name.includes('cardNumber')) {
+    return `${value.slice(0, 4)}-${value.slice(4, 8)}-XXXX-XXXX`;
+  }
+  if (name.includes('cardCorp')) {
+    return `${value.split('[')[1].split(']')[0]}`;
+  }
+  if (name.includes('cardType')) {
+    return Reg(F.cardType, value);
+  }
+  return value;
+};
+
+export { Reg, RegData, NormalizeData };

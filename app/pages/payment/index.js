@@ -93,9 +93,8 @@ const Payment = () => {
         <Table
           now={!nowPage ? 1 : nowPage}
           title={[
-            ['결제 시각', 'date', 2],
-            ['카드사', 'cardCorp', 1.2],
-            ['결제 카드', 'cardNumber', 1.7],
+            ['결제 시각', 'date', 1.7],
+            ['결제 카드', 'cardNumber', 1.2],
             ['금액', 'amount', 1.4],
             ['항목', 'item', 1],
             ['구분', 'type', 1],

@@ -108,10 +108,8 @@ const Payment = () => {
       const body = {
         ...cardData,
         subscriptionStartDate: moment().format('X'),
-        thisMonthPrice: paymentAmount.total,
         nextPaymentDate: cardData.periodicPaymentDate,
-        nextMonthPrice: paymentAmount.amount,
-        periodicPaymentPrice: cardData.periodicPaymentDate,
+        nextMonthPrice: cardData.periodicPaymentAmount,
       };
 
       dispatch(

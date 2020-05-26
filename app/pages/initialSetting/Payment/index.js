@@ -155,14 +155,15 @@ const Payment = () => {
                 cardData.cardNumber,
               )} / ${NormalizeData('cardType', cardData.cardType)}`,
             },
-            { title: '결제 카드번호', body: cardData.cardNumber },
             {
               title: '구독 시작 일',
               body: moment().format('YYYY년 MM월 DD일'),
             },
             {
               title: '이번달 결제 금액',
-              body: `${paymentAmount.thisMonth.toLocaleString('en')} 원`,
+              body: paymentAmount.thisMonth
+                ? `${paymentAmount.thisMonth.toLocaleString('en')} 원`
+                : '오류',
             },
             {
               title: '다음 달 결제일',
@@ -170,11 +171,23 @@ const Payment = () => {
             },
             {
               title: '다음 달 결제 금액',
-              body: `${paymentAmount.amount.toLocaleString('en')} 원`,
+              body: paymentAmount.amount
+                ? `${paymentAmount.amount.toLocaleString('en')} 원`
+                : '오류',
             },
-            { title: '업무 시간', body: cardData.openHours },
+            {
+              title: '업무 시간',
+              body: `${NormalizeData('hour', 1400)} ~ ${NormalizeData(
+                'hour',
+                cardData.endHour,
+              )}`,
+            },
           ]}
-          amount={`${paymentAmount.total.toLocaleString('en')} 원`}
+          amount={
+            paymentAmount.total
+              ? `${paymentAmount.total.toLocaleString('en')} 원`
+              : '오류'
+          }
           startDate={moment().format('YYYY년 MM월 DD일')}
           endDate={paymentAmount.lastPaymentDay}
         />
@@ -205,7 +218,7 @@ const Payment = () => {
             onChange={handleChange}
           />
         </PaymentCheckBox>
-        <InfoBox>고객센터 문의 : 1544-7198</InfoBox>
+        <InfoBox>고객센터 문의 : 1833-7164</InfoBox>
         <br />
         <br />
         <br />

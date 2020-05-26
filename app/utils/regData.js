@@ -64,6 +64,9 @@ const NormalizeData = (name, value) => {
   if (!value) {
     return '';
   }
+  if (name.includes('hour')) {
+    return `${String(value).slice(0, 2)}:${String(value).slice(2, 4)}`;
+  }
   if (name.includes('cardNumber')) {
     return `${value.slice(0, 4)}-${value.slice(4, 8)}-XXXX-XXXX`;
   }

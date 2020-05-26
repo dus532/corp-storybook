@@ -58,7 +58,7 @@ const Service = () => {
           <h3>카플랫 고객센터 입니다.</h3>
           <h5>
             상담전화
-            <br /> 1544-7198
+            <br /> 1833-7164
           </h5>
           <div className="button">
             <Button>카카오톡 채널로 문의하기</Button>

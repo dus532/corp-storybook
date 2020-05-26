@@ -81,7 +81,7 @@ const SignIn = () => {
             </Button>
             <br />
             <br />
-            <InfoBox>카플랫에 문의하기 : 1544-7198</InfoBox>
+            <InfoBox>카플랫에 문의하기 : 1833-7164</InfoBox>
           </form>
         </div>
       </SignWrap>

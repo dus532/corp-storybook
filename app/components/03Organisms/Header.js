@@ -415,6 +415,7 @@ const Header = ({ isSigned, location }) => {
         <span>사원관리</span>
       </NavLink>
       <button
+        ref={iRef}
         className="setting_button"
         style={{ cursor: 'pointer', fontWeight: 700 }}
         type="button"

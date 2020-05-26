@@ -10,10 +10,13 @@ import {
   actionPutEmployee,
 } from 'stores';
 import { useToast } from 'utils/hooks';
+import UserManger from 'utils/userManager';
 
 const EditEmployee = ({ onClickExit, data }) => {
   const dispatch = useDispatch();
   const toast = useToast();
+
+  const USER = UserManger().getUser();
 
   const [list, setList] = useState([]);
   const [state, setState] = useState(data);
@@ -126,9 +129,21 @@ const EditEmployee = ({ onClickExit, data }) => {
           title="탈퇴 확인"
           body={
             <>
-              {state.name} ({state.number}, {state.userGroupName})님이 탈퇴
-              처리되면 사원으로 서 더 이상 카플랫 기업 카셰어링 서비스를 이용할
-              수 없습니다. 탈퇴 처리하시겠습니까?
+              <span style={{ fontWeight: 700 }}>
+                {state.name} ({state.number}
+                {state.userGroupName && `, ${state.userGroupName}`})
+              </span>
+              님이{' '}
+              {state.hasBooking ? (
+                <>
+                  현재 차량 <span style={{ fontWeight: 700 }}>예약(이용)</span>{' '}
+                  중인 상태 입니다.
+                </>
+              ) : (
+                ''
+              )}{' '}
+              탈퇴 처리되면 {USER.corpName} 사원으로 서 더 이상 카플랫 기업
+              카셰어링 서비스를 이용할 수 없습니다. 탈퇴 처리하시겠습니까?
             </>
           }
           footer={

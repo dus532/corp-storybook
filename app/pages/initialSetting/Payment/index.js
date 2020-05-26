@@ -161,8 +161,8 @@ const Payment = () => {
             },
             {
               title: '이번달 결제 금액',
-              body: paymentAmount.thisMonth
-                ? `${paymentAmount.thisMonth.toLocaleString('en')} 원`
+              body: cardData.thisMonth
+                ? `${cardData.thisMonth.toLocaleString('en')} 원`
                 : '오류',
             },
             {
@@ -171,8 +171,8 @@ const Payment = () => {
             },
             {
               title: '다음 달 결제 금액',
-              body: paymentAmount.amount
-                ? `${paymentAmount.amount.toLocaleString('en')} 원`
+              body: cardData.periodicPaymentAmount
+                ? `${cardData.periodicPaymentAmount.toLocaleString('en')} 원`
                 : '오류',
             },
             {
@@ -184,8 +184,8 @@ const Payment = () => {
             },
           ]}
           amount={
-            paymentAmount.total
-              ? `${paymentAmount.total.toLocaleString('en')} 원`
+            cardData.thisMonth
+              ? `${cardData.thisMonth.toLocaleString('en')} 원`
               : '오류'
           }
           startDate={moment().format('YYYY년 MM월 DD일')}

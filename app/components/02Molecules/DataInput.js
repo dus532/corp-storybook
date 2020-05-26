@@ -73,7 +73,7 @@ const DataInput = props => {
   return (
     <>
       <StyledDiv>
-        <Input {...props} type={viewPW} />
+        <Input {...props} ref={props.InputRef} type={viewPW} />
         {props.type === 'password' && (
           <div
             className="eyes"
@@ -87,11 +87,11 @@ const DataInput = props => {
             {viewPW === 'password' ? <IconShow /> : <IconHide />}
           </div>
         )}
-        {props.value && statusEmojis(props.status)}
+        {statusEmojis(props.status)}
       </StyledDiv>
       {props.error && (
         <InputError>
-          <h5>{props.error}</h5>
+          <h5>{props.error.message}</h5>
         </InputError>
       )}
     </>
@@ -105,7 +105,8 @@ DataInput.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   status: PropTypes.number,
-  error: PropTypes.string,
+  error: PropTypes.object,
+  InputRef: PropTypes.any,
 };
 
 export default DataInput;

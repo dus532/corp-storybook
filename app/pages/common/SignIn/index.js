@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useForm } from 'react-hook-form';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -32,11 +32,15 @@ const SignIn = () => {
 
   const userStore = useSelector(state => state.user);
 
+  const { handleSubmit, register, errors, getValues } = useForm();
+
   useEffect(() => {
     if (userStore.data) {
       history.push('/home');
     }
   }, [userStore]);
+
+  const formData = getValues();
 
   const handleChange = (e, type) => {
     if (type === 'checkbox') {
@@ -46,10 +50,9 @@ const SignIn = () => {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (userData.adminLoginId && userData.password) {
-      dispatch(actionPostSignIn(userData));
+  const onSubmit = data => {
+    if (data.adminLoginId && data.password) {
+      dispatch(actionPostSignIn(data));
     } else {
       toast('빈칸을 채워주세요.');
     }
@@ -59,7 +62,7 @@ const SignIn = () => {
     modal(SIGN_FIND_EMAIL);
   };
 
-  const propsList = { userData, handleChange };
+  const propsList = { userData, handleChange, register, errors, formData };
 
   return (
     <>
@@ -71,13 +74,11 @@ const SignIn = () => {
             <br /> <span className="blue">카플랫 비즈</span>에 오신 것을
             환영합니다.
           </h2>
-          <form className="sign_bottom" onSubmit={handleSubmit}>
+          <form className="sign_bottom" onSubmit={handleSubmit(onSubmit)}>
             <SignInput {...propsList} />
             <SignExtra {...propsList} toggleFindEmail={modalFindEmail} />
             <Button>
-              <span>
-                <FormattedMessage id="carplat-biz.signin.signin" />
-              </span>
+              <span>로그인</span>
             </Button>
             <br />
             <br />

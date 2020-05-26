@@ -45,7 +45,16 @@ const Subscription = () => {
           {current && (
             <BillPaper
               className="box_overflow"
-              title="구독 상품 정보"
+              title={
+                SubscriptionsData.data.status === C.SUB_TYPE.SUBSCRIBING
+                  ? '최근 결제 금액'
+                  : `${
+                      SubscriptionsData.data.status !==
+                      C.SUB_TYPE.EXPIRED_SUBSCRIBING
+                        ? '기존 '
+                        : ''
+                    }구독 상품 정보`
+              }
               noPadding={
                 SubscriptionsData.data.status ===
                   C.SUB_TYPE.UPGRADE_SUBSCRIBING ||
@@ -71,13 +80,15 @@ const Subscription = () => {
                 },
                 {
                   title: '결제 카드',
-                  body: `${NormalizeData(
-                    'cardCorp',
-                    current.cardCorp,
-                  )} / ${NormalizeData(
-                    'cardNumber',
-                    current.cardNumber,
-                  )} / ${NormalizeData('cardType', current.cardType)}`,
+                  body: current.cardNumber
+                    ? `${NormalizeData(
+                        'cardCorp',
+                        current.cardCorp,
+                      )} / ${NormalizeData(
+                        'cardNumber',
+                        current.cardNumber,
+                      )} / ${NormalizeData('cardType', current.cardType)}`
+                    : '-',
                 },
                 {
                   title: '정기 결제일',
@@ -142,7 +153,9 @@ const Subscription = () => {
                 },
                 {
                   title: '구독 시작일',
-                  body: moment.unix(next.startDate).format('YYYY년 MM월 DD일'),
+                  body: next.startDate
+                    ? moment.unix(next.startDate).format('YYYY년 MM월 DD일')
+                    : '-',
                 },
                 {
                   title: '구독 갱신일',
@@ -152,17 +165,21 @@ const Subscription = () => {
                 },
                 {
                   title: '결제 카드',
-                  body: `${NormalizeData(
-                    'cardCorp',
-                    next.cardCorp,
-                  )} / ${NormalizeData(
-                    'cardNumber',
-                    next.cardNumber,
-                  )} / ${NormalizeData('cardType', next.cardType)}`,
+                  body: next.cardNumber
+                    ? `${NormalizeData(
+                        'cardCorp',
+                        next.cardCorp,
+                      )} / ${NormalizeData(
+                        'cardNumber',
+                        next.cardNumber,
+                      )} / ${NormalizeData('cardType', next.cardType)}`
+                    : '-',
                 },
                 {
                   title: '정기 결제일',
-                  body: `매월 ${next.periodicPaymentDate}일`,
+                  body: next.periodicPaymentDate
+                    ? `매월 ${next.periodicPaymentDate}일`
+                    : '-',
                 },
                 {
                   title: '정기 결제 금액',

@@ -31,7 +31,10 @@ const Subscription = () => {
     dispatch(actionGetSubscription());
   }, []);
 
-  window.sessionStorage.setItem('userNumber', current.userNumber);
+  window.sessionStorage.setItem(
+    'userNumber',
+    (current && current.userNumber) || 5,
+  );
 
   return (
     <div>

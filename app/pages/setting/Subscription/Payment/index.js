@@ -33,6 +33,7 @@ const Payment = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const toast = useToast();
+
   const [check, setCheck] = useState({
     periodicPaymentAmount: '',
     periodicPaymentDate: '',
@@ -97,18 +98,19 @@ const Payment = () => {
             .format('X');
   }
 
-  const onReqeust = () => {
-    dispatch(
-      actionPutSubscription(update, () => {
-        history.push('/setting/subscription');
-        toast('구독 상품 변경을 요청한 상태입니다. ', 'Ok');
-        toast(
-          '기업 구독상품 혹은 동시 구독자 인원이 업그레이드 될 경우 고객님들이 이용할 수 있는 차량 대수가 충분한지 확인한 후 기업 관리자분에게 연락을 드릴 예정입니다.',
-          'ok',
-        );
-      }),
-    );
-  };
+  const onReqeust = () =>
+    check.periodicPaymentAmount
+      ? dispatch(
+          actionPutSubscription(update, () => {
+            history.push('/setting/subscription');
+            toast('구독 상품 변경을 요청한 상태입니다. ', 'Ok');
+            toast(
+              '기업 구독상품 혹은 동시 구독자 인원이 업그레이드 될 경우 고객님들이 이용할 수 있는 차량 대수가 충분한지 확인한 후 기업 관리자분에게 연락을 드릴 예정입니다.',
+              'ok',
+            );
+          }),
+        )
+      : toast('상품의 정책이 정해지지 않았거나, 서버 오류가 발생했습니다.');
 
   useEffect(() => {
     dispatch(

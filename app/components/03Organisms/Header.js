@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -307,22 +307,16 @@ const Header = ({ isSigned, location }) => {
   const [menu, setMenu] = useState(false);
   const [setting, setSetting] = useState(false);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        iRef.current &&
-        !iRef.current.contains(event.target) &&
-        document.body.clientWidth > 768
-      ) {
-        setSetting(false);
-      }
+  function handleClickOutside(event) {
+    if (
+      iRef.current &&
+      !iRef.current.contains(event.target) &&
+      document.body.clientWidth > 768
+    ) {
+      setSetting(false);
     }
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [iRef]);
+    document.removeEventListener('click', handleClickOutside);
+  }
 
   const nowInitPage = () => {
     if (location.indexOf('/registercard') !== -1) {
@@ -415,12 +409,16 @@ const Header = ({ isSigned, location }) => {
         <span>사원관리</span>
       </NavLink>
       <button
-        ref={iRef}
         className="setting_button"
         style={{ cursor: 'pointer', fontWeight: 700 }}
         type="button"
         onClick={() => {
-          setSetting(!setting);
+          if (setting) {
+            setSetting(false);
+          } else {
+            setSetting(true);
+            document.addEventListener('click', handleClickOutside);
+          }
         }}
       >
         설정

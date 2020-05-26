@@ -37,9 +37,7 @@ const SubscriptionUpdate = () => {
 
   const [data, setData] = useState({
     type: C.ITEM_TYPE.PREMIUM.value,
-    people: window.sessionStorage.getItem('userNumber')
-      ? window.sessionStorage.getItem('userNumber')
-      : 2,
+    people: window.sessionStorage.getItem('userNumber') || 5,
   });
 
   const handleChange = (name, value) => {

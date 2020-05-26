@@ -56,8 +56,8 @@ const C = {
   },
 
   PAYMENT_TYPE: {
-    PAYMENT: 0,
-    PAYMENT_FINISH: 1,
+    PAYMENT: 1,
+    REFUND: 2,
   },
 
   LICENSE_TYPE: {

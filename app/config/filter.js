@@ -50,8 +50,8 @@ const F = {
   ],
 
   PaymentsType: [
-    { value: C.PAYMENT_TYPE.PAYMENT, body: '- ' },
-    { value: C.PAYMENT_TYPE.PAYMENT_FINISH, body: '결제완료' },
+    { value: C.PAYMENT_TYPE.PAYMENT, body: '결제' },
+    { value: C.PAYMENT_TYPE.REFUND, body: '환불' },
   ],
 
   // 존재유무

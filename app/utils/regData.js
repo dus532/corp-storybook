@@ -21,6 +21,9 @@ const Edit = styled.button`
 const Reg = (type, value) => type.filter(t => t.value === value)[0].body;
 
 const RegData = (name, value, onClick, t) => {
+  if (!value) {
+    return '';
+  }
   if (name.includes('amount')) {
     return `${(value[name] * 1).toLocaleString('en')} 원`;
   }
@@ -58,6 +61,9 @@ const RegData = (name, value, onClick, t) => {
 };
 
 const NormalizeData = (name, value) => {
+  if (!value) {
+    return '';
+  }
   if (name.includes('cardNumber')) {
     return `${value.slice(0, 4)}-${value.slice(4, 8)}-XXXX-XXXX`;
   }

@@ -206,7 +206,7 @@ const DropBox = ({
 
 DropBox.propTypes = {
   width: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   title: PropTypes.string,
   inputRef: PropTypes.any,
   data: PropTypes.array,

@@ -229,7 +229,7 @@ const Update = () => {
                       e.keyCode === 13 && e.target.value && onAdd()
                     }
                     value={data.add}
-                    maxLength={5}
+                    maxLength={10}
                   />
                   <Button onClick={onAdd} type="button">
                     입력

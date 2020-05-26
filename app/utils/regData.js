@@ -21,7 +21,7 @@ const Edit = styled.button`
 const Reg = (type, value) => type.filter(t => t.value === value)[0].body;
 
 const RegData = (name, value, onClick, t) => {
-  if (!value[name]) {
+  if (!value[name] && !name.includes('edit')) {
     return '';
   }
   if (name.includes('amount')) {

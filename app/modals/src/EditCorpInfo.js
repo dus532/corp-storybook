@@ -92,6 +92,7 @@ const EditCorpInfo = ({ onClickExit, data }) => {
                 <br />
                 <h6>부서 이름</h6>
                 <Input
+                  maxLength={10}
                   placeholder={data.data.name}
                   onChange={e => {
                     edit = e.target.value;

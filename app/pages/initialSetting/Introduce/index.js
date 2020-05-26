@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
@@ -66,6 +66,10 @@ const IntroBottom = styled.div`
 const Introduce = () => {
   const USER = UserManager().getUser();
   const history = useHistory();
+
+  useEffect(() => {
+    window.localStorage.removeItem('temp');
+  }, []);
 
   return (
     <Container580>

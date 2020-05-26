@@ -7,8 +7,8 @@ const GlobalStyle = createGlobalStyle`
   *:active {
       -webkit-tap-highlight-color: transparent;
       outline: none;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
+      -ms-touch-action: inherit;
+      touch-action: inherit;
   }
 
   ul{
@@ -131,10 +131,13 @@ const GlobalStyle = createGlobalStyle`
     color:rgba(0,0,0,0.4);
   }
 
+  a{
+    color:inherit;
+  }
+
   a,a:active,a:focus,div:active,div:focus{
     text-decoration:none;
     outline:none;
-    color:inherit;
   }
 
   /* Chrome, Safari, Edge, Opera */

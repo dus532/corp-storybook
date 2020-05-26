@@ -132,7 +132,7 @@ const BillPaper = ({
       !d.table ? (
         <Line type={title} key={d.title} blue={blue}>
           <span className="title">{d.title}</span>
-          <span className="body">{d.body}</span>
+          <span className="body">{d.body ? d.body : '-'}</span>
         </Line>
       ) : (
         <React.Fragment key={d.title}>

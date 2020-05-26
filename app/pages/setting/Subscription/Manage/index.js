@@ -31,6 +31,8 @@ const Subscription = () => {
     dispatch(actionGetSubscription());
   }, []);
 
+  window.sessionStorage.setItem('userNumber', current.userNumber);
+
   return (
     <div>
       <Container>

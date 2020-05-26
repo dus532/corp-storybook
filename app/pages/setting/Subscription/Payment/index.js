@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -15,7 +15,8 @@ import moment from 'utils/moment';
 
 import C from 'config/constants';
 import { useToast } from 'utils/hooks';
-import { actionPutSubscription } from 'stores';
+import { actionPutSubscription, actionPostCheckSubscription } from 'stores';
+import { NormalizeData } from 'utils/regData';
 
 const Text = styled.div`
   margin: 40px 0;
@@ -32,6 +33,10 @@ const Payment = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const toast = useToast();
+  const [check, setCheck] = useState({
+    periodicPaymentAmount: '',
+    periodicPaymentDate: '',
+  });
 
   const subData = useSelector(state => state.subscription.data);
   if (!subData) {
@@ -105,6 +110,24 @@ const Payment = () => {
     );
   };
 
+  useEffect(() => {
+    dispatch(
+      actionPostCheckSubscription(
+        {
+          subscriptionId: current.id,
+          type: isUpgrade ? 1 : 2,
+          product: next.type,
+          userNumber: next.people,
+        },
+        res => {
+          setCheck(res.data.payload);
+        },
+      ),
+    );
+  }, []);
+
+  console.log(check);
+
   return (
     <Container>
       <BigTitle>구독 상품 변경</BigTitle>
@@ -129,9 +152,15 @@ const Payment = () => {
           },
           {
             title: '결제 카드',
-            body: `${current.cardCorp}카드 / ${current.cardNumber} / ${
-              current.cardType
-            }`,
+            body: current.cardNumber
+              ? `${NormalizeData(
+                  'cardCorp',
+                  current.cardCorp,
+                )} / ${NormalizeData(
+                  'cardNumber',
+                  current.cardNumber,
+                )} / ${NormalizeData('cardType', current.cardType)}`
+              : '-',
           },
           {
             title: '정기 결제일',
@@ -157,30 +186,34 @@ const Payment = () => {
         data={[
           {
             title: '구독 정보',
-            body: `${update.product} / ${update.userNumber} 명`,
+            body: `${NormalizeData('productType', update.product)} / ${
+              update.userNumber
+            } 명`,
           },
           {
             title: '구독 시작일',
-            body: update.subscriptionStartDate
-              ? moment
-                  .unix(update.subscriptionStartDate)
-                  .format('YYYY년 MM월 DD일')
-              : '-',
+            body: '-',
           },
           {
             title: '결제 카드',
-            body: `${update.cardCorp}카드 / ${update.cardNumber} / ${
-              update.cardType
-            }`,
+            body: update.cardNumber
+              ? `${NormalizeData(
+                  'cardCorp',
+                  update.cardCorp,
+                )} / ${NormalizeData(
+                  'cardNumber',
+                  update.cardNumber,
+                )} / ${NormalizeData('cardType', update.cardType)}`
+              : '-',
           },
           {
             title: '정기 결제일',
-            body: `매월 ${update.periodicPaymentDate}일`,
+            body: `매월 ${check.periodicPaymentDate}일`,
           },
           {
             title: '정기 결제 금액',
-            body: update.periodicPrice
-              ? `월 ${update.periodicPrice.toLocaleString('en')}원`
+            body: check.periodicPaymentAmount
+              ? `월 ${check.periodicPaymentAmount.toLocaleString('en')}원`
               : '-',
           },
           {

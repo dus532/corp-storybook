@@ -45,6 +45,7 @@ export {
   actionPushSubscription,
   actionPutSubscription,
   actionDeleteSubscription,
+  actionPostCheckSubscription,
 } from 'stores/actions/subscription';
 
 export {

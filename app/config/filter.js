@@ -54,6 +54,12 @@ const F = {
     { value: C.PAYMENT_TYPE.REFUND, body: '환불' },
   ],
 
+  ProductType: [
+    { value: C.ITEM_TYPE.PREMIUM.value, body: '프리미엄' },
+    { value: C.ITEM_TYPE.STANDARD.value, body: '스탠다드' },
+    { value: C.ITEM_TYPE.BASIC.value, body: '베이직' },
+  ],
+
   // 존재유무
   Boolean: [{ value: 0, body: '-' }, { value: 1, body: '있음' }],
 };

@@ -124,10 +124,22 @@ const Table = ({ now = '1', data = [], title = [], nodata }) => {
   const onSort = value => {
     setList([
       ...list.sort((a, b) => {
-        if (a[value] > b[value]) {
+        if (!a[value]) {
+          return 1;
+        }
+        if (!b[value]) {
+          return -1;
+        }
+        if (
+          (Number(a[value]) ? Number(a[value]) : a[value]) >
+          (Number(b[value]) ? Number(b[value]) : b[value])
+        ) {
           return sort.filter(f => f.key === value)[0].isSort ? 1 : -1;
         }
-        if (a[value] < b[value]) {
+        if (
+          (Number(a[value]) ? Number(a[value]) : a[value]) <
+          (Number(b[value]) ? Number(b[value]) : b[value])
+        ) {
           return sort.filter(f => f.key === value)[0].isSort ? -1 : 1;
         }
         return 0;

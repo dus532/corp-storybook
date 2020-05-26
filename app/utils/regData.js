@@ -76,6 +76,9 @@ const NormalizeData = (name, value) => {
   if (name.includes('cardType')) {
     return Reg(F.cardType, value);
   }
+  if (name.includes('productType')) {
+    return Reg(F.ProductType, value);
+  }
   return value;
 };
 

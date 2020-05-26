@@ -30,6 +30,10 @@ const StyledSummary = styled.div`
     font-weight: 700;
   }
 
+  .date {
+    margin: 0 12px;
+  }
+
   .left {
     flex: 1;
     font-weight: 700;
@@ -96,7 +100,7 @@ const ExcelDownload = styled.button`
   }
 `;
 
-const Summary = ({ data, type }) => {
+const Summary = ({ data, type, filter }) => {
   const headerData = [
     { label: 'ID', key: 'id' },
     { label: '결제 시각', key: 'date' },
@@ -139,6 +143,10 @@ const Summary = ({ data, type }) => {
             <div className="right">
               <span className="bold">{data.totalCount}건</span>{' '}
             </div>
+            <span className="date">
+              {moment.unix(filter.startDate).format('YYYY년 MM월 DD일')} ~{' '}
+              {moment.unix(filter.endDate).format('YYYY년 MM월 DD일')}
+            </span>
           </StyledSummary>
         );
       }
@@ -158,7 +166,11 @@ const Summary = ({ data, type }) => {
               </span>
             </div>
             <div className="right">
-              <span className="bold">{data.totalCount}건</span>{' '}
+              <span className="bold">전체 {data.totalCount}건</span>
+              <span className="date">
+                {moment.unix(filter.startDate).format('YYYY년 MM월 DD일')} ~{' '}
+                {moment.unix(filter.endDate).format('YYYY년 MM월 DD일')}
+              </span>
               <ExcelDownload>
                 <CSVLink
                   headers={headerData}
@@ -190,6 +202,7 @@ const Summary = ({ data, type }) => {
 Summary.propTypes = {
   type: PropTypes.string,
   data: PropTypes.any,
+  filter: PropTypes.object,
 };
 
 export default Summary;

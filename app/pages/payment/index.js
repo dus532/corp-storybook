@@ -89,7 +89,7 @@ const Payment = () => {
         onClick={onSearch}
       />
       <AsyncDiv store={paymentData}>
-        <Summary data={paymentData.data} />
+        <Summary data={paymentData.data} filter={filter} />
         <Table
           now={!nowPage ? 1 : nowPage}
           title={[

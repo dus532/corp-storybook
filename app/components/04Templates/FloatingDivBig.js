@@ -92,12 +92,13 @@ const Div = styled.div`
 `;
 
 const BG = styled.div`
+  overflow: hidden;
   position: fixed;
   background: rgba(0, 0, 0, 0.1);
   width: 100%;
   top: 0;
   left: 0;
-  height: 100%;
+  height: 110vh;
   cursor: pointer;
   animation: bg 0.5s;
   z-index: 99;

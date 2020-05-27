@@ -39,7 +39,7 @@ const ChangeInfo = () => {
     }
   }, []);
 
-  const { handleSubmit, register } = useForm({
+  const { handleSubmit, register, errors } = useForm({
     defaultValues: adminData,
   });
 
@@ -69,10 +69,35 @@ const ChangeInfo = () => {
                 <Input name="name" ref={register} required />
                 <br />
                 <h4>관리자 전화번호</h4>
-                <Input name="phoneNumber" ref={register} required />
+                <Input
+                  name="phoneNumber"
+                  type="tel"
+                  ref={register({
+                    pattern: {
+                      value: /^[0-9]{3,13}$/,
+                      message: '전화번호가 맞지 않습니다.',
+                    },
+                  })}
+                  required
+                />
+                {errors.phoneNumber && (
+                  <h5 className="error">{errors.phoneNumber.message}</h5>
+                )}
                 <br />
                 <h4>이메일 주소</h4>
-                <Input name="email" ref={register} required />
+                <Input
+                  name="email"
+                  ref={register({
+                    pattern: {
+                      value: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                      message: '이메일 형식에 맞지 않습니다.',
+                    },
+                  })}
+                  required
+                />
+                {errors.email && (
+                  <h5 className="error">{errors.email.message}</h5>
+                )}
                 <br />
                 <ButtonBottom
                   left="취소"

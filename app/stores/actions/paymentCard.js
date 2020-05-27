@@ -5,7 +5,10 @@ import UserManager from 'utils/userManager';
 const { read, del, update, onlyRead, onlyCreate } = createActions('card');
 
 export const actionGetCards = () =>
-  read({ url: `/corp/manageCards/${UserManager().getUser().corpId}` });
+  read({
+    url: `/corp/manageCards/${UserManager().getUser().corpId}`,
+    fastLoading: true,
+  });
 
 export const actionDelCard = (cardId, onSuccess) =>
   del({

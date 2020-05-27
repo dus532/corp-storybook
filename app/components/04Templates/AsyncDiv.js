@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Lottie from 'react-lottie';
 
 import { REQUEST_SUCCESS, REQUEST_FAILURE } from 'stores/controller/constants';
 
 import IconError from '../01Atoms/IconError';
+
+import animationData from './loading.json';
 
 const LoadFail = styled.div`
   width: 100%;
@@ -18,6 +21,15 @@ const LoadFail = styled.div`
   flex-direction: column;
 `;
 
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+};
+
 const AsyncDiv = ({ store, children }) => {
   if (store.status === REQUEST_SUCCESS) {
     return <>{children}</>;
@@ -30,7 +42,18 @@ const AsyncDiv = ({ store, children }) => {
       </LoadFail>
     );
   }
-  return <LoadFail className="box_overflow">로딩중...</LoadFail>;
+  return (
+    <LoadFail className="box_overflow">
+      <Lottie
+        options={defaultOptions}
+        height={40}
+        width={40}
+        isStopped={false}
+        isPaused
+      />
+      열심히 달리고 있어요!
+    </LoadFail>
+  );
 };
 
 AsyncDiv.propTypes = {

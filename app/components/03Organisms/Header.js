@@ -78,6 +78,10 @@ const StyledHeader = styled.div`
     width: 670px;
   }
 
+  .header_bottom-menubutton {
+    display: none;
+  }
+
   .header_right {
     display: flex;
     align-items: center;
@@ -131,6 +135,13 @@ const StyledHeader = styled.div`
       background: white;
     }
 
+    .header_bottom-menubutton {
+      display: block;
+      width: auto;
+      height: 100%;
+      text-align: right;
+    }
+
     .header_bottom_mobile {
       display: flex;
     }
@@ -163,7 +174,7 @@ const MobileMenu = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
-    animation: mobile_menu-bg 0.45s;
+    animation: mobile_menu-bg 0.5s;
   }
 
   .menu {
@@ -226,10 +237,10 @@ const MobileMenu = styled.div`
 
   @keyframes mobile_menu {
     from {
-      right: -200px;
+      transform: translateX(200px);
     }
     to {
-      right: 0px;
+      transform: translateX(0);
     }
   }
 
@@ -265,12 +276,12 @@ const SettingMenu = styled.div`
     display: block;
     text-align: right;
     background: white;
-    transition: 0.35s;
+    transition: 0.25s;
   }
 
   .menu:hover {
     background: ${Color.SubGray};
-    transition: 0.35s;
+    transition: 0.25s;
   }
 
   @media screen and (max-width: 1199px) {
@@ -599,7 +610,13 @@ const Header = ({ isSigned, location }) => {
                 className="logo_header"
               />
               <div className="header_bottom-menu">{menus}</div>
-              <IconMenu className="mobile" onClick={onOpen} />
+              <button
+                className="header_bottom-menubutton"
+                type="button"
+                onClick={onOpen}
+              >
+                <IconMenu className="mobile" />
+              </button>
             </Container>
           )}
         </StyledHeader>
@@ -622,6 +639,8 @@ const Header = ({ isSigned, location }) => {
               <div className="info">
                 <h5 className="info_text">{isSigned.corpName} 관리자 님</h5>
                 <SmallButton
+                  mobile
+                  className="info_button"
                   onClick={() => {
                     history.push('/initial/introduce');
                   }}

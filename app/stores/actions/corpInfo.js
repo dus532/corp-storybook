@@ -5,7 +5,10 @@ import UserManager from 'utils/userManager';
 const { read, update, handleChange, onlyRead } = createActions('info');
 
 export const actionGetCorpInfo = () =>
-  read({ url: `/corp/manageInfo/${UserManager().getUser().corpId}` });
+  read({
+    url: `/corp/manageInfo/${UserManager().getUser().corpId}`,
+    fastLoading: true,
+  });
 
 export const actionHandleChangeCorpInfo = (name, data) =>
   handleChange(name, data);

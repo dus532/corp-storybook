@@ -15,12 +15,18 @@ import {
 } from './constants';
 
 export default resourceName => ({
-  read: ({ url = `/corp/${resourceName}`, params = {}, meta = {} }) => ({
+  read: ({
+    url = `/corp/${resourceName}`,
+    params = {},
+    meta = {},
+    fastLoading = false,
+  }) => ({
     type: GET_REQUEST,
     promise: RequestManager('get', url, params),
     meta: {
       ...meta,
       resourceName,
+      fastLoading,
     },
   }),
 

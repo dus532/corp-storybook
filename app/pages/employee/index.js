@@ -76,17 +76,7 @@ const Employees = () => {
     });
   };
 
-  const onSearch = () => {
-    // dispatch(
-    //   actionGetManageEmployees(
-    //     { ...filter, employeeNumber: filter.search },
-    //     () => {
-    //       history.push(`${document.location.pathname}?page=1`);
-    //     },
-    //   ),
-    // );
-    setSearch(filter.search);
-  };
+  const onSearch = () => employeeData.data && setSearch(filter.search);
 
   useEffect(() => {
     history.push(`${document.location.pathname}?page=1`);

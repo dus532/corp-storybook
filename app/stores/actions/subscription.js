@@ -7,7 +7,10 @@ const { read, update, del, pushDetail, onlyCreate } = createActions(
 );
 
 export const actionGetSubscription = () =>
-  read({ url: `/corp/manageSubscription/${UserManager().getUser().corpId}` });
+  read({
+    url: `/corp/manageSubscription/${UserManager().getUser().corpId}`,
+    fastLoading: true,
+  });
 
 export const actionPushSubscription = data => pushDetail(data);
 

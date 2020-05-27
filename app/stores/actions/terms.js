@@ -3,4 +3,7 @@ import createActions from 'stores/controller/createActions';
 
 const { read } = createActions('terms');
 
-export const actionGetTerms = () => read({});
+export const actionGetTerms = () =>
+  read({
+    fastLoading: true,
+  });

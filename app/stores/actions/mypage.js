@@ -4,7 +4,10 @@ import UserManager from 'utils/userManager';
 
 const { read, update } = createActions('myPage');
 
-export const actionGetMyPage = () => read({});
+export const actionGetMyPage = () =>
+  read({
+    fastLoading: true,
+  });
 
 export const actionPutAdminInfo = (params, onSuccess) =>
   update({

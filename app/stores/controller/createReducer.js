@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
 
@@ -38,13 +39,19 @@ export default (...reducerNames) =>
           case GET_REQUEST:
           case POST_REQUEST:
             return handle(state, action, {
-              start: prevState => ({
-                ...prevState,
-                status:
-                  state.status === REQUEST_WAITING
-                    ? REQUEST_START
-                    : state.status,
-              }),
+              start: prevState =>
+                meta.fastLoading
+                  ? {
+                      ...prevState,
+                      status:
+                        state.status === REQUEST_WAITING
+                          ? REQUEST_START
+                          : state.status,
+                    }
+                  : {
+                      ...prevState,
+                      status: REQUEST_WAITING,
+                    },
               success: prevState => ({
                 ...prevState,
                 status: REQUEST_SUCCESS,

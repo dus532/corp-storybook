@@ -3,4 +3,7 @@ import createActions from 'stores/controller/createActions';
 
 const { read } = createActions('faqs');
 
-export const actionGetFAQs = () => read({});
+export const actionGetFAQs = () =>
+  read({
+    fastLoading: true,
+  });

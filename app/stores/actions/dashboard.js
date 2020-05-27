@@ -10,6 +10,7 @@ export const actionGetDashBoard = data =>
       ...data,
       corpId: UserManager().getUser().corpId,
     },
+    fastLoading: true,
   });
 
 export const actionPostInitialUsage = (data, onSuccess) =>

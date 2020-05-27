@@ -1,9 +1,10 @@
 /* eslint-disable indent */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import SearchIMG from 'images/icon_search.png';
+import DelIMG from 'images/icon_delete.png';
 
 import C from 'config/constants';
 import F from 'config/filter';
@@ -61,6 +62,16 @@ const StyledFilter = styled.div`
     transition: 0.25s;
     font-size: 0.8rem;
   }
+  .searchclear {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    margin-left: -16px;
+    left: -16px;
+    background: url(${DelIMG}) center / cover;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
   .search_button:hover {
     background: ${Color.BlueHover};
     transition: 0.25s;
@@ -79,6 +90,12 @@ const StyledFilter = styled.div`
 
     .middle {
       margin: 0 5px;
+    }
+
+    .searchclear {
+      position: absolute;
+      left: auto;
+      right: 36px;
     }
 
     .search_mobile {
@@ -130,6 +147,7 @@ const Filter = ({
   placeholder = '예약번호 입력',
 }) => {
   const [date, setDate] = useState(0);
+  const inp = useRef();
 
   const Bottom = () => {
     switch (type) {
@@ -304,10 +322,24 @@ const Filter = ({
           className="search search_mobile box_overflow"
           onSubmit={e => {
             e.preventDefault();
+            inp.current.blur();
             onClick();
           }}
         >
-          <Input className="search_input" placeholder={placeholder} />
+          <Input
+            ref={inp}
+            type="text"
+            value={filter.search || ''}
+            onChange={e => handleChange(e.target.value, 'search')}
+            className="search_input"
+            placeholder={placeholder}
+          />
+          <button
+            type="button"
+            style={{ opacity: filter.search ? 1 : 0.1 }}
+            onClick={() => handleChange('', 'search')}
+            className="searchclear"
+          />
         </form>
         {type !== 'announcements' && (
           <>
@@ -398,6 +430,13 @@ const Filter = ({
             onChange={e => handleChange(e.target.value, 'search')}
             className="search_input"
             placeholder={placeholder}
+            type="text"
+          />
+          <button
+            type="button"
+            style={{ opacity: filter.search ? 1 : 0.1 }}
+            onClick={() => handleChange('', 'search')}
+            className="searchclear"
           />
           <button type="submit" className="search_button">
             조회하기

@@ -44,6 +44,8 @@ const Payment = () => {
     check2: false,
   });
 
+  console.log(cardData);
+
   // 리덕스 스토어에 데이터가 없으면 전 화면으로 돌아갑니다.
   if (!cardData) {
     history.push('/initial/registercard');
@@ -159,8 +161,8 @@ const Payment = () => {
             },
             {
               title: '이번달 결제 금액',
-              body: cardData.thisMonth
-                ? `${cardData.thisMonth.toLocaleString('en')} 원`
+              body: cardData.thisMonthPrice
+                ? `${cardData.thisMonthPrice.toLocaleString('en')} 원`
                 : '오류',
             },
             {
@@ -175,15 +177,12 @@ const Payment = () => {
             },
             {
               title: '업무 시간',
-              body: `${NormalizeData('hour', 1400)} ~ ${NormalizeData(
-                'hour',
-                cardData.endHour,
-              )}`,
+              body: `${cardData.startHour} ~ ${cardData.endHour}`,
             },
           ]}
           amount={
-            cardData.thisMonth
-              ? `${cardData.thisMonth.toLocaleString('en')} 원`
+            cardData.thisMonthPrice
+              ? `${cardData.thisMonthPrice.toLocaleString('en')} 원`
               : '오류'
           }
           startDate={moment().format('YYYY년 MM월 DD일')}

@@ -20,10 +20,27 @@ const Line = styled.div`
   min-height: 80px;
   margin: 0 44px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid ${Color.LineGray};
   cursor: pointer;
+
+  .unread {
+    flex-shrink: 0;
+    width: 20px;
+    margin-left: -20px;
+    margin-bottom: 24px;
+  }
+
+  .circle {
+    width: 12px;
+    height: 12px;
+    background: #fc2b38;
+    border-radius: 12px;
+  }
+
+  .title {
+    flex: 1;
+  }
 
   span {
     font-weight: 700;
@@ -43,7 +60,10 @@ const Board = ({ now = '1', data, onClick }) =>
         if (index >= (now * 1 - 1) * 10 && index < now * 10) {
           return (
             <Line key={d.id} onClick={() => onClick(d)}>
-              <div>
+              <div className="unread">
+                {!d.isRead && <div className="circle" />}
+              </div>
+              <div className="title">
                 <span>{d.title}</span>
                 <br />
                 {moment(d.createdAt).format('YYYY년 MM월 DD일 HH:mm')}

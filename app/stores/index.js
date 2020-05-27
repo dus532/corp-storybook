@@ -38,7 +38,10 @@ export {
   actionGetRentalStatement,
 } from 'stores/actions/rental';
 
-export { actionGetAnnouncements } from 'stores/actions/announcements';
+export {
+  actionGetAnnouncements,
+  actionPutAnnouncements,
+} from 'stores/actions/announcements';
 
 export {
   actionGetSubscription,

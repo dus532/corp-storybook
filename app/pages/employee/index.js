@@ -32,7 +32,7 @@ const Employees = () => {
 
   const [filter, setFilter] = useState({
     startDate: moment()
-      .startOf('month')
+      .startOf('year')
       .format('X'),
     endDate: moment().format('X'),
     license: 0,

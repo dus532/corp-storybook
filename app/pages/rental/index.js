@@ -22,7 +22,7 @@ const Rental = () => {
 
   const [filter, setFilter] = useState({
     startDate: moment()
-      .startOf('month')
+      .startOf('year')
       .format('X'),
     endDate: moment().format('X'),
     status: 0,

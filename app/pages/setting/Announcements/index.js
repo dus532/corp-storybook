@@ -67,7 +67,9 @@ const Announcements = () => {
             now={nowPage || 1}
             total={
               AnnouncementsData.data &&
-              Math.ceil(AnnouncementsData.data.announcements.length / 10)
+              AnnouncementsData.data.announcements.length > 0
+                ? Math.ceil(AnnouncementsData.data.announcements.length / 10)
+                : 1
             }
           />
         </AsyncDiv>

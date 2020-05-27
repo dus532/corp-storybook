@@ -62,7 +62,7 @@ const utilsMiddleware = store => next => action => {
           );
           break;
         case 'Wrong Password':
-          store.dispatch(onToast(`비밀번호가 맞지 않습니다.`));
+          store.dispatch(onToast(`계정과 비밀번호가 일치하지 않습니다`));
           break;
         default:
           if (typeof response.data.message === 'string') {

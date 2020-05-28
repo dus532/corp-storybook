@@ -64,6 +64,9 @@ const utilsMiddleware = store => next => action => {
         case 'Wrong Password':
           store.dispatch(onToast(`계정과 비밀번호가 일치하지 않습니다`));
           break;
+        case 'Wrong Current Password':
+          store.dispatch(onToast(`계정과 현재 비밀번호가 일치하지 않습니다`));
+          break;
         default:
           if (typeof response.data.message === 'string') {
             if (response.data.message.includes('fail to billkey')) {

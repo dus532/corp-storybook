@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable no-nested-ternary */
 // 환영합니다!
 // 여기는 API 요청을 담당하는 RequestManager 입니다.
 import axios from 'axios';
@@ -26,16 +28,23 @@ const RequestManager = (method, url, data, header) => {
     // 이는 추후 서버쪽 로그 기록으로도 활용될 수 있습니다.
     const now = moment().format('MM.DD a h:mm:ss');
     console.log(`${now} 📡 서버 통신 ( ${method.toUpperCase()} ) ${url}`, data);
-    console.log(configs[process.env.NODE_ENV], process.env.NODE_ENV);
 
     // 02. axios 통신
     // axios 통신을 시도합니다.
     axios({
       method,
+      // url: `${
+      //   configs[process.env.NODE_ENV].apiServerURL
+      //     ? configs[process.env.NODE_ENV].apiServerURL
+      //     : configs.dev.apiServerURL
+      // }${url}`,
       url: `${
-        configs[process.env.NODE_ENV].apiServerURL
-          ? configs[process.env.NODE_ENV].apiServerURL
-          : configs.dev.apiServerURL
+        window.document.location.href.includes('staging')
+          ? configs.staging.apiServerURL
+          : window.document.location.href.includes('dev') ||
+            window.document.location.href.includes('localhost')
+          ? configs.development.apiServerURL
+          : configs.production.apiServerURL
       }${url}`,
       data: (method === 'post' || method === 'put') && data,
       params: (method === 'get' || method === 'delete') && data,

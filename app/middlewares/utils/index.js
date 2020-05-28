@@ -62,10 +62,12 @@ const utilsMiddleware = store => next => action => {
           );
           break;
         case 'Wrong Password':
-          store.dispatch(onToast(`계정과 비밀번호가 일치하지 않습니다`));
+          store.dispatch(onToast(`계정과 비밀번호가 일치하지 않습니다.`));
           break;
         case 'Wrong Current Password':
-          store.dispatch(onToast(`계정과 현재 비밀번호가 일치하지 않습니다`));
+          store.dispatch(
+            onToast(`관리자 정보 변경이 실패하였습니다. 다시 시도해주세요.`),
+          );
           break;
         default:
           if (typeof response.data.message === 'string') {

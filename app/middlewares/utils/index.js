@@ -125,7 +125,12 @@ const utilsMiddleware = store => next => action => {
   if (meta && meta.read && meta[KEY.LIFECYCLE] === LIFECYCLE.SUCCESS) {
     const { read } = createActions(meta.resourceName);
 
-    store.dispatch(read({ url: meta.read }));
+    store.dispatch(
+      read({
+        fastLoading: true,
+        url: meta.read,
+      }),
+    );
   }
 
   return next(action);

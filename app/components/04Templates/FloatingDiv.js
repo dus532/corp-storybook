@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -101,7 +101,7 @@ const BG = styled.div`
   left: 0;
   height: 100%;
   animation: bg 0.5s;
-  z-index: 99;
+  z-index: 90;
 
   @keyframes bg {
     from {
@@ -117,25 +117,38 @@ const BG = styled.div`
   }
 `;
 
-const FloatingDiv = ({ title, body, footer, onClickExit, fullScreen }) => (
-  <>
-    <BG onClick={onClickExit} />
-    <Div>
-      <div className={`${fullScreen ? 'floating_big' : ''} floating_container`}>
-        <div className="floating_header">
-          <h3>{title}</h3>
-          <button type="button" onClick={onClickExit}>
-            <span>
-              <IconClose />
-            </span>
-          </button>
+const FloatingDiv = ({ title, body, footer, onClickExit, fullScreen }) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = '20px';
+    return () => {
+      document.body.style.overflow = 'unset';
+      document.body.style.paddingRight = '0px';
+    };
+  }, []);
+
+  return (
+    <>
+      <BG onClick={onClickExit} />
+      <Div>
+        <div
+          className={`${fullScreen ? 'floating_big' : ''} floating_container`}
+        >
+          <div className="floating_header">
+            <h3>{title}</h3>
+            <button type="button" onClick={onClickExit}>
+              <span>
+                <IconClose />
+              </span>
+            </button>
+          </div>
+          <div className="floating_body">{body}</div>
+          <div className="floating_footer">{footer}</div>
         </div>
-        <div className="floating_body">{body}</div>
-        <div className="floating_footer">{footer}</div>
-      </div>
-    </Div>
-  </>
-);
+      </Div>
+    </>
+  );
+};
 
 FloatingDiv.propTypes = {
   title: PropTypes.string,

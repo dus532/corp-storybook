@@ -79,6 +79,10 @@ const GlobalStyle = createGlobalStyle`
     height:100%;
   }
 
+  .modal_open {
+    height: 100vh;
+    overflow-y: hidden;
+  }
 
   button{
     border:0;

@@ -523,13 +523,13 @@ const Header = ({ isSigned, location }) => {
               )}
               <div className="header_right">
                 <h5 className="header_name">{isSigned.corpName} 관리자 님</h5>
-                <SmallButton
+                {/* <SmallButton
                   onClick={() => {
                     history.push('/initial/introduce');
                   }}
                 >
                   초기설정
-                </SmallButton>
+                </SmallButton> */}
                 <SmallButton
                   onClick={() => {
                     history.push('/mypage');
@@ -653,7 +653,7 @@ const Header = ({ isSigned, location }) => {
               <hr />
               <div className="info">
                 <h5 className="info_text">{isSigned.corpName} 관리자 님</h5>
-                <SmallButton
+                {/* <SmallButton
                   mobile
                   className="info_button"
                   onClick={() => {
@@ -661,7 +661,7 @@ const Header = ({ isSigned, location }) => {
                   }}
                 >
                   초기설정
-                </SmallButton>
+                </SmallButton> */}
                 <SmallButton
                   onClick={() => {
                     history.push('/mypage');

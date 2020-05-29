@@ -12,15 +12,29 @@ import {
   SubscriptionPanel,
   ButtonBottom,
   InputPeople,
+  IconArrow,
 } from 'components';
 import { actionPushSubscription } from 'stores';
 
 const Flex = styled.div`
   display: flex;
 
+  div:last-child {
+    margin-right: 0;
+  }
+
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
+`;
+
+const More = styled.a`
+  width: 100%;
+  margin-top: 20px;
+  font-weight: 700;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 const SubscriptionUpdate = () => {
@@ -88,6 +102,14 @@ const SubscriptionUpdate = () => {
             handleChange={handleChange}
           />
         </Flex>
+        <More
+          className="box_overflow"
+          target="_blank"
+          href="https://biz.carplat.co.kr/sharing/"
+        >
+          상품 더 알아보기
+          <IconArrow />
+        </More>
         <InputPeople number={data.people} handleChange={handleChange} />
         <ButtonBottom
           left="취소"

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Div = styled.div`
   max-width: 372px;
   width: 100%;
-  margin: 48px auto 40px;
+  margin: 8px auto 40px;
 `;
 
 const Input = styled.div`
@@ -89,7 +89,7 @@ const InputPeople = ({ number, handleChange }) => (
 );
 
 InputPeople.propTypes = {
-  number: PropTypes.number,
+  number: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   handleChange: PropTypes.func,
 };
 

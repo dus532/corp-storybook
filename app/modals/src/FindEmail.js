@@ -1,62 +1,65 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
 
 import { useDispatch } from 'react-redux';
 
 import { FloatingDiv, SubButton, Input } from 'components';
 import { actionPostResetPassword } from 'stores';
 
-import { useToast } from 'utils/hooks';
-
 const FindEmail = ({ onClickExit }) => {
-  const toast = useToast();
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(0);
 
-  let email = '';
+  const { handleSubmit, register, errors } = useForm();
 
-  const onSend = () => {
-    if (email) {
-      dispatch(
-        actionPostResetPassword({ email }, () => {
-          setPage(1);
-        }),
-      );
-    } else {
-      toast('이메일 주소가 입력되지 않았습니다.');
-    }
+  const onSend = data => {
+    dispatch(
+      actionPostResetPassword(data, () => {
+        setPage(1);
+      }),
+    );
   };
 
   if (page === 0) {
     return (
-      <FloatingDiv
-        fullScreen
-        title="이메일 주소로 계정 찾기"
-        body={
-          <>
-            기업 고객 가입 신청 시 등록했던 담당자 이메일 주소를 입력하시고,
-            버튼을 클릭해주세요.
-            <br />
-            <br />
-            <Input
-              placeholder="기업담당자의 이메일 주소"
-              onChange={e => {
-                email = e.target.value;
-              }}
-            />
-            <br />
-          </>
-        }
-        footer={
-          <>
-            <SubButton white onClick={onSend} size="small">
-              <span>아이디/비밀번호 찾기</span>
-            </SubButton>
-          </>
-        }
-        onClickExit={onClickExit}
-      />
+      <form onSubmit={handleSubmit(onSend)}>
+        <FloatingDiv
+          fullScreen
+          title="이메일 주소로 계정 찾기"
+          body={
+            <>
+              기업 고객 가입 신청 시 등록했던 담당자 이메일 주소를 입력하시고,
+              버튼을 클릭해주세요.
+              <br />
+              <br />
+              <Input
+                name="email"
+                ref={register({
+                  pattern: {
+                    value: /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                    message: '이메일 형식에 맞지 않습니다.',
+                  },
+                })}
+                required
+              />
+              {errors.email && (
+                <h5 className="error">{errors.email.message}</h5>
+              )}
+              <br />
+            </>
+          }
+          footer={
+            <>
+              <SubButton type="submit" white size="small">
+                <span>아이디/비밀번호 찾기</span>
+              </SubButton>
+            </>
+          }
+          onClickExit={onClickExit}
+        />
+      </form>
     );
   }
   return (

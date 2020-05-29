@@ -123,10 +123,13 @@ const FloatingDiv = ({ title, body, footer, onClickExit, fullScreen }) => {
     document.body.style.overflow = 'hidden';
     if (document.body.clientWidth < 768) {
       document.body.style.position = 'fixed';
+    } else {
+      document.body.style.paddingRight = '17px';
     }
     return () => {
       document.body.style.overflow = 'unset';
       document.body.style.position = 'unset';
+      document.body.style.paddingRight = '0px';
       window.scrollTo(0, y);
     };
   }, []);

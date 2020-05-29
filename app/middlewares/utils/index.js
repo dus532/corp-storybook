@@ -69,6 +69,12 @@ const utilsMiddleware = store => next => action => {
             onToast(`관리자 정보 변경이 실패하였습니다. 다시 시도해주세요.`),
           );
           break;
+        case 'Raidea Server Error findUserIdResult ':
+          store.dispatch(onToast(`일치하는 유저 정보가 없습니다.`));
+          break;
+        case 'No number':
+          store.dispatch(onToast(`번호를 입력해주세요.`));
+          break;
         default:
           if (typeof response.data.message === 'string') {
             if (response.data.message.includes('fail to billkey')) {

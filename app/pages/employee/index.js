@@ -87,19 +87,28 @@ const Employees = () => {
   }, [search]);
 
   useEffect(() => {
-    if (!modalType) {
-      dispatch(
-        actionGetManageEmployees({ ...filter, employeeNumber: filter.search }),
-      );
-    }
+    dispatch(
+      actionGetManageEmployees({ ...filter, employeeNumber: filter.search }),
+    );
   }, [
     filter.startDate,
     filter.endDate,
     filter.license,
     filter.userGroupId,
     filter.corpId,
-    modalType,
   ]);
+
+  useEffect(() => {
+    if (!modalType) {
+      dispatch(
+        actionGetManageEmployees(
+          { ...filter, employeeNumber: filter.search },
+          () => {},
+          true,
+        ),
+      );
+    }
+  }, [modalType]);
 
   useEffect(() => {
     dispatch(

@@ -7,8 +7,10 @@ const { read, onlyRead, update, del } = createActions('manageEmployees');
 export const actionGetManageEmployees = (
   { page, employeeNumber, license, startDate, endDate, userGroupId, corpId },
   onSuccess,
+  fastLoading,
 ) =>
   read({
+    fastLoading,
     params: {
       page,
       employeeNumber,

@@ -66,7 +66,7 @@ const Div = styled.div`
 
   @keyframes floating_div {
     from {
-      opacity: 0;
+      opacity: 0.5;
       transform: translateY(20px);
     }
     to {
@@ -126,12 +126,17 @@ const FloatingDivBig = ({
   onClickExit,
 }) => {
   const makeHTML = () => ({ __html: html });
+
   useEffect(() => {
+    const y = window.scrollY;
     document.body.style.overflow = 'hidden';
-    document.body.style.paddingRight = '20px';
+    if (document.body.clientWidth < 768) {
+      document.body.style.position = 'fixed';
+    }
     return () => {
       document.body.style.overflow = 'unset';
-      document.body.style.paddingRight = '0px';
+      document.body.style.position = 'unset';
+      window.scrollTo(0, y);
     };
   }, []);
 

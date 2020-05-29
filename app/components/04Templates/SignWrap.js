@@ -35,7 +35,7 @@ const Wrap = styled.div`
   .sign_bottom {
     margin-top: 20px;
     width: 100%;
-    max-width: 372px;
+    max-width: 320px;
   }
 
   .sign_askCarplat {

@@ -36,7 +36,7 @@ const StyledDropBox = styled.div`
 const Select = styled.div`
   position: relative;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 3;
   animation: opacity 0.25s;
   border: solid 1px #d6d6d6;
   max-height: 300px;
@@ -150,11 +150,20 @@ const DropBox = ({
       }
     }
 
+    if (document.body.clientWidth < 700) {
+      if (viewBox) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'unset';
+      }
+    }
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'unset';
     };
-  }, [iRef]);
+  }, [iRef, viewBox]);
 
   return (
     <StyledDropBox ref={iRef} style={{ width }} className={className}>

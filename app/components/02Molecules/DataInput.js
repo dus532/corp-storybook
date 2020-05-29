@@ -41,7 +41,7 @@ const InputError = styled.div`
   width: 100%;
   text-align: left;
   padding-left: 12px;
-  height: 16px;
+  min-height: 16px;
   margin: 2px 0 16px;
 
   h5 {

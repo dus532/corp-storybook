@@ -127,6 +127,8 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5em;
   }
 
+  input,button {border-radius:0;-webkit-appearance:none} 
+
   input,input:focus {
     outline:none;
   }
@@ -166,6 +168,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @media screen and (max-width: 768px) {
+    *{-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+    }
 
     #app{
       min-width:100%;

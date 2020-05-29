@@ -68,7 +68,7 @@ const StyledFilter = styled.div`
     position: relative;
     margin-left: -16px;
     left: -16px;
-    background: url(${DelIMG}) center / cover;
+    background: url(${DelIMG}) center / contain no-repeat;
     flex-shrink: 0;
     cursor: pointer;
   }

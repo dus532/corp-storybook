@@ -42,7 +42,8 @@ const RequestManager = (method, url, data, header) => {
         window.document.location.href.includes('staging')
           ? configs.staging.apiServerURL
           : window.document.location.href.includes('dev') ||
-            window.document.location.href.includes('localhost')
+            window.document.location.href.includes('localhost') ||
+            window.document.location.href.includes('192')
           ? configs.development.apiServerURL
           : configs.production.apiServerURL
       }${url}`,

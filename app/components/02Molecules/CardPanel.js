@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import MoreIMG from 'images/icon_more.png';
+import { NormalizeData } from 'utils/regData';
 
 const StyledPanel = styled.div`
   width: 100%;
@@ -30,7 +31,7 @@ const StyledPanel = styled.div`
     flex-shrink: 0;
   }
   .menu_mobile {
-    background: url(${MoreIMG}) center / cover no-repeat;
+    background: url(${MoreIMG}) center / contain no-repeat;
     width: 24px;
     height: 24px;
     display: none;
@@ -89,9 +90,15 @@ const CardPanel = ({ data, onClickSetting }) => (
     <div className="tag">
       <Tag t={data.main}>{data.main ? '대표 결제카드' : '부서 전용카드'}</Tag>
     </div>
-    <div className="body">
-      {data.cardCorp}카드 / {data.number}
-    </div>
+    {data.number ? (
+      <div className="body">
+        {NormalizeData('cardCorp', data.cardCorp)} /{' '}
+        {NormalizeData('cardNumber', data.number)} /{' '}
+        {NormalizeData('cardType', data.cardType)}
+      </div>
+    ) : (
+      <div className="body">카드번호가 없습니다.</div>
+    )}
     <button type="button" className="menu" onClick={onClickSetting} />
   </StyledPanel>
 );

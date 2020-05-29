@@ -51,6 +51,10 @@ const StyledSummary = styled.div`
     min-height: auto;
     padding: 20px;
 
+    .date {
+      display: none;
+    }
+
     .left {
       width: 100%;
     }

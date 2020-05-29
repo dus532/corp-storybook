@@ -7,6 +7,6 @@ const Styled = styled.div`
   text-align: center;
 `;
 
-const Footer = () => <Styled>ver 0.2.14</Styled>;
+const Footer = () => <Styled>ver 0.2.14 /test020/ {`J+c7TU:#1}I~`}</Styled>;
 
 export default Footer;

@@ -19,9 +19,15 @@ const IconInfo = styled.div`
 
 const StyledInfoBox = styled.div`
   width: 100%;
+  display: flex;
   justify-content: center;
+  align-items: center;
   padding: 20px 0;
   text-align: center;
+
+  div {
+    flex-shrink: 0;
+  }
 
   h5 {
     display: inline-block;
@@ -30,9 +36,8 @@ const StyledInfoBox = styled.div`
 
 const InfoBox = ({ children, className }) => (
   <StyledInfoBox className={className}>
-    <h5>
-      <IconInfo /> {children}
-    </h5>
+    <IconInfo />
+    <h5>{children}</h5>
   </StyledInfoBox>
 );
 

@@ -28,6 +28,7 @@ const StyledHeader = styled.div`
   border-bottom: ${props =>
     props.borderBottom ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'};
   background: ${Color.White};
+  box-shadow: none;
   top: 0;
   z-index: 2;
 
@@ -126,6 +127,8 @@ const StyledHeader = styled.div`
   }
 
   @media screen and (max-width: 768px) {
+    width: 100vw;
+
     .header_top {
       display: none;
     }
@@ -136,6 +139,7 @@ const StyledHeader = styled.div`
     }
 
     .header_bottom-menubutton {
+      padding: 0;
       display: block;
       width: auto;
       height: 100%;
@@ -314,9 +318,20 @@ const Header = ({ isSigned, location }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const iRef = useRef(null);
+  const HeaderRef = useRef(null);
 
   const [menu, setMenu] = useState(false);
   const [setting, setSetting] = useState(false);
+
+  document.addEventListener('scroll', () => {
+    if (document.body.clientWidth < 768) {
+      if (window.scrollY > 0) {
+        HeaderRef.current.style.boxShadow = '0 3px 10px rgba(0,0,0,0.1)';
+      } else {
+        HeaderRef.current.style.boxShadow = 'none';
+      }
+    }
+  });
 
   function handleClickOutside(event) {
     if (
@@ -498,7 +513,7 @@ const Header = ({ isSigned, location }) => {
   if (isSigned) {
     return (
       <>
-        <StyledHeader borderBottom={noBorderBottom()}>
+        <StyledHeader ref={HeaderRef} borderBottom={noBorderBottom()}>
           <div className="header_top">
             <Container padding className="container">
               {location.indexOf('/initial') !== -1 ? (

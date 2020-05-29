@@ -26,8 +26,16 @@ const Announcements = () => {
 
   const [filter, setFilter] = useState({ search: '' });
 
-  const handleChange = (data, name) => {
+  const handleChange = (data, name, reset) => {
     setFilter({ ...filter, [name]: data });
+
+    if (reset) {
+      dispatch(
+        actionGetAnnouncements({ keyword: null }, () => {
+          history.push(`${document.location.pathname}?page=1`);
+        }),
+      );
+    }
   };
 
   const onSearch = () => {

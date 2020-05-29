@@ -33,7 +33,7 @@ const Rental = () => {
     corpId: UserManager().getUser().corpId,
   });
 
-  const handleChange = (data, name) => {
+  const handleChange = (data, name, reset) => {
     if (name === 'userGroupId') {
       // 사원그룹 수정시 사원도 초기화
       setFilter({
@@ -43,6 +43,14 @@ const Rental = () => {
       });
     } else {
       setFilter({ ...filter, [name || data.target.name]: data });
+    }
+
+    if (reset) {
+      dispatch(
+        actionGetManageRentals({ ...filter, number: null }, () => {
+          history.push(`${document.location.pathname}`);
+        }),
+      );
     }
   };
 

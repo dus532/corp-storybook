@@ -64,8 +64,12 @@ const Employees = () => {
 
   const modalType = useSelector(state => state.modal.type);
 
-  const handleChange = (data, name) => {
+  const handleChange = (data, name, reset) => {
     setFilter({ ...filter, [name]: data });
+
+    if (reset) {
+      setSearch('');
+    }
   };
 
   const handleDateChange = (sDate, eDate) => {

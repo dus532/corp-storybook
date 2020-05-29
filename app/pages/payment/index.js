@@ -39,8 +39,16 @@ const Payment = () => {
     corpId: UserManager().getUser().corpId,
   });
 
-  const handleChange = (data, name) => {
+  const handleChange = (data, name, reset) => {
     setFilter({ ...filter, [name]: data });
+
+    if (reset) {
+      dispatch(
+        actionGetManagePayments({ ...filter, rentalId: null }, () => {
+          history.push(`${document.location.pathname}?page=1`);
+        }),
+      );
+    }
   };
 
   const handleDateChange = (sDate, eDate) => {

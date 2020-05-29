@@ -337,7 +337,7 @@ const Filter = ({
           <button
             type="button"
             style={{ opacity: filter.search ? 1 : 0.1 }}
-            onClick={() => handleChange('', 'search')}
+            onClick={() => handleChange('', 'search', true)}
             className="searchclear"
           />
         </form>
@@ -435,7 +435,7 @@ const Filter = ({
           <button
             type="button"
             style={{ opacity: filter.search ? 1 : 0.1 }}
-            onClick={() => handleChange('', 'search')}
+            onClick={() => handleChange('', 'search', true)}
             className="searchclear"
           />
           <button type="submit" className="search_button">

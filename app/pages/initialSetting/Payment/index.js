@@ -160,6 +160,10 @@ const Payment = () => {
               body: moment().format('YYYY년 MM월 DD일'),
             },
             {
+              title: '구독 갱신 일',
+              body: '-',
+            },
+            {
               title: '이번달 결제 금액',
               body: cardData.thisMonthPrice
                 ? `${cardData.thisMonthPrice.toLocaleString('en')} 원`

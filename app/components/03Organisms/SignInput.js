@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import DataInput from 'components/02Molecules/DataInput';
 
 const SignInInput = ({ register, errors, formData }) => {
-  const REG = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,12}$/;
+  const REG = /(?=.*\d{1,50})(?=.*[~`!@#$%\[\]\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{8,12}$/;
 
   return (
     <>

@@ -199,7 +199,9 @@ const Payment = () => {
           },
           {
             title: '구독 시작일',
-            body: '-',
+            body: check.startDate
+              ? moment.unix(check.startDate).format('YYYY년 MM월 DD일')
+              : '-',
           },
           {
             title: '결제 카드',

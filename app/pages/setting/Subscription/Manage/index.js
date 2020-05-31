@@ -78,6 +78,12 @@ const Subscription = () => {
                     .format('YYYY년 MM월 DD일'),
                 },
                 {
+                  title: '구독 갱신일',
+                  body: current.renewDate
+                    ? moment.unix(current.renewDate).format('YYYY년 MM월 DD일')
+                    : '-',
+                },
+                {
                   title: '결제 카드',
                   body: current.cardNumber
                     ? `${NormalizeData(

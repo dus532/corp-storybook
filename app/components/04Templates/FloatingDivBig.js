@@ -1,7 +1,8 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useReactToPrint } from 'react-to-print';
 
 import IconClose from 'components/01Atoms/IconClose';
 import Color from 'config/color';
@@ -31,7 +32,6 @@ const Div = styled.div`
     padding: 24px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
     border-bottom: 1px solid ${Color.LineGray};
   }
 
@@ -39,7 +39,22 @@ const Div = styled.div`
     font-weight: 700;
   }
 
+  .floating_print {
+    background: #f7f7f7;
+    width: 100%;
+    min-height: 40vh;
+    max-height: 70vh;
+    height: 100%;
+  }
+
+  .print {
+    background: white;
+    margin: 0 auto;
+    transform: scale(0.8);
+  }
+
   .floating_body {
+    margin-top: 20px;
     margin-bottom: 36px;
     width: 572px;
     min-height: 40vh;
@@ -117,15 +132,29 @@ const BG = styled.div`
   }
 `;
 
+const PrintPage = ({ data, pageRef }) => <div ref={pageRef}>{data}</div>;
+
+PrintPage.propTypes = {
+  data: PropTypes.any,
+  pageRef: PropTypes.any,
+};
+
 const FloatingDivBig = ({
   title,
   subtitle,
   body,
+  print,
   html,
   footer,
+  leftButton,
   onClickExit,
 }) => {
   const makeHTML = () => ({ __html: html });
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     const y = window.scrollY;
@@ -153,12 +182,27 @@ const FloatingDivBig = ({
               <h3>{title}</h3>
               {subtitle}
             </div>
-            <button type="button" onClick={onClickExit}>
-              <span>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <button
+                style={{ display: 'flex' }}
+                type="button"
+                onClick={onClickExit}
+              >
                 <IconClose />
-              </span>
-            </button>
+              </button>
+              <div>{leftButton}</div>
+            </div>
           </div>
+          {print && (
+            <div className="floating_print">
+              <button onClick={handlePrint} type="button">
+                프린트
+              </button>
+              <div className="print">
+                <PrintPage pageRef={componentRef} data={print} />
+              </div>
+            </div>
+          )}
           {body && <div className="floating_body">{body}</div>}
           {html && (
             <div
@@ -178,6 +222,8 @@ FloatingDivBig.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
   body: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  print: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  leftButton: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   onClickExit: PropTypes.func,
   footer: PropTypes.element,
 };

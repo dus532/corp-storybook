@@ -62,6 +62,17 @@ const MyPage = () => {
               ]}
               bottom={
                 <>
+                  {/* <Button
+                    onClick={() => {
+                      modal(PAYMENT_STATEMENT, {
+                        title: '이용 내역서',
+                        subtitle: '예약번호 : SDFSD',
+                        content: <>sdf</>,
+                      });
+                    }}
+                  >
+                    테스트
+                  </Button> */}
                   <ButtonBottom
                     type="big"
                     left="비밀번호 변경"

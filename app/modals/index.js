@@ -13,6 +13,7 @@ import {
   CheckPW,
   Error,
   PostCode,
+  Statement,
 } from 'modals/src';
 import {
   SIGN_FIND_EMAIL,
@@ -24,6 +25,7 @@ import {
   CHECK_PW,
   ERROR,
   POST_CODE,
+  PAYMENT_STATEMENT,
 } from 'modals/constants';
 
 const Modals = () => {
@@ -54,6 +56,8 @@ const Modals = () => {
       return <Error {...propsAll} />;
     case POST_CODE:
       return <PostCode {...propsAll} />;
+    case PAYMENT_STATEMENT:
+      return <Statement {...propsAll} />;
     default:
       return <></>;
   }

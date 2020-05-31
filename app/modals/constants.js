@@ -7,3 +7,4 @@ export const EDIT_EMPLOYEE = 'employee/edit';
 export const CHECK_PW = 'check/pw';
 export const ERROR = 'etc/error';
 export const POST_CODE = 'etc/postcode';
+export const PAYMENT_STATEMENT = 'payment/statement';

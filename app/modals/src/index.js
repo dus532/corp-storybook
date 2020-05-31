@@ -7,3 +7,4 @@ export { default as EditEmployee } from './EditEmployee';
 export { default as CheckPW } from './CheckPW';
 export { default as Error } from './Error';
 export { default as PostCode } from './PostCode';
+export { default as Statement } from './Statement';

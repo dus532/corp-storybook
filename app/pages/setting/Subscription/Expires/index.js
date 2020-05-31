@@ -38,7 +38,7 @@ const Expires = () => {
   };
 
   const expireData = () => ({
-    subscriptionId: SubscriptionsData.data.nextSubs.id,
+    subscriptionId: SubscriptionsData.data.businessSubs.id,
     cancelReqTime: moment().format('X'),
     cancelApplyTime: moment().format('X'),
   });

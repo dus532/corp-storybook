@@ -153,9 +153,10 @@ const Payment = () => {
           },
           {
             title: '구독 갱신일',
-            body: current.renewDate
-              ? moment.unix(current.renewDate).format('YYYY년 MM월 DD일')
-              : '-',
+            body:
+              current.renewDate && current.renewDate * 1 > 1500000000
+                ? moment.unix(current.renewDate).format('YYYY년 MM월 DD일')
+                : '-',
           },
           {
             title: '결제 카드',

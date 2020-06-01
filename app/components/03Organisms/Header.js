@@ -21,6 +21,7 @@ import IconClose from 'components/01Atoms/IconClose';
 import IconConfirm from 'components/01Atoms/IconConfirm';
 import IconStatusOK from 'components/01Atoms/IconStatusOK';
 import IconStatusWait from 'components/01Atoms/IconStatusWait';
+import IconStatusBlue from 'components/01Atoms/IconStatusBlue';
 
 const StyledHeader = styled.div`
   width: 100%;
@@ -128,6 +129,10 @@ const StyledHeader = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 100vw;
+
+    .initial_status {
+      color: black;
+    }
 
     .header_top {
       display: none;
@@ -365,7 +370,7 @@ const Header = ({ isSigned, location }) => {
           <div className="initial_status">
             <h2>01</h2>
             <h3>결제카드 등록</h3>
-            <IconStatusWait />
+            <IconStatusBlue />
             <IconStatusWait />
             <IconStatusWait />
           </div>

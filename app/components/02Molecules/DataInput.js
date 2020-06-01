@@ -84,7 +84,7 @@ const DataInput = props => {
             role="button"
             tabIndex={0}
           >
-            {viewPW === 'password' ? <IconShow /> : <IconHide />}
+            {viewPW !== 'password' ? <IconShow /> : <IconHide />}
           </div>
         )}
         {statusEmojis(props.status)}

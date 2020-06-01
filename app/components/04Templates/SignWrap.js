@@ -26,7 +26,6 @@ const Wrap = styled.div`
     align-items: center;
     justify-content: center;
     background: white;
-    flex-wrap: wrap;
     width: 584px;
     text-align: center;
     padding: 128px 0;

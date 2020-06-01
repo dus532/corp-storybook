@@ -51,10 +51,11 @@ const Payment = () => {
   // 이 부분은 현재 구독 상품과 비교하여 업그레이드인지 다운그레이드인지를 확인합니다.
 
   // 다운그레이드 조건
-  if (current.product < next.type) {
-    // 구독 상품이 프리미엄 > 스탠다드 > 베이직 순서로 하향 변경되었을 때
-    isUpgrade = false;
-  } else if (current.userNumber > next.people) {
+  // if (current.product < next.type) {
+  // 구독 상품이 프리미엄 > 스탠다드 > 베이직 순서로 하향 변경되었을 때
+  // isUpgrade = false;
+  // } else
+  if (current.userNumber * 1 >= next.people * 1) {
     // 동시 이용자 수가 줄어들었을 때
     isUpgrade = false;
   }
@@ -132,8 +133,6 @@ const Payment = () => {
       ),
     );
   }, []);
-
-  console.log(check);
 
   return (
     <Container>

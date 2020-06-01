@@ -114,6 +114,10 @@ const GlobalStyle = createGlobalStyle`
 
   }
 
+  .mobile{
+    display:none;
+  }
+
   #app {
     width:100%;
     min-height: 100%;
@@ -156,10 +160,6 @@ const GlobalStyle = createGlobalStyle`
   /* Firefox */
   input[type=number] {
     -moz-appearance: textfield;
-  }
-
-  .mobile{
-    display:none;
   }
 
   .hidden{

@@ -63,6 +63,10 @@ const View = styled.div`
     display: flex;
   }
 
+  .mobile {
+    display: none !important;
+  }
+
   .medal {
     display: inline-block;
     float: right;
@@ -105,7 +109,7 @@ const View = styled.div`
     }
 
     .mobile {
-      display: block;
+      display: block !important;
       width: 24px;
       height: 28px;
     }
@@ -153,6 +157,7 @@ const Icon = styled.div`
 
 const SubscriptionPanel = ({
   handleChange,
+  className,
   value,
   type,
   amount,
@@ -172,7 +177,7 @@ const SubscriptionPanel = ({
   }
 
   return (
-    <Div className="box_overflow">
+    <Div className={`box_overflow ${className}`}>
       <View>
         {type === C.ITEM_TYPE.PREMIUM.value && <div className="medal" />}
         <input
@@ -216,6 +221,7 @@ SubscriptionPanel.propTypes = {
   type: PropTypes.number,
   amount: PropTypes.string,
   title: PropTypes.string,
+  className: PropTypes.string,
   people: PropTypes.number,
   car: PropTypes.number,
   handleChange: PropTypes.func,

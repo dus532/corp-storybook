@@ -50,7 +50,7 @@ const SubscriptionUpdate = () => {
   }, []);
 
   const [data, setData] = useState({
-    type: C.ITEM_TYPE.PREMIUM.value,
+    type: C.ITEM_TYPE.BASIC.value,
     people: window.sessionStorage.getItem('userNumber') || 5,
   });
 
@@ -75,6 +75,7 @@ const SubscriptionUpdate = () => {
         <BigTitle>구독 상품 변경</BigTitle>
         <Flex>
           <SubscriptionPanel
+            className="hidden"
             type={C.ITEM_TYPE.PREMIUM.value}
             title="프리미엄"
             people={2}
@@ -84,6 +85,7 @@ const SubscriptionUpdate = () => {
             handleChange={handleChange}
           />
           <SubscriptionPanel
+            className="hidden"
             type={C.ITEM_TYPE.STANDARD.value}
             title="스탠다드"
             people={1}

@@ -162,9 +162,10 @@ const RentalPanel = ({ data }) => {
         </div>
         <div className="body_elements">
           <span className="body_elements_bold">사원 정보</span>
-          {data.employeeName} / {data.employeePhoneNumber} /{' '}
-          {data.userGroupName ? `${data.userGroupName} / ` : ''}
-          {data.employeeNumber}
+          {data.employeeName}{' '}
+          {data.employeePhoneNumber ? `/ ${data.employeePhoneNumber}` : ''}
+          {data.userGroupName ? `/ ${data.userGroupName}` : ''}
+          {data.employeeNumber ? `/ ${data.employeeNumber}` : ''}
         </div>
       </div>
       <div className="footer">

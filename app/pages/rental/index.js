@@ -106,7 +106,7 @@ const Rental = () => {
         list={list}
       />
       <AsyncDiv store={rentalData}>
-        <Summary type="rental" data={rentalData.data} />
+        <Summary type="rental" data={rentalData.data} filter={filter} />
         <RentalList data={rentalData.data.rentals} />
       </AsyncDiv>
     </Container>

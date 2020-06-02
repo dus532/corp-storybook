@@ -84,11 +84,11 @@ const C = {
   },
 
   RENTAL_TYPE: {
-    RENTAL: 0,
     RESERVATION: 1,
-    DELAY: 2,
-    FINISH: 3,
-    CANCEL: 5,
+    RENTAL: 2,
+    CANCEL: 3,
+    DELAY: 4,
+    FINISH: 5,
   },
 };
 

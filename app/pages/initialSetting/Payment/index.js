@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
@@ -109,9 +110,12 @@ const Payment = () => {
     if (state.all) {
       const body = {
         ...cardData,
+        businessSubs: 1,
+        thisMonthPrice: Math.ceil(cardData.thisMonthPrice),
         subscriptionStartDate: moment().format('X'),
         nextPaymentDate: cardData.periodicPaymentDate,
         nextMonthPrice: cardData.periodicPaymentAmount,
+        usageNumber: cardData.userNumber,
       };
 
       dispatch(
@@ -165,8 +169,10 @@ const Payment = () => {
             },
             {
               title: '이번달 결제 금액',
-              body: cardData.thisMonthPrice
-                ? `${cardData.thisMonthPrice.toLocaleString('en')} 원`
+              body: Math.ceil(cardData.thisMonthPrice)
+                ? `${Math.ceil(cardData.thisMonthPrice).toLocaleString(
+                    'en',
+                  )} 원`
                 : '오류',
             },
             {
@@ -185,8 +191,8 @@ const Payment = () => {
             },
           ]}
           amount={
-            cardData.thisMonthPrice
-              ? `${cardData.thisMonthPrice.toLocaleString('en')} 원`
+            Math.ceil(cardData.thisMonthPrice)
+              ? `${Math.ceil(cardData.thisMonthPrice).toLocaleString('en')} 원`
               : '오류'
           }
           startDate={moment().format('YYYY년 MM월 DD일')}

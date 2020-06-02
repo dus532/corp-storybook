@@ -54,7 +54,6 @@ const utilsMiddleware = store => next => action => {
           break;
         case 'Charge Subscription Failed':
           store.dispatch(onToast(`결제에 실패했습니다.`));
-          store.dispatch(onToast(`혹시 100원 미만의 결제인가요?`));
           break;
         case 'Raidea Server Error registerCardResult':
           store.dispatch(

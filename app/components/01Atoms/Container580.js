@@ -33,7 +33,7 @@ const Container580 = styled.div`
     flex: 1;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     .input {
       margin: 0;
       padding-top: 20px;

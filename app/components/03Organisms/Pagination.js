@@ -24,7 +24,7 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     width: 32px;
     height: 32px;
     font-size: 0.8rem;

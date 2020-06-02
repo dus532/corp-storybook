@@ -30,7 +30,7 @@ const StyledMyPanel = styled.div`
     align-items: center;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     padding: 20px;
     margin-top: 10px;
 
@@ -59,7 +59,7 @@ const Part = styled.div`
     align-items: center;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     padding: 0;
     font-size: 0.8rem;
     height: auto;
@@ -80,7 +80,7 @@ const Line = styled.div`
   background: ${Color.LineGray};
   height: 48px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;

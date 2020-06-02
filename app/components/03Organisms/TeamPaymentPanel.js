@@ -19,7 +19,7 @@ const StyledPanel = styled.div`
     font-size: 0.9rem;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-top: 10px;
   }
 `;
@@ -42,7 +42,7 @@ const Filter = styled.div`
     font-weight: 300;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     align-items: flex-start;
     flex-direction: column;
     margin-bottom: 16px;
@@ -79,7 +79,7 @@ const Card = styled.div`
     font-weight: 700;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
     align-items: flex-start;
     height: auto;
@@ -109,7 +109,7 @@ const Tag = styled.span`
   display: ${props => (props.mobile ? 'none' : 'inline-block')};
   font-size: 0.8rem;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     font-size: 0.8rem;
     margin-right: 0px;
     display: ${props => (props.mobile ? 'inline-block' : 'none')};

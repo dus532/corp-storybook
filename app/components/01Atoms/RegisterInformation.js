@@ -22,7 +22,7 @@ const RegisterInformation = styled.div`
     font-weight: 500;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     h2 {
       margin-top: 40px;
       font-size: 1.4rem;

@@ -22,7 +22,7 @@ const StyledWelcomePanel = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-top: 0px;
     flex-direction: column;
     padding: 20px;

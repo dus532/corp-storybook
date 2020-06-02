@@ -167,7 +167,7 @@ const GlobalStyle = createGlobalStyle`
     opacity:0.5;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     *{-webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
     }
 

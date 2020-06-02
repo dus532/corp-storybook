@@ -9,7 +9,7 @@ const StyledBitTitle = styled.div`
   font-size: 2rem;
   font-weight: 700;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     position: relative;
     margin: 0;
     left: -20px;

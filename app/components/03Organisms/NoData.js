@@ -24,7 +24,7 @@ const StyledDiv = styled.div`
   background: white;
   padding: 40px 0;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     padding: 40px 0;
   }
 `;

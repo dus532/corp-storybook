@@ -21,7 +21,7 @@ const StyledBG = styled.div`
     margin-top: 0px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-top: 0px;
     top: 0px;
   }

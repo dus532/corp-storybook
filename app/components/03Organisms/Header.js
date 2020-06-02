@@ -127,7 +127,7 @@ const StyledHeader = styled.div`
     color: black;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     width: 100vw;
 
     .initial_status {
@@ -253,7 +253,7 @@ const MobileMenu = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     .header_top {
       display: none;
     }
@@ -299,7 +299,7 @@ const SettingMenu = styled.div`
     margin-left: 0;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
@@ -313,7 +313,7 @@ const SettingMenuMobile = styled.div`
     font-weight: 400;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: flex;
     flex-direction: column;
   }

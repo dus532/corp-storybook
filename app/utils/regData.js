@@ -11,7 +11,7 @@ const Edit = styled.button`
   height: 24px;
   background: url(${EditIMG}) center / cover no-repeat;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     position: absolute;
     top: 24px;
     right: 24px;

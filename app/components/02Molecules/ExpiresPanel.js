@@ -16,7 +16,7 @@ const Div = styled.div`
   height: 144px;
   flex: 1;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     padding: 0 20px;
     height: 100%;
     min-height: 112px;
@@ -49,7 +49,7 @@ const Check = styled.div`
     cursor: pointer;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin: 0 16px 0 0;
     position: relative;
     top: -20px;
@@ -77,7 +77,7 @@ const View = styled.div`
     margin-top: 4px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     .title {
       font-size: 1.1rem;
     }

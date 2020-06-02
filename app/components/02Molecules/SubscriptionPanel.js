@@ -16,7 +16,7 @@ const Div = styled.div`
   margin-right: 28px;
   flex: 1;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-bottom: 10px;
   }
 `;
@@ -75,7 +75,7 @@ const View = styled.div`
     background: url(${MedalIMG}) center / cover no-repeat;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     height: auto;
     display: flex;
     padding: 20px;
@@ -134,7 +134,7 @@ const Amount = styled.div`
     font-weight: 700;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;

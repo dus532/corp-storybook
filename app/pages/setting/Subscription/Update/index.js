@@ -23,7 +23,7 @@ const Flex = styled.div`
     margin-right: 0;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
   }
 `;

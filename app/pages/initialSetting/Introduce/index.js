@@ -32,7 +32,7 @@ const IntroTop = styled.div`
     animation: rotate_card 1s;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
     margin-top: 20px;
     margin-bottom: 40px;

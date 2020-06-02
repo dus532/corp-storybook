@@ -28,7 +28,7 @@ const StyledDropBox = styled.div`
     color: black;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     width: 48%;
   }
 `;
@@ -66,7 +66,7 @@ const Select = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: flex;
     position: fixed;
     overflow: none;

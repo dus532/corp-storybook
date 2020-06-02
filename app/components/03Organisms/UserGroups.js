@@ -50,7 +50,7 @@ const Table = styled.table`
   .td_edit {
     padding: 0;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     font-size: 0.8rem;
     th,
     td {

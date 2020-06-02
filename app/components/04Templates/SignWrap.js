@@ -42,7 +42,7 @@ const Wrap = styled.div`
     text-align: left;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     height: 100vh;
 
     .sign_title {

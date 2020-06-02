@@ -19,7 +19,7 @@ import moment from 'utils/moment';
 const SubTitle = styled.div`
   margin-bottom: 10px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-top: 18px;
     margin-bottom: 4px;
   }

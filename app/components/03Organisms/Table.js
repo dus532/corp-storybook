@@ -30,7 +30,7 @@ const Th = styled.div`
     line-height: 24px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
@@ -42,7 +42,7 @@ const Line = styled.div`
   background: #eee;
   box-sizing: border-box;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;
@@ -59,7 +59,7 @@ const Tr = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     padding: 16px 20px;
     font-size: 0.9rem;
     line-height: 30px;
@@ -79,7 +79,7 @@ const Td = styled.div`
     align-items: center;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: flex;
     height: auto;
 
@@ -97,7 +97,7 @@ const IMGReorder = styled.div`
   display: inline-block;
   background: url(${IconReorder}) center / cover no-repeat;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     display: none;
   }
 `;

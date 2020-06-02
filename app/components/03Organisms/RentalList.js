@@ -70,7 +70,7 @@ const StyledPanel = styled.div`
     align-items: flex-end;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     border-left: none;
     border-top: 4px solid
       ${props => (props.mainColor ? props.mainColor : 'black')};

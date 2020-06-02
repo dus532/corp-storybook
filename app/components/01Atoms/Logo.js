@@ -9,7 +9,7 @@ const Logo = styled.div`
   background: url(${LogoImg}) center / contain no-repeat;
   flex-shrink: 0;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     width: 170px;
     height: 37px;
     margin: 48px 0;

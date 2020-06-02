@@ -50,7 +50,7 @@ const Amount = styled.div`
     font-weight: 700;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     .price {
       width: 100%;
       text-align: right;
@@ -93,7 +93,7 @@ const ButtonSpecial = styled.button`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin: 20px auto 0;
     max-width: ${props => (props.type ? '572px' : '100%')};
     width: 100%;

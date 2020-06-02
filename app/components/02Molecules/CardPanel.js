@@ -37,7 +37,7 @@ const StyledPanel = styled.div`
     display: none;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-bottom: 10px;
     padding: 20px;
     flex-direction: column;

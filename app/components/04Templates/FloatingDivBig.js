@@ -90,7 +90,7 @@ const Div = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     .floating_container {
       margin: 0;
       height: 100%;
@@ -127,7 +127,7 @@ const BG = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     background: rgba(0, 0, 0, 0.1);
   }
 `;

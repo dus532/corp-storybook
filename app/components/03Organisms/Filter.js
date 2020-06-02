@@ -77,7 +77,7 @@ const StyledFilter = styled.div`
     transition: 0.25s;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     margin-top: 0;
 
     .top {

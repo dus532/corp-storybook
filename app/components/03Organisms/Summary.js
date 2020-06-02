@@ -44,7 +44,7 @@ const StyledSummary = styled.div`
     align-items: center;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -90,7 +90,7 @@ const ExcelDownload = styled.button`
     transition: 0.35s;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     border: none;
     padding: 4px;
     margin-left: 0;

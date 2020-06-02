@@ -28,7 +28,7 @@ const StyledDiv = styled.div`
     cursor: pointer;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 900px) {
     span {
       width: 20px;
       right: 0px;

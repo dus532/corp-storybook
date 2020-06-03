@@ -24,6 +24,10 @@ const StyledMyPanel = styled.div`
     display: none;
   }
 
+  .expired {
+    opacity: 0.4;
+  }
+
   .inner {
     display: flex;
     width: 100%;
@@ -85,16 +89,19 @@ const Line = styled.div`
   }
 `;
 
-const MyPanel = ({ store, className, isSetting }) => {
+const MyPanel = ({ store, expired, className, isSetting }) => {
   const data = store.data.businessSubs;
   const history = useHistory();
 
   return (
     <StyledMyPanel className={className}>
-      <div className="inner">
+      <div className={`inner ${expired ? 'expired' : ''}`}>
         <Part>
           이용중인 상품
-          <h2>{data.product}</h2>
+          <h2>
+            {expired && '(해지) '}
+            {data.product}
+          </h2>
           {!isSetting && (
             <h5
               tabIndex={0}
@@ -128,6 +135,7 @@ const MyPanel = ({ store, className, isSetting }) => {
 MyPanel.propTypes = {
   store: PropTypes.object,
   className: PropTypes.any,
+  expired: PropTypes.bool,
   isSetting: PropTypes.bool,
 };
 

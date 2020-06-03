@@ -44,6 +44,9 @@ const Subscription = () => {
           <MyPanel
             className="box_overflow"
             store={SubscriptionsData}
+            expired={
+              SubscriptionsData.data.status === C.SUB_TYPE.EXPIRED_SUBSCRIBING
+            }
             isSetting
           />
           <div style={{ marginTop: 10 }} />
@@ -205,7 +208,6 @@ const Subscription = () => {
                 <>
                   <ButtonBottom
                     type="big"
-                    left="구독 해지"
                     white
                     onClickLeft={() => {
                       modal(CHECK_PW, '/setting/subscription/expires');

@@ -105,7 +105,7 @@ const Payment = () => {
             ['결제 카드', 'cardNumber', 1.2],
             ['금액', 'amount', 1.4],
             ['항목', 'item', 1],
-            ['구분', 'type', 1],
+            ['구분', 'type', 0.7],
             ['상태', 'status', 1],
             ['연관 예약번호', 'rentalId', 1.6],
           ]}

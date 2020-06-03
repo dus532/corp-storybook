@@ -135,12 +135,12 @@ const Employees = () => {
           now={!nowPage ? 1 : nowPage}
           title={[
             ['사번', 'number', 1],
-            ['부서명', 'userGroupName', 1.4],
+            ['부서명', 'userGroupName', 1.8],
             ['사원 이름', 'name', 1.4],
-            ['전화번호', 'phoneNumber', 1.8],
+            ['전화번호', 'phoneNumber', 1.4],
             ['이메일', 'email', 2.2],
             ['가입 일시', 'joinDate', 1.4],
-            ['면허증', 'license', 1.2],
+            ['면허증', 'license', 1],
             [
               '',
               'editEmployee',

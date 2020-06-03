@@ -73,7 +73,12 @@ const DataInput = props => {
   return (
     <>
       <StyledDiv>
-        <Input {...props} ref={props.InputRef} type={viewPW} />
+        <Input
+          {...props}
+          ref={props.InputRef}
+          type={viewPW}
+          onFocus="this.blur()"
+        />
         {props.type === 'password' && (
           <div
             className="eyes"

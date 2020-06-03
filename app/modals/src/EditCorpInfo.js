@@ -65,7 +65,7 @@ const EditCorpInfo = ({ onClickExit, data }) => {
                   white
                   size="small"
                   onClick={() => {
-                    if (data.employeeNumber > 0) {
+                    if (data.data.memberNumber > 0) {
                       setPage(C_LOCAL.DELETE_ERROR);
                     } else {
                       onDelete();

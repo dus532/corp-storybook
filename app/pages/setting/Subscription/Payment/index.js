@@ -193,9 +193,7 @@ const Payment = () => {
         data={[
           {
             title: '구독 정보',
-            body: `${NormalizeData('productType', update.product)} / ${
-              update.userNumber
-            } 명`,
+            body: `${check.product} / ${update.userNumber} 명`,
           },
           {
             title: '구독 시작일',

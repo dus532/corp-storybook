@@ -135,7 +135,7 @@ const MyPanel = ({ store, expired, className, isSetting }) => {
 MyPanel.propTypes = {
   store: PropTypes.object,
   className: PropTypes.any,
-  expired: PropTypes.bool,
+  expired: PropTypes.any,
   isSetting: PropTypes.bool,
 };
 

@@ -45,7 +45,10 @@ const Subscription = () => {
             className="box_overflow"
             store={SubscriptionsData}
             expired={
-              SubscriptionsData.data.status === C.SUB_TYPE.EXPIRED_SUBSCRIBING
+              SubscriptionsData.data.status ===
+                C.SUB_TYPE.EXPIRED_SUBSCRIBING ||
+              (SubscriptionsData.data.status === C.SUB_TYPE.SUBSCRIBING &&
+                current.endDate)
             }
             isSetting
           />
@@ -80,6 +83,14 @@ const Subscription = () => {
                     .unix(current.startDate)
                     .format('YYYY년 MM월 DD일'),
                 },
+                current.endDate
+                  ? {
+                      title: '구독 종료일',
+                      body: moment
+                        .unix(current.endDate)
+                        .format('YYYY년 MM월 DD일'),
+                    }
+                  : {},
                 {
                   title: '구독 갱신일',
                   body:
@@ -120,7 +131,9 @@ const Subscription = () => {
               ]}
               bottom={
                 SubscriptionsData.data.status ===
-                C.SUB_TYPE.EXPIRED_SUBSCRIBING ? (
+                  C.SUB_TYPE.EXPIRED_SUBSCRIBING ||
+                (SubscriptionsData.data.status === C.SUB_TYPE.SUBSCRIBING &&
+                  current.endDate) ? (
                   <>
                     <ButtonBottom
                       white

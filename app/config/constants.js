@@ -8,8 +8,8 @@ const C = {
   },
 
   CARD_TYPE: {
-    PERSONAL: 3,
-    COMPANY: 2,
+    PERSONAL: 4,
+    COMPANY: 3,
   },
 
   REGISTER_TYPE: {

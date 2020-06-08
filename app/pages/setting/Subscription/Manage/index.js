@@ -48,7 +48,7 @@ const Subscription = () => {
               SubscriptionsData.data.status ===
                 C.SUB_TYPE.EXPIRED_SUBSCRIBING ||
               (SubscriptionsData.data.status === C.SUB_TYPE.SUBSCRIBING &&
-                current.endDate)
+                current.endDate >= 15000000)
             }
             isSetting
           />

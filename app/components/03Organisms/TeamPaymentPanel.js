@@ -101,8 +101,10 @@ const Card = styled.div`
 
 const Tag = styled.span`
   padding: 6px;
+  width: 120px;
+  text-align: center;
   border-radius: 4px;
-  font-weight: 300;
+  font-weight: 500;
   color: ${props => (props.isRepresentativeCard ? '#2946b0' : 'black')};
   background: ${props => (props.isRepresentativeCard ? '#e1e7ff' : `#f7f7f7`)};
   margin-right: 10px;
@@ -215,11 +217,13 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
               </h3>
               <div className="team_info">
                 {tag(d)}
-                {d.cardCorp} / {d.cardNumber} /{' '}
+                {d.cardCorp}
+                {d.cardNumber ? ` / ${d.cardNumber} / ` : ''}
                 {d.cardType === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
               </div>
               <div className="team_amount">
-                {d.paymentAmount && d.paymentAmount.toLocaleString('en')}원
+                {d.paymentAmount && (d.paymentAmount * 1).toLocaleString('en')}
+                원
               </div>
             </Card>
           ))}

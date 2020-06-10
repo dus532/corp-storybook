@@ -69,7 +69,7 @@ const renderCustomizedLabel = props => {
         dominantBaseline="middle"
         fontSize="14"
       >
-        {value.toLocaleString('en')}원
+        {Number(value).toLocaleString('en')}원
       </text>
     </g>
   );
@@ -101,7 +101,7 @@ const RecentPaymentPanel = ({ store, className }) => {
           <div className="intro">
             {payload[0].payload.year}년 {payload[0].payload.month}월
           </div>
-          <div className="body">{label.toLocaleString('en')} 원</div>
+          <div className="body">{Number(label).toLocaleString('en')} 원</div>
         </StyledToolTip>
       );
     }

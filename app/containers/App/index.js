@@ -5,6 +5,7 @@ import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
 import Sticky from 'react-sticky-fill';
 
 import {
+  Apply,
   SignIn,
   DashBoard,
   InitRegisterCard,
@@ -52,7 +53,7 @@ const App = () => {
     const USER = UserManager().getUser();
     if (USER && !userData.data) {
       dispatch(actionSetUser(USER));
-    } else if (!USER && document.location.pathname !== '/') {
+    } else if (!USER && location.pathname !== '/') {
       dispatch(actionSignOut());
       history.push('/');
     } else if (
@@ -76,6 +77,7 @@ const App = () => {
       <Switch>
         {/* 로그인 부분 */}
         <Route path="/" exact component={SignIn} />
+        <Route path="/apply" exact component={Apply} />
         {/* 초기설정 */}
         <Route path="/initial/introduce" exact component={InitIntroduce} />
         <Route

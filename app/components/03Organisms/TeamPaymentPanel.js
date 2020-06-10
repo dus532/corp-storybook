@@ -123,8 +123,8 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
   const [state, setState] = useState(0);
 
   const tag = (d, mobile) => (
-    <Tag mobile={mobile} isRepresentativeCard={d.isRepresentativeCard}>
-      {d.isRepresentativeCard ? '대표 결제카드' : '부서 전용카드'}
+    <Tag mobile={mobile} isRepresentativeCard={d.name === '전체'}>
+      {d.name === '전체' ? '대표 결제카드' : '부서 전용카드'}
     </Tag>
   );
 

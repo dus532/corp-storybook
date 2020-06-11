@@ -49,8 +49,8 @@ const AsyncDiv = ({ store, children }) => {
         height={40}
         width={40}
         isStopped={false}
-        isPaused
       />
+      <br />
       열심히 달리고 있어요!
     </LoadFail>
   );

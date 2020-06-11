@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import {
   Container,
@@ -12,26 +12,28 @@ import {
 } from 'components';
 import { actionGetAnnouncements } from 'stores';
 import { ANNOUNCEMENTS_DETAIL } from 'modals/constants';
-import { useModal } from 'utils/hooks';
+import { useModal, useFetchData, useQuery } from 'utils/hooks';
 
-const useQuery = () => new URLSearchParams(useLocation().search);
+const initialState = { search: '' };
 
 const Announcements = () => {
   const dispatch = useDispatch();
-  const AnnouncementsData = useSelector(state => state.announcements);
-
   const history = useHistory();
   const nowPage = useQuery().get('page');
   const modal = useModal();
 
-  const [filter, setFilter] = useState({ search: '' });
+  const [filter, setFilter] = useState(initialState);
+  const [announcementsStore, announcementsData] = useFetchData(
+    'announcements',
+    filter,
+  );
 
   const handleChange = (data, name, reset) => {
     setFilter({ ...filter, [name]: data });
 
     if (reset) {
       dispatch(
-        actionGetAnnouncements({ keyword: null }, () => {
+        actionGetAnnouncements({ keyword: initialState.search }, () => {
           history.push(`${document.location.pathname}?page=1`);
         }),
       );
@@ -46,13 +48,7 @@ const Announcements = () => {
     );
   };
 
-  const onDetail = data => {
-    modal(ANNOUNCEMENTS_DETAIL, data);
-  };
-
-  useEffect(() => {
-    dispatch(actionGetAnnouncements(filter));
-  }, []);
+  const onDetail = data => modal(ANNOUNCEMENTS_DETAIL, data);
 
   return (
     <div>
@@ -65,18 +61,17 @@ const Announcements = () => {
           placeholder="검색어 입력"
           onClick={onSearch}
         />
-        <AsyncDiv store={AnnouncementsData}>
+        <AsyncDiv store={announcementsStore}>
           <Board
             now={nowPage || 1}
-            data={AnnouncementsData.data.announcements}
+            data={announcementsData.announcements}
             onClick={onDetail}
           />
           <Pagination
             now={nowPage || 1}
             total={
-              AnnouncementsData.data &&
-              AnnouncementsData.data.announcements.length > 0
-                ? Math.ceil(AnnouncementsData.data.announcements.length / 10)
+              announcementsData && announcementsData.announcements.length > 0
+                ? Math.ceil(announcementsData.announcements.length / 10)
                 : 1
             }
           />

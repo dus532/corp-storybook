@@ -27,26 +27,31 @@ const RequestManager = (method, url, data, header) => {
     // DEV. 모든 데이터 통신을 콘솔화 합니다.
     // 이는 추후 서버쪽 로그 기록으로도 활용될 수 있습니다.
     const now = moment().format('MM.DD a h:mm:ss');
-    console.log(`${now} 📡 서버 통신 ( ${method.toUpperCase()} ) ${url}`, data);
+    console.log(
+      `${now} 📡 서버 통신 ( ${method.toUpperCase()} ) [ ${
+        process.env.NODE_ENV
+      } ]${url}`,
+      data,
+    );
 
     // 02. axios 통신
     // axios 통신을 시도합니다.
     axios({
       method,
-      // url: `${
-      //   configs[process.env.NODE_ENV].apiServerURL
-      //     ? configs[process.env.NODE_ENV].apiServerURL
-      //     : configs.dev.apiServerURL
-      // }${url}`,
       url: `${
-        window.document.location.href.includes('staging')
-          ? configs.staging.apiServerURL
-          : window.document.location.href.includes('dev') ||
-            window.document.location.href.includes('localhost') ||
-            window.document.location.href.includes('192')
-          ? configs.development.apiServerURL
-          : configs.production.apiServerURL
+        configs[process.env.NODE_ENV].apiServerURL
+          ? configs[process.env.NODE_ENV].apiServerURL
+          : configs.dev.apiServerURL
       }${url}`,
+      // url: `${
+      //   window.document.location.href.includes('staging')
+      //     ? configs.staging.apiServerURL
+      //     : window.document.location.href.includes('dev') ||
+      //       window.document.location.href.includes('localhost') ||
+      //       window.document.location.href.includes('192')
+      //     ? configs.development.apiServerURL
+      //     : configs.production.apiServerURL
+      // }${url}`,
       data: (method === 'post' || method === 'put') && data,
       params: (method === 'get' || method === 'delete') && data,
       headers: {
@@ -62,7 +67,9 @@ const RequestManager = (method, url, data, header) => {
     })
       .then(res => {
         console.log(
-          `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) ${url}`,
+          `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) [ ${
+            process.env.NODE_ENV
+          } ]${url}`,
           res.data,
         );
         resolve(res);

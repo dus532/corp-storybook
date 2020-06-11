@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import moment from 'utils/moment';
 import {
@@ -15,19 +15,11 @@ import {
 import { actionGetManagePayments, actionGetCardList } from 'stores';
 
 import UserManager from 'utils/userManager';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
-
-const list = { cards: [] };
+import { useQuery } from 'utils/hooks';
 
 const Payment = () => {
-  const dispatch = useDispatch();
-  const paymentData = useSelector(state => state.managePayments);
-
-  const history = useHistory();
-  const nowPage = useQuery().get('page');
-
-  const [filter, setFilter] = useState({
+  const list = { cards: [] };
+  const initialState = {
     startDate: moment()
       .startOf('year')
       .format('X'),
@@ -37,7 +29,15 @@ const Payment = () => {
     item: 0,
     search: null,
     corpId: UserManager().getUser().corpId,
-  });
+  };
+
+  const dispatch = useDispatch();
+  const paymentData = useSelector(state => state.managePayments);
+
+  const history = useHistory();
+  const nowPage = useQuery().get('page');
+
+  const [filter, setFilter] = useState(initialState);
 
   const handleChange = (data, name, reset) => {
     setFilter({ ...filter, [name]: data });

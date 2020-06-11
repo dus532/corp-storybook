@@ -33,20 +33,7 @@ const RequestManager = (method, url, data, header) => {
     // axios 통신을 시도합니다.
     axios({
       method,
-      // url: `${
-      //   configs[process.env.NODE_ENV].apiServerURL
-      //     ? configs[process.env.NODE_ENV].apiServerURL
-      //     : configs.dev.apiServerURL
-      // }${url}`,
-      url: `${
-        window.document.location.href.includes('staging')
-          ? configs.staging.apiServerURL
-          : window.document.location.href.includes('dev') ||
-            window.document.location.href.includes('localhost') ||
-            window.document.location.href.includes('192')
-          ? configs.development.apiServerURL
-          : configs.production.apiServerURL
-      }${url}`,
+      url: `${configs.apiServerURL}${url}`,
       data: (method === 'post' || method === 'put') && data,
       params: (method === 'get' || method === 'delete') && data,
       headers: {

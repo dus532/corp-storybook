@@ -68,7 +68,10 @@ const App = () => {
 
   return (
     <>
-      <Helmet titleTemplate="%s - 카플랫 관리자 페이지" defaultTitle="카플랫">
+      <Helmet
+        titleTemplate="%s - 카플랫 관리자 페이지"
+        defaultTitle="카플랫 비즈 - 기업 관리자"
+      >
         <meta name="description" content="카플랫 서비스 관리툴입니다." />
       </Helmet>
       <Sticky style={{ zIndex: 2 }}>

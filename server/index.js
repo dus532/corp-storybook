@@ -6,7 +6,7 @@ const logger = require('./logger');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
-const isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.RUN_TIME_ENV !== 'prod';
 const ngrok =
   (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel
     ? require('ngrok')

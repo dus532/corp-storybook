@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form/dist/react-hook-form.ie11';
 import produce from 'immer';
 import Sticky from 'react-sticky-fill';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import {
   Container,
@@ -12,7 +14,7 @@ import {
   DatePicker,
   ButtonBottom,
 } from 'components';
-import { useModal } from 'utils/hooks';
+import { useModal, useToast } from 'utils/hooks';
 import { POST_CODE } from 'modals/constants';
 import Color from 'config/color';
 import moment from 'utils/moment';
@@ -156,23 +158,51 @@ const PartInfo = styled.div`
 `;
 
 const Apply = () => {
-  const { handleSubmit, register } = useForm();
+  const toast = useToast();
+  const modal = useModal();
+  const history = useHistory();
+
+  const { handleSubmit, register } = useForm({
+    defaultValues: {
+      productName: '프리미엄',
+      workTime: 'NineToSix',
+      usingEmployeeNumber: 'true',
+      usingDepartment: 'true',
+    },
+  });
+
   const [data, setData] = useState({
-    date: moment().format('X'),
-    address: '',
-    part: [],
+    startDate: moment().format('YYYY-MM-DD'),
+    corpAddress: '',
+    departmentNames: [],
     add: '',
   });
-  const modal = useModal();
 
-  const onSubmit = d => {
-    console.log({ ...d, ...data });
+  const onSubmit = inputData => {
+    const body = {
+      ...inputData,
+      ...data,
+      corpAddress: data.address,
+      departmentNames: `${data.departmentNames.map(dn => `${dn}`)}`,
+    };
+
+    axios
+      .post(
+        'https://biz-mobile-api.dev.platdev.net/action/public/subscription',
+        body,
+      )
+      .then(() => history.push('/apply/ok'))
+      .catch(() =>
+        toast(
+          '오류가 발생했습니다. 반복될 경우 1833-7164 ( 카플랫 비즈 고객센터 )에 문의해주세요!',
+        ),
+      );
   };
 
   const onDelete = index => {
     setData(
       produce(draft => {
-        draft.part.splice(index, 1);
+        draft.departmentNames.splice(index, 1);
       }),
     );
   };
@@ -188,7 +218,7 @@ const Apply = () => {
   const onAdd = () => {
     setData(
       produce(draft => {
-        draft.part.push(draft.add);
+        draft.departmentNames.push(draft.add);
         draft.add = '';
       }),
     );
@@ -215,26 +245,26 @@ const Apply = () => {
           <h5>사원 번호 사용</h5>
           <InputRadio
             className="radio"
-            name="products"
+            name="productName"
             id="products_premium"
             body="프리미엄"
-            value={0}
+            value="프리미엄"
             inputRef={register}
           />
           <InputRadio
             className="radio"
-            name="products"
+            name="productName"
             id="products_standard"
             body="스탠다드"
-            value={1}
+            value="스탠다드"
             inputRef={register}
           />
           <InputRadio
             className="radio"
-            name="products"
+            name="productName"
             id="products_basic"
             body="베이직"
-            value={2}
+            value="베이직"
             inputRef={register}
           />
         </div>
@@ -242,8 +272,10 @@ const Apply = () => {
           <h5>동시 구독 인원</h5>
           <Input
             style={{ textAlign: 'right' }}
-            name="usagePeople"
+            name="concurrentUserCount"
             placeholder="명"
+            type="number"
+            inputMode="numeric"
             ref={register}
             required
           />
@@ -253,34 +285,36 @@ const Apply = () => {
           <DatePicker
             width={220}
             className="datepicker"
-            value={new Date(moment.unix(data.date))}
-            onChange={d => handleChange(moment(d).unix(), 'date')}
+            value={new Date(data.startDate)}
+            onChange={d =>
+              handleChange(moment(d).format('YYYY-MM-DD'), 'startDate')
+            }
           />
         </div>
         <div className="input">
           <h5>업무 시간 지정</h5>
           <InputRadio
             className="radio"
-            name="worktime"
+            name="workTime"
             id="8to5"
             body="오전 8시 ~ 오후 5시"
-            value="0"
+            value="EightToFive"
             inputRef={register}
           />
           <InputRadio
             className="radio"
-            name="worktime"
+            name="workTime"
             id="9to6"
             body="오전 9시 ~ 오후 6시"
-            value="1"
+            value="NineToSix"
             inputRef={register}
           />
           <InputRadio
             className="radio"
-            name="worktime"
+            name="workTime"
             id="10to7"
             body="오전 10시 ~ 오후 7시"
-            value="2"
+            value="TenToSeven"
             inputRef={register}
           />
         </div>
@@ -293,7 +327,13 @@ const Apply = () => {
           </div>
           <div className="input">
             <h5>사업자 등록번호</h5>
-            <Input name="companyNumber" ref={register} required />
+            <Input
+              name="corpNumber"
+              type="number"
+              inputMode="numeric"
+              ref={register}
+              required
+            />
           </div>
         </div>
         <div className="input">
@@ -315,45 +355,56 @@ const Apply = () => {
         </div>
         <div className="input">
           <h5>기업 담당자 이름</h5>
-          <Input name="managerName" ref={register} required />
+          <Input name="corpManagerName" ref={register} required />
         </div>
         <div className="input_flex">
           <div className="input">
             <h5>담당자 이메일 주소</h5>
-            <Input name="managerEmail" ref={register} required />
+            <Input
+              name="corpManagerEmail"
+              type="email"
+              ref={register}
+              required
+            />
           </div>
           <div className="input">
             <h5>담당자 전화번호</h5>
-            <Input name="managerTel" ref={register} required />
+            <Input
+              name="corpManagerPhoneNumber"
+              type="number"
+              inputMode="numeric"
+              ref={register}
+              required
+            />
           </div>
         </div>
         <div className="input_flex">
           <div className="input">
             <h5>이메일 도메인1</h5>
-            <Input name="email1" ref={register} required />
+            <Input name="corpDomain1" ref={register} required />
           </div>
           <div className="input">
             <h5>이메일 도메인2</h5>
-            <Input name="email2" ref={register} required />
+            <Input name="corpDomain2" ref={register} />
           </div>
         </div>
         <div className="input">
           <h5>사원 번호 사용</h5>
           <InputRadio
             className="radio"
-            name="useEmployeeNumber"
+            name="usingEmployeeNumber"
             id="useEmployeeNumber_yes"
             body="네, 사용합니다."
-            value={1}
+            value
             inputRef={register}
             required
           />
           <InputRadio
             className="radio"
-            name="useEmployeeNumber"
+            name="usingEmployeeNumber"
             id="useEmployeeNumber_no"
             body="아니오, 사용하지 않습니다."
-            value={0}
+            value={false}
             inputRef={register}
             required
           />
@@ -362,19 +413,19 @@ const Apply = () => {
           <h5>사원 번호 사용</h5>
           <InputRadio
             className="radio"
-            name="useTeamInfo"
+            name="usingDepartment"
             id="useTeamInfo_yes"
             body="네, 사용합니다."
-            value={1}
+            value
             inputRef={register}
             required
           />
           <InputRadio
             className="radio"
-            name="useTeamInfo"
+            name="usingDepartment"
             id="useTeamInfo_no"
             body="아니오, 사용하지 않습니다."
-            value={0}
+            value={false}
             inputRef={register}
             required
           />
@@ -400,7 +451,7 @@ const Apply = () => {
           </Button>
         </div>
         <PartInfo>
-          {data.part.map((d, index) => (
+          {data.departmentNames.map((d, index) => (
             <button
               key={index}
               type="button"

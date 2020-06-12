@@ -1,6 +1,7 @@
 // Common 공통
 export { default as SignIn } from 'pages/common/SignIn';
 export { default as Apply } from 'pages/common/Apply';
+export { default as ApplyOK } from 'pages/common/ApplyOK';
 
 // DashBoard 대쉬보드
 export { default as DashBoard } from 'pages/home/DashBoard';

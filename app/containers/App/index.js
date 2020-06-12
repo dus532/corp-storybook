@@ -6,6 +6,7 @@ import Sticky from 'react-sticky-fill';
 
 import {
   Apply,
+  ApplyOK,
   SignIn,
   DashBoard,
   InitRegisterCard,
@@ -56,7 +57,7 @@ const App = () => {
     } else if (
       !USER &&
       location.pathname !== '/' &&
-      location.pathname !== '/apply'
+      !location.pathname.includes('apply')
     ) {
       dispatch(actionSignOut());
       history.push('/');
@@ -87,6 +88,7 @@ const App = () => {
         {/* 로그인 부분 */}
         <Route path="/" exact component={SignIn} />
         <Route path="/apply" exact component={Apply} />
+        <Route path="/apply/ok" exact component={ApplyOK} />
         {/* 초기설정 */}
         <Route path="/initial/introduce" exact component={InitIntroduce} />
         <Route

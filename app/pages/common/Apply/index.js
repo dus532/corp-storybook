@@ -1,5 +1,426 @@
-import React from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useForm } from 'react-hook-form/dist/react-hook-form.ie11';
+import produce from 'immer';
+import Sticky from 'react-sticky-fill';
 
-const Apply = () => <div>1</div>;
+import {
+  Container,
+  Input,
+  InputRadio,
+  DatePicker,
+  ButtonBottom,
+} from 'components';
+import { useModal } from 'utils/hooks';
+import { POST_CODE } from 'modals/constants';
+import Color from 'config/color';
+import moment from 'utils/moment';
+import ICON_DEL from 'images/icon_delete.png';
+import LogoHeader from 'components/01Atoms/LogoHeader';
+
+const StyledHeader = styled.div`
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid ${Color.LineGray};
+  align-items: center;
+  background: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+`;
+
+const Div = styled.form`
+  background: white;
+  min-height: 100vh;
+
+  h3 {
+    margin-top: 26px;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+  }
+
+  h5 {
+    width: 148px;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .input {
+    height: 40px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .input > input {
+    width: 220px;
+  }
+
+  .input_flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .radio {
+    width: 220px;
+  }
+
+  @media screen and (max-width: 900px) {
+    h5 {
+      width: 100%;
+    }
+    .input {
+      width: 100%;
+      height: auto;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .date {
+      margin-bottom: 20px;
+    }
+
+    .date > div {
+      width: 100%;
+    }
+
+    .input > input {
+      width: 100%;
+    }
+
+    .radio {
+      margin: 10px 0;
+    }
+
+    .input_flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+`;
+
+const Button = styled.button`
+  min-width: 172px;
+  min-height: 40px;
+  font-size: 0.8rem;
+  border: 1px solid ${Color.LineGray};
+  margin-left: 10px;
+  border-radius: 5px;
+
+  @media screen and (max-width: 900px) {
+    margin-left: auto;
+  }
+`;
+
+const PartInfo = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 8px;
+  box-sizing: border-box;
+  background: #f7f7f7;
+  border: 1px solid ${Color.LineGray};
+  max-width: 676px;
+  margin-left: auto;
+  min-height: 60px;
+  width: 100%;
+  align-items: flex-start;
+
+  .partinfo_card {
+    cursor: pointer;
+    align-items: center;
+    font-size: 0.9rem;
+    background: white;
+    display: flex;
+    padding: 4px 4px 4px 10px;
+    margin-right: 8px;
+    border-radius: 50px;
+    border: 1px solid ${Color.LineGray};
+    transition: 0.35s;
+  }
+
+  .partinfo_card:hover {
+    background: #f1f1f1;
+    transition: 0.35s;
+  }
+
+  .partinfo_del {
+    margin-left: 4px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: url(${ICON_DEL}) center / cover;
+    opacity: 0.2;
+  }
+`;
+
+const Apply = () => {
+  const { handleSubmit, register } = useForm();
+  const [data, setData] = useState({
+    date: moment().format('X'),
+    address: '',
+    part: [],
+    add: '',
+  });
+  const modal = useModal();
+
+  const onSubmit = d => {
+    console.log({ ...d, ...data });
+  };
+
+  const onDelete = index => {
+    setData(
+      produce(draft => {
+        draft.part.splice(index, 1);
+      }),
+    );
+  };
+
+  const handleChange = (value, name) => {
+    setData(
+      produce(draft => {
+        draft[name] = value;
+      }),
+    );
+  };
+
+  const onAdd = () => {
+    setData(
+      produce(draft => {
+        draft.part.push(draft.add);
+        draft.add = '';
+      }),
+    );
+  };
+
+  return (
+    <Div onSubmit={handleSubmit(onSubmit)}>
+      <Sticky>
+        <StyledHeader>
+          <Container
+            style={{ height: 60, display: 'flex', alignItems: 'center' }}
+          >
+            <LogoHeader />
+          </Container>
+        </StyledHeader>
+      </Sticky>
+      <br />
+      <br />
+      <Container width="864">
+        <h2>카플랫 기업 카셰어링 가입 신청</h2>
+        <hr />
+        <h3>구독 상품 선택</h3>
+        <div className="input">
+          <h5>사원 번호 사용</h5>
+          <InputRadio
+            className="radio"
+            name="products"
+            id="products_premium"
+            body="프리미엄"
+            value={0}
+            inputRef={register}
+          />
+          <InputRadio
+            className="radio"
+            name="products"
+            id="products_standard"
+            body="스탠다드"
+            value={1}
+            inputRef={register}
+          />
+          <InputRadio
+            className="radio"
+            name="products"
+            id="products_basic"
+            body="베이직"
+            value={2}
+            inputRef={register}
+          />
+        </div>
+        <div className="input">
+          <h5>동시 구독 인원</h5>
+          <Input
+            style={{ textAlign: 'right' }}
+            name="usagePeople"
+            placeholder="명"
+            ref={register}
+            required
+          />
+        </div>
+        <div className="input date">
+          <h5>서비스 시작일</h5>
+          <DatePicker
+            width={220}
+            className="datepicker"
+            value={new Date(moment.unix(data.date))}
+            onChange={d => handleChange(moment(d).unix(), 'date')}
+          />
+        </div>
+        <div className="input">
+          <h5>업무 시간 지정</h5>
+          <InputRadio
+            className="radio"
+            name="worktime"
+            id="8to5"
+            body="오전 8시 ~ 오후 5시"
+            value="0"
+            inputRef={register}
+          />
+          <InputRadio
+            className="radio"
+            name="worktime"
+            id="9to6"
+            body="오전 9시 ~ 오후 6시"
+            value="1"
+            inputRef={register}
+          />
+          <InputRadio
+            className="radio"
+            name="worktime"
+            id="10to7"
+            body="오전 10시 ~ 오후 7시"
+            value="2"
+            inputRef={register}
+          />
+        </div>
+        <br />
+        <h3>기업 정보 입력</h3>
+        <div className="input_flex">
+          <div className="input">
+            <h5>기업 이름</h5>
+            <Input name="corpName" ref={register} required />
+          </div>
+          <div className="input">
+            <h5>사업자 등록번호</h5>
+            <Input name="companyNumber" ref={register} required />
+          </div>
+        </div>
+        <div className="input">
+          <h5>주소</h5>
+          <Input
+            style={{ width: '100%' }}
+            name="address"
+            placeholder="주소"
+            value={data.address}
+            onChange={e => handleChange(e.target.value, e.target.name)}
+            required
+          />
+          <Button
+            type="button"
+            onClick={() => modal(POST_CODE, { data, setData })}
+          >
+            우편 번호 검색
+          </Button>
+        </div>
+        <div className="input">
+          <h5>기업 담당자 이름</h5>
+          <Input name="managerName" ref={register} required />
+        </div>
+        <div className="input_flex">
+          <div className="input">
+            <h5>담당자 이메일 주소</h5>
+            <Input name="managerEmail" ref={register} required />
+          </div>
+          <div className="input">
+            <h5>담당자 전화번호</h5>
+            <Input name="managerTel" ref={register} required />
+          </div>
+        </div>
+        <div className="input_flex">
+          <div className="input">
+            <h5>이메일 도메인1</h5>
+            <Input name="email1" ref={register} required />
+          </div>
+          <div className="input">
+            <h5>이메일 도메인2</h5>
+            <Input name="email2" ref={register} required />
+          </div>
+        </div>
+        <div className="input">
+          <h5>사원 번호 사용</h5>
+          <InputRadio
+            className="radio"
+            name="useEmployeeNumber"
+            id="useEmployeeNumber_yes"
+            body="네, 사용합니다."
+            value={1}
+            inputRef={register}
+            required
+          />
+          <InputRadio
+            className="radio"
+            name="useEmployeeNumber"
+            id="useEmployeeNumber_no"
+            body="아니오, 사용하지 않습니다."
+            value={0}
+            inputRef={register}
+            required
+          />
+        </div>
+        <div className="input">
+          <h5>사원 번호 사용</h5>
+          <InputRadio
+            className="radio"
+            name="useTeamInfo"
+            id="useTeamInfo_yes"
+            body="네, 사용합니다."
+            value={1}
+            inputRef={register}
+            required
+          />
+          <InputRadio
+            className="radio"
+            name="useTeamInfo"
+            id="useTeamInfo_no"
+            body="아니오, 사용하지 않습니다."
+            value={0}
+            inputRef={register}
+            required
+          />
+        </div>
+        <div className="input" style={{ marginBottom: 10 }}>
+          <h5>부서 정보 등록</h5>
+          <Input
+            style={{ width: '100%' }}
+            name="add"
+            placeholder="부서 이름"
+            onChange={e => handleChange(e.target.value, e.target.name)}
+            onKeyDown={e => {
+              if (e.keyCode === 13 && e.target.value) {
+                e.preventDefault();
+                onAdd();
+              }
+            }}
+            value={data.add}
+            maxLength={10}
+          />
+          <Button type="button" onClick={onAdd}>
+            부서정보 입력
+          </Button>
+        </div>
+        <PartInfo>
+          {data.part.map((d, index) => (
+            <button
+              key={index}
+              type="button"
+              className="partinfo_card"
+              onClick={() => onDelete(index)}
+            >
+              {d} <div className="partinfo_del" />
+            </button>
+          ))}
+        </PartInfo>
+        <br />
+        <br />
+        <br />
+        <ButtonBottom typeRight="submit" right="가입 신청하기" />
+        <br />
+        <br />
+        <br />
+      </Container>
+    </Div>
+  );
+};
 
 export default Apply;

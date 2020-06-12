@@ -18,6 +18,7 @@ const StyledInput = styled.div`
     align-items: center;
     position: relative;
     cursor: pointer;
+    font-size: 0.9rem;
   }
 
   input + label:before {

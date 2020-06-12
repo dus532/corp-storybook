@@ -53,14 +53,18 @@ const App = () => {
     const USER = UserManager().getUser();
     if (USER && !userData.data) {
       dispatch(actionSetUser(USER));
-    } else if (!USER && location.pathname !== '/') {
+    } else if (
+      !USER &&
+      location.pathname !== '/' &&
+      location.pathname !== '/apply'
+    ) {
       dispatch(actionSignOut());
       history.push('/');
     } else if (
       USER &&
       !USER.isInitialized &&
-      location.pathname.indexOf('initial') === -1 &&
-      location.pathname.indexOf('mypage') === -1
+      location.pathname.includes('initial') &&
+      location.pathname.includes('mypage')
     ) {
       history.push('/initial/introduce');
     }
@@ -74,9 +78,11 @@ const App = () => {
       >
         <meta name="description" content="카플랫 서비스 관리툴입니다." />
       </Helmet>
-      <Sticky style={{ zIndex: 2 }}>
-        <Header isSigned={userData.data} location={location.pathname} />
-      </Sticky>
+      {userData.data && !location.pathname.includes('apply') && (
+        <Sticky style={{ zIndex: 2 }}>
+          <Header isSigned={userData.data} location={location.pathname} />
+        </Sticky>
+      )}
       <Switch>
         {/* 로그인 부분 */}
         <Route path="/" exact component={SignIn} />

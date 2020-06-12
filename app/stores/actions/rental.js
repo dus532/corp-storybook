@@ -2,7 +2,7 @@
 import createActions from 'stores/controller/createActions';
 import UserManager from 'utils/userManager';
 
-const { read, onlyRead } = createActions('manageRentals');
+const { read, onlyRead, onlyCreate } = createActions('manageRentals');
 
 export const actionGetManageRentals = (
   {
@@ -34,6 +34,13 @@ export const actionGetManageRentals = (
 export const actionGetRentalStatement = (rentalId, onSuccess) =>
   onlyRead({
     url: '/corp/manageRentals/statement',
+    params: { rentalId, corpId: UserManager().getUser().corpId },
+    meta: { onSuccess },
+  });
+
+export const actionPostSendStatement = (rentalId, onSuccess) =>
+  onlyCreate({
+    url: '/action/sendStatement',
     params: { rentalId, corpId: UserManager().getUser().corpId },
     meta: { onSuccess },
   });

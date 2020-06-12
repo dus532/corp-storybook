@@ -29,7 +29,7 @@ const RequestManager = (method, url, data, header) => {
     const now = moment().format('MM.DD a h:mm:ss');
     console.log(
       `${now} 📡 서버 통신 ( ${method.toUpperCase()} ) [ ${
-        process.env.NODE_ENV
+        process.env.RUN_TIME_ENV
       } ]${url}`,
       data,
     );
@@ -55,7 +55,7 @@ const RequestManager = (method, url, data, header) => {
       .then(res => {
         console.log(
           `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) [ ${
-            process.env.NODE_ENV
+            process.env.RUN_TIME_ENV
           } ]${url}`,
           res.data,
         );

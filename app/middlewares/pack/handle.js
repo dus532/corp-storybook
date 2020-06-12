@@ -20,7 +20,7 @@ function verifyHandlers(handlers, action) {
       deline`
       The handler for action ${
         action.type
-      } had a ${key} property defined, but this is not 
+      } had a ${key} property defined, but this is not
       a valid key for a redux-pack handler. Valid keys are: ${Object.keys(
         VALID_KEYS,
       )}
@@ -53,7 +53,7 @@ function safeMap(state, fn, action, name) {
         deline`
         The ${name} handler for action ${
           action.type
-        } is expected to be a function, 
+        } is expected to be a function,
         but found ${typeof fn} instead.
       `,
       );
@@ -62,7 +62,7 @@ function safeMap(state, fn, action, name) {
 }
 
 function handle(startingState, action, handlers) {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.RUN_TIME_ENV === 'dev') {
     verifyHandlers(handlers, action);
   }
   const { meta } = action;

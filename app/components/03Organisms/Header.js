@@ -512,6 +512,9 @@ const Header = ({ isSigned, location }) => {
     if (location === '/home') {
       return false;
     }
+    if (document.body.clientWidth > 900) {
+      return false;
+    }
     return true;
   };
 

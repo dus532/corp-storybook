@@ -52,8 +52,6 @@ const Sending = () => {
           isStopped={false}
           isPaused
         />
-        <br />
-        <div>열심히 달리고 있어요!</div>
       </StyledSending>
     );
   }

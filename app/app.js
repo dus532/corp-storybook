@@ -14,6 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
+import 'url-search-params-polyfill';
 
 // react-toastify
 import { ToastContainer } from 'react-toastify';

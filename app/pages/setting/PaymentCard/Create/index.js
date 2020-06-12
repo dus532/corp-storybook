@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams, useLocation } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form/dist/react-hook-form.ie11';
 
 import C from 'config/constants';
 

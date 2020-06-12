@@ -114,7 +114,8 @@
     "reselect": "4.0.0",
     "sanitize.css": "8.0.0",
     "styled-components": "^5.0.0",
-    "ua-parser-js": "^0.7.21"
+    "ua-parser-js": "^0.7.21",
+    "url-search-params-polyfill": "^8.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

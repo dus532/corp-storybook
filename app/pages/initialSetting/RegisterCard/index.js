@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form/dist/react-hook-form.ie11';
 import { useDispatch } from 'react-redux';
 
 import C from 'config/constants';

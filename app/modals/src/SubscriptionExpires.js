@@ -23,8 +23,8 @@ const Announcements = ({ onClickExit, data }) => {
       body={
         data.type === C.EXPIRES_TYPE.NEXT_MONTH ? (
           <>
-            구독을 익월해지하면 현재 이용중인 서비스가 정기 결제 만료일 다
-            음날부터 모두 해지됩니다.
+            구독을 익월해지하면 현재 이용중인 서비스가 정기 결제 만료일
+            다음날부터 모두 해지됩니다.
             <br />
             <br />
             구독을 해지하시겠습니까?

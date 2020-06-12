@@ -99,7 +99,7 @@ const MyPanel = ({ store, expired, className, isSetting }) => {
         <Part>
           이용중인 상품
           <h2>
-            {expired && '(해지) '}
+            {expired ? '(해지) ' : ''}
             {data.product}
           </h2>
           {!isSetting && (

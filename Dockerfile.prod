@@ -10,7 +10,7 @@ COPY ./.env.prod ./.env
 RUN rm -rf .git
 
 RUN yarn install
-RUN yarn build:preprod
+RUN yarn build:prod
 
 FROM mesosphere/aws-cli:latest
 WORKDIR /project

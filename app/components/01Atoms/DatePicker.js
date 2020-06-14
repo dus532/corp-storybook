@@ -25,7 +25,7 @@ const StyledCustomPicker = styled.button`
 `;
 
 const CustomPicker = forwardRef(({ value, onClick }, ref) => (
-  <StyledCustomPicker onClick={onClick} ref={ref}>
+  <StyledCustomPicker type="button" onClick={onClick} ref={ref}>
     {value}
   </StyledCustomPicker>
 ));
@@ -36,7 +36,7 @@ CustomPicker.propTypes = {
 };
 
 const StyledDatePicer = styled.div`
-  width: 252px;
+  width: ${({ width }) => width || 252}px;
   display: inline-block;
   height: 40px;
 
@@ -45,8 +45,8 @@ const StyledDatePicer = styled.div`
   }
 `;
 
-const DatePick = ({ name, className, value, onChange }) => (
-  <StyledDatePicer className={className}>
+const DatePick = ({ name, className, value, onChange, width }) => (
+  <StyledDatePicer width={width} className={className}>
     <DatePicker
       dateFormat="yyyy-MM-dd"
       name={name}
@@ -61,6 +61,7 @@ const DatePick = ({ name, className, value, onChange }) => (
 
 DatePick.propTypes = {
   name: PropTypes.string,
+  width: PropTypes.number,
   className: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.any,

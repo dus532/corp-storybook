@@ -1,14 +1,13 @@
 /* eslint-disable indent */
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Container, BigTitle, AsyncDiv, CardPanel, InfoBox } from 'components';
-import { actionGetCards } from 'stores';
-import AddIMG from 'images/icon_add.png';
-import { useModal } from 'utils/hooks';
+import { useModal, useFetchData } from 'utils/hooks';
 import { EDIT_CARD } from 'modals/constants';
+
+import AddIMG from 'images/icon_add.png';
 
 const AddCard = styled.div`
   width: 100%;
@@ -29,23 +28,13 @@ const AddCard = styled.div`
 `;
 
 const Manage = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   const modal = useModal();
+  const [cardStore, cardOriData] = useFetchData('card');
 
-  const cardStore = useSelector(state => state.card);
-  const cardData = useSelector(state =>
-    state.card.data
-      ? [
-          { main: true, ...state.card.data.mainCard },
-          ...state.card.data.groupCards,
-        ]
-      : [],
-  );
-
-  useEffect(() => {
-    dispatch(actionGetCards());
-  }, []);
+  const cardData = cardOriData
+    ? [{ main: true, ...cardOriData.mainCard }, ...cardOriData.groupCards]
+    : [];
 
   return (
     <Container>

@@ -8,6 +8,7 @@ export const actionGetManagePayments = (
   onSuccess,
 ) =>
   read({
+    url: '/corp/managePayments',
     params: {
       page,
       status,

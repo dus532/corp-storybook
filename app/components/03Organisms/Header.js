@@ -329,7 +329,7 @@ const Header = ({ isSigned, location }) => {
   const [setting, setSetting] = useState(false);
 
   document.addEventListener('scroll', () => {
-    if (document.body.clientWidth < 768) {
+    if (document.body.clientWidth < 900) {
       if (window.scrollY > 0) {
         HeaderRef.current.style.boxShadow = '0 3px 10px rgba(0,0,0,0.1)';
       } else {
@@ -512,6 +512,9 @@ const Header = ({ isSigned, location }) => {
     if (location === '/home') {
       return false;
     }
+    if (document.body.clientWidth > 900) {
+      return false;
+    }
     return true;
   };
 
@@ -528,13 +531,6 @@ const Header = ({ isSigned, location }) => {
               )}
               <div className="header_right">
                 <h5 className="header_name">{isSigned.corpName} 관리자 님</h5>
-                {/* <SmallButton
-                  onClick={() => {
-                    history.push('/initial/introduce');
-                  }}
-                >
-                  초기설정
-                </SmallButton> */}
                 <SmallButton
                   onClick={() => {
                     history.push('/mypage');

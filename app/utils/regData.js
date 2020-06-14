@@ -18,7 +18,10 @@ const Edit = styled.button`
   }
 `;
 
-const Reg = (type, value) => type.filter(t => t.value === value)[0].body;
+const Reg = (type, value) =>
+  type.filter(t => t.value === value).length > 0
+    ? type.filter(t => t.value === value)[0].body
+    : value;
 
 const RegData = (name, value, onClick, t) => {
   if (!value[name] && !name.includes('edit')) {
@@ -68,7 +71,7 @@ const NormalizeData = (name, value) => {
     return `${String(value).slice(0, 2)}:${String(value).slice(2, 4)}`;
   }
   if (name.includes('cardNumber')) {
-    return `${value.slice(0, 4)}-${value.slice(4, 8)}-XXXX-XXXX`;
+    return `XXXX-XXXX-XXXX-${value.slice(0, 4)}`;
   }
   if (name.includes('cardCorp')) {
     return `${value.split('[')[1].split(']')[0]}`;

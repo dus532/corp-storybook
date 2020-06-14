@@ -6,6 +6,7 @@ FROM node:12.16.1 as node_image
 WORKDIR /project
 
 COPY . ./
+COPY ./.env.prod ./.env
 RUN rm -rf .git
 
 RUN yarn install
@@ -16,8 +17,9 @@ WORKDIR /project
 # update ENTROYPINT ["aws"] of mesosphere/aws-cli
 ENTRYPOINT [""]
 
+COPY --from=node_image /project/.env .env
 COPY --from=node_image /project/build build
 COPY --from=node_image /project/internals/deploy internals/deploy
 
-CMD ["sh", "internals/deploy/deploy-preprod.sh"]
+CMD ["sh", "internals/deploy/deploy-prod.sh"]
 

@@ -45,8 +45,6 @@ const Payment = () => {
     check2: false,
   });
 
-  console.log(cardData);
-
   // 리덕스 스토어에 데이터가 없으면 전 화면으로 돌아갑니다.
   if (!cardData) {
     history.push('/initial/registercard');

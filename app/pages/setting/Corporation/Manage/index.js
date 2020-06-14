@@ -1,24 +1,15 @@
 /* eslint-disable indent */
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 
 import { Container, BigTitle, AsyncDiv, BillPaper } from 'components';
-import { actionGetCorpInfo } from 'stores';
-
-import { useModal } from 'utils/hooks';
+import { useModal, useFetchData } from 'utils/hooks';
 import { CHECK_PW } from 'modals/constants';
 
 const Manage = () => {
-  const dispatch = useDispatch();
   const modal = useModal();
+  const [corpInfoStore, storeData] = useFetchData('info');
 
-  const corpInfoStore = useSelector(state => state.info);
-  const corpInfo = useSelector(state => state.info.data.corpInfo);
-  const userGroups = useSelector(state => state.info.data.userGroups);
-
-  useEffect(() => {
-    dispatch(actionGetCorpInfo());
-  }, []);
+  const { corpInfo, userGroups } = storeData;
 
   return (
     <Container>

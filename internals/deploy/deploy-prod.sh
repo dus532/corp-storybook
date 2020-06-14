@@ -1,8 +1,8 @@
 echo $(hostname) | grep 1$ > /dev/null
 if [ $? -eq 0 ]; then
-	# biz-corp-admin
-	S3_BUCKET="s3://biz-corp-admin.dev.platdev.net"
-	CDN_ID="E1SAL9QNUQW32T"
+	#biz-corp-admin
+	S3_BUCKET="s3://biz-corp-admin.carplat.co.kr"
+	CDN_ID="E139X2VYLOY8A2"
 	BUILD_DIR="build"
 
 	# Clear the S3 bucket
@@ -12,9 +12,9 @@ if [ $? -eq 0 ]; then
 	# Clear the cache
 	aws cloudfront create-invalidation --distribution-id $CDN_ID --paths /index.html /favicon.ico
 
-	# corp
-	S3_BUCKET="s3://corp.dev.platdev.net"
-	CDN_ID="EH4GXQPTR2CTE"
+	#corp
+	S3_BUCKET="s3://corp.carplat.co.kr"
+	CDN_ID="E3DBQJEFVRL7N3"
 	BUILD_DIR="build"
 
 	# Clear the S3 bucket

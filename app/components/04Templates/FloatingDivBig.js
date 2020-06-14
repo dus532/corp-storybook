@@ -3,9 +3,15 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useReactToPrint } from 'react-to-print';
+import { useDispatch } from 'react-redux';
 
 import IconClose from 'components/01Atoms/IconClose';
+import SubButton from 'components/01Atoms/SubButton';
 import Color from 'config/color';
+import ICON_MAIL from 'images/icon_mail.png';
+import ICON_PRINTER from 'images/icon_printer.png';
+import { actionPostSendStatement } from 'stores';
+import { useToast } from 'utils/hooks';
 
 const Div = styled.div`
   top: 0px;
@@ -37,6 +43,7 @@ const Div = styled.div`
 
   h3 {
     font-weight: 700;
+    margin-bottom: 4px;
   }
 
   .floating_print {
@@ -45,12 +52,30 @@ const Div = styled.div`
     min-height: 40vh;
     max-height: 70vh;
     height: 100%;
+    overflow: auto;
   }
 
   .print {
-    background: white;
+    display: flex;
+    justify-content: center;
     margin: 0 auto;
     transform: scale(0.8);
+  }
+
+  .icon_print {
+    width: 24px;
+    display: inline-block;
+    height: 24px;
+    margin-right: 8px;
+    background: url(${ICON_PRINTER}) center / cover no-repeat;
+  }
+
+  .icon_mail {
+    width: 24px;
+    display: inline-block;
+    height: 24px;
+    margin-right: 8px;
+    background: url(${ICON_MAIL}) center / cover no-repeat;
   }
 
   .floating_body {
@@ -91,8 +116,12 @@ const Div = styled.div`
   }
 
   @media screen and (max-width: 900px) {
+    .print {
+      transform: scale(0.6);
+    }
     .floating_container {
       margin: 0;
+      width: 100%;
       height: 100%;
       top: 60px;
       display: flex;
@@ -142,6 +171,7 @@ PrintPage.propTypes = {
 const FloatingDivBig = ({
   title,
   subtitle,
+  rentalID,
   body,
   print,
   html,
@@ -150,6 +180,8 @@ const FloatingDivBig = ({
   onClickExit,
 }) => {
   const makeHTML = () => ({ __html: html });
+  const dispatch = useDispatch();
+  const toast = useToast();
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -178,11 +210,17 @@ const FloatingDivBig = ({
       <Div>
         <div className="floating_container">
           <div className="floating_header">
-            <div>
+            <div className="floating_header_flex">
               <h3>{title}</h3>
               {subtitle}
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+              }}
+            >
               <button
                 style={{ display: 'flex' }}
                 type="button"
@@ -190,14 +228,55 @@ const FloatingDivBig = ({
               >
                 <IconClose />
               </button>
-              <div>{leftButton}</div>
+              <div>
+                {print && (
+                  <>
+                    <SubButton
+                      style={{ width: 172, marginTop: 4, marginRight: 8 }}
+                      onClick={handlePrint}
+                      size="small"
+                      white
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <div className="icon_print" /> 출력하기
+                      </div>
+                    </SubButton>
+                    <SubButton
+                      style={{ width: 172, marginTop: 4 }}
+                      onClick={() =>
+                        dispatch(
+                          actionPostSendStatement(rentalID, () => {
+                            toast('이메일이 발송되었습니다', 'ok');
+                          }),
+                        )
+                      }
+                      size="small"
+                      white
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <div className="icon_mail" /> 이메일 보내기
+                      </div>
+                    </SubButton>
+                  </>
+                )}
+                {leftButton}
+              </div>
             </div>
           </div>
           {print && (
             <div className="floating_print">
-              <button onClick={handlePrint} type="button">
-                프린트
-              </button>
               <div className="print">
                 <PrintPage pageRef={componentRef} data={print} />
               </div>
@@ -220,6 +299,7 @@ const FloatingDivBig = ({
 FloatingDivBig.propTypes = {
   html: PropTypes.any,
   title: PropTypes.string,
+  rentalID: PropTypes.string,
   subtitle: PropTypes.string,
   body: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   print: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

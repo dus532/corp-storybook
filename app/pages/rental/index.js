@@ -16,9 +16,9 @@ const list = { userGroups: [], employees: [] };
 
 const Rental = () => {
   const dispatch = useDispatch();
-  const rentalData = useSelector(state => state.manageRentals);
-
   const history = useHistory();
+
+  const rentalData = useSelector(state => state.manageRentals);
 
   const [filter, setFilter] = useState({
     startDate: moment()

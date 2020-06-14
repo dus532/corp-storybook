@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /**
  * app.js
  *
@@ -14,6 +15,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import FontFaceObserver from 'fontfaceobserver';
+import 'url-search-params-polyfill';
 
 // react-toastify
 import { ToastContainer } from 'react-toastify';
@@ -105,6 +107,9 @@ if (!window.Intl) {
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,
 // we do not want it installed
-if (process.env.NODE_ENV === 'production') {
+if (
+  process.env.RUN_TIME_ENV === 'prod' ||
+  process.env.RUN_TIME_ENV === 'staging'
+) {
   require('offline-plugin/runtime').install(); // eslint-disable-line global-require
 }

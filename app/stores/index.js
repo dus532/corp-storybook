@@ -36,6 +36,7 @@ export {
 export {
   actionGetManageRentals,
   actionGetRentalStatement,
+  actionPostSendStatement,
 } from 'stores/actions/rental';
 
 export {

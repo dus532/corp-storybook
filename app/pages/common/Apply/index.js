@@ -242,7 +242,7 @@ const Apply = () => {
         <hr />
         <h3>구독 상품 선택</h3>
         <div className="input">
-          <h5>사원 번호 사용</h5>
+          <h5>구독 상품</h5>
           <InputRadio
             className="radio"
             name="productName"
@@ -410,7 +410,7 @@ const Apply = () => {
           />
         </div>
         <div className="input">
-          <h5>사원 번호 사용</h5>
+          <h5>부서 정보 사용</h5>
           <InputRadio
             className="radio"
             name="usingDepartment"
@@ -447,7 +447,7 @@ const Apply = () => {
             maxLength={10}
           />
           <Button type="button" onClick={onAdd}>
-            부서정보 입력
+            부서 정보 입력
           </Button>
         </div>
         <PartInfo>

@@ -7,6 +7,6 @@ const Styled = styled.div`
   text-align: center;
 `;
 
-const Footer = () => <Styled>ver 0.2.23</Styled>;
+const Footer = () => <Styled>ver 0.2.24</Styled>;
 
 export default Footer;

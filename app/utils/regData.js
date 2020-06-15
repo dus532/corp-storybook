@@ -24,7 +24,7 @@ const Reg = (type, value) =>
     : value;
 
 const RegData = (name, value, onClick, t) => {
-  if (!value[name] && !name.includes('edit')) {
+  if (!value[name] && value[name] !== 0 && !name.includes('edit')) {
     return '';
   }
   if (name.includes('amount')) {
@@ -49,7 +49,7 @@ const RegData = (name, value, onClick, t) => {
     return Reg(F.PaymentsType, value[name]);
   }
   if (name.includes('license')) {
-    return Reg(F.Boolean, value[name]);
+    return Reg(F.licenseType, value[name]);
   }
   if (name.includes('cardNumber')) {
     return `${value.cardCorp.split('[')[1].split(']')[0]}(${value[name].slice(

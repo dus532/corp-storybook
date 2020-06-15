@@ -140,6 +140,10 @@ const Subscription = () => {
                       type="big"
                       left="구독 상품 재신청"
                       onClickLeft={() => {
+                        window.sessionStorage.setItem(
+                          'subscriptionType',
+                          'reSubscription',
+                        );
                         modal(CHECK_PW, '/setting/subscription/update');
                       }}
                     />

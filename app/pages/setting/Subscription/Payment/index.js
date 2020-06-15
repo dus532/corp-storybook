@@ -104,8 +104,17 @@ const Payment = () => {
       ? dispatch(
           actionPutSubscription(update, () => {
             history.push('/setting/subscription');
-            if (isUpgrade) {
-              toast('구독 상품 변경을 요청한 상태입니다. ', 'Ok');
+            if (
+              window.sessionStorage.getItem('subscriptionType') ===
+              'reSubscription'
+            ) {
+              toast('구독 상품 재신청을 요청한 상태입니다. ', 'ok');
+              toast(
+                '기업 구독 상품이 재신청될 경우 고객님들이 이용할 수 있는 차량 대수가 충분한지 확인한 후 기업관리자분에게 연락을 드릴 예정입니다.',
+                'ok',
+              );
+            } else if (isUpgrade) {
+              toast('구독 상품 변경을 요청한 상태입니다. ', 'ok');
               toast(
                 '기업 구독상품 혹은 동시 구독자 인원이 업그레이드 될 경우 고객님들이 이용할 수 있는 차량 대수가 충분한지 확인한 후 기업 관리자분에게 연락을 드릴 예정입니다.',
                 'ok',

@@ -49,6 +49,7 @@ const C = {
     RENTAL_FEE: 1,
     EXTRA_FEE: 2,
     FEE: 3,
+    DRIVING_FEE: 4,
     PANALTY: 5,
     CANCELLATION_FEE: 6,
     HI_PASS: 7,
@@ -89,6 +90,11 @@ const C = {
     CANCEL: 3,
     DELAY: 4,
     FINISH: 5,
+  },
+
+  BUSINESS_PERSONAL_TYPE: {
+    BUSINESS: 1,
+    PERSONAL: 2,
   },
 };
 

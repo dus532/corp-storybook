@@ -37,6 +37,7 @@ const F = {
     { value: C.PAYMENT_ITEM.RENTAL_FEE, body: '정기구독' },
     { value: C.PAYMENT_ITEM.EXTRA_FEE, body: '추가구독' },
     { value: C.PAYMENT_ITEM.FEE, body: '이용료' },
+    { value: C.PAYMENT_ITEM.DRIVING_FEE, body: '주행료' },
     { value: C.PAYMENT_ITEM.PANALTY, body: '패널티' },
     { value: C.PAYMENT_ITEM.CANCELLATION_FEE, body: '취소 수수료' },
     { value: C.PAYMENT_ITEM.HI_PASS, body: '하이패스' },
@@ -59,6 +60,13 @@ const F = {
     { value: C.ITEM_TYPE.STANDARD.value, body: '스탠다드' },
     { value: C.ITEM_TYPE.BASIC.value, body: '베이직' },
   ],
+
+  businessPersonalType: [
+    { value: C.BUSINESS_PERSONAL_TYPE.BUSINESS, body: '업무용' },
+    { value: C.BUSINESS_PERSONAL_TYPE.PERSONAL, body: '개인용' },
+  ],
+
+  isLicense: [{ value: 1, body: '등록 완료' }, { value: 0, body: '미인증' }],
 
   // 존재유무
   Boolean: [{ value: 0, body: '-' }, { value: 1, body: '있음' }],

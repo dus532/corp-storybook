@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import moment from 'utils/moment';
 import UserManager from 'utils/userManager';
+import Logger from 'utils/logger';
 import configs from 'config';
 
 const RequestManager = (method, url, data, header) => {
@@ -27,7 +28,7 @@ const RequestManager = (method, url, data, header) => {
     // DEV. 모든 데이터 통신을 콘솔화 합니다.
     // 이는 추후 서버쪽 로그 기록으로도 활용될 수 있습니다.
     const now = moment().format('MM.DD a h:mm:ss');
-    console.log(
+    Logger(
       `${now} 📡 서버 통신 ( ${method.toUpperCase()} ) [ ${
         process.env.RUN_TIME_ENV
       } ]${url}`,
@@ -53,7 +54,7 @@ const RequestManager = (method, url, data, header) => {
       },
     })
       .then(res => {
-        console.log(
+        Logger(
           `${now} ✅ 서버 통신 ( ${method.toUpperCase()} ) [ ${
             process.env.RUN_TIME_ENV
           } ]${url}`,
@@ -65,14 +66,14 @@ const RequestManager = (method, url, data, header) => {
         if (err.response) {
           switch (err.response.status) {
             case 400:
-              console.log(
+              Logger(
                 `${now} ⛔️ 잘못된 요청 ( Bad Request, 400 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
               break;
             case 401:
-              console.log(
+              Logger(
                 `${now} ⛔️ 인증 실패 ( Unauthorized, 401 ) ${url} - ${
                   err.response.data.message
                 }`,
@@ -97,14 +98,14 @@ const RequestManager = (method, url, data, header) => {
               }
               break;
             case 403:
-              console.log(
+              Logger(
                 `${now} ⛔️ 권한 없음 ( Forbidden, 403 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
               break;
             case 404:
-              console.log(
+              Logger(
                 `${now} ⛔️ 데이터 없음 ( Not Found, 404 ) ${url} - ${
                   err.response.data.message
                 }`,
@@ -112,21 +113,21 @@ const RequestManager = (method, url, data, header) => {
               // toast.error("데이터가 없습니다. ( No Data, 404 )");
               break;
             case 406:
-              console.log(
+              Logger(
                 `${now} ⛔️ 서버에서 원하는 규격이 아님 ( Not Acceptable, 406 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
               break;
             case 409:
-              console.log(
+              Logger(
                 `${now} ⛔️ 요청 충돌 ( Confilct, 409 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
               break;
             case 419:
-              console.log(
+              Logger(
                 `${now} ⛔️ 토큰 만료 ( Token Expired, 419 ) ${url} - ${
                   err.response.data.message
                 }`,
@@ -134,14 +135,14 @@ const RequestManager = (method, url, data, header) => {
               //   RefreshToken().then(res => Network(resolve, reject));
               break;
             case 500:
-              console.log(
+              Logger(
                 `${now} ⛔️ 서버 에러 ( Server Error, 500 ) ${url} - ${
                   err.response.data.message
                 }`,
               );
               break;
             default:
-              console.log(err.response);
+              Logger(err.response);
               break;
           }
         }

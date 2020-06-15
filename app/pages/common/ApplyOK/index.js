@@ -6,7 +6,7 @@ import Sticky from 'react-sticky-fill';
 import { Container, ButtonBottom } from 'components';
 import LogoHeader from 'components/01Atoms/LogoHeader';
 import Color from 'config/color';
-import ICON_OK from 'images/icon_ok.png';
+import ICON_OK from 'images/icon_confirm_navy.png';
 
 const StyledHeader = styled.div`
   width: 100%;
@@ -18,26 +18,29 @@ const StyledHeader = styled.div`
 `;
 
 const Div = styled.form`
-  min-height: 700px;
   background: white;
-
-  @media screen and (max-width: 900px) {
-  }
 `;
 
 const Wrap = styled.div`
   width: 600px;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin: 0 auto;
 
   h2 {
     font-size: 2.4rem;
     font-weight: 100;
+    line-height: 3.2rem;
   }
 
   h2 > span {
     font-weight: 400;
   }
   .ok {
+    display: inline-block;
     width: 60px;
     height: 60px;
     background: url(${ICON_OK}) center / cover no-repeat;
@@ -63,11 +66,9 @@ const Apply = () => (
     <br />
     <Container width="864" style={{ background: 'white' }}>
       <Wrap>
-        <br />
-        <br />
-        <br />
         <div>
           <div className="ok" />
+          <br />
           <br />
           <h2>
             신청이
@@ -80,7 +81,6 @@ const Apply = () => (
             <br />
             24시간 내에 카플랫 고객센터에서 연락드리겠습니다.
           </h4>
-          <br />
           <br />
           <br />
           <ButtonBottom

@@ -106,15 +106,33 @@ const ExcelDownload = styled.button`
 
 const Summary = ({ data, type, filter }) => {
   const headerData = [
-    { label: 'ID', key: 'id' },
-    { label: '결제 시각', key: 'date' },
+    { label: '거점 이름', key: 'positionName' },
+    { label: '회원 그룹 이름', key: 'corpName' },
+    { label: '구독 상품', key: 'subscriptionProductName' },
+    { label: '회원 이름', key: 'userName' },
+    { label: '전화번호', key: 'phoneNumber' },
+    { label: '부서 이름', key: 'userGroupName' },
+    { label: '사원 번호', key: 'employeeNumber' },
+    { label: '연관 예약번호', key: 'rentalId' },
+    { label: '업무용 / 개인용', key: 'businessPersonal' },
+    { label: '예약 시간', key: 'rentalStartDate' },
+    { label: '실제 이용 시간', key: 'usageStartDate' },
+    { label: '실제 이용 시간(분)', key: 'usagePeriod' },
+    { label: '차량 번호', key: 'carNumber' },
+    { label: '대여 차량', key: 'carName' },
+    { label: '대여 사유', key: 'purpose' },
+    { label: '인보이스 번호', key: 'chargeId' },
+    { label: '청구일시', key: 'chargeRequestDate' },
+    { label: '청구내역', key: 'item' },
+    { label: '인보이스 상태', key: 'status' },
+    { label: 'ID', key: 'chargeId' },
+    { label: '결제 시각', key: 'chargeDate' },
     { label: '결제 회사', key: 'cardCorp' },
     { label: '결제 카드', key: 'cardNumber' },
-    { label: '금액', key: 'amount' },
-    { label: '항목', key: 'item' },
+    { label: '결제 금액', key: 'amount' },
+    { label: '결제 항목', key: 'item' },
     { label: '구분', key: 'type' },
-    { label: '상태', key: 'status' },
-    { label: '연관 예약번호', key: 'rentalId' },
+    { label: '상태', key: 'chargeStatus' },
   ];
 
   switch (type) {
@@ -184,6 +202,13 @@ const Summary = ({ data, type, filter }) => {
                     status: RegData('status', d),
                     type: RegData('type', d),
                     date: RegData('date', d),
+                    businessPersonal: RegData('businessPersonal', d),
+                    purpose: RegData('purpose', d),
+                    chargeStatus: RegData('status', d),
+                    rentalStartDate: RegData('rentalStartDate', d),
+                    usageStartDate: RegData('usageStartDate', d),
+                    chargeRequestDate: RegData('chargeRequestDate', d),
+                    chargeDate: RegData('chargeDate', d),
                     amount:
                       d.amount && `${(d.amount * 1).toLocaleString('en')} 원`,
                   }))}

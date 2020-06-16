@@ -55,19 +55,19 @@ const App = () => {
     if (USER && !userData.data) {
       dispatch(actionSetUser(USER));
     } else if (
+      USER &&
+      !USER.isInitialized &&
+      !location.pathname.includes('initial') &&
+      !location.pathname.includes('mypage')
+    ) {
+      history.push('/initial/introduce');
+    } else if (
       !USER &&
       location.pathname !== '/' &&
       !location.pathname.includes('apply')
     ) {
       dispatch(actionSignOut());
       history.push('/');
-    } else if (
-      USER &&
-      !USER.isInitialized &&
-      location.pathname.includes('initial') &&
-      location.pathname.includes('mypage')
-    ) {
-      history.push('/initial/introduce');
     }
   }, [location]);
 

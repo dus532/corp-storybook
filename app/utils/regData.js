@@ -33,6 +33,20 @@ const RegData = (name, value, onClick, t) => {
   if (name.includes('joinDate')) {
     return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;
   }
+  if (name.includes('rentalStartDate')) {
+    return `${moment
+      .unix(value[name])
+      .format('MM/DD (ddd) HH:mm')} ~ ${moment
+      .unix(value.rentalEndDate)
+      .format('MM/DD (ddd) HH:mm')}`;
+  }
+  if (name.includes('usageStartDate')) {
+    return `${moment
+      .unix(value[name])
+      .format('MM/DD (ddd) HH:mm')} ~ ${moment
+      .unix(value.usageEndDate)
+      .format('MM/DD (ddd) HH:mm')}`;
+  }
   if (name.includes('date') || name.includes('Date')) {
     return `${moment.unix(value[name]).format('YYYY. MM. DD HH:mm:ss')}`;
   }
@@ -48,8 +62,14 @@ const RegData = (name, value, onClick, t) => {
   if (name.includes('type')) {
     return Reg(F.PaymentsType, value[name]);
   }
+  if (name.includes('purpose')) {
+    return Reg(F.rentalPuropose, value[name]);
+  }
   if (name.includes('license')) {
     return Reg(F.licenseType, value[name]);
+  }
+  if (name.includes('businessPersonal')) {
+    return Reg(F.businessPersonalType, value[name]);
   }
   if (name.includes('cardNumber')) {
     return `${value.cardCorp.split('[')[1].split(']')[0]}(${value[name].slice(

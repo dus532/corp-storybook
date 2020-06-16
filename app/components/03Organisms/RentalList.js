@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import TEMPIMG from 'images/no_car.png';
+// import TEMPIMG from 'images/no_car.png';
 import SubButton from 'components/01Atoms/SubButton';
 import IconOK from 'components/01Atoms/IconOK';
 import NoData from 'components/03Organisms/NoData';
@@ -40,7 +40,8 @@ const StyledPanel = styled.div`
   .header_car {
     width: 200px;
     height: 100%;
-    background: url(${TEMPIMG}) center / cover no-repeat;
+    background: url(${props => (props.imgurl ? props.imgurl : 'white')}) center /
+      cover no-repeat;
   }
 
   .iconOK {
@@ -89,9 +90,10 @@ const StyledPanel = styled.div`
     }
 
     .header_car {
-      width: 120px;
-      height: 90px;
-      background: url(${TEMPIMG}) center / cover no-repeat;
+      width: 190px;
+      height: 100px;
+      background: url(${props => (props.imgurl ? props.imgurl : 'white')})
+        center / contain no-repeat;
     }
 
     .body_elements {
@@ -134,6 +136,7 @@ const RentalPanel = ({ data }) => {
     <StyledPanel
       className="box_overflow"
       mainColor={toStringStatus(data.status).color}
+      imgurl={data.carImageUrl}
     >
       <div className="header">
         <div className="header_status">

@@ -188,7 +188,7 @@ const Apply = () => {
 
     axios
       .post(
-        'https://biz-mobile-api.dev.platdev.net/action/public/subscription',
+        `https://biz-mobile-api.prod.platdev.net/action/public/subscription`,
         body,
       )
       .then(() => history.push('/apply/ok'))

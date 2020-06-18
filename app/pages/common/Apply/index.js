@@ -188,7 +188,9 @@ const Apply = () => {
 
     axios
       .post(
-        `https://biz-mobile-api.prod.platdev.net/action/public/subscription`,
+        `https://biz-mobile-api.${
+          process.env.RUN_TIME_ENV
+        }.platdev.net/action/public/subscription`,
         body,
       )
       .then(() => history.push('/apply/ok'))

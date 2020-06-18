@@ -20,6 +20,7 @@ import Color from 'config/color';
 import moment from 'utils/moment';
 import ICON_DEL from 'images/icon_delete.png';
 import LogoHeader from 'components/01Atoms/LogoHeader';
+import configs from 'config';
 
 const StyledHeader = styled.div`
   width: 100%;
@@ -187,12 +188,7 @@ const Apply = () => {
     };
 
     axios
-      .post(
-        `https://biz-mobile-api.${
-          process.env.RUN_TIME_ENV
-        }.platdev.net/action/public/subscription`,
-        body,
-      )
+      .post(`${configs.mobileServerURL}/action/public/subscription`, body)
       .then(() => history.push('/apply/ok'))
       .catch(() =>
         toast(

@@ -40,6 +40,11 @@ const utilsMiddleware = store => next => action => {
             onToast(`등록되지 않은 아이디거나, 잘못된 비밀번호입니다.`),
           );
           break;
+        case 'Not Admin Account':
+          store.dispatch(
+            onToast(`등록되지 않은 아이디거나, 잘못된 비밀번호입니다.`),
+          );
+          break;
         case 'Card Already Registered':
           store.dispatch(
             onModal(ERROR, {

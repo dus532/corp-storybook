@@ -119,6 +119,7 @@ module.exports = options => ({
       'process.env': {
         RUN_TIME_ENV: JSON.stringify(process.env.RUN_TIME_ENV),
         API_SERVER: JSON.stringify(process.env.API_SERVER),
+        MOBILE_API_SERVER: JSON.stringify(process.env.MOBILE_API_SERVER),
       },
     }),
   ]),

@@ -12,13 +12,13 @@ import {
   Pagination,
   NoData,
 } from 'components';
-import { actionGetManagePayments, actionGetCardList } from 'stores';
+import { actionGetManagePayments } from 'stores';
 
 import UserManager from 'utils/userManager';
-import { useQuery } from 'utils/hooks';
+import { useQuery, useCardList } from 'utils/hooks';
 
 const Payment = () => {
-  const list = { cards: [] };
+  const list = { cards: useCardList() };
   const initialState = {
     startDate: moment()
       .startOf('year')
@@ -77,14 +77,6 @@ const Payment = () => {
     filter.item,
     filter.corpId,
   ]);
-
-  useEffect(() => {
-    dispatch(
-      actionGetCardList(res => {
-        list.cards = res.data.payload.cards;
-      }),
-    );
-  }, []);
 
   return (
     <Container>

@@ -13,7 +13,6 @@ import {
 
 import Color from 'config/color';
 import NoData from 'components/03Organisms/NoData';
-
 const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
@@ -69,7 +68,7 @@ const renderCustomizedLabel = props => {
         dominantBaseline="middle"
         fontSize="14"
       >
-        {Number(value).toLocaleString('en')}원
+        {Number(value).toLocaleString('en')} 원
       </text>
     </g>
   );
@@ -77,6 +76,7 @@ const renderCustomizedLabel = props => {
 
 const RecentPaymentPanel = ({ store, className }) => {
   const data = store.data.monthlyPayments;
+
   const viewport = document.body.clientWidth > 768 ? 'pc' : 'mobile';
 
   const CustomTooltip = ({ active, payload, label }) => {
@@ -165,6 +165,7 @@ const RecentPaymentPanel = ({ store, className }) => {
                 dataKey="amount"
                 fill={Color.DarkBlue}
                 barSize={viewport === 'pc' ? 60 : 10}
+                isAnimationActive={false}
               >
                 {viewport === 'pc' && (
                   <LabelList dataKey="amount" content={renderCustomizedLabel} />

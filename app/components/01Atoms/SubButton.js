@@ -9,7 +9,6 @@ const SubButton = styled(Button)`
   color: ${props => (props.blue ? Color.Blue : Color.Black)};
   width: 100%;
   font-size: 0.8rem;
-  line-height: 40px;
   vertical-align: middle;
 
   &:hover {

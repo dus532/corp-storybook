@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import moment from 'utils/moment';
 import {
@@ -13,12 +13,10 @@ import {
   NoData,
 } from 'components';
 import { actionGetManageEmployees, actionGetUserGroupsList } from 'stores';
-import { useModal } from 'utils/hooks';
+import { useModal, useQuery } from 'utils/hooks';
 import { EDIT_EMPLOYEE } from 'modals/constants';
 
 import UserManager from 'utils/userManager';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
 
 const list = { userGroups: [] };
 

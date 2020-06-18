@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory, useParams, useLocation } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form/dist/react-hook-form.ie11';
 
 import C from 'config/constants';
@@ -29,9 +29,7 @@ import {
   actionPutCard,
 } from 'stores';
 import UserManager from 'utils/userManager';
-import { useToast } from 'utils/hooks';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
+import { useToast, useQuery } from 'utils/hooks';
 
 const Create = () => {
   const dispatch = useDispatch();

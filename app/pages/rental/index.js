@@ -4,13 +4,10 @@ import { useHistory } from 'react-router-dom';
 
 import moment from 'utils/moment';
 import { Container, Filter, AsyncDiv, Summary, RentalList } from 'components';
-import {
-  actionGetManageRentals,
-  actionGetEmployeesList,
-  actionGetUserGroupsList,
-} from 'stores';
+import { actionGetManageRentals } from 'stores';
 
 import UserManager from 'utils/userManager';
+import { useEmployeesList, useGroupList } from 'utils/hooks';
 
 const list = { userGroups: [], employees: [] };
 
@@ -82,18 +79,8 @@ const Rental = () => {
     filter.corpId,
   ]);
 
-  useEffect(() => {
-    dispatch(
-      actionGetEmployeesList(res => {
-        list.employees = res.data.payload.employees;
-      }),
-    );
-    dispatch(
-      actionGetUserGroupsList(res => {
-        list.userGroups = res.data.payload.userGroups;
-      }),
-    );
-  }, []);
+  list.employees = useEmployeesList();
+  list.userGroups = useGroupList();
 
   return (
     <Container>

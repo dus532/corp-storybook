@@ -52,6 +52,7 @@ export {
   default as TeamPaymentPanel,
 } from 'components/03Organisms/TeamPaymentPanel';
 export { default as Filter } from 'components/03Organisms/Filter';
+export { default as FilterList } from 'components/03Organisms/FilterList';
 export { default as Table } from 'components/03Organisms/Table';
 export { default as Summary } from 'components/03Organisms/Summary';
 export { default as Pagination } from 'components/03Organisms/Pagination';

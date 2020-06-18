@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { useHistory, useParams, useLocation } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import C from 'config/constants';
 
@@ -18,9 +18,7 @@ import {
 } from 'components';
 import { actionPostCardUsageLimit } from 'stores';
 import UserManager from 'utils/userManager';
-import { useToast } from 'utils/hooks';
-
-const useQuery = () => new URLSearchParams(useLocation().search);
+import { useToast, useQuery } from 'utils/hooks';
 
 const RegisterInputText = styled.div`
   display: flex;
@@ -140,7 +138,7 @@ const Usage = () => {
                   name="notice_type"
                   id="all"
                   body="설정하지 않음"
-                  checked={state.noticeType === C.NOTICE_TYPE.NONE}
+                  checked={Number(state.noticeType) === C.NOTICE_TYPE.NONE}
                   onChange={() =>
                     setState({ ...state, noticeType: C.NOTICE_TYPE.NONE })
                   }
@@ -149,7 +147,7 @@ const Usage = () => {
                   name="notice_type"
                   id="email"
                   body="설정 함"
-                  checked={state.noticeType === C.NOTICE_TYPE.EMAIL}
+                  checked={Number(state.noticeType) === C.NOTICE_TYPE.EMAIL}
                   onChange={() =>
                     setState({ ...state, noticeType: C.NOTICE_TYPE.EMAIL })
                   }

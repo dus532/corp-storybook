@@ -182,11 +182,6 @@ const Filter = ({
         );
 
       case 'rental':
-        // 예약관리
-        // (3) Dropdown: 부서 필터 설정 – 전체 부서(default) / 각 부서 목록 (부서 이름)
-        // (4) Dropdown: 설정된 부서 하위의 사원 필터 설정 – 전체 사원(default) / 각 사원 목록 (사원 이름)
-        // (5) Dropdown: 예약 상태 필터 설정 – 전체 예약(default) / 차량 예약 / 차량 대여 / 예약 취소 / 반납 지연 / 이용 완료
-        // (6) Dropdown: 예약 목적 필터 설정 – 전체 목적(default) / 외근 / 출장 / 사내 행사
         return (
           <div className="bottom">
             <div className="bottom_box">

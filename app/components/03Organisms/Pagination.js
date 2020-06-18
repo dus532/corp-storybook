@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import IconArrow from 'components/01Atoms/IconArrow';
 
 import Color from 'config/color';
+import { useQuery } from 'utils/hooks';
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -33,6 +34,7 @@ const Button = styled.button`
 
 const Pagination = ({ now, total }) => {
   const history = useHistory();
+  const URL = useQuery();
 
   const arr = [];
   const min = Math.floor((now * 1 - 1) / 10) * 10;
@@ -43,7 +45,8 @@ const Pagination = ({ now, total }) => {
   }
 
   if (now > total) {
-    history.push(`${document.location.pathname}?page=${total}`);
+    URL.set('page', total);
+    history.push(`${document.location.pathname}?${URL.toString()}`);
   }
 
   return (
@@ -51,7 +54,8 @@ const Pagination = ({ now, total }) => {
       {now > 1 && (
         <Button
           onClick={() => {
-            history.push(`${document.location.pathname}?page=${now * 1 - 1}`);
+            URL.set('page', now * 1 - 1);
+            history.push(`${document.location.pathname}?${URL.toString()}`);
           }}
         >
           <IconArrow arrow="left" />
@@ -64,7 +68,8 @@ const Pagination = ({ now, total }) => {
               check={now * 1 === d}
               type="button"
               onClick={() => {
-                history.push(`${document.location.pathname}?page=${d}`);
+                URL.set('page', d);
+                history.push(`${document.location.pathname}?${URL.toString()}`);
               }}
               key={d}
             >
@@ -77,7 +82,8 @@ const Pagination = ({ now, total }) => {
       {now * 1 < total && (
         <Button
           onClick={() => {
-            history.push(`${document.location.pathname}?page=${now * 1 + 1}`);
+            URL.set('page', now * 1 + 1);
+            history.push(`${document.location.pathname}?${URL.toString()}`);
           }}
         >
           <IconArrow />

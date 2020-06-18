@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
@@ -9,6 +9,9 @@ import {
   actionGetAnnouncements,
   actionGetCards,
   actionGetSubscription,
+  actionGetCardList,
+  actionGetEmployeesList,
+  actionGetUserGroupsList,
 } from 'stores';
 
 export const useToast = () => {
@@ -21,6 +24,49 @@ export const useModal = () => {
   const dispatch = useDispatch();
 
   return (body, data) => dispatch(onModal(body, data));
+};
+
+export const useCardList = (load = true) => {
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (load) {
+      dispatch(actionGetCardList(res => setData(res.data.payload.cards)));
+    }
+  }, []);
+
+  return data;
+};
+
+export const useEmployeesList = (load = true) => {
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (load) {
+      dispatch(
+        actionGetEmployeesList(res => setData(res.data.payload.employees)),
+      );
+    }
+  }, []);
+
+  return data;
+};
+
+export const useGroupList = (load = true) => {
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (load) {
+      dispatch(
+        actionGetUserGroupsList(res => setData(res.data.payload.userGroups)),
+      );
+    }
+  }, []);
+
+  return data;
 };
 
 export const useFetchData = (rName, filter) => {

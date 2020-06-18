@@ -19,7 +19,7 @@ const StyledDropBox = styled.div`
     width: 100%;
     height: 100%;
     cursor: pointer;
-    border: solid 1px #eee;
+    border: solid 1px ${Color.LineGray};
     font-size: 0.9rem;
     background: white url(${DBIMG}) right / 24px 24px no-repeat;
   }

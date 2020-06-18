@@ -7,6 +7,7 @@ import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import ko from 'date-fns/locale/ko';
 
 import IconIMG from 'images/icon_calender.png';
+import Color from 'config/color';
 
 import './DatePicker.css';
 
@@ -16,7 +17,7 @@ setDefaultLocale('ko');
 const StyledCustomPicker = styled.button`
   width: 100%;
   height: 40px;
-  border: solid 1px #eee;
+  border: solid 1px ${Color.LineGray};
   background: white url(${IconIMG}) 96% / 24px 24px no-repeat;
   z-index: 0;
   text-align: left;

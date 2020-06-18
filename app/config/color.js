@@ -10,7 +10,7 @@ const color = {
   Gray: '#C5C5C5',
   SubGray: '#EDEDED',
   SubGrayHover: '#d1d1d1',
-  LineGray: '#E5E5E5',
+  LineGray: '#d6d6d6',
   DarkGray: '#ACACAC',
 };
 

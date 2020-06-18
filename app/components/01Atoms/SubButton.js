@@ -12,7 +12,7 @@ const SubButton = styled(Button)`
   vertical-align: middle;
 
   &:hover {
-    background: #eee;
+    background: ${Color.LineGray};
   }
 `;
 

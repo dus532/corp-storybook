@@ -11,7 +11,7 @@ const Input = styled.input`
   height: 40px;
   margin: 4px 0;
   padding: 4px 12px;
-  border: 1px solid #eee;
+  border: 1px solid ${Color.LineGray};
   background: white;
 
   &:hover {

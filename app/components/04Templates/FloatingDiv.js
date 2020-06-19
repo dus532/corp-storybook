@@ -127,8 +127,8 @@ const FloatingDiv = ({ title, body, footer, onClickExit, fullScreen }) => {
       document.body.style.paddingRight = '17px';
     }
     return () => {
-      document.body.style.overflow = 'unset';
-      document.body.style.position = 'unset';
+      document.body.style.overflow = 'auto';
+      document.body.style.position = 'static';
       document.body.style.paddingRight = '0px';
       window.scrollTo(0, y);
     };

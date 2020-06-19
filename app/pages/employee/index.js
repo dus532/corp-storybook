@@ -85,9 +85,7 @@ const Employees = () => {
   }, [search]);
 
   useEffect(() => {
-    dispatch(
-      actionGetManageEmployees({ ...filter, employeeNumber: filter.search }),
-    );
+    dispatch(actionGetManageEmployees(filter));
   }, [
     filter.startDate,
     filter.endDate,
@@ -98,13 +96,7 @@ const Employees = () => {
 
   useEffect(() => {
     if (!modalType) {
-      dispatch(
-        actionGetManageEmployees(
-          { ...filter, employeeNumber: filter.search },
-          () => {},
-          true,
-        ),
-      );
+      dispatch(actionGetManageEmployees(filter, () => {}, true));
     }
   }, [modalType]);
 

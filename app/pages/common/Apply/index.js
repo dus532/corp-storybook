@@ -214,12 +214,14 @@ const Apply = () => {
   };
 
   const onAdd = () => {
-    setData(
-      produce(draft => {
-        draft.departmentNames.push(draft.add);
-        draft.add = '';
-      }),
-    );
+    if (data.add) {
+      setData(
+        produce(draft => {
+          draft.departmentNames.push(draft.add);
+          draft.add = '';
+        }),
+      );
+    }
   };
 
   return (

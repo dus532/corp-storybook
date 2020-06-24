@@ -188,13 +188,41 @@ const FloatingDivBig = ({
     content: () => componentRef.current,
   });
 
+  const getScrollBarWidth = () => {
+    const inner = document.createElement('p');
+    inner.style.width = '100%';
+    inner.style.height = '200px';
+
+    const outer = document.createElement('div');
+    outer.style.position = 'absolute';
+    outer.style.top = '0px';
+    outer.style.left = '0px';
+    outer.style.visibility = 'hidden';
+    outer.style.width = '200px';
+    outer.style.height = '150px';
+    outer.style.overflow = 'hidden';
+    outer.appendChild(inner);
+
+    document.body.appendChild(outer);
+    const w1 = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    let w2 = inner.offsetWidth;
+    if (w1 === w2) {
+      w2 = outer.clientWidth;
+    }
+
+    document.body.removeChild(outer);
+
+    return w1 - w2;
+  };
+
   useEffect(() => {
     const y = window.scrollY;
     document.body.style.overflow = 'hidden';
     if (document.body.clientWidth < 768) {
       document.body.style.position = 'fixed';
     } else {
-      document.body.style.paddingRight = '17px';
+      document.body.style.paddingRight = `${getScrollBarWidth()}px`;
     }
     return () => {
       document.body.style.overflow = 'auto';
@@ -232,7 +260,11 @@ const FloatingDivBig = ({
                 {print && (
                   <>
                     <SubButton
-                      style={{ width: 172, marginTop: 4, marginRight: 8 }}
+                      style={{
+                        width: 172,
+                        marginTop: 4,
+                        marginRight: 8,
+                      }}
                       onClick={handlePrint}
                       size="small"
                       white

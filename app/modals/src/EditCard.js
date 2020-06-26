@@ -69,7 +69,7 @@ const EditCard = ({ onClickExit, data }) => {
                           ? `&userGroupId=${data.userGroupId}`
                           : ''
                       }${
-                        data.limitedAmount
+                        data.isLimited
                           ? `&limitedAmount=${data.limitedAmount}`
                           : ''
                       }${

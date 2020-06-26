@@ -9,6 +9,6 @@ const Styled = styled.div`
   color: #aaa;
 `;
 
-const Footer = () => <Styled>CARPLAT BIZ, v1.1.0.0</Styled>;
+const Footer = () => <Styled>CARPLAT BIZ, v1.2.0.0</Styled>;
 
 export default Footer;

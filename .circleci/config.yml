@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@0.1.20
+
 executors:
   api_server_exec:
     docker:
@@ -9,7 +12,7 @@ executors:
 
 jobs:
 
-  test:
+  scancode:
     machine: true
     steps:
       - checkout
@@ -30,6 +33,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Set Env
+          command: |
+            echo cp .env.dev .env
+            cp .env.dev .env
+      - run:
           name: Install
           command: |
             echo yarn install
@@ -37,43 +45,67 @@ jobs:
       - run:
           name: Test
           command: |
-            echo yarn test
+            echo yarn test --> need to implement
             #yarn test
-      #- store_test_results:
-      #    path: ~/reports
-      #- store_artifacts:
-      #    path: ~/reports
+      - store_artifacts:
+          path: ~/project/coverage
+          destination: coverage
       - run:
           name: Build
           command: |
             echo yarn build:dev
             yarn build:dev
       - persist_to_workspace:
-          root: ~/project
+          root: /home/circleci/project
           paths:
-            - .circleci
+            - build
 
-  deploy-cdn-dev:
-    machine: true
+  deploy-dev:
+    executor: api_server_exec
     steps:
       - attach_workspace:
-          at: ~/project
+          at: /home/circleci/project
+      - aws-cli/setup:
+          aws-access-key-id: DEV_S3_KEY
+          aws-secret-access-key: DEV_S3_SECRET
+          aws-region: DEV_AWS_REGION
       - run:
-          name: Deploy to dev envionment
+          name: Deploy to dev envionment (biz-corp-admin)
+          environment:
+            BUILD_DIR: build
+            S3_BUCKET: s3://biz-corp-admin.dev.platdev.net
+            CDN_ID: E1SAL9QNUQW32T
           command: |
             echo deploy to dev envionment
-            cd ./.circleci/script && ./deploy-dev.sh
+            # Clear the S3 bucket
+            aws s3 rm $S3_BUCKET --recursive
+            # Sync the bundle project
+            aws s3 cp $BUILD_DIR $S3_BUCKET --recursive --acl public-read
+            # Clear the cache
+            aws cloudfront create-invalidation --distribution-id $CDN_ID --paths /index.html /favicon.ico
+      - run:
+          name: Deploy to dev envionment (corp)
+          environment:
+            BUILD_DIR: build
+            S3_BUCKET: s3://corp.dev.platdev.net
+            CDN_ID: EH4GXQPTR2CTE
+          command: |
+            echo deploy to dev envionment
+            # Clear the S3 bucket
+            aws s3 rm $S3_BUCKET --recursive
+            # Sync the bundle project
+            aws s3 cp $BUILD_DIR $S3_BUCKET --recursive --acl public-read
+            # Clear the cache
+            aws cloudfront create-invalidation --distribution-id $CDN_ID --paths /index.html /favicon.ico
 
 workflows:
   version: 2.1
-  test-build-deploy:
+  build-test-deploy:
     jobs:
-      - test
       - build
-      - deploy-cdn-dev:
-          requires:
-            - test
-            - build
+      - deploy-dev:
           filters:
             branches:
               only: develop
+          requires:
+            - build

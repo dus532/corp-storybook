@@ -28,10 +28,11 @@ const PostCode = ({ data, onClickExit }) => {
     setPage(2);
   };
 
+  // CS 어드민 부서와 협의로 기본 주소와 상세 주소를 나누는 키워드는 "|"를 사용합니다.
   const onFinish = () => {
     data.setData({
       ...data.data,
-      address: `${address.fullAddress} ${address.detail}`,
+      address: `${address.fullAddress} | ${address.detail}`,
     });
     onClickExit();
   };

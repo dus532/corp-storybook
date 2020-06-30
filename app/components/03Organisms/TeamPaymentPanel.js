@@ -8,6 +8,7 @@ import NoData from 'components/03Organisms/NoData';
 
 import C from 'config/constants';
 import moment from 'utils/moment';
+import toChangeMoney from 'utils/toChangeMoney';
 
 const StyledPanel = styled.div`
   margin-top: 30px;
@@ -222,8 +223,7 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
                 {d.cardType === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
               </div>
               <div className="team_amount">
-                {d.paymentAmount && (d.paymentAmount * 1).toLocaleString('en')}
-                원
+                {toChangeMoney(d.paymentAmount)}
               </div>
             </Card>
           ))}

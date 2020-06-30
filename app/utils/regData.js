@@ -5,6 +5,8 @@ import moment from 'utils/moment';
 import F from 'config/filter';
 import EditIMG from 'images/icon_edit.png';
 
+import toChangeMoney from './toChangeMoney';
+
 const Edit = styled.button`
   cursor: pointer;
   width: 24px;
@@ -28,7 +30,7 @@ const RegData = (name, value, onClick, t) => {
     return '';
   }
   if (name.includes('amount')) {
-    return `${(value[name] * 1).toLocaleString('en')} 원`;
+    return toChangeMoney(value[name]);
   }
   if (name.includes('joinDate')) {
     return `${moment.unix(value[name]).format('YYYY. MM. DD')}`;

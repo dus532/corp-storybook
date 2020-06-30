@@ -17,6 +17,7 @@ import C from 'config/constants';
 import { useToast } from 'utils/hooks';
 import { actionPutSubscription, actionPostCheckSubscription } from 'stores';
 import { NormalizeData } from 'utils/regData';
+import toChangeMoney from 'utils/toChangeMoney';
 
 const Text = styled.div`
   margin: 40px 0;
@@ -184,9 +185,7 @@ const Payment = () => {
           },
           {
             title: '정기 결제 금액',
-            body: current.periodicPaymentAmount
-              ? `월 ${current.periodicPaymentAmount.toLocaleString('en')}원`
-              : '-',
+            body: toChangeMoney(current.periodicPaymentAmount, 'en', '0 원'),
           },
           {
             title: '업무 시간',
@@ -228,9 +227,7 @@ const Payment = () => {
           },
           {
             title: '정기 결제 금액',
-            body: check.periodicPaymentAmount
-              ? `월 ${check.periodicPaymentAmount.toLocaleString('en')}원`
-              : '-',
+            body: toChangeMoney(check.periodicPaymentAmount),
           },
           {
             title: '업무 시간',

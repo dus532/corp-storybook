@@ -6,6 +6,7 @@ import moment from 'utils/moment';
 import { actionGetRentalStatement } from 'stores';
 import { FloatingDivBig } from 'components';
 import { useToast } from 'utils/hooks';
+import toChangeMoney from 'utils/toChangeMoney';
 
 const Page = ({ data }) => {
   const label1 = (label, body) => (
@@ -58,7 +59,7 @@ const Page = ({ data }) => {
           marginRight: 24,
         }}
       >
-        {price ? Number(price).toLocaleString('en') : 0} 원
+        {toChangeMoney(price)}
       </div>
       <div
         style={{
@@ -117,21 +118,9 @@ const Page = ({ data }) => {
         >
           요금상세
         </div>
-        {label2(
-          '이용료',
-          `${
-            data.totalAmount ? Number(data.totalAmount).toLocaleString('en') : 0
-          } 원`,
-        )}
+        {label2('이용료', toChangeMoney(data.totalAmount, 'en', '0 원'))}
         {label2('하이패스', `0 원`)}
-        {label2(
-          '패널티',
-          `${
-            data.totalCancelAmount
-              ? Number(data.totalCancelAmount).toLocaleString('en')
-              : 0
-          } 원`,
-        )}
+        {label2('패널티', toChangeMoney(data.totalCancelAmount, 'en', '0 원'))}
         <hr style={{ margin: '10px 0' }} />
         <div
           style={{
@@ -145,10 +134,7 @@ const Page = ({ data }) => {
             총 금액
           </div>
           <div style={{ fontWeight: 500, color: '#2946be' }}>
-            {data.totalAmount
-              ? Number(data.totalAmount).toLocaleString('en')
-              : 0}{' '}
-            원
+            {toChangeMoney(data.totalAmount, 'en', '0 원')}
           </div>
         </div>
         <br />

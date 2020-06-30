@@ -10,6 +10,7 @@ import moment from 'utils/moment';
 import DL_IMG from 'images/icon_download.png';
 import DL_IMG_M from 'images/icon_download_mobile.png';
 import { RegData } from 'utils/regData';
+import toChangeMoney from 'utils/toChangeMoney';
 
 const StyledSummary = styled.div`
   width: 100%;
@@ -156,11 +157,7 @@ const Summary = ({ data, type, filter }) => {
           <StyledSummary className="box_overflow">
             <div className="left">
               이용요금 :{' '}
-              <span className="blue">
-                {data.totalAmount &&
-                  (data.totalAmount * 1).toLocaleString('en')}
-                원
-              </span>
+              <span className="blue">{toChangeMoney(data.totalAmount)}</span>
             </div>
             <div className="right">
               <span className="bold">{data.totalCount}건</span>{' '}
@@ -181,11 +178,7 @@ const Summary = ({ data, type, filter }) => {
           <StyledSummary className="box_overflow">
             <div className="left">
               이용요금 :{' '}
-              <span className="blue">
-                {data.totalAmount &&
-                  (data.totalAmount * 1).toLocaleString('en')}
-                원
-              </span>
+              <span className="blue">{toChangeMoney(data.totalAmount)}</span>
             </div>
             <div className="right">
               <span className="bold">전체 {data.totalCount}건</span>
@@ -209,8 +202,7 @@ const Summary = ({ data, type, filter }) => {
                     usageStartDate: RegData('usageStartDate', d),
                     chargeRequestDate: RegData('chargeRequestDate', d),
                     chargeDate: RegData('chargeDate', d),
-                    amount:
-                      d.amount && `${(d.amount * 1).toLocaleString('en')} 원`,
+                    amount: toChangeMoney(d.amount),
                   }))}
                   filename={`carplat_payment_${moment().format(
                     'YYYYMMDDHHmmss',

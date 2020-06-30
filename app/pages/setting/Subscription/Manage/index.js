@@ -17,6 +17,7 @@ import C from 'config/constants';
 import { useModal } from 'utils/hooks';
 import { CHECK_PW } from 'modals/constants';
 import { NormalizeData } from 'utils/regData';
+import toChangeMoney from 'utils/toChangeMoney';
 
 const Subscription = () => {
   const dispatch = useDispatch();
@@ -118,11 +119,7 @@ const Subscription = () => {
                 },
                 {
                   title: '정기 결제 금액',
-                  body: current.periodicPaymentAmount
-                    ? `월 ${current.periodicPaymentAmount.toLocaleString(
-                        'en',
-                      )}원`
-                    : '-',
+                  body: toChangeMoney(current.periodicPaymentAmount),
                 },
                 {
                   title: '업무 시간',
@@ -213,7 +210,7 @@ const Subscription = () => {
                 {
                   title: '정기 결제 금액',
                   body: next.periodicPaymentAmount
-                    ? `월 ${next.periodicPaymentAmount.toLocaleString('en')}원`
+                    ? `월 ${toChangeMoney(next.periodicPaymentAmount)}`
                     : '-',
                 },
                 {

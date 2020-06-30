@@ -13,6 +13,7 @@ import {
 
 import Color from 'config/color';
 import NoData from 'components/03Organisms/NoData';
+import toChangeMoney from 'utils/toChangeMoney';
 const StyledPanel = styled.div`
   margin-top: 30px;
   background: ${Color.White};
@@ -68,7 +69,7 @@ const renderCustomizedLabel = props => {
         dominantBaseline="middle"
         fontSize="14"
       >
-        {Number(value).toLocaleString('en')} 원
+        {toChangeMoney(value)}
       </text>
     </g>
   );
@@ -101,7 +102,7 @@ const RecentPaymentPanel = ({ store, className }) => {
           <div className="intro">
             {payload[0].payload.year}년 {payload[0].payload.month}월
           </div>
-          <div className="body">{Number(label).toLocaleString('en')} 원</div>
+          <div className="body">{toChangeMoney(label)}</div>
         </StyledToolTip>
       );
     }

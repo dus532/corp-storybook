@@ -19,6 +19,7 @@ import {
 import Color from 'config/color';
 import { actionPostChargeSubscription } from 'stores';
 import { NormalizeData } from 'utils/regData';
+import toChangeMoney from 'utils/toChangeMoney';
 
 const PaymentCheckBox = styled.div`
   margin-top: 12px;
@@ -167,11 +168,7 @@ const Payment = () => {
             },
             {
               title: '이번달 결제 금액',
-              body: Math.ceil(cardData.thisMonthPrice)
-                ? `${Math.ceil(cardData.thisMonthPrice).toLocaleString(
-                    'en',
-                  )} 원`
-                : '오류',
+              body: toChangeMoney(Math.ceil(cardData.thisMonthPrice)),
             },
             {
               title: '다음 달 결제일',
@@ -179,20 +176,14 @@ const Payment = () => {
             },
             {
               title: '다음 달 결제 금액',
-              body: cardData.periodicPaymentAmount
-                ? `${cardData.periodicPaymentAmount.toLocaleString('en')} 원`
-                : '오류',
+              body: toChangeMoney(cardData.periodicPaymentAmount),
             },
             {
               title: '업무 시간',
               body: `${cardData.startHour} ~ ${cardData.endHour}`,
             },
           ]}
-          amount={
-            Math.ceil(cardData.thisMonthPrice)
-              ? `${Math.ceil(cardData.thisMonthPrice).toLocaleString('en')} 원`
-              : '오류'
-          }
+          amount={toChangeMoney(cardData.thisMonthPrice)}
           startDate={moment().format('YYYY년 MM월 DD일')}
           endDate={paymentAmount.lastPaymentDay}
         />

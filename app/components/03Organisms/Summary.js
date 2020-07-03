@@ -156,8 +156,8 @@ const Summary = ({ data, type, filter }) => {
         return (
           <StyledSummary className="box_overflow">
             <div className="left">
-              이용요금 :{' '}
-              <span className="blue">{toChangeMoney(data.totalAmount)}</span>
+              {/* 이용요금 :{' '}
+              <span className="blue">{toChangeMoney(data.totalAmount)}</span> */}
             </div>
             <div className="right">
               <span className="bold">{data.totalCount}건</span>{' '}

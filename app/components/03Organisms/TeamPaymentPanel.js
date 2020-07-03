@@ -220,7 +220,9 @@ const TeamPaymentPanel = ({ store, className, setDate, date }) => {
                 {tag(d)}
                 {d.cardCorp}
                 {d.cardNumber ? ` / ${d.cardNumber} / ` : ''}
-                {d.cardType === C.CARD_TYPE.PERSONAL ? '개인카드' : '법인카드'}
+                {d.cardType === C.CARD_TYPE.PERSONAL && '개인카드'}
+                {d.cardType === C.CARD_TYPE.COMPANY && '법인카드'}
+                {!d.cardType && '전체카드'}
               </div>
               <div className="team_amount">
                 {toChangeMoney(d.paymentAmount)}

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -36,8 +37,7 @@ const Filter = styled.div`
   font-weight: 700;
 `;
 
-const renderCustomizedLabel = props => {
-  const { x, y, width, value } = props;
+const renderCustomizedLabel = ({ x, y, width, value }) => {
   const viewport = document.body.clientWidth > 768 ? 'pc' : 'mobile';
   const boxWidth = 120;
   const boxHeight = 26;
@@ -141,9 +141,17 @@ const RecentPaymentPanel = ({ store, className }) => {
                 dataKey="amount"
                 tickFormatter={tick =>
                   viewport === 'pc'
-                    ? `${data.filter(d => d.amount === tick)[0].year}년
-                  ${data.filter(d => d.amount === tick)[0].month}월`
-                    : `${data.filter(d => d.amount === tick)[0].month}월`
+                    ? `${
+                        data.filter(d => Number(d.amount) === Number(tick))[0]
+                          .year
+                      }년
+                  ${
+                    data.filter(d => Number(d.amount) === Number(tick))[0].month
+                  }월`
+                    : `${
+                        data.filter(d => Number(d.amount) === Number(tick))[0]
+                          .month
+                      }월`
                 }
                 axisLine={{ stroke: '#ededed' }}
                 tick={{ fontSize: viewport === 'pc' ? 16 : 12 }}

@@ -59,7 +59,7 @@ const Service = () => (
         </h5>
         <a
           className="button"
-          href="https://pf.kakao.com/_afSwM"
+          href="http://pf.kakao.com/_DxjxoUxb"
           target="_blank"
         >
           <Button>카카오톡 채널로 문의하기</Button>

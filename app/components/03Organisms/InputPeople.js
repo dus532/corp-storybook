@@ -19,6 +19,7 @@ const Input = styled.div`
     text-align: right;
     padding: 0 12px;
     display: flex;
+    overflow: hidden;
   }
 
   .number {
@@ -27,7 +28,7 @@ const Input = styled.div`
     margin-right: 4px;
     border: none;
     text-align: right;
-    width: 100%;
+    width: 90%;
   }
 
   .unit {

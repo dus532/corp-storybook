@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Container, BigTitle, AsyncDiv, CardPanel, InfoBox } from 'components';
-import { useModal, useFetchData } from 'utils/hooks';
+import { useModal, useFetchData, useToast } from 'utils/hooks';
 import { EDIT_CARD } from 'modals/constants';
 
 import AddIMG from 'images/icon_add.png';
@@ -30,11 +30,20 @@ const AddCard = styled.div`
 const Manage = () => {
   const history = useHistory();
   const modal = useModal();
+  const toast = useToast();
   const [cardStore, cardOriData] = useFetchData('card');
 
   const cardData = cardOriData
     ? [{ main: true, ...cardOriData.mainCard }, ...cardOriData.groupCards]
     : [];
+
+  const createCard = () => {
+    if (cardData.length >= 5) {
+      toast('카드는 5개까지 등록이 가능합니다.');
+    } else {
+      history.push(`/setting/paymentcard/create`);
+    }
+  };
 
   return (
     <Container>
@@ -50,12 +59,7 @@ const Manage = () => {
             }}
           />
         ))}
-        <AddCard
-          className="box_overflow"
-          onClick={() => {
-            history.push(`/setting/paymentcard/create`);
-          }}
-        >
+        <AddCard className="box_overflow" onClick={createCard}>
           <div className="plus" />
           <div>부서 결제카드 등록하기</div>
         </AddCard>

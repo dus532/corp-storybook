@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, BigTitle, ItemPanel, AsyncDiv } from 'components';
 import { actionGetTerms } from 'stores';
+import TermsStyles from 'terms-styles';
 
 const Terms = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Terms = () => {
       <AsyncDiv store={Termsdata}>
         <ItemPanel data={Termsdata.data.terms} board />
       </AsyncDiv>
+      <TermsStyles />
     </Container>
   );
 };

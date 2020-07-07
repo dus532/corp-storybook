@@ -70,20 +70,6 @@ jobs:
           aws-secret-access-key: DEV_S3_SECRET
           aws-region: DEV_AWS_REGION
       - run:
-          name: Deploy to dev envionment (biz-corp-admin)
-          environment:
-            BUILD_DIR: build
-            S3_BUCKET: s3://biz-corp-admin.dev.platdev.net
-            CDN_ID: E1SAL9QNUQW32T
-          command: |
-            echo deploy to dev envionment
-            # Clear the S3 bucket
-            aws s3 rm $S3_BUCKET --recursive
-            # Sync the bundle project
-            aws s3 cp $BUILD_DIR $S3_BUCKET --recursive --acl public-read
-            # Clear the cache
-            aws cloudfront create-invalidation --distribution-id $CDN_ID --paths /index.html /favicon.ico
-      - run:
           name: Deploy to dev envionment (corp)
           environment:
             BUILD_DIR: build

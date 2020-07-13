@@ -34,7 +34,7 @@ const Page = ({ data }) => {
     </div>
   );
 
-  const label3 = (date, price) => (
+  const label3 = (date, price, link) => (
     <div
       style={{
         display: 'flex',
@@ -61,7 +61,7 @@ const Page = ({ data }) => {
       >
         {toChangeMoney(price)}
       </div>
-      <div
+      <a
         style={{
           width: 80,
           height: 32,
@@ -72,9 +72,12 @@ const Page = ({ data }) => {
           textAlign: 'center',
           borderRadius: 4,
         }}
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
       >
         영수증 발급
-      </div>
+      </a>
     </div>
   );
 
@@ -152,7 +155,11 @@ const Page = ({ data }) => {
         </div>
         {data.chargeItems.map(d => (
           <React.Fragment key={d.paidAt}>
-            {label3(d.paidAt, d.amount)}
+            {label3(
+              d.paidAt,
+              d.amount,
+              `https://npg.nicepay.co.kr/issue/CheckCardInfo.do?TID=${d.pgTid}`,
+            )}
           </React.Fragment>
         ))}
         <br />

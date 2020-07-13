@@ -38,9 +38,9 @@ export const actionGetRentalStatement = (rentalId, onSuccess) =>
     meta: { onSuccess },
   });
 
-export const actionPostSendStatement = (rentalId, onSuccess) =>
+export const actionPostSendStatement = (rentalId, onSuccess, onFailure) =>
   onlyCreate({
     url: '/action/sendStatement',
     params: { rentalId, corpId: UserManager().getUser().corpId },
-    meta: { onSuccess },
+    meta: { onSuccess, onFailure },
   });

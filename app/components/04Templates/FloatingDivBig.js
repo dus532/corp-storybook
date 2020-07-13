@@ -59,7 +59,7 @@ const Div = styled.div`
     display: flex;
     justify-content: center;
     margin: 0 auto;
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
 
   .icon_print {
@@ -101,6 +101,16 @@ const Div = styled.div`
 
     *:last-child {
       margin-right: 0;
+    }
+  }
+
+  @media print {
+    .print_page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
     }
   }
 
@@ -161,7 +171,11 @@ const BG = styled.div`
   }
 `;
 
-const PrintPage = ({ data, pageRef }) => <div ref={pageRef}>{data}</div>;
+const PrintPage = ({ data, pageRef }) => (
+  <div className="print_page" ref={pageRef}>
+    <div>{data}</div>
+  </div>
+);
 
 PrintPage.propTypes = {
   data: PropTypes.any,
@@ -283,9 +297,15 @@ const FloatingDivBig = ({
                       style={{ width: 172, marginTop: 4 }}
                       onClick={() =>
                         dispatch(
-                          actionPostSendStatement(rentalID, () => {
-                            toast('이메일이 발송되었습니다', 'ok');
-                          }),
+                          actionPostSendStatement(
+                            rentalID,
+                            () => {
+                              toast('이메일이 발송되었습니다', 'ok');
+                            },
+                            () => {
+                              toast('이메일 발송에 실패하였습니다.');
+                            },
+                          ),
                         )
                       }
                       size="small"

@@ -15,7 +15,7 @@ const SignInInput = ({ register, errors, formData }) => {
         name="adminLoginId"
         InputRef={register({
           minLength: {
-            value: 6,
+            value: 4,
             message: '아이디가 너무 짧습니다.',
           },
           required: '아이디가 너무 짧습니다.',

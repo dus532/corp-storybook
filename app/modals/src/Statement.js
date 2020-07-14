@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -7,6 +8,7 @@ import { actionGetRentalStatement } from 'stores';
 import { FloatingDivBig } from 'components';
 import { useToast } from 'utils/hooks';
 import toChangeMoney from 'utils/toChangeMoney';
+import { NormalizeData } from 'utils/regData';
 
 const Page = ({ data }) => {
   const label1 = (label, body) => (
@@ -34,7 +36,8 @@ const Page = ({ data }) => {
     </div>
   );
 
-  const label3 = (date, price, link) => (
+  // JUW00000219
+  const label3 = (date, price, link, billData) => (
     <div
       style={{
         display: 'flex',
@@ -48,7 +51,9 @@ const Page = ({ data }) => {
           {moment.unix(date).format('YYYY/MM/DD')} 결제
         </div>
         <div style={{ color: `#525561`, fontSize: `0.6rem` }}>
-          법인결제 / 이용료
+          {NormalizeData('cardType', billData.cardType)} /{' '}
+          {NormalizeData('cardCorp', billData.cardCorp)} /{' '}
+          {NormalizeData('cardNumber', billData.cardNumber)}
         </div>
       </div>
       <div
@@ -153,12 +158,13 @@ const Page = ({ data }) => {
         >
           결제내역
         </div>
-        {data.chargeItems.map(d => (
-          <React.Fragment key={d.paidAt}>
+        {data.chargeItems.map((d, index) => (
+          <React.Fragment key={index}>
             {label3(
               d.paidAt,
               d.amount,
               `https://npg.nicepay.co.kr/issue/CheckCardInfo.do?TID=${d.pgTid}`,
+              data,
             )}
           </React.Fragment>
         ))}

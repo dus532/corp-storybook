@@ -144,11 +144,10 @@ const RequestManager = (method, url, data, header) => {
 
 const Request = async (method, url, data, header) => {
   const USER = UserManager().getUser();
-  const { refreshToken } = USER;
 
   if (USER && moment.unix(USER.expiredAt) < moment()) {
     const token = await RequestManager('post', '/action/refreshToken', {
-      refreshToken,
+      refreshToken: USER.refreshToken,
     });
     UserManager().setUser({
       ...USER,

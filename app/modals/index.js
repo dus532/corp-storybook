@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -31,6 +31,21 @@ import {
 const Modals = () => {
   const modal = useSelector(state => state.modal);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const keyClose = e => {
+      if (e.key === 'Escape') {
+        dispatch(offModal());
+        document.removeEventListener('keyup', keyClose);
+      }
+    };
+
+    if (modal.type) {
+      document.addEventListener('keyup', keyClose);
+    } else {
+      document.removeEventListener('keyup', keyClose);
+    }
+  }, [modal.type]);
 
   const propsAll = {
     data: modal.data,

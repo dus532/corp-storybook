@@ -81,17 +81,6 @@ const RequestManager = (method, url, data, header) => {
               if (document.location.pathname === '/') {
                 reject(err);
               } else {
-                UserManager().setUser({
-                  isSignIn: false,
-                  id: 0,
-                  name: '',
-                  username: '',
-                  companyNumber: '',
-                  phoneNumber: '',
-                  adminSecretKey: '',
-                  isApproved: false,
-                  accessToken: '',
-                });
                 setTimeout(() => {
                   document.location.href = '/';
                 }, 1500);
@@ -153,4 +142,20 @@ const RequestManager = (method, url, data, header) => {
   return new Promise((resolve, reject) => Network(resolve, reject));
 };
 
-export default RequestManager;
+const Request = async (method, url, data, header) => {
+  const USER = UserManager().getUser();
+  const { refreshToken } = USER;
+
+  if (USER && moment.unix(USER.expiredAt) < moment()) {
+    const token = await RequestManager('post', '/action/refreshToken', {
+      refreshToken,
+    });
+    UserManager().setUser({
+      ...USER,
+      ...token.data.payload,
+    });
+  }
+  return RequestManager(method, url, data, header);
+};
+
+export default Request;

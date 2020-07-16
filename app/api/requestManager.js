@@ -146,13 +146,20 @@ const Request = async (method, url, data, header) => {
   const USER = UserManager().getUser();
 
   if (USER && moment.unix(USER.expiredAt) < moment()) {
-    const token = await RequestManager('post', '/action/refreshToken', {
-      refreshToken: USER.refreshToken,
-    });
-    UserManager().setUser({
-      ...USER,
-      ...token.data.payload,
-    });
+    try {
+      const token = await RequestManager('post', '/action/refreshToken', {
+        refreshToken: USER.refreshToken,
+      });
+      UserManager().setUser({
+        ...USER,
+        ...token.data.payload,
+      });
+    } catch (err) {
+      UserManager().setUser('');
+      setTimeout(() => {
+        document.location.href = '/';
+      }, 500);
+    }
   }
   return RequestManager(method, url, data, header);
 };

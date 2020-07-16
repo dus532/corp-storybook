@@ -117,7 +117,7 @@ const Page = ({ data }) => {
         <Label1 label="운전자" body={data.rental.employeeName} />
         <Label1 label="이용차량" body={data.rental.carName} />
         <Label1 label="차량번호" body={data.rental.carNumber} />
-        <Label1 label="이용시간" body={`총 ${data.rental.usagePeriod} 시간`} />
+        <Label1 label="이용시간" body={`총 ${data.rental.usagePeriod}`} />
         <Label1
           label="대여"
           body={moment.unix(data.rental.startDate).format(`MM/DD (ddd) HH:mm`)}

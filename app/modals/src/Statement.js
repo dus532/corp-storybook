@@ -177,18 +177,19 @@ const Page = ({ data }) => {
         >
           결제내역
         </div>
-        {data.chargeItems.map((d, index) => (
-          <React.Fragment key={index}>
-            <Label3
-              date={d.paidAt}
-              price={d.amount}
-              link={`https://npg.nicepay.co.kr/issue/CheckCardInfo.do?TID=${
-                d.pgTid
-              }`}
-              billData={data}
-            />
-          </React.Fragment>
-        ))}
+        {data.chargeItems &&
+          data.chargeItems.map((d, index) => (
+            <React.Fragment key={index}>
+              <Label3
+                date={d.paidAt}
+                price={d.amount}
+                link={`https://npg.nicepay.co.kr/issue/CheckCardInfo.do?TID=${
+                  d.pgTid
+                }`}
+                billData={data}
+              />
+            </React.Fragment>
+          ))}
         <br />
         <hr style={{ margin: '10px 0' }} />
         <br />

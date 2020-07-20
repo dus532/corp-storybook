@@ -16,7 +16,6 @@ import DropBox from '../01Atoms/DropBox';
 import Input from '../01Atoms/Input';
 
 const StyledFilter = styled.div`
-  margin-top: 30px;
   .dropbox {
     margin-right: 8px;
   }

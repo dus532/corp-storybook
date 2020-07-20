@@ -1,99 +1,81 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import moment from 'utils/moment';
-import { Container, Filter, AsyncDiv, Summary, RentalList } from 'components';
-import { actionGetManageRentals } from 'stores';
+// import moment from 'utils/moment';
+import {
+  Container,
+  AsyncDiv,
+  Summary,
+  RentalList,
+  BigTitle,
+  FilterList,
+} from 'components';
+// import { actionGetManageRentals } from 'stores';
 
-import UserManager from 'utils/userManager';
+// import UserManager from 'utils/userManager';
 import { useEmployeesList, useGroupList } from 'utils/hooks';
 
 const list = { userGroups: [], employees: [] };
 
+// const initialQuery = {
+//   startDate: moment()
+//     .startOf('year')
+//     .format('X'),
+//   endDate: moment().format('X'),
+//   status: 0,
+//   purpose: 0,
+//   userGroupId: null,
+//   employeeId: null,
+//   search: null,
+//   corpId: UserManager().getUser().corpId,
+// };
+
 const Rental = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  // const dispatch = useDispatch();
 
   const rentalData = useSelector(state => state.manageRentals);
 
-  const [filter, setFilter] = useState({
-    startDate: moment()
-      .startOf('year')
-      .format('X'),
-    endDate: moment().format('X'),
-    status: 0,
-    purpose: 0,
-    userGroupId: null,
-    employeeId: null,
-    search: null,
-    corpId: UserManager().getUser().corpId,
-  });
-
-  const handleChange = (data, name, reset) => {
-    if (name === 'userGroupId') {
-      // 사원그룹 수정시 사원도 초기화
-      setFilter({
-        ...filter,
-        employeeId: null,
-        [name || data.target.name]: data,
-      });
-    } else {
-      setFilter({ ...filter, [name || data.target.name]: data });
-    }
-
-    if (reset) {
-      dispatch(
-        actionGetManageRentals({ ...filter, number: null }, () => {
-          history.push(`${document.location.pathname}`);
-        }),
-      );
-    }
-  };
-
-  const handleDateChange = (sDate, eDate) => {
-    setFilter({
-      ...filter,
-      startDate: sDate,
-      endDate: eDate,
-    });
-  };
-
-  const onSearch = () => {
-    dispatch(
-      actionGetManageRentals({ ...filter, number: filter.search }, () => {
-        history.push(`${document.location.pathname}`);
-      }),
-    );
-  };
-
-  useEffect(() => {
-    dispatch(actionGetManageRentals({ ...filter, number: filter.search }));
-  }, [
-    filter.startDate,
-    filter.endDate,
-    filter.status,
-    filter.purpose,
-    filter.userGroupId,
-    filter.employeeId,
-    filter.corpId,
-  ]);
+  // const [filter, setFilter] = useState({
+  //   startDate: moment()
+  //     .startOf('year')
+  //     .format('X'),
+  //   endDate: moment().format('X'),
+  //   status: 0,
+  //   purpose: 0,
+  //   userGroupId: null,
+  //   employeeId: null,
+  //   search: null,
+  //   corpId: UserManager().getUser().corpId,
+  // });
 
   list.employees = useEmployeesList();
   list.userGroups = useGroupList();
 
   return (
     <Container>
-      <Filter
-        type="rental"
-        filter={filter}
-        handleChange={handleChange}
-        handleDateChange={handleDateChange}
-        onClick={onSearch}
-        list={list}
+      <BigTitle>예약조회</BigTitle>
+      <FilterList
+        date
+        search
+        data={[
+          {
+            type: 'employees',
+            key: 'employeeId',
+            data: list.employees,
+            initial: { value: 0, body: '전체 부서' },
+          },
+          {
+            type: 'userGroups',
+            key: 'userGroupsId',
+            data: list.userGroups,
+            initial: { value: 0, body: '전체 사원' },
+          },
+          { type: 'rentalStatus', key: 'status' },
+          { type: 'rentalPuropose', key: 'purpose' },
+        ]}
       />
       <AsyncDiv store={rentalData}>
-        <Summary type="rental" data={rentalData.data} filter={filter} />
+        <Summary type="rental" data={rentalData.data} />
         <RentalList data={rentalData.data.rentals} />
       </AsyncDiv>
     </Container>

@@ -1,25 +1,20 @@
 /* eslint-disable indent */
 import styled from 'styled-components';
 
-import Color from 'config/color';
-
 const StyledBitTitle = styled.div`
   margin-top: 40px;
-  margin-bottom: ${props => (props.marginSmall ? `10px` : `20px`)};
-  font-size: 2rem;
-  font-weight: 700;
+  margin-bottom: 16px;
+  font-size: 32px;
 
   @media screen and (max-width: 900px) {
     position: relative;
-    margin: 0;
+    margin-top: 12px;
+    margin-bottom: 12px;
     left: -20px;
     width: 100vw;
-    height: 40px;
-    padding: 0 0 10px 20px;
+    padding: 0 0 0 20px;
     background: white;
-    font-size: 1.3rem;
-    border-bottom: ${props =>
-      props.noBorder ? 'none' : `1px solid ${Color.LineGray}`};
+    font-size: 24px;
   }
 `;
 

@@ -5,8 +5,8 @@ import Color from 'config/color';
 const Wrap = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
   justify-content: center;
+  height: calc(100vh - 144px);
   align-items: center;
   background: #f7f7f7;
   box-sizing: border-box;
@@ -42,14 +42,11 @@ const Wrap = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    height: 100vh;
-
     .sign_title {
       font-size: 1.2rem;
     }
     .sign_container {
       width: 100%;
-      min-height: 600px;
       height: 100%;
       margin: 0px;
       padding: 0;

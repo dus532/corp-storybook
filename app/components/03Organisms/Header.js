@@ -26,12 +26,12 @@ import IconStatusBlue from 'components/01Atoms/IconStatusBlue';
 const StyledHeader = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border-bottom: ${props =>
-    props.borderBottom ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'};
+  border-bottom: 1px solid var(--grey100);
   background: ${Color.White};
   box-shadow: none;
   top: 0;
   z-index: 2;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
 
   .container {
     display: flex;
@@ -129,6 +129,7 @@ const StyledHeader = styled.div`
 
   @media screen and (max-width: 900px) {
     width: 100vw;
+    box-shadow: none;
 
     .initial_status {
       color: black;
@@ -323,20 +324,9 @@ const Header = ({ isSigned, location }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const iRef = useRef(null);
-  const HeaderRef = useRef(null);
 
   const [menu, setMenu] = useState(false);
   const [setting, setSetting] = useState(false);
-
-  document.addEventListener('scroll', () => {
-    if (document.body.clientWidth < 900) {
-      if (window.scrollY > 0) {
-        HeaderRef.current.style.boxShadow = '0 3px 10px rgba(0,0,0,0.1)';
-      } else {
-        HeaderRef.current.style.boxShadow = 'none';
-      }
-    }
-  });
 
   function handleClickOutside(event) {
     if (
@@ -508,20 +498,10 @@ const Header = ({ isSigned, location }) => {
     history.push('/');
   };
 
-  const noBorderBottom = () => {
-    if (location === '/home') {
-      return false;
-    }
-    if (document.body.clientWidth > 900) {
-      return false;
-    }
-    return true;
-  };
-
   if (isSigned) {
     return (
       <>
-        <StyledHeader ref={HeaderRef} borderBottom={noBorderBottom()}>
+        <StyledHeader>
           <div className="header_top">
             <Container padding className="container">
               {location.indexOf('/initial') !== -1 ? (

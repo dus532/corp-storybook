@@ -7,7 +7,7 @@ import InputCheckBox from 'components/02Molecules/InputCheckBox';
 
 const SignExtraFlex = styled.div`
   margin-top: 4px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,7 +30,7 @@ const SignExtra = ({ userData, handleChange, toggleFindEmail }) => (
       id="isSaved"
       name="isSaved"
       body="로그인 상태 유지"
-      labelStyle={{ textDecoration: 'none', fontSize: 12 }}
+      labelStyle={{ textDecoration: 'none', fontSize: 14 }}
       checked={userData.isSaved}
       onChange={e => handleChange(e, 'checkbox')}
     />

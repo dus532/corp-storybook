@@ -10,7 +10,7 @@ const Button = styled.button`
   outline: none;
   border: none;
   color: ${props => (props.color === 'gray' ? 'black' : 'white')};
-  font-size: ${props => (props.size === 'small' ? '0.8rem' : '0.8rem')};
+  font-size: ${props => (props.size === 'small' ? '14px' : '16px')};
   font-weight: 500;
   transition: 0.25s;
   cursor: pointer;

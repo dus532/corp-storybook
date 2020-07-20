@@ -22,8 +22,9 @@ const StyledInfoBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
+  padding: 16px 0;
   text-align: center;
+  margin: ${({ margin }) => margin || 0};
 
   div {
     flex-shrink: 0;
@@ -34,8 +35,8 @@ const StyledInfoBox = styled.div`
   }
 `;
 
-const InfoBox = ({ children, className }) => (
-  <StyledInfoBox className={className}>
+const InfoBox = ({ children, className, margin }) => (
+  <StyledInfoBox className={className} margin={margin}>
     <IconInfo />
     <h5>{children}</h5>
   </StyledInfoBox>
@@ -44,6 +45,7 @@ const InfoBox = ({ children, className }) => (
 InfoBox.propTypes = {
   children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   className: PropTypes.any,
+  margin: PropTypes.string,
 };
 
 export default InfoBox;

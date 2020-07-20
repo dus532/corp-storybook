@@ -10,7 +10,8 @@ import {
   SignExtra,
   Button,
   Logo,
-  InfoBox,
+  H5,
+  H3,
 } from 'components';
 import { actionPostSignIn } from 'stores';
 import { SIGN_FIND_EMAIL } from 'modals/constants';
@@ -58,10 +59,6 @@ const SignIn = () => {
     }
   };
 
-  const modalFindEmail = () => {
-    modal(SIGN_FIND_EMAIL);
-  };
-
   const propsList = { userData, handleChange, register, errors, formData };
 
   return (
@@ -69,20 +66,23 @@ const SignIn = () => {
       <SignWrap>
         <div className="sign_container">
           <Logo />
-          <h2 className="sign_title">
+          <H3>
             프리미엄 기업 카셰어링 서비스,
             <br /> <span className="blue">카플랫 비즈</span>에 오신 것을
             환영합니다.
-          </h2>
+          </H3>
           <form className="sign_bottom" onSubmit={handleSubmit(onSubmit)}>
             <SignInput {...propsList} />
-            <SignExtra {...propsList} toggleFindEmail={modalFindEmail} />
-            <Button>
-              <span>로그인</span>
-            </Button>
-            <br />
-            <br />
-            <InfoBox>카플랫에 문의하기 : 1833-7164</InfoBox>
+            <SignExtra
+              {...propsList}
+              toggleFindEmail={() => {
+                modal(SIGN_FIND_EMAIL);
+              }}
+            />
+            <Button>로그인</Button>
+            <H5 margin="16px 0 0 0" color="var(--grey400)">
+              카플랫에 문의하기 : 1833-7164
+            </H5>
           </form>
         </div>
       </SignWrap>

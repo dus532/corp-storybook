@@ -3,6 +3,28 @@ import { createGlobalStyle } from 'styled-components';
 import Color from 'config/color';
 
 const GlobalStyle = createGlobalStyle`
+  
+  :root {
+    --primary700: #101c4c;
+    --primary600: #182a72;
+    --primary500: #203898;
+    --primary400: #2946be;
+    --primary300: #a9b5e5;
+    --primary200: #e1e7ff;
+    --primary100: #f4f5fb;
+    --deepgrey: #343742;
+    --grey500: #525561;
+    --grey400: #8d909d;
+    --grey300: #b9bcc1;
+    --grey200: #dcdee1;
+    --grey100: #f5f6f6;
+    --red: #fc2b38;
+    --orange: #ffa100;
+    --green400: #44c46d;
+    --black: #141721;
+    --white: #ffffff;
+  }
+
 
   *:active {
       -webkit-tap-highlight-color: transparent;
@@ -14,17 +36,24 @@ const GlobalStyle = createGlobalStyle`
   ul{
     margin:0;
   }
+  h1{
+      margin:0;
+      padding:0;
+      font-size:32px;
+      font-weight:500;
+  }
+
   h2{
       margin:0;
       padding:0;
-      font-size:1.8rem;
+      font-size:24px;
       font-weight:500;
   }
 
   h3{
     margin:0;
     padding:0;
-    font-size:1.1rem;
+    font-size:18px;
     font-weight:normal;
     letter-spacing:-0.2px;
   }
@@ -32,22 +61,27 @@ const GlobalStyle = createGlobalStyle`
   h4{
     margin:0;
     padding:0;
-    font-size:1rem;
+    font-size:16px;
     font-weight:normal;
   }
   
   h5{
     margin:0;
     padding:0;
-    font-size:0.9rem;
+    font-size:14px;
     font-weight:normal;
   }
 
   h6{
     margin:0;
     padding:0;
-    font-size:0.6rem;
+    font-size:12px;
     font-weight:normal;
+  }
+
+  sub{
+    vertical-align: none;
+    font-size:11px;
   }
 
   .fs01{

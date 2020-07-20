@@ -19,6 +19,7 @@ export { default as IconRightText } from 'components/01Atoms/IconRightText';
 export { default as DropBox } from 'components/01Atoms/DropBox';
 export { default as DatePicker } from 'components/01Atoms/DatePicker';
 export { default as BigTitle } from 'components/01Atoms/BigTitle';
+export { H1, H2, H3, H4, H5, H6, Sub } from 'components/01Atoms/H';
 
 // 02 Molecules
 export { default as InfoBox } from 'components/02Molecules/InfoBox';

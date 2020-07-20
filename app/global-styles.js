@@ -25,6 +25,9 @@ const GlobalStyle = createGlobalStyle`
     --white: #ffffff;
   }
 
+  .content{
+    min-height:calc(100vh - 144px);
+  }
 
   *:active {
       -webkit-tap-highlight-color: transparent;
@@ -140,7 +143,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     line-height: 1.5;
     word-break:keep-all;
-    background:#F7F7F7;
+    background:white;
   }
 
   body {
@@ -156,8 +159,6 @@ const GlobalStyle = createGlobalStyle`
     width:100%;
     min-height: 100%;
     min-width: 1200px;    
-    padding-bottom: 80px;
-
   }
 
   p,
@@ -207,6 +208,7 @@ const GlobalStyle = createGlobalStyle`
 
     #app{
       min-width:100%;
+      /* background:white; */
     }
 
     .mobile{

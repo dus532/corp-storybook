@@ -5,23 +5,14 @@ import UserManager from 'utils/userManager';
 const { read, onlyRead, onlyCreate } = createActions('manageRentals');
 
 export const actionGetManageRentals = (
-  {
-    number,
-    status,
-    corpId,
-    startDate,
-    purpose,
-    endDate,
-    employeeId,
-    userGroupId,
-  },
+  { number, status, startDate, purpose, endDate, employeeId, userGroupId },
   onSuccess,
 ) =>
   read({
     params: {
       number,
       status,
-      corpId,
+      corpId: UserManager().getUser().corpId,
       employeeId,
       userGroupId,
       purpose,

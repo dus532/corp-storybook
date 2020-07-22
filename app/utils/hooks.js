@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import {
   onToast,
@@ -98,3 +98,38 @@ export const useFetchData = (rName, filter) => {
 };
 
 export const useQuery = () => new URLSearchParams(useLocation().search);
+
+const makeURL = query => {
+  const URL = new URLSearchParams();
+
+  if (query) {
+    Object.keys(query).forEach(q => {
+      URL.set(q, query[q]);
+    });
+    return URL.toString();
+  }
+  return '';
+};
+
+export const useQueryObject = initial => {
+  const [query, setQuery] = useState({});
+  const location = useLocation();
+  const history = useHistory();
+
+  const searchParams = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    const q = {};
+    searchParams.forEach((v, k) => {
+      q[k] = v;
+    });
+
+    if (Object.keys(q).length < 1) {
+      history.push(`${location.pathname}?${makeURL(initial)}`);
+    } else {
+      setQuery(q);
+    }
+  }, [location.search]);
+
+  return query;
+};

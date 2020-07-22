@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styled from 'styled-components';
@@ -39,9 +40,9 @@ const DropBox = ({
     {initial && <option value={initial.value}>{initial.body}</option>}
     {data &&
       data.map(
-        d =>
+        (d, index) =>
           d && (
-            <option key={d.value || d.id} value={d.value || d.id || 0}>
+            <option key={index} value={d.value || d.id || 0}>
               {d.body || d.name}
             </option>
           ),

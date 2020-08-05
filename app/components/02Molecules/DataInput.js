@@ -3,30 +3,14 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import Input from 'components/01Atoms/Input';
-import IconError from 'components/01Atoms/IconError';
-import IconOK from 'components/01Atoms/IconOK';
-import IconShow from 'components/01Atoms/IconShow';
-import IconHide from 'components/01Atoms/IconHide';
+import InputError from 'components/01Atoms/InputError';
+import Icon from 'components/01Atoms/Icon';
+import { H5 } from 'components/01Atoms/H';
 
 const StyledDiv = styled.div`
   display: flex;
   align-items: center;
-  justify-context: center;
-
-  span {
-    position: relative;
-    width: 0px;
-    top: 4px;
-    right: -4px;
-  }
-
-  .eyes {
-    width: 0px;
-    position: relative;
-    top: 4px;
-    right: 32px;
-    cursor: pointer;
-  }
+  justify-content: center;
 
   @media screen and (max-width: 900px) {
     span {
@@ -37,63 +21,76 @@ const StyledDiv = styled.div`
   }
 `;
 
-const InputError = styled.div`
-  width: 100%;
-  text-align: left;
-  padding-left: 12px;
-  min-height: 16px;
-  margin: 2px 0 16px;
+const Fix = styled.div`
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
 
-  h5 {
-    color: #ee6833;
+  .suffix {
+    position: relative;
+    width: 0px;
+    right: 28px;
+  }
+
+  .prefix {
+    position: relative;
+    width: 0px;
+    left: 12px;
   }
 `;
 
-const statusEmojis = status => {
-  switch (status) {
-    case 1:
-      return (
-        <span>
-          <IconOK />
-        </span>
-      );
-    case 2:
-      return (
-        <span>
-          <IconError />
-        </span>
-      );
-    default:
-      return <></>;
-  }
-};
+const Eyes = styled.button`
+  margin: 0;
+  padding: 0;
+  width: 0px;
+  display: inline-block;
+  position: relative;
+  top: 1.5px;
+  right: ${({ error }) => (error ? 64 : 36)}px;
+  transition: 0.35s;
+  cursor: pointer;
+`;
 
 const DataInput = props => {
   const [viewPW, setViewPW] = useState(props.type);
   return (
     <>
       <StyledDiv>
+        {props.prefix && (
+          <Fix>
+            <H5 className="prefix" color="var(--grey400)">
+              {props.prefix}
+            </H5>
+          </Fix>
+        )}
         <Input {...props} ref={props.InputRef} type={viewPW} />
         {props.type === 'password' && (
-          <div
+          <Eyes
+            type="button"
             className="eyes"
+            error={props.error}
             onClick={() =>
               viewPW === 'password' ? setViewPW('text') : setViewPW('password')
             }
-            onKeyPress={e => e.key === '19' && setViewPW('text')}
-            role="button"
-            tabIndex={0}
           >
-            {viewPW !== 'password' ? <IconShow /> : <IconHide />}
-          </div>
+            {viewPW !== 'password' ? (
+              <Icon type="show" />
+            ) : (
+              <Icon type="hide" />
+            )}
+          </Eyes>
         )}
-        {statusEmojis(props.status)}
+        {props.suffix && (
+          <Fix>
+            <H5 className="suffix" color="var(--grey400)">
+              {props.suffix}
+            </H5>
+          </Fix>
+        )}
       </StyledDiv>
-      {props.error && (
-        <InputError>
-          <h5>{props.error.message}</h5>
-        </InputError>
-      )}
+      {props.error && <InputError>{props.error.message}</InputError>}
     </>
   );
 };
@@ -107,6 +104,8 @@ DataInput.propTypes = {
   status: PropTypes.number,
   error: PropTypes.object,
   InputRef: PropTypes.any,
+  suffix: PropTypes.any,
+  prefix: PropTypes.any,
 };
 
 export default DataInput;

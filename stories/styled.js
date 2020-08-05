@@ -18,14 +18,24 @@ export const Wrap = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 800px;
+  width: 996px;
   height: 100%;
   margin: 0 auto;
 `;
 
+export const Flex = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  .box {
+    margin-right: 36px;
+    margin-bottom: 36px;
+  }
+`;
+
 export const H2 = styled.h2`
-  font-size: 40px;
-  font-weight: 100;
+  font-size: 52px;
+  font-weight: 900;
   margin: 0;
   padding: 0;
 `;
@@ -42,6 +52,18 @@ export const H5 = styled.h5`
   font-weight: 500;
   margin: 0;
   padding: 0;
+`;
+
+export const Tag = styled.div`
+  background: #dcdee1;
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 5px;
+  border: 1px solid #b9bcc1;
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: #525561;
+  font-weight: 700;
 `;
 
 export const Header = ({ title, subtitle }) => (
@@ -79,24 +101,26 @@ Info.propTypes = {
   subtitle: PropTypes.string,
 };
 
-export const ExBox = ({ h, children }) => {
-  const ExWrap = styled.div`
-    width: 375px;
-    padding: 20px;
-    height: ${({ height }) => (height ? `${height}px` : '200px')};
-    background: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #ddd;
-  `;
+const ExWrap = styled.div`
+  width: 375px;
+  padding: 20px;
+  min-height: ${({ height }) => (height ? `${height}px` : '200px')};
+  background: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
 
-  return (
-    <ExWrap height={h}>
-      <div>{children}</div>
-    </ExWrap>
-  );
-};
+  .child {
+    margin: 0 auto;
+  }
+`;
+
+export const ExBox = ({ h, children }) => (
+  <ExWrap height={h}>
+    <div className="child">{children}</div>
+  </ExWrap>
+);
 
 ExBox.propTypes = {
   h: PropTypes.string,

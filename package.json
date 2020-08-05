@@ -50,7 +50,7 @@
     "deploy-stage": "./internals/deploy/deploy.sh staging",
     "deploy-prod": "./internals/deploy/deploy.sh production",
     "storybook": "NODE_PATH=app start-storybook -p 6006",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook"
   },
   "browserslist": [
     "last 2 versions",
@@ -146,6 +146,7 @@
     "babel-plugin-react-intl": "3.0.1",
     "babel-plugin-styled-components": "1.10.0",
     "babel-plugin-transform-react-remove-prop-types": "0.4.24",
+    "chromatic": "^5.1.0",
     "circular-dependency-plugin": "5.0.2",
     "compare-versions": "3.4.0",
     "compression-webpack-plugin": "^3.1.0",

@@ -1,4 +1,8 @@
 import { configure } from '@storybook/react';
 
-// 3. Load a X.story.js file for each of your components/X.js:
-configure(require.context('../app', true, /\.story\.js$/), module);
+function loadStories() {
+  const req = require.context(`../app`, true, /\.stories\.jsx?$/);
+  req.keys().forEach(filename => req(filename));
+}
+
+configure(loadStories, module);

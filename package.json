@@ -50,7 +50,7 @@
     "deploy-stage": "./internals/deploy/deploy.sh staging",
     "deploy-prod": "./internals/deploy/deploy.sh production",
     "storybook": "NODE_PATH=app start-storybook -p 6006",
-    "build-storybook": "cross-env RUN_TIME_ENV=dev build-storybook"
+    "build-storybook": "NODE_PATH=app build-storybook"
   },
   "browserslist": [
     "last 2 versions",

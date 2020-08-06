@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
-import GlobalStyle from '../app/global-styles';
+import DataInput from '../components/02Molecules/DataInput';
+import DropBox from '../components/01Atoms/DropBox';
+import Icon from '../components/01Atoms/Icon';
 
-import DataInput from '../app/components/02Molecules/DataInput';
-import DropBox from '../app/components/01Atoms/DropBox';
-import Icon from '../app/components/01Atoms/Icon';
+import GlobalStyle from '../global-styles';
 
 import { Wrap, Container, Header, ExBox, Info, Tag, Flex } from './styled';
 

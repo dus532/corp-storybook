@@ -11,7 +11,7 @@ export default {
 
 export const Primary = () => (
   <div style={{ width: 400 }}>
-    <Button onClick={action('클릭!')}>버튼</Button>
+    <Button onClick={action('클릭!')}>버튼11</Button>
   </div>
 );
 

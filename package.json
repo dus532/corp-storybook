@@ -50,7 +50,8 @@
     "deploy-stage": "./internals/deploy/deploy.sh staging",
     "deploy-prod": "./internals/deploy/deploy.sh production",
     "storybook": "NODE_PATH=app start-storybook -p 6006",
-    "build-storybook": "NODE_PATH=app build-storybook"
+    "build-storybook": "NODE_PATH=app build-storybook",
+    "chromatic": "npx chromatic --project-token mxeic9qa3pm"
   },
   "browserslist": [
     "last 2 versions",

@@ -102,10 +102,10 @@ Info.propTypes = {
 };
 
 const ExWrap = styled.div`
-  width: 375px;
   padding: 20px;
+  min-width: ${({ width }) => (width ? `${width}px` : '375px')};
   min-height: ${({ height }) => (height ? `${height}px` : '200px')};
-  background: #f4f4f4;
+  background: ${({ bgColor }) => bgColor || `#f4f4f4`};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,13 +116,15 @@ const ExWrap = styled.div`
   }
 `;
 
-export const ExBox = ({ h, children }) => (
-  <ExWrap height={h}>
+export const ExBox = ({ width, height, bgColor, children }) => (
+  <ExWrap width={width} height={height} bgColor={bgColor}>
     <div className="child">{children}</div>
   </ExWrap>
 );
 
 ExBox.propTypes = {
-  h: PropTypes.string,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  bgColor: PropTypes.string,
   children: PropTypes.node,
 };

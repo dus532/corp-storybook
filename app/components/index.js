@@ -21,6 +21,7 @@ export { default as DatePicker } from 'components/01Atoms/DatePicker';
 export { default as BigTitle } from 'components/01Atoms/BigTitle';
 export { default as InputError } from 'components/01Atoms/InputError';
 export { H1, H2, H3, H4, H5, H6, Sub } from 'components/01Atoms/H';
+export { default as Label } from 'components/01Atoms/Label';
 
 // 02 Molecules
 export { default as InfoBox } from 'components/02Molecules/InfoBox';

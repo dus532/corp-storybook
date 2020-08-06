@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
+import Label from '../components/01Atoms/Label';
 import DataInput from '../components/02Molecules/DataInput';
 import DropBox from '../components/01Atoms/DropBox';
 import Icon from '../components/01Atoms/Icon';
@@ -102,6 +103,38 @@ export const Input = () => (
               placeholder="접두사"
               error={{ message: '검색어를 입력해주세요!' }}
             />
+            <br />
+          </ExBox>
+        </div>
+      </Flex>
+      <br />
+    </Container>
+    <GlobalStyle />
+  </Wrap>
+);
+
+export const LabelList = () => (
+  <Wrap>
+    <Container>
+      <br />
+      <Header title="Label" subtitle="Label을 이용하여 리스트를 만듭니다" />
+      <br />
+      <Flex>
+        <div className="box">
+          <Info title="withBG 라벨 배경" subtitle="라벨에 배경색이 있을때" />
+          <br />
+          <ExBox width="500" bgColor="white">
+            <br />
+            <Tag>withBG + Input</Tag>
+            <Label width={470} label="라벨" placeholder="텍스트" withBG>
+              <DataInput width={280} placeholder="라벨 텍스트" />
+            </Label>
+            <br />
+            <br />
+            <Tag>withBG + Text</Tag>
+            <Label width={470} label="라벨" placeholder="텍스트" withBG>
+              안녕하세요
+            </Label>
             <br />
           </ExBox>
         </div>

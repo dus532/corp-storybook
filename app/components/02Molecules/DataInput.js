@@ -57,7 +57,7 @@ const DataInput = props => {
   const [viewPW, setViewPW] = useState(props.type);
   return (
     <>
-      <StyledDiv>
+      <StyledDiv style={props.style}>
         {props.prefix && (
           <Fix>
             <H5 className="prefix" color="var(--grey400)">
@@ -96,6 +96,7 @@ const DataInput = props => {
 };
 
 DataInput.propTypes = {
+  style: PropTypes.object,
   onChange: PropTypes.func,
   name: PropTypes.string,
   value: PropTypes.any,

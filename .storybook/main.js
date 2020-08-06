@@ -1,8 +1,13 @@
+const path = require('path');
+
+// your app's webpack.config.js
+const custom = require('../internals/webpack/webpack.dev.babel.js');
+
 module.exports = {
-  stories: ['../stories/*.stories.js'],
-  addons: ['@storybook/addon-actions', '@storybook/addon-links'],
-  webpackFinal: async config => {
-    // do mutation to the config
-    return config;
+  webpackFinal: config => {
+    return {
+      ...config,
+      module: { ...config.module, rules: custom.module.rules },
+    };
   },
 };

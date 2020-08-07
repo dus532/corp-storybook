@@ -4,15 +4,25 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import GreyIMG from 'images/icon_select_grey.png';
+import PriIMG from 'images/icon_select_primary.png';
+
 const StyledDropBox = styled.select`
-  padding: 0 12px;
+  appearance: none;
+  padding: 0 34px 0 12px;
   margin: ${({ margin }) => margin};
   height: 40px;
   display: inline-block;
-  border: 1px solid var(--grey200);
+  border: ${({ value }) =>
+    value ? `1px solid var(--primary400)` : `1px solid var(--grey200)`};
   border-radius: 2px;
   font-size: 14px;
   font-weight: 400;
+  background: ${({ value }) =>
+    value
+      ? `url(${PriIMG}) right 8px center / 18px no-repeat var(--primary100)`
+      : `url(${GreyIMG}) right 8px center / 18px no-repeat white`};
+  color: ${({ value }) => (value ? `var(--primary400)` : `black`)};
 
   &:focus,
   &:active {
